@@ -4,15 +4,26 @@ using UnityEngine;
 
 public class TerrainGenerator : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private Vector3 currentPosition = new Vector3(0, 0, 0);
+
+    [SerializeField] private List<GameObject> terrains = new List<GameObject>();
+
+    private void Start()
     {
-        
+        SpawnTerrain();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            SpawnTerrain();
+        }
+    }
+
+    private void SpawnTerrain()
+    {
+        Instantiate(terrains[Random.Range(0, terrains.Count)], currentPosition, Quaternion.identity);
+        currentPosition.x++;
     }
 }
