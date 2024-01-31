@@ -4,13 +4,17 @@ using UnityEngine;
 
 public class TerrainGenerator : MonoBehaviour
 {
-    private Vector3 currentPosition = new Vector3(0, 0, 0);
-
     [SerializeField] private List<GameObject> terrains = new List<GameObject>();
+    [SerializeField] private int maxTerrainCount;
+
+    private Vector3 currentPosition = new Vector3(0, 0, 0);
 
     private void Start()
     {
-        SpawnTerrain();
+        for (int i = 0; i < maxTerrainCount; i++)
+        {
+            SpawnTerrain();
+        }
     }
 
     private void Update()

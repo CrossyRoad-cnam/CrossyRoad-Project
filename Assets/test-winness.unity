@@ -250,6 +250,7 @@ MonoBehaviour:
   - {fileID: 5806917797530182393, guid: 07b1117de79c69949be37e4ffb2d30dc, type: 3}
   - {fileID: 2568265488172583157, guid: ff4bc2c04f4e9714aa2e8fb3798e275e, type: 3}
   - {fileID: 1968103204995430382, guid: 3b219bd3d5e60414f89d0d34512dfbac, type: 3}
+  maxTerrainCount: 30
 --- !u!4 &98937092
 Transform:
   m_ObjectHideFlags: 0
@@ -350,13 +351,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 611305750}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.83, y: 3.49, z: -28.77}
+  m_LocalRotation: {x: 0.33751795, y: 0.54542965, z: -0.254338, w: 0.7238096}
+  m_LocalPosition: {x: -0.5, y: 10, z: -3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 50, y: 74, z: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
