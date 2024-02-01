@@ -20,11 +20,10 @@ public class Player : MonoBehaviour
             float zDifference = 0;
             if (transform.position.z % 1 != 0)
             {
-                zDifference = transform.position.z - Mathf.Round(transform.position.z + 1);
+                zDifference = Mathf.Round(transform.position.z) - transform.position.z;
             }
             transform.position = (transform.position + new Vector3(1, 0, zDifference));    
         }
-
     }
 
     public void FinishHop()
