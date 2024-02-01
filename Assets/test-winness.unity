@@ -246,10 +246,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 141ee7beb0a3f2f468707facdccaec47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  terrains:
-  - {fileID: 5806917797530182393, guid: 07b1117de79c69949be37e4ffb2d30dc, type: 3}
-  - {fileID: 2568265488172583157, guid: ff4bc2c04f4e9714aa2e8fb3798e275e, type: 3}
-  - {fileID: 1968103204995430382, guid: 3b219bd3d5e60414f89d0d34512dfbac, type: 3}
+  terrainData:
+  - {fileID: 11400000, guid: 8b712ac1d9abbfb4eaef08a1ed1d2ee1, type: 2}
+  - {fileID: 11400000, guid: 81292531d01fb3d4685216ebbd8a3cf3, type: 2}
+  - {fileID: 11400000, guid: c768d9b2794799c47a54190af1c91d15, type: 2}
   maxTerrainCount: 30
 --- !u!4 &98937092
 Transform:
@@ -326,9 +326,9 @@ Camera:
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
-  orthographic: 0
+  orthographic: 1
   orthographic size: 5
-  m_Depth: -1
+  m_Depth: 60
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -351,13 +351,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 611305750}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.33751795, y: 0.54542965, z: -0.254338, w: 0.7238096}
-  m_LocalPosition: {x: -0.5, y: 10, z: -3}
+  m_LocalRotation: {x: 0.17931256, y: 0.51188517, z: -0.11020598, w: 0.8328716}
+  m_LocalPosition: {x: -3.5, y: 8.07, z: -5.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 50, y: 74, z: 0}
+  m_LocalEulerAnglesHint: {x: 24.3, y: 63.15, z: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
