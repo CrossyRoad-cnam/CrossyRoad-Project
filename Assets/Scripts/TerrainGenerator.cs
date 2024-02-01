@@ -28,7 +28,7 @@ public class TerrainGenerator : MonoBehaviour
         }
     }
 
-    private void SpawnTerrain(bool isStart)
+    public void SpawnTerrain(bool isStart)
     {
         int whichTerrain = Random.Range(0, terrainData.Count);
         int terrainInSuccession = Random.Range(1, terrainData[whichTerrain].maxInSuccession);

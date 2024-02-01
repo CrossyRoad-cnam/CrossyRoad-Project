@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    [SerializeField] private TerrainGenerator terrainGenerator; 
     private Animator animator;
     private bool isHopping;
 
@@ -15,35 +16,34 @@ public class Player : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.UpArrow) && !isHopping)
         {
-            animator.SetTrigger("hop");
-            isHopping = true;
             float zDifference = 0;
             if (transform.position.z % 1 != 0)
             {
                 zDifference = Mathf.Round(transform.position.z) - transform.position.z;
             }
-            transform.position = (transform.position + new Vector3(1, 0, zDifference));
+            MoveCharacter(new Vector3(1, 0, zDifference));
         }
         else if (Input.GetKeyDown(KeyCode.DownArrow) && !isHopping)
         {
-            animator.SetTrigger("hop");
-            isHopping = true;
-            transform.position = (transform.position + new Vector3(-1, 0, 0));
+            MoveCharacter(new Vector3(-1, 0, 0));
         }
         else if (Input.GetKeyDown(KeyCode.LeftArrow) && !isHopping)
         {
-            animator.SetTrigger("hop");
-            isHopping = true;
-            transform.position = (transform.position + new Vector3(0, 0, 1));
+            MoveCharacter(new Vector3(0, 0, -1));
         }
         else if (Input.GetKeyDown(KeyCode.RightArrow) && !isHopping)
         {
-            animator.SetTrigger("hop");
-            isHopping = true;
-            transform.position = (transform.position + new Vector3(0, 0, -1));
+            MoveCharacter(new Vector3(0, 0, 1));
         }   
     }
 
+    private void MoveCharacter(Vector3 direction)
+    {
+        animator.SetTrigger("hop");
+        isHopping = true;
+        transform.position = (transform.position + direction);
+        terrainGenerator.SpawnTerrain(false);
+    }
     public void FinishHop()
     {
         isHopping = false;
