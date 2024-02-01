@@ -17,12 +17,12 @@ public class Player : MonoBehaviour
         {
             animator.SetTrigger("hop");
             isHopping = true;
-            Debug.Log(transform.position);
-            if(transform.position.z % 1 == 0)
+            float zDifference = 0;
+            if (transform.position.z % 1 != 0)
             {
-                Debug.Log("On Grid Space");
-                transform.Translate(new Vector3(1, 0, 0));
+                zDifference = transform.position.z - Mathf.Round(transform.position.z + 1);
             }
+            transform.position = (transform.position + new Vector3(1, 0, zDifference));    
         }
 
     }

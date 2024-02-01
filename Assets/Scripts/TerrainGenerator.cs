@@ -17,7 +17,7 @@ public class TerrainGenerator : MonoBehaviour
         {
             SpawnTerrain(true);
         }
-        maxTerrainCount += currentTerrains.Count;
+        maxTerrainCount = currentTerrains.Count;
     }
 
     private void Update()
