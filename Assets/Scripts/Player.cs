@@ -28,34 +28,19 @@ public class Player : MonoBehaviour
         {
             animator.SetTrigger("hop");
             isHopping = true;
-            float zDifference = 0;
-            if (transform.position.z % 1 != 0)
-            {
-                zDifference = Mathf.Round(transform.position.z) - transform.position.z;
-            }
-            transform.position = (transform.position + new Vector3(-1, 0, zDifference));
+            transform.position = (transform.position + new Vector3(-1, 0, 0));
         }
         else if (Input.GetKeyDown(KeyCode.LeftArrow) && !isHopping)
         {
             animator.SetTrigger("hop");
             isHopping = true;
-            float xDifference = 0;
-            if (transform.position.x % 1 != 0)
-            {
-                xDifference = Mathf.Round(transform.position.x) - transform.position.x;
-            }
-            transform.position = (transform.position + new Vector3(xDifference, 0, 1));
+            transform.position = (transform.position + new Vector3(0, 0, 1));
         }
         else if (Input.GetKeyDown(KeyCode.RightArrow) && !isHopping)
         {
             animator.SetTrigger("hop");
             isHopping = true;
-            float xDifference = 0;
-            if (transform.position.x % 1 != 0)
-            {
-                xDifference = Mathf.Round(transform.position.x) - transform.position.x;
-            }
-            transform.position = (transform.position + new Vector3(xDifference, 0, -1));
+            transform.position = (transform.position + new Vector3(0, 0, -1));
         }   
     }
 
