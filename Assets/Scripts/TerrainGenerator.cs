@@ -8,8 +8,8 @@ public class TerrainGenerator : MonoBehaviour
     [SerializeField] private int maxTerrainCount;
     [SerializeField] private Transform terrainHolder;
 
+    [HideInInspector] public Vector3 currentPosition = Vector3.zero;
     private List<GameObject> currentTerrains = new List<GameObject>();
-    private Vector3 currentPosition = Vector3.zero;
 
     private void Start()
     {

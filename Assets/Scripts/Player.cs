@@ -29,11 +29,11 @@ public class Player : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.LeftArrow) && !isHopping)
         {
-            MoveCharacter(new Vector3(0, 0, -1));
+            MoveCharacter(new Vector3(0, 0, 1));
         }
         else if (Input.GetKeyDown(KeyCode.RightArrow) && !isHopping)
         {
-            MoveCharacter(new Vector3(0, 0, 1));
+            MoveCharacter(new Vector3(0, 0, -1));
         }   
     }
 
