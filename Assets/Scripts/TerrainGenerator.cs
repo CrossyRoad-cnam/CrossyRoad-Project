@@ -5,11 +5,11 @@ using UnityEngine;
 public class TerrainGenerator : MonoBehaviour
 {
     [SerializeField] private int minDistanceFromPlayer;
-    [SerializeField] private List<TerrainData> terrainData= new List<TerrainData>();
+    [SerializeField] private List<TerrainData> terrainData = new List<TerrainData>();
     [SerializeField] private int maxTerrainCount;
     [SerializeField] private Transform terrainHolder;
 
-    [HideInInspector] public Vector3 currentPosition = Vector3.zero;
+    [HideInInspector] public Vector3 currentPosition = new Vector3(0,0,0);
     private List<GameObject> currentTerrains = new List<GameObject>();
 
     private void Start()
@@ -18,11 +18,10 @@ public class TerrainGenerator : MonoBehaviour
         {
             SpawnTerrain(true, new Vector3(0,0,0));
         }
-        maxTerrainCount = currentTerrains.Count;
     }
     public void SpawnTerrain(bool isStart, Vector3 playerPosition)
     {
-        if(currentPosition.x - playerPosition.x < minDistanceFromPlayer)
+        if(currentPosition.x - playerPosition.x < minDistanceFromPlayer || (isStart))
         {
            int whichTerrain = Random.Range(0, terrainData.Count);
            int terrainInSuccession = Random.Range(1, terrainData[whichTerrain].maxInSuccession);

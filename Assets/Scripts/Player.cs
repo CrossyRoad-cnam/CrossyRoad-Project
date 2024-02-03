@@ -39,11 +39,6 @@ public class Player : MonoBehaviour
 
     private void MoveCharacter(Vector3 direction)
     {
-        if (terrainGenerator == null)
-        {
-            Debug.LogError("TerrainGenerator is not assigned to Player!");
-            return;
-        }
         animator.SetTrigger("hop");
         isHopping = true;
         transform.position = (transform.position + direction);
