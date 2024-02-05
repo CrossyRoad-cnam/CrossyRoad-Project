@@ -290,7 +290,7 @@ Camera:
   far clip plane: 1000
   field of view: 70
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 8
   m_Depth: 60
   m_CullingMask:
     serializedVersion: 2
@@ -491,7 +491,7 @@ PrefabInstance:
       objectReference: {fileID: 1595569629}
     - target: {fileID: 6714637674210826803, guid: 55769f10b2354094597d2f41cb2c61bd, type: 3}
       propertyPath: maxTerrainCount
-      value: 30
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 6714637674210826803, guid: 55769f10b2354094597d2f41cb2c61bd, type: 3}
       propertyPath: minDistanceFromPlayer
