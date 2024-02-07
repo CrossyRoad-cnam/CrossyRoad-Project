@@ -34,7 +34,7 @@ public class Player : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.RightArrow) && !isHopping)
         {
             MoveCharacter(new Vector3(0, 0, -1));
-        }   
+        }
     }
 
     private void MoveCharacter(Vector3 direction)
