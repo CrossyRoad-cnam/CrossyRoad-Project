@@ -16,12 +16,7 @@ public class Player : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.UpArrow) && !isHopping)
         {
-            float zDifference = 0;
-            if (transform.position.z % 1 != 0)
-            {
-                zDifference = Mathf.Round(transform.position.z) - transform.position.z;
-            }
-            MoveCharacter(new Vector3(1, 0, zDifference));
+            MoveCharacter(new Vector3(1, 0, 0));
         }
         else if (Input.GetKeyDown(KeyCode.DownArrow) && !isHopping)
         {
@@ -41,7 +36,7 @@ public class Player : MonoBehaviour
     {
         animator.SetTrigger("hop");
         isHopping = true;
-        transform.position = (transform.position + direction);
+        transform.position += direction;
         terrainGenerator.SpawnTerrain(false, transform.position);
     }
     public void FinishHop()
