@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0915b5226e1fc954eada4364e46ea65a, type: 3}
-  m_Name: Grass
+  m_Name: Grass02
   m_EditorClassIdentifier: 
-  terrain: {fileID: 8562624435428234971, guid: 66b4fb01e8f001f43b93e73ba09b401a, type: 3}
+  terrain: {fileID: 5665028700151794608, guid: 56e9734eac3e2c245be3e4f37a512706, type: 3}
   maxInSuccession: 2
