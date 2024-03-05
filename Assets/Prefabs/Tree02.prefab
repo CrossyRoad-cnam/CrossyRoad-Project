@@ -74,7 +74,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 3313a02dae6a1bd4489ca1ff32516283, type: 2}
     - target: {fileID: 919132149155446097, guid: df57017a4aed25d48a364cf27f941984, type: 3}
       propertyPath: m_Name
-      value: Wood02
+      value: Tree02
       objectReference: {fileID: 0}
     - target: {fileID: 6745302439343835087, guid: df57017a4aed25d48a364cf27f941984, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -84,5 +84,34 @@ PrefabInstance:
     m_RemovedGameObjects:
     - {fileID: -466329591000292508, guid: df57017a4aed25d48a364cf27f941984, type: 3}
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: df57017a4aed25d48a364cf27f941984, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8760568379069093419}
   m_SourcePrefab: {fileID: 100100000, guid: df57017a4aed25d48a364cf27f941984, type: 3}
+--- !u!1 &2610711759874416770 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: df57017a4aed25d48a364cf27f941984, type: 3}
+  m_PrefabInstance: {fileID: 2952801503262465491}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &8760568379069093419
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2610711759874416770}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.488466, y: 2.5416434, z: 1.2382941}
+  m_Center: {x: 0.14284575, y: 1.1548644, z: 0.10091138}

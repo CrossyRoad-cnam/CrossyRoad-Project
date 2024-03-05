@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_LightingSettings: {fileID: 0}
+  m_LightingSettings: {fileID: 4890085278179872738, guid: a273b523f06908f47adfb0ff39f2f258, type: 2}
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -561,7 +561,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112
-  m_CollisionDetection: 2
+  m_CollisionDetection: 0
 --- !u!65 &1960003971
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -649,12 +649,28 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6714637674210826803, guid: 55769f10b2354094597d2f41cb2c61bd, type: 3}
       propertyPath: terrainData.Array.size
-      value: 4
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6714637674210826803, guid: 55769f10b2354094597d2f41cb2c61bd, type: 3}
+      propertyPath: terrainDatas.Array.size
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6714637674210826803, guid: 55769f10b2354094597d2f41cb2c61bd, type: 3}
       propertyPath: terrainData.Array.data[3]
       value: 
       objectReference: {fileID: 11400000, guid: 5636877b15360a64a99815b1368a8c2b, type: 2}
+    - target: {fileID: 6714637674210826803, guid: 55769f10b2354094597d2f41cb2c61bd, type: 3}
+      propertyPath: terrainDatas.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 8b712ac1d9abbfb4eaef08a1ed1d2ee1, type: 2}
+    - target: {fileID: 6714637674210826803, guid: 55769f10b2354094597d2f41cb2c61bd, type: 3}
+      propertyPath: terrainDatas.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 81292531d01fb3d4685216ebbd8a3cf3, type: 2}
+    - target: {fileID: 6714637674210826803, guid: 55769f10b2354094597d2f41cb2c61bd, type: 3}
+      propertyPath: terrainDatas.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: c768d9b2794799c47a54190af1c91d15, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
