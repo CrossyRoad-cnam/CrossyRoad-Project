@@ -2048,6 +2048,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   terrainGenerator: {fileID: 0}
+  scoreText: {fileID: 0}
 --- !u!95 &6154235888902621169
 Animator:
   serializedVersion: 5

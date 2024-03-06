@@ -607,18 +607,6 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 2181244423828480601, guid: 87ff3e309995ffb4096e064740b9a1da, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2181244423828480601, guid: 87ff3e309995ffb4096e064740b9a1da, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2181244423828480601, guid: 87ff3e309995ffb4096e064740b9a1da, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2181244423828480601, guid: 87ff3e309995ffb4096e064740b9a1da, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -661,6 +649,10 @@ PrefabInstance:
     - target: {fileID: 8364481363753794514, guid: 87ff3e309995ffb4096e064740b9a1da, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 8723654141832360691, guid: 87ff3e309995ffb4096e064740b9a1da, type: 3}
+      propertyPath: m_IsKinematic
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8828932352373189211, guid: 87ff3e309995ffb4096e064740b9a1da, type: 3}
       propertyPath: scoreText
@@ -830,38 +822,6 @@ PrefabInstance:
       propertyPath: terrainHolder
       value: 
       objectReference: {fileID: 1595569629}
-    - target: {fileID: 6714637674210826803, guid: 55769f10b2354094597d2f41cb2c61bd, type: 3}
-      propertyPath: maxTerrainCount
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 6714637674210826803, guid: 55769f10b2354094597d2f41cb2c61bd, type: 3}
-      propertyPath: minDistanceFromPlayer
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 6714637674210826803, guid: 55769f10b2354094597d2f41cb2c61bd, type: 3}
-      propertyPath: terrainData.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 6714637674210826803, guid: 55769f10b2354094597d2f41cb2c61bd, type: 3}
-      propertyPath: terrainDatas.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 6714637674210826803, guid: 55769f10b2354094597d2f41cb2c61bd, type: 3}
-      propertyPath: terrainData.Array.data[3]
-      value: 
-      objectReference: {fileID: 11400000, guid: 5636877b15360a64a99815b1368a8c2b, type: 2}
-    - target: {fileID: 6714637674210826803, guid: 55769f10b2354094597d2f41cb2c61bd, type: 3}
-      propertyPath: terrainDatas.Array.data[0]
-      value: 
-      objectReference: {fileID: 11400000, guid: 8b712ac1d9abbfb4eaef08a1ed1d2ee1, type: 2}
-    - target: {fileID: 6714637674210826803, guid: 55769f10b2354094597d2f41cb2c61bd, type: 3}
-      propertyPath: terrainDatas.Array.data[1]
-      value: 
-      objectReference: {fileID: 11400000, guid: 81292531d01fb3d4685216ebbd8a3cf3, type: 2}
-    - target: {fileID: 6714637674210826803, guid: 55769f10b2354094597d2f41cb2c61bd, type: 3}
-      propertyPath: terrainDatas.Array.data[2]
-      value: 
-      objectReference: {fileID: 11400000, guid: c768d9b2794799c47a54190af1c91d15, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

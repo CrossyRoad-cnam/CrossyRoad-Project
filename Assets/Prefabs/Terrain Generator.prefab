@@ -44,11 +44,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 141ee7beb0a3f2f468707facdccaec47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minDistanceFromPlayer: 15
-  terrainData:
+  minDistanceFromPlayer: 20
+  terrainDatas:
   - {fileID: 11400000, guid: 8b712ac1d9abbfb4eaef08a1ed1d2ee1, type: 2}
   - {fileID: 11400000, guid: 81292531d01fb3d4685216ebbd8a3cf3, type: 2}
   - {fileID: 11400000, guid: c768d9b2794799c47a54190af1c91d15, type: 2}
-  maxTerrainCount: 30
+  maxTerrainCount: 20
   terrainHolder: {fileID: 0}
   currentPosition: {x: 0, y: 0, z: 0}
