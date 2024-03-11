@@ -26,11 +26,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a748b24098e371a4dbff8892a31b5954, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.051266
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a748b24098e371a4dbff8892a31b5954, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.094401
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a748b24098e371a4dbff8892a31b5954, type: 3}
       propertyPath: m_LocalRotation.w
@@ -68,6 +68,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rock02
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: a748b24098e371a4dbff8892a31b5954, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
     - target: {fileID: 1151388028547126963, guid: a748b24098e371a4dbff8892a31b5954, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.17799
@@ -82,11 +86,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1151388028547126963, guid: a748b24098e371a4dbff8892a31b5954, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.1919
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1151388028547126963, guid: a748b24098e371a4dbff8892a31b5954, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2.67
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -120,5 +124,5 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.76484704, y: 0.5504754, z: 0.71538377}
-  m_Center: {x: -0.008089515, y: 1.455728, z: -2.6640055}
+  m_Size: {x: 0.76484704, y: 0.5876913, z: 0.7467217}
+  m_Center: {x: 0, y: 0.25476423, z: 0.004261438}
