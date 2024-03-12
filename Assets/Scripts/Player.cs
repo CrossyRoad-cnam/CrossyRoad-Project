@@ -11,10 +11,12 @@ public class Player : MonoBehaviour
     private int score;
     private Animator animator;
     private bool isHopping;
+    private Rigidbody rb;
 
     private void Start()
     {
         animator = GetComponent<Animator>();
+        rb = GetComponent<Rigidbody>();
     }
     private void Update()
     {
@@ -49,5 +51,13 @@ public class Player : MonoBehaviour
     public void FinishHop()
     {
         isHopping = false;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Obstacle"))
+        {
+            Debug.Log(collision.gameObject.name);
+        }
     }
 }
