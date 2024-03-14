@@ -7,25 +7,27 @@ public class Player : MonoBehaviour
 {
     [SerializeField] private TerrainGenerator terrainGenerator;
     [SerializeField] private Text scoreText;
-    
-    private int score;
+
+    private float initialPosition;
     private Animator animator;
     private bool isHopping;
     private Rigidbody rb;
+    private int previousScore;
 
     private void Start()
     {
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
+        initialPosition = transform.position.x;
+        previousScore = 0;
+        UpdateScoreText();
     }
+
     private void Update()
     {
-
         if (Input.GetKeyDown(KeyCode.UpArrow) && !isHopping)
         {
             MoveCharacter(new Vector3(1, 0, 0));
-            score++;
-            scoreText.text = "Score: " + score;
         }
         else if (Input.GetKeyDown(KeyCode.DownArrow) && !isHopping)
         {
@@ -47,7 +49,15 @@ public class Player : MonoBehaviour
         isHopping = true;
         transform.position += direction;
         terrainGenerator.SpawnTerrain(false, transform.position);
+
+        int currentScore = CalculateScore();
+        if (currentScore > previousScore)
+        {
+            previousScore = currentScore;
+            UpdateScoreText();
+        }
     }
+
     public void FinishHop()
     {
         isHopping = false;
@@ -59,5 +69,16 @@ public class Player : MonoBehaviour
         {
             Debug.Log(collision.gameObject.name);
         }
+    }
+
+    private int CalculateScore()
+    {
+        float distanceMoved = transform.position.x - initialPosition;
+        return Mathf.RoundToInt(distanceMoved);
+    }
+
+    private void UpdateScoreText()
+    {
+        scoreText.text = "Score: " + previousScore;
     }
 }
