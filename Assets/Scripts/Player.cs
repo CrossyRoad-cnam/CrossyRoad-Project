@@ -12,14 +12,14 @@ public class Player : MonoBehaviour
     private Animator animator;
     private bool isHopping;
     private Rigidbody rb;
-    private int previousScore;
+    private int scoreValue = 0;
 
     private void Start()
     {
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
         initialPosition = transform.position.x;
-        previousScore = 0;
+        scoreValue = 0;
         UpdateScoreText();
     }
 
@@ -51,9 +51,9 @@ public class Player : MonoBehaviour
         terrainGenerator.SpawnTerrain(false, transform.position);
 
         int currentScore = CalculateScore();
-        if (currentScore > previousScore)
+        if (currentScore > scoreValue)
         {
-            previousScore = currentScore;
+            scoreValue = currentScore;
             UpdateScoreText();
         }
     }
@@ -79,6 +79,6 @@ public class Player : MonoBehaviour
 
     private void UpdateScoreText()
     {
-        scoreText.text = "Score: " + previousScore;
+        scoreText.text = scoreValue.ToString();
     }
 }
