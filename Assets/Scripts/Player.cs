@@ -11,13 +11,11 @@ public class Player : MonoBehaviour
     private float initialPosition;
     private Animator animator;
     private bool isHopping;
-    private Rigidbody rb;
     private int scoreValue = 0;
 
     private void Start()
     {
         animator = GetComponent<Animator>();
-        rb = GetComponent<Rigidbody>();
         initialPosition = transform.position.x;
         scoreValue = 0;
         UpdateScoreText();
@@ -27,47 +25,62 @@ public class Player : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.UpArrow) && !isHopping)
         {
-            MoveCharacter(new Vector3(1, 0, 0));
+            MoveCharacter(Vector3.right);
         }
         else if (Input.GetKeyDown(KeyCode.DownArrow) && !isHopping)
         {
-            MoveCharacter(new Vector3(-1, 0, 0));
+            MoveCharacter(Vector3.left);
         }
         else if (Input.GetKeyDown(KeyCode.LeftArrow) && !isHopping)
         {
-            MoveCharacter(new Vector3(0, 0, 1));
+            MoveCharacter(Vector3.forward);
         }
         else if (Input.GetKeyDown(KeyCode.RightArrow) && !isHopping)
         {
-            MoveCharacter(new Vector3(0, 0, -1));
+            MoveCharacter(Vector3.back);
         }
     }
 
     private void MoveCharacter(Vector3 direction)
     {
+        if (CanMoveInDirection(direction))
+        {
+            PerformMove(direction);
+            UpdateScore();
+        }
+    }
+
+    private bool CanMoveInDirection(Vector3 direction)
+    {
+        RaycastHit hit;
+        float range = 0.5f;
+
+        if (Physics.Raycast(transform.position, direction, out hit, range))
+        {
+            if (hit.collider.CompareTag("Obstacle"))
+            {
+                Debug.Log("Obstacle detected, can't move!");
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private void PerformMove(Vector3 direction)
+    {
         animator.SetTrigger("hop");
         isHopping = true;
         transform.position += direction;
         terrainGenerator.SpawnTerrain(false, transform.position);
+    }
 
+    private void UpdateScore()
+    {
         int currentScore = CalculateScore();
         if (currentScore > scoreValue)
         {
             scoreValue = currentScore;
             UpdateScoreText();
-        }
-    }
-
-    public void FinishHop()
-    {
-        isHopping = false;
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Obstacle"))
-        {
-            Debug.Log(collision.gameObject.name);
         }
     }
 
@@ -80,5 +93,18 @@ public class Player : MonoBehaviour
     private void UpdateScoreText()
     {
         scoreText.text = scoreValue.ToString();
+    }
+
+    public void FinishHop()
+    {
+        isHopping = false;
+    }
+    // Pour tester si la collision fonctionne
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Obstacle"))
+        {
+            Debug.Log(collision.gameObject.name);
+        }
     }
 }
