@@ -157,7 +157,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 3313a02dae6a1bd4489ca1ff32516283, type: 2}
     - target: {fileID: 919132149155446097, guid: 10f576b9ee2ba044a84847b4d93465d5, type: 3}
       propertyPath: m_Name
-      value: Tree01
+      value: Tree03
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 10f576b9ee2ba044a84847b4d93465d5, type: 3}
       propertyPath: m_TagString
@@ -207,5 +207,5 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.9228082, y: 5.4561644, z: 1.6731982}
-  m_Center: {x: 0.1634736, y: 0.792891, z: 0.124295235}
+  m_Size: {x: 1.9228082, y: 9.607409, z: 1.6731982}
+  m_Center: {x: 0.1634736, y: 1.5135014, z: 0.124295235}
