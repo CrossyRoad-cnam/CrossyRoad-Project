@@ -62,7 +62,7 @@ public class Player : MonoBehaviour
         {
             if (hit.collider.CompareTag("Obstacle"))
             {
-                Debug.Log("Obstacle detected, can't move!");
+                Debug.Log("Obstacle detected, can't move! Name : " + hit.collider.name);
                 return false;
             }
         }
@@ -102,12 +102,12 @@ public class Player : MonoBehaviour
     {
         isHopping = false;
     }
-    // Pour tester si la collision fonctionne
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Obstacle"))
+        if (collision.gameObject.CompareTag("Ennemy"))
         {
-            Debug.Log(collision.gameObject.name);
+            Debug.Log("GAME OVER");
+            Destroy(this.gameObject);
         }
     }
 }

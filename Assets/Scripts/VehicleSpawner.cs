@@ -5,7 +5,9 @@ using UnityEngine;
 public class VehicleSpawner : MonoBehaviour
 {
     [SerializeField] private GameObject Vehicle;
-    [SerializeField] private Transform spawnPos;
+    [SerializeField] private Transform spawnPosition;
+    [SerializeField] private float minSeparationTime;
+    [SerializeField] private float maxSeparationTime;
 
     private void Start()
     {
@@ -16,9 +18,9 @@ public class VehicleSpawner : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(Random.Range(1, 3));
-            Instantiate(Vehicle, spawnPos.position, Quaternion.identity);
+            yield return new WaitForSeconds(Random.Range(minSeparationTime, maxSeparationTime));
+            Instantiate(Vehicle, spawnPosition.position, Quaternion.identity);
         }
     }
-    
+  
 }

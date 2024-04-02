@@ -8,7 +8,7 @@ public class Vehicle : MonoBehaviour
 
     private void Update()
     {
-        transform.Translate(Vector3.forward * speed);
+        transform.Translate(Vector3.forward * speed * Time.deltaTime);
     }
 
 }

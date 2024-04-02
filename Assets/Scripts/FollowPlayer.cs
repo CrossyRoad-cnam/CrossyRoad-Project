@@ -9,6 +9,9 @@ public class FollowPlayer : MonoBehaviour
     [SerializeField] private float smoothSpeed;
     private void Update()
     {
-        transform.position = Vector3.Lerp(transform.position, player.transform.position + offset, smoothSpeed);
+        if (player != null)
+        {
+            transform.position = Vector3.Lerp(transform.position, player.transform.position + offset, smoothSpeed);
+        }
     }   
 }
