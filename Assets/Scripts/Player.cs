@@ -23,21 +23,24 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.UpArrow) && !isHopping)
+        if (!isHopping)
         {
-            MoveCharacter(Vector3.right);
-        }
-        else if (Input.GetKeyDown(KeyCode.DownArrow) && !isHopping)
-        {
-            MoveCharacter(Vector3.left);
-        }
-        else if (Input.GetKeyDown(KeyCode.LeftArrow) && !isHopping)
-        {
-            MoveCharacter(Vector3.forward);
-        }
-        else if (Input.GetKeyDown(KeyCode.RightArrow) && !isHopping)
-        {
-            MoveCharacter(Vector3.back);
+            if (Input.GetKeyDown(KeyCode.UpArrow))
+            {
+                MoveCharacter(Vector3.right);
+            }
+            else if (Input.GetKeyDown(KeyCode.DownArrow))
+            {
+                MoveCharacter(Vector3.left);
+            }
+            else if (Input.GetKeyDown(KeyCode.LeftArrow))
+            {
+                MoveCharacter(Vector3.forward);
+            }
+            else if (Input.GetKeyDown(KeyCode.RightArrow))
+            {
+                MoveCharacter(Vector3.back);
+            }
         }
     }
 
