@@ -102,12 +102,4 @@ public class Player : MonoBehaviour
     {
         isHopping = false;
     }
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Ennemy"))
-        {
-            Debug.Log("GAME OVER");
-            Destroy(this.gameObject);
-        }
-    }
 }

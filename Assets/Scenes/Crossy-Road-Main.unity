@@ -674,6 +674,10 @@ PrefabInstance:
       propertyPath: m_Center.x
       value: -0.119712085
       objectReference: {fileID: 0}
+    - target: {fileID: 5716090685469776869, guid: 87ff3e309995ffb4096e064740b9a1da, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8364481363753794514, guid: 87ff3e309995ffb4096e064740b9a1da, type: 3}
       propertyPath: m_Name
       value: Player
