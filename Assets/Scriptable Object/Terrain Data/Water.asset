@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: Water
   m_EditorClassIdentifier: 
   possibleTerrain:
-  - {fileID: 1968103204995430382, guid: 3b219bd3d5e60414f89d0d34512dfbac, type: 3}
+  - {fileID: 1340897351910476466, guid: 4bbe8732f5258d44785cf58d4f84343f, type: 3}
+  - {fileID: 1131628978633802032, guid: d62f6533a7b02f8478b45c2a99fea50b, type: 3}
   maxInSuccession: 3

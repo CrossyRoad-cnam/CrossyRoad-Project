@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class KillPlayer : MonoBehaviour
 {
-    private void OnCollisionEnter(Collision collision)
+    public void OnCollisionEnter(Collision collision)
     {
         Player player = collision.gameObject.GetComponent<Player>();
         if (player != null)

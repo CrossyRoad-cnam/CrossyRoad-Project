@@ -98,8 +98,23 @@ public class Player : MonoBehaviour
         scoreText.text = scoreValue.ToString();
     }
 
-    public void FinishHop()
+    private void FinishHop()
     {
         isHopping = false;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.collider.GetComponent<MovingObject>() != null)
+        {
+            if (collision.collider.GetComponent<MovingObject>().isLog)
+            {
+                transform.parent = collision.collider.transform;
+            }
+        }
+        else
+        {
+            transform.parent = null;
+        }
     }
 }
