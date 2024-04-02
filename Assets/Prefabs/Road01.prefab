@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &860255835332658620
+--- !u!1 &5408675755583327747
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,7 +8,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4450172193130828013}
+  - component: {fileID: 4944000794178479974}
   m_Layer: 0
   m_Name: SpawnPos
   m_TagString: Untagged
@@ -16,22 +16,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4450172193130828013
+--- !u!4 &4944000794178479974
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 860255835332658620}
+  m_GameObject: {fileID: 5408675755583327747}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: -0.489}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4148920181954408899}
+  m_Father: {fileID: 2919742859921153869}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &2568265488172583157
+--- !u!1 &5770569823952254585
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -39,49 +39,49 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4148920181954408899}
-  - component: {fileID: 8001833707929911272}
-  - component: {fileID: 484932550342927336}
-  - component: {fileID: 6773103825471149475}
-  - component: {fileID: 1350853206190082592}
+  - component: {fileID: 2919742859921153869}
+  - component: {fileID: 1768909287028518921}
+  - component: {fileID: 6749120461240365698}
+  - component: {fileID: 7896504880665827802}
+  - component: {fileID: 7749142624764562104}
   m_Layer: 0
-  m_Name: Road
+  m_Name: Road01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4148920181954408899
+--- !u!4 &2919742859921153869
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2568265488172583157}
+  m_GameObject: {fileID: 5770569823952254585}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -2.85, z: 14.23}
   m_LocalScale: {x: 1, y: 1, z: 60}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 4450172193130828013}
+  - {fileID: 4944000794178479974}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &8001833707929911272
+--- !u!33 &1768909287028518921
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2568265488172583157}
+  m_GameObject: {fileID: 5770569823952254585}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &484932550342927336
+--- !u!23 &6749120461240365698
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2568265488172583157}
+  m_GameObject: {fileID: 5770569823952254585}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -117,13 +117,13 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &6773103825471149475
+--- !u!65 &7896504880665827802
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2568265488172583157}
+  m_GameObject: {fileID: 5770569823952254585}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -138,19 +138,20 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1350853206190082592
+--- !u!114 &7749142624764562104
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2568265488172583157}
+  m_GameObject: {fileID: 5770569823952254585}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 17fff18bef122c8449ebf5877b2df364, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Vehicle: {fileID: 7074179691381657869, guid: 800699b19313c3f43802e0b70136c7ff, type: 3}
-  spawnPosition: {fileID: 4450172193130828013}
+  spawnPosition: {fileID: 4944000794178479974}
   minSeparationTime: 3
   maxSeparationTime: 5
+  isRightSide: 1

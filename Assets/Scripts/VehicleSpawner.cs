@@ -8,6 +8,7 @@ public class VehicleSpawner : MonoBehaviour
     [SerializeField] private Transform spawnPosition;
     [SerializeField] private float minSeparationTime;
     [SerializeField] private float maxSeparationTime;
+    [SerializeField] private bool isRightSide;
 
     private void Start()
     {
@@ -19,7 +20,12 @@ public class VehicleSpawner : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(Random.Range(minSeparationTime, maxSeparationTime));
-            Instantiate(Vehicle, spawnPosition.position, Quaternion.identity);
+            GameObject newVehicle = Instantiate(Vehicle, spawnPosition.position, Quaternion.identity);
+
+            if (!isRightSide)
+            {
+                newVehicle.transform.Rotate(0, 180, 0);
+            }
         }
     }
   
