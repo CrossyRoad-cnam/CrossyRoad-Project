@@ -26,7 +26,28 @@ public class MovingObjectSpawner : MonoBehaviour
             {
                 newObject.transform.Rotate(0, 180, 0);
             }
+
+            StartCoroutine(DestroyOutOfBounds(newObject));
         }
     }
-  
+
+    private IEnumerator DestroyOutOfBounds(GameObject obj)
+    {
+        float terrainSize = 60f;
+
+        float minTerrainZ = spawnPosition.position.z - terrainSize;
+        float maxTerrainZ = spawnPosition.position.z + terrainSize;
+
+        while (true)
+        {
+            yield return null;
+
+            float objZ = obj.transform.position.z;
+            if (objZ < minTerrainZ || objZ > maxTerrainZ)
+            {
+                Destroy(obj);
+                yield break;
+            }
+        }
+    }
 }
