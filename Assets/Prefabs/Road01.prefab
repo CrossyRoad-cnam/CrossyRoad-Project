@@ -152,6 +152,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movingObject: {fileID: 7074179691381657869, guid: 800699b19313c3f43802e0b70136c7ff, type: 3}
   spawnPosition: {fileID: 4944000794178479974}
-  minSeparationTime: 3
-  maxSeparationTime: 5
+  minSeparationTime: 5
+  maxSeparationTime: 7
   isRightSide: 1
