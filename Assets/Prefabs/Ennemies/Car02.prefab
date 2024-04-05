@@ -106,7 +106,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isLog: 0
-  speed: 2.5
+  speed: 4
 --- !u!65 &8331856563043808433
 BoxCollider:
   m_ObjectHideFlags: 0

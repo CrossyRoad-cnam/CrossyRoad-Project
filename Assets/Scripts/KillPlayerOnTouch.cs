@@ -9,7 +9,7 @@ public class KillPlayer : MonoBehaviour
         Player player = collision.gameObject.GetComponent<Player>();
         if (player != null)
         {
-            Debug.Log("Player collided with obstacle. GAME OVER");
+            Debug.Log("Player killed himself. GAME OVER");
             Destroy(player.gameObject);
         }
     }
@@ -18,7 +18,7 @@ public class KillPlayer : MonoBehaviour
         Player player = other.gameObject.GetComponent<Player>();
         if (player != null)
         {
-            Debug.Log("Obstacle collided with player. GAME OVER");
+            Debug.Log("Player was killed. GAME OVER");
             Destroy(player.gameObject);
         }
     }
