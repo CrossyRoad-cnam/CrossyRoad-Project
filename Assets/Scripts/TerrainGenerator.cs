@@ -21,24 +21,27 @@ public class TerrainGenerator : MonoBehaviour
     }
     public void SpawnTerrain(bool isStart, Vector3 playerPosition)
     {
-        if(currentPosition.x - playerPosition.x < minDistanceFromPlayer || (isStart))
+        if (currentPosition.x - playerPosition.x < minDistanceFromPlayer || (isStart))
         {
            int whichTerrain = Random.Range(0, terrainDatas.Count);
            int terrainInSuccession = Random.Range(1, terrainDatas[whichTerrain].maxInSuccession);
 
            for (int i = 0; i < terrainInSuccession; i++)
            {
-               GameObject terrain = Instantiate(terrainDatas[whichTerrain].possibleTerrain[Random.Range(0, terrainDatas[whichTerrain].possibleTerrain.Count)], currentPosition, Quaternion.identity, terrainHolder);
-               currentTerrains.Add(terrain);
-               if (!isStart)
-               {
-                   if (currentTerrains.Count > maxTerrainCount)
-                   {
-                       Destroy(currentTerrains[0]);
-                       currentTerrains.RemoveAt(0);
-                   }
-               }
-               currentPosition.x++;
+                GameObject terrain = Instantiate(terrainDatas[whichTerrain].possibleTerrain[Random.Range(0, terrainDatas[whichTerrain].possibleTerrain.Count)], currentPosition, Quaternion.identity, terrainHolder);
+                currentTerrains.Add(terrain);
+
+                if (!isStart)
+                {
+                    if (currentTerrains.Count > maxTerrainCount)
+                    {
+                        Destroy(currentTerrains[0].gameObject);
+                        Destroy(currentTerrains[0]);
+                        currentTerrains.RemoveAt(0);
+                    }
+                }
+                
+                currentPosition.x++;
            }
         }
 
