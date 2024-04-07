@@ -10,6 +10,7 @@ public class TerrainGenerator : MonoBehaviour
     [SerializeField] private Transform terrainHolder;
 
     [HideInInspector] public Vector3 currentPosition = new Vector3(0,0,0);
+    
     private List<GameObject> currentTerrains = new List<GameObject>();
 
     private void Start()
@@ -19,6 +20,7 @@ public class TerrainGenerator : MonoBehaviour
             SpawnTerrain(true, new Vector3(0, 0, 0));
         }
     }
+
     public void SpawnTerrain(bool isStart, Vector3 playerPosition)
     {
         if (currentPosition.x - playerPosition.x < minDistanceFromPlayer || (isStart))
@@ -44,6 +46,5 @@ public class TerrainGenerator : MonoBehaviour
                 currentPosition.x++;
            }
         }
-
     }
 }

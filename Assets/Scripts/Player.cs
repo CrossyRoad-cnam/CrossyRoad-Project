@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
     [SerializeField] private Text scoreText;
 
     private float initialPosition;
+    private Quaternion initialRotation;
     private Animator animator;
     private bool isHopping;
     private int scoreValue = 0;
@@ -17,6 +18,7 @@ public class Player : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         initialPosition = transform.position.x;
+        initialRotation = transform.rotation;
         scoreValue = 0;
         UpdateScoreText();
     }
@@ -27,19 +29,19 @@ public class Player : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.UpArrow))
             {
-                MoveCharacter(Vector3.right);
+                MoveCharacter(new Vector3(1, 0, 0));
             }
             else if (Input.GetKeyDown(KeyCode.DownArrow))
             {
-                MoveCharacter(Vector3.left);
+                MoveCharacter(new Vector3(-1, 0, 0));
             }
             else if (Input.GetKeyDown(KeyCode.LeftArrow))
             {
-                MoveCharacter(Vector3.forward);
+                MoveCharacter(new Vector3(0, 0, 1));
             }
             else if (Input.GetKeyDown(KeyCode.RightArrow))
             {
-                MoveCharacter(Vector3.back);
+                MoveCharacter(new Vector3(0, 0, -1));
             }
         }
     }
@@ -68,12 +70,14 @@ public class Player : MonoBehaviour
         }
         return true;
     }
-
     private void PerformMove(Vector3 direction)
     {
         animator.SetTrigger("hop");
         isHopping = true;
+        Invoke("FinishHop", 0.5f);
+
         transform.position += direction;
+
         terrainGenerator.SpawnTerrain(false, transform.position);
     }
 
@@ -117,4 +121,5 @@ public class Player : MonoBehaviour
             transform.parent = null;
         }
     }
+
 }
