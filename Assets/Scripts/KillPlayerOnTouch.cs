@@ -6,7 +6,14 @@ public class KillPlayer : MonoBehaviour
 {
     private GameOverManager gameOverManager;
 
-    
+    void Start()
+    {
+        gameOverManager = FindObjectOfType<GameOverManager>();
+        if (gameOverManager == null)
+        {
+            Debug.LogError("GameOverManager not found in the scene.");
+        }
+    }
     private void OnCollisionEnter(Collision collision)
     {
         Player player = collision.gameObject.GetComponent<Player>();
