@@ -12,13 +12,11 @@ public class GameOverManager : MonoBehaviour
     {
         GameOverScreen.SetActive(false);
     }
-    // Start is called before the first frame update
     void Start()
     {
         
     }
 
-    // Update is called once per frame
     void Update()
     {
         
@@ -26,17 +24,18 @@ public class GameOverManager : MonoBehaviour
 
     public void GameOver()
     {
-        // Activer le canvas gameOver
         GameOverScreen.SetActive(true);
-        // Arrêter le temps (si nécessaire)
         Time.timeScale = 0f;
     }
 
     public void RestartGame()
     {
-        // Recharger la scène de jeu
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        // Remettre le temps à sa valeur normale
         Time.timeScale = 1f;
+    }
+
+    public void QuitGame()
+    {
+        SceneManager.LoadScene(0);
     }
 }
