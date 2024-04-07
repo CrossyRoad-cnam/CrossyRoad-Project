@@ -18,7 +18,6 @@ public class Player : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         initialPosition = transform.position.x;
-        initialRotation = transform.rotation;
         scoreValue = 0;
         UpdateScoreText();
     }
@@ -58,13 +57,12 @@ public class Player : MonoBehaviour
     private bool CanMoveInDirection(Vector3 direction)
     {
         RaycastHit hit;
-        float range = 1.0f;
+        float range = 1.4f;
 
         if (Physics.Raycast(transform.position, direction, out hit, range))
         {
             if (hit.collider.CompareTag("Obstacle"))
             {
-                Debug.Log("Obstacle detected, can't move! Name : " + hit.collider.name);
                 return false;
             }
         }
@@ -74,10 +72,7 @@ public class Player : MonoBehaviour
     {
         animator.SetTrigger("hop");
         isHopping = true;
-        Invoke("FinishHop", 0.5f);
-
         transform.position += direction;
-
         terrainGenerator.SpawnTerrain(false, transform.position);
     }
 
