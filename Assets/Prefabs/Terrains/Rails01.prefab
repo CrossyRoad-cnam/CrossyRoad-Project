@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6899443715940400226}
   - component: {fileID: 4750804277744170148}
   - component: {fileID: 9095330719590655504}
+  - component: {fileID: -8530923975872314893}
   m_Layer: 0
   m_Name: Rails01
   m_TagString: Untagged
@@ -170,6 +171,23 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-8530923975872314893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 42430506527670589}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17fff18bef122c8449ebf5877b2df364, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movingObject: {fileID: 199381037990934736, guid: d3d1af9940f302343884eb6ce645a21b, type: 3}
+  spawnPosition: {fileID: 2878619820002355007}
+  minSeparationTime: 5
+  maxSeparationTime: 7
+  isRightSide: 0
 --- !u!1 &95789617471771495
 GameObject:
   m_ObjectHideFlags: 0
@@ -3240,7 +3258,7 @@ Transform:
   m_GameObject: {fileID: 3635399736862441012}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.4, z: -0.489}
+  m_LocalPosition: {x: -3.18, y: -2.965, z: -0.65}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
