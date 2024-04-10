@@ -12,10 +12,10 @@ public class MovingObjectSpawner : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(SpawnVehicle());
+        StartCoroutine(SpawnObject());
     }
 
-    private IEnumerator SpawnVehicle()
+    private IEnumerator SpawnObject()
     {
         while (true)
         {

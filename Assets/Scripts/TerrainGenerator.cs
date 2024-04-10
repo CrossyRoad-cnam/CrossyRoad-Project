@@ -25,11 +25,17 @@ public class TerrainGenerator : MonoBehaviour
     {
         if (currentPosition.x - playerPosition.x < minDistanceFromPlayer || (isStart))
         {
-           int whichTerrain = Random.Range(0, terrainDatas.Count);
-           int terrainInSuccession = Random.Range(1, terrainDatas[whichTerrain].maxInSuccession);
+            int whichTerrain = Random.Range(0, terrainDatas.Count);
+            int maxSuccession = terrainDatas[whichTerrain].maxInSuccession;
+            int terrainInSuccession = Random.Range(1, maxSuccession);
 
-           for (int i = 0; i < terrainInSuccession; i++)
-           {
+            if (terrainInSuccession > maxSuccession)
+            {
+                terrainInSuccession = maxSuccession;
+            }
+
+            for (int i = 0; i < terrainInSuccession; i++)
+            {
                 GameObject terrain = Instantiate(terrainDatas[whichTerrain].possibleTerrain[Random.Range(0, terrainDatas[whichTerrain].possibleTerrain.Count)], currentPosition, Quaternion.identity, terrainHolder);
                 currentTerrains.Add(terrain);
 
@@ -42,9 +48,10 @@ public class TerrainGenerator : MonoBehaviour
                         currentTerrains.RemoveAt(0);
                     }
                 }
-                
+
                 currentPosition.x++;
-           }
+            }
         }
     }
+
 }
