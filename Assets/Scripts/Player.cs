@@ -58,7 +58,7 @@ public class Player : MonoBehaviour
     {
         RaycastHit hit;
         float playerSize = Mathf.Max(transform.localScale.x, transform.localScale.z);
-        float range = playerSize * 1.2f;
+        float range = playerSize * 1f;
 
         if (Physics.Raycast(transform.position, direction, out hit, range))
         {
