@@ -7,14 +7,12 @@ public class Player : MonoBehaviour
 {
     [SerializeField] private TerrainGenerator terrainGenerator;
     [SerializeField] private Text scoreText;
-    [SerializeField] private ScoreManager scoreManager;
-
 
     private float initialPosition;
     private Quaternion initialRotation;
     private Animator animator;
     private bool isHopping;
-    private int scoreValue = 0;
+    public float scoreValue = 0;
 
     private void Start()
     {
@@ -31,8 +29,6 @@ public class Player : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.UpArrow))
             {
                 MoveCharacter(new Vector3(1, 0, 0));
-                Debug.Log(scoreManager);
-                scoreManager.AddScore(new Score("Player", 454));
             }
             else if (Input.GetKeyDown(KeyCode.DownArrow))
             {

@@ -5932,7 +5932,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rowUi: {fileID: 5034130766778453736, guid: b27cc1100f799f041b1d3aaef817c81d, type: 3}
-  scoreManager: {fileID: 0}
+  scoreManager: {fileID: 1261457918}
 --- !u!114 &1682309540
 MonoBehaviour:
   m_ObjectHideFlags: 0

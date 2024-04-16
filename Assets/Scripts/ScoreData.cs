@@ -6,7 +6,7 @@ using UnityEngine.SocialPlatforms.Impl;
 
 
 [Serializable]
-public class ScoreData : MonoBehaviour
+public class ScoreData 
 {
     public List<Score> scores;
 

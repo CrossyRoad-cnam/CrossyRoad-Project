@@ -5,10 +5,12 @@ using UnityEngine;
 public class KillPlayer : MonoBehaviour
 {
     private GameOverManager gameOverManager;
+    private ScoreManager scoreManager;
 
     void Start()
     {
         gameOverManager = FindObjectOfType<GameOverManager>();
+        scoreManager = FindObjectOfType<ScoreManager>();
         if (gameOverManager == null)
         {
             Debug.LogError("GameOverManager not found in the scene.");
@@ -21,6 +23,8 @@ public class KillPlayer : MonoBehaviour
         {
             Debug.Log("Player killed himself. GAME OVER");
             gameOverManager.GameOver();
+            scoreManager.AddScore(new Score("player", player.scoreValue));
+            scoreManager.SaveScore();
             Destroy(player.gameObject);
         }
     }

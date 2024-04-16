@@ -11,8 +11,13 @@ public class ScoreUi : MonoBehaviour
 
     void Start()
     {
+
         var scores = scoreManager.GetHighScores().ToArray();
-        for (int i = 0; i < scores.Length; i++)
+        if (scores.Length == 0)
+        {
+            Debug.Log("No scores found.");
+        }
+        for (int i = 0; i < 4; i++)
         {
             var row = Instantiate(rowUi, transform).GetComponent<RowUi>();
             row.rank.text = (i + 1).ToString();
