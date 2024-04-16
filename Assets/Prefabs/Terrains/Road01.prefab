@@ -155,4 +155,3 @@ MonoBehaviour:
   minSeparationTime: 5
   maxSeparationTime: 7
   isRightSide: 1
-  terrainHolder: {fileID: 0}
