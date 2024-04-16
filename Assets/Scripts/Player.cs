@@ -69,11 +69,31 @@ public class Player : MonoBehaviour
         }
         return true;
     }
+    private void RotateCharacter(Vector3 direction)
+    {
+        if (direction.x > 0)
+        {
+            transform.rotation = Quaternion.Euler(0, 0, 0);
+        }
+        else if (direction.x < 0)
+        {
+            transform.rotation = Quaternion.Euler(0, 180, 0);
+        }
+        else if (direction.z > 0)
+        {
+            transform.rotation = Quaternion.Euler(0, -90, 0);
+        }
+        else if (direction.z < 0)
+        {
+            transform.rotation = Quaternion.Euler(0, 90, 0);
+        }
+    }
     private void PerformMove(Vector3 direction)
     {
         animator.SetTrigger("hop");
         isHopping = true;
         transform.position += direction;
+        RotateCharacter(direction);
         terrainGenerator.SpawnTerrain(false, transform.position);
     }
 
@@ -115,6 +135,17 @@ public class Player : MonoBehaviour
         else
         {
             transform.parent = null;
+        }
+    }
+
+    private void OnDrawGizmos()
+    {
+        if (Application.isPlaying) // Only draw in editor, not during play
+        {
+            float playerSize = Mathf.Max(transform.localScale.x, transform.localScale.z);
+            float range = playerSize * 1f;
+            Gizmos.color = Color.yellow; // Adjust color as needed
+            Gizmos.DrawRay(transform.position, transform.forward * range);
         }
     }
 
