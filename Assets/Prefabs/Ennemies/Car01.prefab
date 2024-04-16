@@ -10,11 +10,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 32156a538b894634991b1933b011f926, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.8
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 32156a538b894634991b1933b011f926, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.9
+      value: 1.2
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 32156a538b894634991b1933b011f926, type: 3}
       propertyPath: m_LocalPosition.x
@@ -56,6 +56,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -4683669308469848369, guid: 32156a538b894634991b1933b011f926, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 4e739e1149a79cc499fd075722acd6ab, type: 2}
+    - target: {fileID: -4683669308469848369, guid: 32156a538b894634991b1933b011f926, type: 3}
+      propertyPath: m_Materials.Array.data[3]
+      value: 
+      objectReference: {fileID: 2100000, guid: 960b1af362fb5404185d0a852c8959ff, type: 2}
     - target: {fileID: 919132149155446097, guid: 32156a538b894634991b1933b011f926, type: 3}
       propertyPath: m_Name
       value: Car01

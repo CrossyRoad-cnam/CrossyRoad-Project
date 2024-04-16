@@ -14,7 +14,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f7b64647981263346a2313ba7081fd70, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.091827
+      value: 1.3358504
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f7b64647981263346a2313ba7081fd70, type: 3}
       propertyPath: m_LocalScale.z
@@ -26,7 +26,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f7b64647981263346a2313ba7081fd70, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: 1.0056
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f7b64647981263346a2313ba7081fd70, type: 3}
       propertyPath: m_LocalPosition.z
@@ -96,9 +96,6 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f7b64647981263346a2313ba7081fd70, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1028763723980523300}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f7b64647981263346a2313ba7081fd70, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 5068320118915445806}
   m_SourcePrefab: {fileID: 100100000, guid: f7b64647981263346a2313ba7081fd70, type: 3}
 --- !u!1 &5635724997450916859 stripped
@@ -106,20 +103,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: f7b64647981263346a2313ba7081fd70, type: 3}
   m_PrefabInstance: {fileID: 4825457293079666346}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1028763723980523300
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5635724997450916859}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 408f8b95df02bc84e9a6bb9bb98cb241, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isLog: 1
-  speed: 2.5
 --- !u!65 &5068320118915445806
 BoxCollider:
   m_ObjectHideFlags: 0
