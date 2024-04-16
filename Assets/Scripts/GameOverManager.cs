@@ -25,7 +25,6 @@ public class GameOverManager : MonoBehaviour
     public void GameOver()
     {
         GameOverScreen.SetActive(true);
-        Time.timeScale = 0f;
     }
 
     public void RestartGame()
