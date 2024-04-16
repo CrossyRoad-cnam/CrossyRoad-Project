@@ -2052,6 +2052,10 @@ PrefabInstance:
       value: Terrain Generator
       objectReference: {fileID: 0}
     - target: {fileID: 6714637674210826803, guid: 55769f10b2354094597d2f41cb2c61bd, type: 3}
+      propertyPath: StartTerrain
+      value: 
+      objectReference: {fileID: 8562624435428234971, guid: 66b4fb01e8f001f43b93e73ba09b401a, type: 3}
+    - target: {fileID: 6714637674210826803, guid: 55769f10b2354094597d2f41cb2c61bd, type: 3}
       propertyPath: terrainHolder
       value: 
       objectReference: {fileID: 1595569629}
