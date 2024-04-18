@@ -139,6 +139,13 @@ public class Player : MonoBehaviour
     {
         isHopping = false;
     }
+    private void FixPlayerPosition() // Fonction que nous utiliserons pour arrondir la position du joueur à la grille
+    {
+        Vector3 position = transform.position;
+        position.x = Mathf.Round(position.x); 
+        position.z = Mathf.Round(position.z);
+        transform.position = position;
+    }
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -152,6 +159,7 @@ public class Player : MonoBehaviour
         else
         {
             transform.parent = null;
+            FixPlayerPosition();
         }
     }
 }
