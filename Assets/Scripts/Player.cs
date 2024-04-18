@@ -70,23 +70,42 @@ public class Player : MonoBehaviour
     }
     private void RotateCharacter(Vector3 direction)
     {
+        Quaternion newRotation = Quaternion.identity;
         if (direction.x > 0)
         {
-            transform.rotation = Quaternion.Euler(0, 0, 0);
+            newRotation = Quaternion.Euler(0, 0, 0);
         }
         else if (direction.x < 0)
         {
-            transform.rotation = Quaternion.Euler(0, 180, 0);
+            newRotation = Quaternion.Euler(0, 180, 0);
         }
         else if (direction.z > 0)
         {
-            transform.rotation = Quaternion.Euler(0, -90, 0);
+            newRotation = Quaternion.Euler(0, -90, 0);
         }
         else if (direction.z < 0)
         {
-            transform.rotation = Quaternion.Euler(0, 90, 0);
+            newRotation = Quaternion.Euler(0, 90, 0);
         }
+        StartCoroutine(RotateOverTime(newRotation));
     }
+
+    private IEnumerator RotateOverTime(Quaternion newRotation)
+    {
+        float duration = 0.1f;
+        float time = 0;
+        Quaternion startRotation = transform.rotation;
+
+        while (time < duration)
+        {
+            transform.rotation = Quaternion.Slerp(startRotation, newRotation, time / duration);
+            time += Time.deltaTime;
+            yield return null;
+        }
+
+        transform.rotation = newRotation;
+    }
+
     private void PerformMove(Vector3 direction)
     {
         animator.SetTrigger("hop");
