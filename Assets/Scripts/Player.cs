@@ -136,16 +136,4 @@ public class Player : MonoBehaviour
             transform.parent = null;
         }
     }
-
-    private void OnDrawGizmos()
-    {
-        if (Application.isPlaying) // Only draw in editor, not during play
-        {
-            float playerSize = Mathf.Max(transform.localScale.x, transform.localScale.z);
-            float range = playerSize * 1f;
-            Gizmos.color = Color.yellow; // Adjust color as needed
-            Gizmos.DrawRay(transform.position, transform.forward * range);
-        }
-    }
-
 }
