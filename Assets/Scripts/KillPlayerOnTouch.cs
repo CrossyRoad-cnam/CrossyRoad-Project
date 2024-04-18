@@ -34,6 +34,8 @@ public class KillPlayer : MonoBehaviour
         if (player != null)
         {
             Debug.Log("Player was killed. GAME OVER");
+            scoreManager.AddScore(new Score("player", player.scoreValue));
+            scoreManager.SaveScore();
             gameOverManager.GameOver();
             Destroy(player.gameObject);
         }

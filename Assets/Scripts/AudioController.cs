@@ -22,6 +22,7 @@ public class AudioController : MonoBehaviour
         audioSource.clip = sound;
         audioSource.volume = volume;
         audioSource.pitch = pitch;
+        audioSource.loop = true;
         audioSource.Play();
     }
 
