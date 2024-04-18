@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Menu.unity
+    guid: 361f39d41480aa647b118e8d518f2d45
+  - enabled: 1
     path: Assets/Scenes/Crossy-Road-Main.unity
     guid: adb0c2dacfc92514d94b001ac44a2627
   m_configObjects: {}

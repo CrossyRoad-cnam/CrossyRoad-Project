@@ -40,7 +40,7 @@ public class TerrainGenerator : MonoBehaviour
         }
         else
         {
-            throw new ArgumentOutOfRangeException("playerStartPos", playerStartPos, "La position de départ du joueur est actuellement située en dehors sa zone d'apparition (voir StartTerrains) !");
+            throw new ArgumentOutOfRangeException("playerStartPos", playerStartPos, "La position de dï¿½part du joueur est actuellement situï¿½e en dehors sa zone d'apparition (voir StartTerrains) !");
         }
     }
 
@@ -69,23 +69,32 @@ public class TerrainGenerator : MonoBehaviour
         if (currentPosition.x - playerPosition.x < minDistanceFromPlayer || (isStart))
         {
             int whichTerrain = Random.Range(0, terrainDatas.Count);
-            int terrainInSuccession = Random.Range(1, terrainDatas[whichTerrain].maxInSuccession);
+            int maxSuccession = terrainDatas[whichTerrain].maxInSuccession;
+            int terrainInSuccession = Random.Range(1, maxSuccession);
+
+            if (terrainInSuccession > maxSuccession)
+            {
+                terrainInSuccession = maxSuccession;
+            }
 
             for (int i = 0; i < terrainInSuccession; i++)
             {
                 GameObject terrain = Instantiate(terrainDatas[whichTerrain].possibleTerrain[Random.Range(0, terrainDatas[whichTerrain].possibleTerrain.Count)], currentPosition, Quaternion.identity, terrainHolder);
                 currentTerrains.Add(terrain);
+
                 if (!isStart)
                 {
                     if (currentTerrains.Count > maxTerrainCount)
                     {
+                        Destroy(currentTerrains[0].gameObject);
                         Destroy(currentTerrains[0]);
                         currentTerrains.RemoveAt(0);
                     }
                 }
+
                 currentPosition.x++;
             }
         }
-
     }
+
 }

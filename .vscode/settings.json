@@ -51,5 +51,6 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "CrossyRoad-Project.sln"
+    "dotnet.defaultSolution": "CrossyRoad-Project.sln",
+    "dotnet.preferCSharpExtension": true
 }
