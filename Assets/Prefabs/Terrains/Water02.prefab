@@ -134,8 +134,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movingObject: {fileID: 6159006319036399535, guid: a1a4adf457af217f085403620141c22a, type: 3}
   spawnPosition: {fileID: 2501726992589591580}
-  minSeparationTime: 3
-  maxSeparationTime: 6
+  minSeparationTime: 1
+  maxSeparationTime: 3
   isRightSide: 0
 --- !u!1 &5607529587928731484
 GameObject:

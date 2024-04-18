@@ -57,8 +57,7 @@ public class Player : MonoBehaviour
     private bool CanMoveInDirection(Vector3 direction)
     {
         RaycastHit hit;
-        float playerSize = Mathf.Max(transform.localScale.x, transform.localScale.z);
-        float range = playerSize * 1.2f;
+        float range = 1f;
 
         if (Physics.Raycast(transform.position, direction, out hit, range))
         {

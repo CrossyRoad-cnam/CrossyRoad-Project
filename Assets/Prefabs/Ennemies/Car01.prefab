@@ -59,11 +59,11 @@ PrefabInstance:
     - target: {fileID: -4683669308469848369, guid: 32156a538b894634991b1933b011f926, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 4e739e1149a79cc499fd075722acd6ab, type: 2}
+      objectReference: {fileID: 2100000, guid: 23c433e2a587f0e5ea66fd4fb617fbf6, type: 2}
     - target: {fileID: -4683669308469848369, guid: 32156a538b894634991b1933b011f926, type: 3}
       propertyPath: m_Materials.Array.data[3]
       value: 
-      objectReference: {fileID: 2100000, guid: 960b1af362fb5404185d0a852c8959ff, type: 2}
+      objectReference: {fileID: 2100000, guid: c368b84496d77a52fb12a99de96b0b17, type: 2}
     - target: {fileID: 919132149155446097, guid: 32156a538b894634991b1933b011f926, type: 3}
       propertyPath: m_Name
       value: Car01
@@ -126,7 +126,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.9639032, y: 0.6633567, z: 2.2074544}
+  m_Size: {x: 1, y: 0.6633567, z: 2.1}
   m_Center: {x: -0.018048454, y: 0.39198092, z: 0.25038922}
 --- !u!114 &205558411228259365
 MonoBehaviour:
