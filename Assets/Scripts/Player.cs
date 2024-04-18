@@ -116,7 +116,6 @@ public class Player : MonoBehaviour
     {
         scoreText.text = scoreValue.ToString();
     }
-
     private void FinishHop()
     {
         isHopping = false;

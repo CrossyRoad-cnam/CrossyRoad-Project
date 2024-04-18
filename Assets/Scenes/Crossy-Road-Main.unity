@@ -128,6 +128,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 8364481363753794514, guid: 87ff3e309995ffb4096e064740b9a1da, type: 3}
   m_PrefabInstance: {fileID: 1345830030}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &31379683 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2181244423828480601, guid: 87ff3e309995ffb4096e064740b9a1da, type: 3}
+  m_PrefabInstance: {fileID: 1345830030}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &55862419
 GameObject:
   m_ObjectHideFlags: 0
@@ -1351,11 +1356,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2181244423828480601, guid: 87ff3e309995ffb4096e064740b9a1da, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 10
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2181244423828480601, guid: 87ff3e309995ffb4096e064740b9a1da, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 2181244423828480601, guid: 87ff3e309995ffb4096e064740b9a1da, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1949,7 +1954,15 @@ PrefabInstance:
       objectReference: {fileID: 1595569629}
     - target: {fileID: 6714637674210826803, guid: 55769f10b2354094597d2f41cb2c61bd, type: 3}
       propertyPath: maxTerrainCount
-      value: 40
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 6714637674210826803, guid: 55769f10b2354094597d2f41cb2c61bd, type: 3}
+      propertyPath: playerTransform
+      value: 
+      objectReference: {fileID: 31379683}
+    - target: {fileID: 6714637674210826803, guid: 55769f10b2354094597d2f41cb2c61bd, type: 3}
+      propertyPath: minDistanceFromPlayer
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 6714637674210826803, guid: 55769f10b2354094597d2f41cb2c61bd, type: 3}
       propertyPath: terrainDatas.Array.size
