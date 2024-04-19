@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657767, g: 0.4964127, b: 0.57481843, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028401, g: 0.22571425, b: 0.30692324, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -162,16 +162,16 @@ Light:
   m_Type: 1
   m_Shape: 0
   m_Color: {r: 0.9811321, g: 0.8765336, b: 0.55998576, a: 1}
-  m_Intensity: 1
+  m_Intensity: 1.2
   m_Range: 10
   m_SpotAngle: 72.5
   m_InnerSpotAngle: 21.80208
-  m_CookieSize: 65.73
+  m_CookieSize: 10
   m_Shadows:
     m_Type: 1
     m_Resolution: 3
     m_CustomResolution: -1
-    m_Strength: 0.65
+    m_Strength: 0.85
     m_Bias: 0
     m_NormalBias: 0
     m_NearPlane: 0.1
@@ -929,7 +929,7 @@ Camera:
   far clip plane: 1000
   field of view: 70
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 4.5
   m_Depth: 60
   m_CullingMask:
     serializedVersion: 2
@@ -974,7 +974,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 31379678}
   offset: {x: 1, y: 2.35, z: 0}
-  smoothSpeed: 0.1
+  smoothSpeed: 0.2
 --- !u!1 &855586176
 GameObject:
   m_ObjectHideFlags: 0
