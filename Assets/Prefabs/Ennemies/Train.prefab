@@ -184,6 +184,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Train
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 2c450243bcc5bf248a9ee915a2cefad9, type: 3}
+      propertyPath: m_TagString
+      value: Ennemy
+      objectReference: {fileID: 0}
     - target: {fileID: 6479430281386937201, guid: 2c450243bcc5bf248a9ee915a2cefad9, type: 3}
       propertyPath: m_LocalScale.x
       value: 6
