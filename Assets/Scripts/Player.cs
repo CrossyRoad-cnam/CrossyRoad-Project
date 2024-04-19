@@ -139,7 +139,7 @@ public class Player : MonoBehaviour
     {
         isHopping = false;
     }
-    private void FixPlayerPosition() // Fonction que nous utiliserons pour arrondir la position du joueur à la grille
+    private void FixPlayerPosition() // Fonction que nous utiliserons pour arrondir la position du joueur à la grille (pour correspondre à notre snapGrid)
     {
         Vector3 position = transform.position;
         position.x = Mathf.Round(position.x); 

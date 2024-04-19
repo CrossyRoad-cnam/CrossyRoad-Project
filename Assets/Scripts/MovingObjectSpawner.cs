@@ -34,14 +34,12 @@ public class MovingObjectSpawner : MonoBehaviour
     private IEnumerator DestroyOutOfBounds(GameObject obj)
     {
         float terrainSize = 60f;
-
         float minTerrainZ = spawnPosition.position.z - terrainSize;
         float maxTerrainZ = spawnPosition.position.z + terrainSize;
 
         while (true)
         {
             yield return null;
-
             float objZ = obj.transform.position.z;
             if (objZ < minTerrainZ || objZ > maxTerrainZ)
             {
