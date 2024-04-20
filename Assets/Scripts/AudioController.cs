@@ -25,6 +25,10 @@ public class AudioController : MonoBehaviour
         audioSource.loop = true;
         audioSource.Play();
     }
+    public void SetVolume(float volume)
+    {
+        audioSource.volume = volume;
+    }
 
     // Start is called before the first frame update
     void Start()
