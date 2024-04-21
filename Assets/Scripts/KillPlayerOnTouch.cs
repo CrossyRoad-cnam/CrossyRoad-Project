@@ -11,10 +11,13 @@ public class KillPlayer : MonoBehaviour
     {
         gameOverManager = FindObjectOfType<GameOverManager>();
         scoreManager = FindObjectOfType<ScoreManager>();
-        if (gameOverManager == null)
-        {
-            Debug.LogError("GameOverManager not found in the scene.");
-        }
+    } 
+    private void ProcessGameOver(Player player)
+    {
+        gameOverManager.GameOver();
+        scoreManager.AddScore(new Score("player", player.scoreValue));
+        scoreManager.SaveScore();
+        Destroy(player.gameObject);
     }
     private void OnCollisionEnter(Collision collision)
     {
@@ -22,10 +25,7 @@ public class KillPlayer : MonoBehaviour
         if (player != null)
         {
             Debug.Log("Player killed himself. GAME OVER");
-            gameOverManager.GameOver();
-            scoreManager.AddScore(new Score("player", player.scoreValue));
-            scoreManager.SaveScore();
-            Destroy(player.gameObject);
+            ProcessGameOver(player);
         }
     }
     private void OnTriggerEnter(Collider other)
@@ -34,10 +34,7 @@ public class KillPlayer : MonoBehaviour
         if (player != null)
         {
             Debug.Log("Player was killed. GAME OVER");
-            scoreManager.AddScore(new Score("player", player.scoreValue));
-            scoreManager.SaveScore();
-            gameOverManager.GameOver();
-            Destroy(player.gameObject);
+            ProcessGameOver(player);
         }
     }
 }
