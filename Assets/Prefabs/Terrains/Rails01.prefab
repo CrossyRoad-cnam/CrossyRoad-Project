@@ -184,9 +184,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movingObject: {fileID: 8518486559447410070, guid: 8c1d10f8fdc270e41a251d2389654b2b, type: 3}
   spawnPosition: {fileID: 2878619820002355007}
+  terrainPrefab: {fileID: 42430506527670589}
   minSeparationTime: 5
   maxSeparationTime: 7
   isRightSide: 1
+  scaleFactor: 0.05
 --- !u!1 &95789617471771495
 GameObject:
   m_ObjectHideFlags: 0
