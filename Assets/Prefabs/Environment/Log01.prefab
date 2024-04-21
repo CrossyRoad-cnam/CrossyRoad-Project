@@ -48,6 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isJumpable: 1
   speed: 3
+  isRotating: 0
 --- !u!65 &1516515126468814529
 BoxCollider:
   m_ObjectHideFlags: 0

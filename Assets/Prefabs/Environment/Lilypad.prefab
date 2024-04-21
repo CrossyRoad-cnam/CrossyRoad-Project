@@ -67,12 +67,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c9622d7cdbb5432408064180ac97b3b2, type: 3}
       insertIndex: -1
       addedObject: {fileID: 3392089545938561813}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c9622d7cdbb5432408064180ac97b3b2, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 5903277055921860895}
     - targetCorrespondingSourceObject: {fileID: 4584339947330567888, guid: c9622d7cdbb5432408064180ac97b3b2, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8023302760619394641}
+    - targetCorrespondingSourceObject: {fileID: 4584339947330567888, guid: c9622d7cdbb5432408064180ac97b3b2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5404330497338031604}
   m_SourcePrefab: {fileID: 100100000, guid: c9622d7cdbb5432408064180ac97b3b2, type: 3}
 --- !u!1 &5509636879091888198 stripped
 GameObject:
@@ -100,6 +100,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.5, y: 0.125, z: 0.5}
   m_Center: {x: 0, y: 0.0625, z: 0}
+--- !u!114 &5404330497338031604
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5509636879091888198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b46aa0ebb310fc23bf29db3c2376796, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationSpeed: 20
 --- !u!1 &9163022839712953287 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: c9622d7cdbb5432408064180ac97b3b2, type: 3}
@@ -119,18 +132,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isJumpable: 1
   speed: 0
---- !u!114 &5903277055921860895
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9163022839712953287}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f72477949df7bdc4aa5de99a421aa7c0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bobbingAmount: 0.5
-  bobbingSpeed: 1
-  isJumpable: 1
