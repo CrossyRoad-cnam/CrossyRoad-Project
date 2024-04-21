@@ -152,7 +152,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movingObject: {fileID: 6375814923497777484, guid: 24a0a899299039b49b2020d551abe24d, type: 3}
   spawnPosition: {fileID: 4228452876981304124}
-  terrainPrefab: {fileID: 3307581954599153408}
   minSeparationTime: 4
   maxSeparationTime: 6
   isRightSide: 0
