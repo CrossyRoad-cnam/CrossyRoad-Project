@@ -151,7 +151,7 @@ public class Player : MonoBehaviour
     {
         if (collision.collider.GetComponent<MovingObject>() != null)
         {
-            if (collision.collider.GetComponent<MovingObject>().isLog)
+            if (collision.collider.GetComponent<MovingObject>().isJumpable)
             {
                 transform.parent = collision.collider.transform;
             }

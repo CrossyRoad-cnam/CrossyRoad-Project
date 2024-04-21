@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MovingObject : MonoBehaviour
 {
-    [SerializeField] public bool isLog;
+    [SerializeField] public bool isJumpable;
     [SerializeField] private float speed;
 
     private void Update()
