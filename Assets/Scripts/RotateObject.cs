@@ -2,9 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using UnityEngine;
+
 public class RotateObject : MonoBehaviour
 {
-   [SerializeField] private float rotationSpeed = 15f;
+    [SerializeField] private float rotationSpeed = 15f;
+    [SerializeField] private int rotationDirection1 = 1;
+    [SerializeField] private int rotationDirection2 = -1;
+    private float currentRotationSpeed;
+
+    void Start()
+    {
+        int chosenDirection = Random.Range(0, 2) == 0 ? rotationDirection1 : rotationDirection2;
+        currentRotationSpeed = rotationSpeed * chosenDirection;
+    }
+
     void Update()
     {
         RotateOverTime();
@@ -12,10 +24,10 @@ public class RotateObject : MonoBehaviour
 
     private void RotateOverTime()
     {
-        Quaternion deltaRotation = Quaternion.Euler(0f, rotationSpeed * Time.deltaTime, 0f);
-        transform.rotation = transform.rotation * deltaRotation;
+        Quaternion deltaRotation = Quaternion.Euler(0f, currentRotationSpeed * Time.deltaTime, 0f);
+        transform.rotation *= deltaRotation;
     }
-
 }
+
 
 
