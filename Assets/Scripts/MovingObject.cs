@@ -14,9 +14,6 @@ public class MovingObject : MonoBehaviour
         difficulty = PlayerPrefs.GetInt("Difficulty", 1);
         float speedMultiplier = GetSpeedMultiplier(difficulty);
         float currentSpeed = speed * speedMultiplier;
-        Debug.Log("speed mult : " + speedMultiplier);
-        Debug.Log("difficulty : " + difficulty);
-        Debug.Log("speed :" + currentSpeed); 
         transform.Translate(Vector3.forward * currentSpeed * Time.deltaTime);
     }
 
