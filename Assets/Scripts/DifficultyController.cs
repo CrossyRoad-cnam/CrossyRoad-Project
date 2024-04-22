@@ -9,29 +9,39 @@ public class DifficultyController : MonoBehaviour
     public TextMeshProUGUI difficultyText;
     private string[] difficultyLevels = { "Easy", "Medium", "Hard" };
     private int currentDifficultyIndex = 1; // Medium par défaut
+    private string difficultyKey = "Difficulty";
     // Start is called before the first frame update
     void Start()
     {
+        if (PlayerPrefs.HasKey(difficultyKey))
+        {
+            currentDifficultyIndex = PlayerPrefs.GetInt(difficultyKey);
+        }
         UpdateDifficultyText();
     }
 
-    // Méthode appelée lors du clic sur le bouton pour augmenter la difficulté
     public void IncreaseDifficulty()
     {
         currentDifficultyIndex = Mathf.Min(currentDifficultyIndex + 1, difficultyLevels.Length - 1);
         UpdateDifficultyText();
+        SaveDifficulty();
     }
 
-    // Méthode appelée lors du clic sur le bouton pour diminuer la difficulté
     public void DecreaseDifficulty()
     {
         currentDifficultyIndex = Mathf.Max(currentDifficultyIndex - 1, 0);
         UpdateDifficultyText();
+        SaveDifficulty();
     }
 
-    // Met à jour le texte affichant le niveau de difficulté actuel
     private void UpdateDifficultyText()
     {
         difficultyText.text = difficultyLevels[currentDifficultyIndex];
+    }
+
+    private void SaveDifficulty()
+    {
+        PlayerPrefs.SetInt(difficultyKey, currentDifficultyIndex);
+        PlayerPrefs.Save();
     }
 }
