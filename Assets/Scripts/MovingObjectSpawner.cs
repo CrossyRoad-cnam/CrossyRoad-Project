@@ -20,7 +20,10 @@ public class MovingObjectSpawner : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(Random.Range(minSeparationTime, maxSeparationTime));
-            GameObject newObject = Instantiate(movingObject, spawnPosition.position, Quaternion.identity);
+            GameObject newObject = Instantiate(movingObject, spawnPosition.position, movingObject.transform.rotation);
+
+            // Allow the 'movingObject' to rotate, according to the 'spawnPos' values (usage: train orientation, yAngle = 180°)
+            newObject.transform.Rotate(spawnPosition.rotation.x, spawnPosition.rotation.y, spawnPosition.rotation.z);
 
             if (!isRightSide)
             {
