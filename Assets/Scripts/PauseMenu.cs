@@ -1,14 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
     public GameObject pauseMenuUI;
+    public GameObject player;
     // Start is called before the first frame update
     void Start()
     {
-
+        player = GameObject.Find("Player");
     }
 
     // Update is called once per frame
@@ -16,43 +18,39 @@ public class PauseMenu : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            // Vérifie si le jeu est déjà en pause
             if (Time.timeScale == 0f)
             {
-                // Si oui, reprend le jeu
                 ResumeGame();
             }
             else
             {
-                // Si non, met le jeu en pause
                 PauseGame();
             }
         }
     }
     void PauseGame()
     {
-        pauseMenuUI.SetActive(true); // Active le menu pause
-        Time.timeScale = 0f; // Arrête le temps dans le jeu
+        pauseMenuUI.SetActive(true); 
+        Time.timeScale = 0f; 
     }
 
-    // Fonction pour reprendre le jeu
     public void ResumeGame()
     {
-        pauseMenuUI.SetActive(false); // Désactive le menu pause
-        Time.timeScale = 1f; // Reprend le temps dans le jeu
+        pauseMenuUI.SetActive(false);
+        Time.timeScale = 1f; 
     }
 
     public void QuitGame()
     {
-        Time.timeScale = 0f;
-        // charge la scene du menu principal
-        UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(0);
+
     }
 
     public void RestartGame()
     {
         Time.timeScale = 1f;
-        UnityEngine.SceneManagement.SceneManager.LoadScene(1);
+        SceneManager.LoadScene(1);
     }
 
 }

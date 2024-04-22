@@ -7,6 +7,7 @@ public class GameOverManager : MonoBehaviour
 {
 
     public GameObject GameOverScreen;
+    public PauseMenu pauseMenu;
 
     public void Awake()
     {
@@ -25,6 +26,10 @@ public class GameOverManager : MonoBehaviour
     public void GameOver()
     {
         GameOverScreen.SetActive(true);
+        if (pauseMenu != null)
+        {
+            pauseMenu.enabled = false;
+        }
     }
 
     public void RestartGame()

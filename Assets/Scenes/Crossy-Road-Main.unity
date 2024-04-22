@@ -438,6 +438,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GameOverScreen: {fileID: 1372669520}
+  pauseMenu: {fileID: 127963719}
 --- !u!114 &121287866 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6714637674210826803, guid: 55769f10b2354094597d2f41cb2c61bd, type: 3}
@@ -502,6 +503,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pauseMenuUI: {fileID: 847480208}
+  player: {fileID: 0}
 --- !u!114 &127963720
 MonoBehaviour:
   m_ObjectHideFlags: 0
