@@ -9,6 +9,13 @@ public class MovingObjectSpawner : MonoBehaviour
     [SerializeField] private float minSeparationTime;
     [SerializeField] private float maxSeparationTime;
     [SerializeField] private bool isRightSide;
+    /// <summary>
+    /// Détermine de cb de temps d'avance l'évènement 'ObjectIncoming' est déclenché
+    /// </summary>
+    [SerializeField] float EventThrowAdvancePercentage = 0.3f;
+    public delegate void ObjectIncomingEventHandler();
+    public event ObjectIncomingEventHandler ObjectIncoming;
+
 
     private void Start()
     {
@@ -19,7 +26,14 @@ public class MovingObjectSpawner : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(Random.Range(minSeparationTime, maxSeparationTime));
+            /// MODIFICATION JEREMIE
+            /// J'ai découpé ici le temps d'attente afin que l'évènement 'ObjectIncoming' (objet en mouvement en approche !) puisse être envoyé en avance
+            /// Ainsi pour les rails, je sais à l'avance qu'un train arrive et je peux donc faire clignoter les feux du terrain
+            /// MODIFICATION JEREMIE
+            float seconds = Random.Range(minSeparationTime, maxSeparationTime);
+            yield return new WaitForSeconds(seconds * (1 - EventThrowAdvancePercentage));
+            ObjectIncoming?.Invoke();
+            yield return new WaitForSeconds(seconds * EventThrowAdvancePercentage);
             GameObject newObject = Instantiate(movingObject, spawnPosition.position, movingObject.transform.rotation);
 
             // Allow the 'movingObject' to rotate, according to the 'spawnPos' values (usage: train orientation, yAngle = 180°)
