@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class RotateObject : MonoBehaviour
 {
-    [SerializeField] private float rotationSpeed = 15f;
+    [SerializeField] private float rotationSpeed = 10f;
     [SerializeField] private int rotationDirection1 = 1;
     [SerializeField] private int rotationDirection2 = -1;
     private float currentRotationSpeed;

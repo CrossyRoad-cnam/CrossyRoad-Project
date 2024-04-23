@@ -112,7 +112,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b46aa0ebb310fc23bf29db3c2376796, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationSpeed: 20
+  rotationSpeed: 15
+  rotationDirection1: 1
+  rotationDirection2: -1
 --- !u!1 &9163022839712953287 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: c9622d7cdbb5432408064180ac97b3b2, type: 3}
