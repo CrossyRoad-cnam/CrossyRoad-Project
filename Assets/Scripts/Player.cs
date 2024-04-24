@@ -7,44 +7,54 @@ public class Player : MonoBehaviour
 {
     [SerializeField] private TerrainGenerator terrainGenerator;
     [SerializeField] private Text scoreText;
-
+    [SerializeField] private GameObject ennemyPrefab;
     private float initialPosition;
     private Quaternion initialRotation;
     private Animator animator;
     private bool isHopping;
     public float scoreValue = 0;
+    private float lastScore = 0;
+    private GameObject ennemyInstance;
+    private float idleTime = 0;
+    private bool isEagleActive = false;
 
     private void Start()
     {
         animator = GetComponent<Animator>();
         initialPosition = transform.position.x;
-        scoreValue = 0;
         UpdateScoreText();
+        ennemyInstance = Instantiate(ennemyPrefab);
+        ennemyInstance.SetActive(false);
     }
 
     private void Update()
     {
-        if (!isHopping)
+        if (!isHopping && !isEagleActive)
         {
-            if (Input.GetKeyDown(KeyCode.UpArrow))
-            {
-                MoveCharacter(new Vector3(1, 0, 0));
-            }
-            else if (Input.GetKeyDown(KeyCode.DownArrow))
-            {
-                MoveCharacter(new Vector3(-1, 0, 0));
-            }
-            else if (Input.GetKeyDown(KeyCode.LeftArrow))
-            {
-                MoveCharacter(new Vector3(0, 0, 1));
-            }
-            else if (Input.GetKeyDown(KeyCode.RightArrow))
-            {
-                MoveCharacter(new Vector3(0, 0, -1));
-            }
+            HandleMovement();
+            CheckIdleTime();
         }
     }
 
+    private void HandleMovement()
+    {
+        if (Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            MoveCharacter(new Vector3(1, 0, 0));
+        }
+        else if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            MoveCharacter(new Vector3(-1, 0, 0));
+        }
+        else if (Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            MoveCharacter(new Vector3(0, 0, 1));
+        }
+        else if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            MoveCharacter(new Vector3(0, 0, -1));
+        }
+    }
     private void MoveCharacter(Vector3 direction)
     {
         if (CanMoveInDirection(direction))
@@ -53,7 +63,6 @@ public class Player : MonoBehaviour
             UpdateScore();
         }
     }
-
     private bool CanMoveInDirection(Vector3 direction)
     {
         RaycastHit hit;
@@ -139,10 +148,10 @@ public class Player : MonoBehaviour
     {
         isHopping = false;
     }
-    private void FixPlayerPosition() // Fonction que nous utiliserons pour arrondir la position du joueur à la grille (pour correspondre à notre snapGrid)
+    private void FixPlayerPosition()
     {
         Vector3 position = transform.position;
-        position.x = Mathf.Round(position.x); 
+        position.x = Mathf.Round(position.x);
         position.z = Mathf.Round(position.z);
         transform.position = position;
     }
@@ -160,6 +169,39 @@ public class Player : MonoBehaviour
         {
             transform.parent = null;
             FixPlayerPosition();
+        }
+    }
+
+    private void CheckIdleTime()
+    {
+        if (scoreValue == lastScore)
+        {
+            idleTime += Time.deltaTime;
+            if (idleTime >= 5.0f && !isEagleActive)
+            {
+                TriggerEagle();
+            }
+        }
+        else
+        {
+            lastScore = scoreValue;
+            idleTime = 0;
+        }
+    }
+
+    private void TriggerEagle()
+    {
+        isEagleActive = true;
+        ennemyInstance.SetActive(true);
+        ennemyInstance.transform.position = transform.position + new Vector3(10, 2, 0); 
+    }
+
+    private void LateUpdate()
+    {
+        if (isEagleActive)
+        {
+            Vector3 targetPosition = transform.position;
+            ennemyInstance.transform.position = Vector3.Lerp(ennemyInstance.transform.position, targetPosition, Time.deltaTime * 7);
         }
     }
 }
