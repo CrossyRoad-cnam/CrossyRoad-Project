@@ -3353,7 +3353,7 @@ PrefabInstance:
       objectReference: {fileID: 1595569629}
     - target: {fileID: 6714637674210826803, guid: 55769f10b2354094597d2f41cb2c61bd, type: 3}
       propertyPath: maxTerrainCount
-      value: 30
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 6714637674210826803, guid: 55769f10b2354094597d2f41cb2c61bd, type: 3}
       propertyPath: playerTransform
@@ -3361,7 +3361,7 @@ PrefabInstance:
       objectReference: {fileID: 31379683}
     - target: {fileID: 6714637674210826803, guid: 55769f10b2354094597d2f41cb2c61bd, type: 3}
       propertyPath: minDistanceFromPlayer
-      value: 20
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 6714637674210826803, guid: 55769f10b2354094597d2f41cb2c61bd, type: 3}
       propertyPath: terrainDatas.Array.size

@@ -1025,8 +1025,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17fff18bef122c8449ebf5877b2df364, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movingObjects:
-  - {fileID: 8518486559447410070, guid: 8c1d10f8fdc270e41a251d2389654b2b, type: 3}
+  movingObject: {fileID: 8518486559447410070, guid: 8c1d10f8fdc270e41a251d2389654b2b, type: 3}
   spawnPosition: {fileID: 3428490068530743872}
   minSeparationTime: 5
   maxSeparationTime: 7

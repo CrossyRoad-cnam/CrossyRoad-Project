@@ -4,16 +4,14 @@ using UnityEngine;
 
 public class MovingObjectSpawner : MonoBehaviour
 {
-    [SerializeField] private List<GameObject> movingObjects;
+    [SerializeField] private GameObject movingObject;
     [SerializeField] private Transform spawnPosition;
     [SerializeField] private float minSeparationTime;
     [SerializeField] private float maxSeparationTime;
     [SerializeField] private bool isRightSide;
-    private GameObject movingObject;
 
     private void Start()
     {
-        movingObject = movingObjects[Random.Range(0, movingObjects.Count)];
         StartCoroutine(SpawnObject());
     }
 
