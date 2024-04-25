@@ -21,6 +21,7 @@ public class MovingObjectSpawner : MonoBehaviour
         {
             yield return new WaitForSeconds(Random.Range(minSeparationTime, maxSeparationTime));
             GameObject newObject = Instantiate(movingObject, spawnPosition.position, Quaternion.identity);
+            newObject.transform.SetParent(transform, true); // Hotfix pour que les objets soient détruites avec le terrain
 
             if (!isRightSide)
             {
