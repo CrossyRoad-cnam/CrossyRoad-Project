@@ -150,8 +150,10 @@ public class Player : MonoBehaviour
     }
     private void FixPlayerPosition()
     {
-        Vector3 targetPosition = new Vector3(Mathf.Round(transform.position.x), transform.position.y, Mathf.Round(transform.position.z));
-        transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * 10);
+        Vector3 position = transform.position;
+        position.x = Mathf.Round(position.x);
+        position.z = Mathf.Round(position.z);
+        transform.position = position;
     }
 
     private void OnCollisionEnter(Collision collision)
