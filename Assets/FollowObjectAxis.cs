@@ -12,6 +12,10 @@ public class FollowObjectAxis : MonoBehaviour
 
     void Update()
     {
+        // si le joueur n'est pas défini, on ne fait rien
+        if (player == null)
+            return;
+
         FollowPlayerOnAxis();
     }
 

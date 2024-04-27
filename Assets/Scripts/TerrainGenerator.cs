@@ -42,7 +42,7 @@ public class TerrainGenerator : MonoBehaviour
         }
         else
         {
-            throw new ArgumentOutOfRangeException("playerStartPos", playerStartPos, "La position de d�part du joueur est actuellement situ�e en dehors sa zone d'apparition (voir StartTerrains) !");
+            throw new ArgumentOutOfRangeException("playerStartPos", playerStartPos, "La position de départ du joueur est actuellement située en dehors sa zone d'apparition (voir StartTerrains) !");
         }
     }
 
