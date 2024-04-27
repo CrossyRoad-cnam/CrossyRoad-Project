@@ -24,13 +24,14 @@ public class MovingObjectSpawner : MonoBehaviour
 
     private IEnumerator SpawnObject()
     {
+        float seconds = 1f;
         while (true)
         {
             /// MODIFICATION JEREMIE
             /// J'ai d�coup� ici le temps d'attente afin que l'�v�nement 'ObjectIncoming' (objet en mouvement en approche !) puisse �tre envoy� en avance
             /// Ainsi pour les rails, je sais � l'avance qu'un train arrive et je peux donc faire clignoter les feux du terrain
-            /// MODIFICATION JEREMIE
-            float seconds = Random.Range(minSeparationTime, maxSeparationTime);
+            /// MODIFICATION JEREMIE 
+            
             yield return new WaitForSeconds(seconds * (1 - EventThrowAdvancePercentage));
             ObjectIncoming?.Invoke();
             yield return new WaitForSeconds(seconds * EventThrowAdvancePercentage);
@@ -44,6 +45,8 @@ public class MovingObjectSpawner : MonoBehaviour
             {
                 newObject.transform.Rotate(0, 180, 0);
             }
+            seconds = Random.Range(minSeparationTime, maxSeparationTime);
+
 
             StartCoroutine(DestroyOutOfBounds(newObject));
         }
