@@ -135,7 +135,7 @@ MonoBehaviour:
   movingObject: {fileID: 6159006319036399535, guid: a1a4adf457af217f085403620141c22a, type: 3}
   spawnPosition: {fileID: 2501726992589591580}
   minSeparationTime: 1
-  maxSeparationTime: 3
+  maxSeparationTime: 4
   isRightSide: 0
   EventThrowAdvancePercentage: 0.3
 --- !u!1 &5607529587928731484

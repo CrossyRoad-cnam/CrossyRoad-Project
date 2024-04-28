@@ -152,7 +152,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movingObject: {fileID: 1957904246838440411, guid: 41594c918e78ebc41851846389952e59, type: 3}
   spawnPosition: {fileID: 4944000794178479974}
-  minSeparationTime: 5
+  minSeparationTime: 2
   maxSeparationTime: 7
   isRightSide: 1
   EventThrowAdvancePercentage: 0.3
