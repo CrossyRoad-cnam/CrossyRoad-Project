@@ -192,8 +192,11 @@ public class Player : MonoBehaviour
     }
     private void UpdateTimeText()
     {
-        int time = Mathf.RoundToInt(Time.timeSinceLevelLoad);
-        timeText.text = "Temps \n\n" + time.ToString();
+        int totalSeconds = Mathf.RoundToInt(Time.timeSinceLevelLoad);
+        int minutes = totalSeconds / 60;
+        int seconds = totalSeconds % 60;
+
+        timeText.text = "Time:\n" + string.Format("{0:D2} : {1:D2}", minutes, seconds);
     }
 
 }
