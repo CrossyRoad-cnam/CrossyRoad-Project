@@ -197,13 +197,15 @@ public class Player : MonoBehaviour
         int minutes = totalSeconds / 60;
         int seconds = totalSeconds % 60;
 
-        timeText.text = "Time:\n" + string.Format("{0:D2} : {1:D2}", minutes, seconds);
+        timeText.text = "Time\n" + string.Format("{0:D2} : {1:D2}", minutes, seconds);
     }
 
     private void DisplayHighScore()
     {
         int highScore = scoreManager.GetHighestScore();
-        highScoreText.text = "Top: " + highScore;
+        highScoreText.text = "Top " + highScore;
         Debug.Log(highScore);
     }
+
+    // TO DO : Séparer les logiques d'affichage et de gestion de score de cette classe
 }
