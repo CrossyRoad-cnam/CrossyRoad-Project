@@ -2964,6 +2964,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 739224703}
     - target: {fileID: 8828932352373189211, guid: 87ff3e309995ffb4096e064740b9a1da, type: 3}
+      propertyPath: isEagleActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8828932352373189211, guid: 87ff3e309995ffb4096e064740b9a1da, type: 3}
       propertyPath: terrainGenerator
       value: 
       objectReference: {fileID: 121287866}

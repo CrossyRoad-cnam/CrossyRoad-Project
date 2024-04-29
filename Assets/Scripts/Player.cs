@@ -5,6 +5,10 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
+    /// <summary>
+    /// Indicates the amount of time, the player is allow to pass inactive, in seconds
+    /// </summary>
+    [SerializeField] private float EagleDelay = 5.0f;
     [SerializeField] private TerrainGenerator terrainGenerator;
     [SerializeField] private Text scoreText;
     [SerializeField] private GameObject ennemyPrefab;
@@ -19,6 +23,9 @@ public class Player : MonoBehaviour
     private float lastScore = 0;
     private GameObject ennemyInstance;
     private float idleTime = 0;
+    /// <summary>
+    /// Indicates if the eagle is flying toward the player. Avoid sending multiple eagles
+    /// </summary>
     private bool isEagleActive = false;
     private int backStepsCounter;
 
@@ -173,7 +180,7 @@ public class Player : MonoBehaviour
         if (scoreValue == lastScore)
         {
             idleTime += Time.deltaTime;
-            if (idleTime >= 5.0f && !isEagleActive)
+            if (idleTime >= EagleDelay && !isEagleActive)
             {
                 TriggerEagle();
             }
