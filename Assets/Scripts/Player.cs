@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
     [SerializeField] private TerrainGenerator terrainGenerator;
     [SerializeField] private Text scoreText;
     [SerializeField] private GameObject ennemyPrefab;
+    [SerializeField] private Text timeText;
     private float initialPosition;
     private Quaternion initialRotation;
     private Animator animator;
@@ -22,13 +23,13 @@ public class Player : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         initialPosition = transform.position.x;
-        UpdateScoreText();
         ennemyInstance = Instantiate(ennemyPrefab);
         ennemyInstance.SetActive(false);
     }
 
     private void Update()
     {
+        UpdateTimeText();
         if (!isHopping && !isEagleActive)
         {
             HandleMovement();
@@ -39,21 +40,13 @@ public class Player : MonoBehaviour
     private void HandleMovement()
     {
         if (Input.GetKeyDown(KeyCode.UpArrow))
-        {
             MoveCharacter(new Vector3(1, 0, 0));
-        }
         else if (Input.GetKeyDown(KeyCode.DownArrow))
-        {
             MoveCharacter(new Vector3(-1, 0, 0));
-        }
         else if (Input.GetKeyDown(KeyCode.LeftArrow))
-        {
             MoveCharacter(new Vector3(0, 0, 1));
-        }
         else if (Input.GetKeyDown(KeyCode.RightArrow))
-        {
             MoveCharacter(new Vector3(0, 0, -1));
-        }
     }
     private void MoveCharacter(Vector3 direction)
     {
@@ -81,27 +74,20 @@ public class Player : MonoBehaviour
     {
         Quaternion newRotation = Quaternion.identity;
         if (direction.x > 0)
-        {
             newRotation = Quaternion.Euler(0, 0, 0);
-        }
         else if (direction.x < 0)
-        {
             newRotation = Quaternion.Euler(0, 180, 0);
-        }
         else if (direction.z > 0)
-        {
             newRotation = Quaternion.Euler(0, -90, 0);
-        }
         else if (direction.z < 0)
-        {
             newRotation = Quaternion.Euler(0, 90, 0);
-        }
+
         StartCoroutine(RotateOverTime(newRotation));
     }
 
     private IEnumerator RotateOverTime(Quaternion newRotation)
     {
-        float duration = 0.1f;
+        float duration = 0.2f;
         float time = 0;
         Quaternion startRotation = transform.rotation;
 
@@ -204,4 +190,10 @@ public class Player : MonoBehaviour
             ennemyInstance.transform.position = Vector3.Lerp(ennemyInstance.transform.position, targetPosition, Time.deltaTime * 7);
         }
     }
+    private void UpdateTimeText()
+    {
+        int time = Mathf.RoundToInt(Time.timeSinceLevelLoad);
+        timeText.text = "Temps \n\n" + time.ToString();
+    }
+
 }
