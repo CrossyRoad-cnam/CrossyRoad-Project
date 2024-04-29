@@ -9,6 +9,8 @@ public class Player : MonoBehaviour
     [SerializeField] private Text scoreText;
     [SerializeField] private GameObject ennemyPrefab;
     [SerializeField] private Text timeText;
+    [SerializeField] private Text highScoreText;
+    [SerializeField] private ScoreManager scoreManager;
     private float initialPosition;
     private Quaternion initialRotation;
     private Animator animator;
@@ -25,6 +27,7 @@ public class Player : MonoBehaviour
         initialPosition = transform.position.x;
         ennemyInstance = Instantiate(ennemyPrefab);
         ennemyInstance.SetActive(false);
+        DisplayHighScore();
     }
 
     private void Update()
@@ -114,10 +117,8 @@ public class Player : MonoBehaviour
     {
         int currentScore = CalculateScore();
         if (currentScore > scoreValue)
-        {
             scoreValue = currentScore;
             UpdateScoreText();
-        }
     }
 
     private int CalculateScore()
@@ -199,4 +200,10 @@ public class Player : MonoBehaviour
         timeText.text = "Time:\n" + string.Format("{0:D2} : {1:D2}", minutes, seconds);
     }
 
+    private void DisplayHighScore()
+    {
+        int highScore = scoreManager.GetHighestScore();
+        highScoreText.text = "Top: " + highScore;
+        Debug.Log(highScore);
+    }
 }

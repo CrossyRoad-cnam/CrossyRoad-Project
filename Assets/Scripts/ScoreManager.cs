@@ -53,4 +53,13 @@ public class ScoreManager : MonoBehaviour
 
         PlayerPrefs.SetString("scores", json);
     }
+
+    public int GetHighestScore()
+    {
+        if (sd.scores == null || sd.scores.Count == 0)
+        {
+            return 0;
+        }
+        return Mathf.RoundToInt(sd.scores.Max(x => x.score));
+    }
 }
