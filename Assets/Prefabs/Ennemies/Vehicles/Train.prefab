@@ -315,7 +315,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcbd3a27666307343a0452c4476d3658, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sound: {fileID: 8300000, guid: f9f332548cda3fe428700f80002c662a, type: 3}
+  sound: {fileID: 8300000, guid: f0119109d2599c1408b0bf1fca053492, type: 3}
   volume: 0.5
   pitch: 1
-  maxDistance: 3
+  IsLoop: 1
+  maxDistance: 4

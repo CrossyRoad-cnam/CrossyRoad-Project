@@ -6630,6 +6630,7 @@ MonoBehaviour:
   sound: {fileID: 8300000, guid: 4a72931a059384f429238d87b2b3d240, type: 3}
   volume: 1
   pitch: 1
+  IsLoop: 1
 --- !u!4 &2141786906
 Transform:
   m_ObjectHideFlags: 0

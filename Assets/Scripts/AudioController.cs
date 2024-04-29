@@ -17,7 +17,9 @@ public class AudioController : MonoBehaviour
 
     private const string volumeKey = "Volume";
 
-    public void Awake()
+    public bool IsLoop = false;  
+
+    public virtual void Awake()
     {
         if (audioSource == null)
         {
@@ -36,7 +38,7 @@ public class AudioController : MonoBehaviour
 
         audioSource.volume = volume;
         audioSource.pitch = pitch;
-        audioSource.loop = true;
+        audioSource.loop = IsLoop;
 
         LoadVolume();
         audioSource.Play();
@@ -48,15 +50,13 @@ public class AudioController : MonoBehaviour
         SaveVolume();
     }
 
-    // Sauvegarde le volume actuel dans les PlayerPrefs
-    private void SaveVolume()
+    protected void SaveVolume()
     {
         PlayerPrefs.SetFloat(volumeKey, volume);
-        PlayerPrefs.Save(); // N'oubliez pas de sauvegarder
+        PlayerPrefs.Save(); 
     }
 
-    // Charge le volume sauvegardé depuis les PlayerPrefs
-    private void LoadVolume()
+    protected void LoadVolume()
     {
         if (PlayerPrefs.HasKey(volumeKey))
         {
@@ -66,14 +66,12 @@ public class AudioController : MonoBehaviour
     }
 
 
-    // Start is called before the first frame update
     void Start()
     {
         Debug.Log("testStartAudio");
 
     }
 
-    // Update is called once per frame
     void Update()
     {
         Debug.Log("testStartAudio");
