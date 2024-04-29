@@ -20,6 +20,7 @@ public class Player : MonoBehaviour
     private GameObject ennemyInstance;
     private float idleTime = 0;
     private bool isEagleActive = false;
+    private int backStepsCounter;
 
     private void Start()
     {
@@ -27,11 +28,10 @@ public class Player : MonoBehaviour
         initialPosition = transform.position.x;
         ennemyInstance = Instantiate(ennemyPrefab);
         ennemyInstance.SetActive(false);
-        DisplayHighScore();
     }
-
     private void Update()
     {
+        DisplayHighScore();
         UpdateTimeText();
         if (!isHopping && !isEagleActive)
         {
@@ -39,24 +39,40 @@ public class Player : MonoBehaviour
             CheckIdleTime();
         }
     }
-
     private void HandleMovement()
     {
         if (Input.GetKeyDown(KeyCode.UpArrow))
-            MoveCharacter(new Vector3(1, 0, 0));
+            MoveCharacter(new Vector3(1, 0, 0), false);
         else if (Input.GetKeyDown(KeyCode.DownArrow))
-            MoveCharacter(new Vector3(-1, 0, 0));
+            MoveCharacter(new Vector3(-1, 0, 0), true);
         else if (Input.GetKeyDown(KeyCode.LeftArrow))
-            MoveCharacter(new Vector3(0, 0, 1));
+            MoveCharacter(new Vector3(0, 0, 1), false);
         else if (Input.GetKeyDown(KeyCode.RightArrow))
-            MoveCharacter(new Vector3(0, 0, -1));
+            MoveCharacter(new Vector3(0, 0, -1), false);
     }
-    private void MoveCharacter(Vector3 direction)
+    private void MoveCharacter(Vector3 direction, bool isBack)
     {
         if (CanMoveInDirection(direction))
         {
             PerformMove(direction);
             UpdateScore();
+            ManageBackwardSteps(isBack);
+        }
+    }
+    private void ManageBackwardSteps(bool isBack)
+    {
+        if (isBack)
+        {
+            backStepsCounter++;
+            if (backStepsCounter >= 3)
+            {
+                TriggerEagle();
+                backStepsCounter = 0;
+            }
+        }
+        else
+        {
+            backStepsCounter = 0;
         }
     }
     private bool CanMoveInDirection(Vector3 direction)
@@ -87,7 +103,6 @@ public class Player : MonoBehaviour
 
         StartCoroutine(RotateOverTime(newRotation));
     }
-
     private IEnumerator RotateOverTime(Quaternion newRotation)
     {
         float duration = 0.2f;
@@ -103,7 +118,6 @@ public class Player : MonoBehaviour
 
         transform.rotation = newRotation;
     }
-
     private void PerformMove(Vector3 direction)
     {
         animator.SetTrigger("hop");
@@ -112,7 +126,6 @@ public class Player : MonoBehaviour
         RotateCharacter(direction);
         terrainGenerator.SpawnTerrain(false, transform.position);
     }
-
     private void UpdateScore()
     {
         int currentScore = CalculateScore();
@@ -120,13 +133,11 @@ public class Player : MonoBehaviour
             scoreValue = currentScore;
             UpdateScoreText();
     }
-
     private int CalculateScore()
     {
         float distanceMoved = transform.position.x - initialPosition;
         return Mathf.RoundToInt(distanceMoved);
     }
-
     private void UpdateScoreText()
     {
         scoreText.text = scoreValue.ToString();
@@ -142,7 +153,6 @@ public class Player : MonoBehaviour
         position.z = Mathf.Round(position.z);
         transform.position = position;
     }
-
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.collider.GetComponent<MovingObject>() != null)
@@ -158,7 +168,6 @@ public class Player : MonoBehaviour
             FixPlayerPosition();
         }
     }
-
     private void CheckIdleTime()
     {
         if (scoreValue == lastScore)
@@ -175,14 +184,20 @@ public class Player : MonoBehaviour
             idleTime = 0;
         }
     }
-
+    private void CheckBackSteps()
+    {
+        if (backStepsCounter >= 3)
+        {
+            TriggerEagle();
+            backStepsCounter = 0;
+        }
+    }
     private void TriggerEagle()
     {
         isEagleActive = true;
         ennemyInstance.SetActive(true);
         ennemyInstance.transform.position = transform.position + new Vector3(10, 2, 0); 
     }
-
     private void LateUpdate()
     {
         if (isEagleActive)
@@ -199,7 +214,6 @@ public class Player : MonoBehaviour
 
         timeText.text = "Time\n" + string.Format("{0:D2} : {1:D2}", minutes, seconds);
     }
-
     private void DisplayHighScore()
     {
         int highScore = scoreManager.GetHighestScore();
