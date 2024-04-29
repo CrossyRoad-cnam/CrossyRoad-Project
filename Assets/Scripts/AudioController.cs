@@ -13,18 +13,31 @@ public class AudioController : MonoBehaviour
     [Range(0.1f, 2.5f)]
     public float pitch = 1f;
 
-    private AudioSource audioSource;
+    protected AudioSource audioSource;
 
     private const string volumeKey = "Volume";
 
     public void Awake()
     {
-        gameObject.AddComponent<AudioSource>();
-        audioSource = GetComponent<AudioSource>();
-        audioSource.clip = sound;
+        if (audioSource == null)
+        {
+            audioSource = GetComponent<AudioSource>();
+        }
+
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
+        }
+
+        if (sound != null)
+        {
+            audioSource.clip = sound;
+        }
+
         audioSource.volume = volume;
         audioSource.pitch = pitch;
         audioSource.loop = true;
+
         LoadVolume();
         audioSource.Play();
     }
@@ -56,13 +69,14 @@ public class AudioController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        Debug.Log("testStartAudio");
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        Debug.Log("testStartAudio");
+
     }
 }

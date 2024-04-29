@@ -21,10 +21,6 @@ public class ScoreManager : MonoBehaviour
         {
             sd = JsonUtility.FromJson<ScoreData>(json);
         }
-
-        Debug.Log("JSON: " + json);
-
-        Debug.Log("Scores: " + sd.scores);
     }
 
     public IEnumerable<Score> GetHighScores()
