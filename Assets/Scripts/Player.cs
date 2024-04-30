@@ -8,7 +8,6 @@ public class Player : MonoBehaviour
     public static Player Instance { get; private set; }
     [SerializeField] private TerrainGenerator terrainGenerator;
     [SerializeField] private Text scoreText;
-    [SerializeField] private GameObject ennemyPrefab;
     [SerializeField] private Text timeText;
     [SerializeField] private Text highScoreText;
     [SerializeField] private ScoreManager scoreManager;
@@ -18,9 +17,8 @@ public class Player : MonoBehaviour
     private bool isHopping;
     public float scoreValue = 0;
     private float lastScore = 0;
-    private GameObject ennemyInstance;
     private float idleTime = 0;
-    private bool isEagleActive = false;
+    private bool isEnnemyActive = false;
     private int backStepsCounter;
 
     private void Awake()
@@ -37,14 +35,12 @@ public class Player : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         initialPosition = transform.position.x;
-        ennemyInstance = Instantiate(ennemyPrefab);
-        ennemyInstance.SetActive(false);
     }
     private void Update()
     {
         DisplayHighScore();
         UpdateTimeText();
-        if (!isHopping && !isEagleActive && Time.timeScale != 0)
+        if (!isHopping && !isEnnemyActive && Time.timeScale != 0)
         {
             HandleMovement();
             CheckIdleTime();
@@ -184,7 +180,7 @@ public class Player : MonoBehaviour
         if (scoreValue == lastScore)
         {
             idleTime += Time.deltaTime;
-            if (idleTime >= 5.0f && !isEagleActive)
+            if (idleTime >= 5.0f && !isEnnemyActive)
             {
                 TriggerEagle();
             }
@@ -195,27 +191,10 @@ public class Player : MonoBehaviour
             idleTime = 0;
         }
     }
-    private void CheckBackSteps()
-    {
-        if (backStepsCounter >= 3)
-        {
-            TriggerEagle();
-            backStepsCounter = 0;
-        }
-    }
     private void TriggerEagle()
     {
-        isEagleActive = true;
-        ennemyInstance.SetActive(true);
-        ennemyInstance.transform.position = transform.position + new Vector3(10, 2, 0); 
-    }
-    private void LateUpdate()
-    {
-        if (isEagleActive)
-        {
-            Vector3 targetPosition = transform.position;
-            ennemyInstance.transform.position = Vector3.Lerp(ennemyInstance.transform.position, targetPosition, Time.deltaTime * 7);
-        }
+        isEnnemyActive = true;
+
     }
     private void UpdateTimeText()
     {
@@ -235,5 +214,9 @@ public class Player : MonoBehaviour
         highScoreText.text = "Top " + highScore;
     }
 
+    public bool CheckEnnemyTrigger()
+    {
+        return isEnnemyActive;
+    }
     // TO DO : Séparer les logiques d'affichage et de gestion de score de cette classe
 }
