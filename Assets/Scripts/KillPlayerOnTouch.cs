@@ -12,29 +12,27 @@ public class KillPlayer : MonoBehaviour
         gameOverManager = FindObjectOfType<GameOverManager>();
         scoreManager = FindObjectOfType<ScoreManager>();
     } 
-    private void ProcessGameOver(Player player)
+    private void ProcessGameOver()
     {
         gameOverManager.GameOver();
-        scoreManager.AddScore(new Score("player", player.scoreValue));
+        scoreManager.AddScore(new Score("player", Player.Instance.scoreValue));
         scoreManager.SaveScore();
-        Destroy(player.gameObject);
+        Destroy(Player.Instance.gameObject);
     }
     private void OnCollisionEnter(Collision collision)
     {
-        Player player = collision.gameObject.GetComponent<Player>();
-        if (player != null)
+        if (collision.gameObject == Player.Instance.gameObject)
         {
             Debug.Log("Player killed himself. GAME OVER");
-            ProcessGameOver(player);
+            ProcessGameOver();
         }
     }
     private void OnTriggerEnter(Collider other)
     {
-        Player player = other.gameObject.GetComponent<Player>();
-        if (player != null)
+        if (other.gameObject == Player.Instance.gameObject)
         {
             Debug.Log("Player was killed. GAME OVER");
-            ProcessGameOver(player);
+            ProcessGameOver();
         }
     }
 }
