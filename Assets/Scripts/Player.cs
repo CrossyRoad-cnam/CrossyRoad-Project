@@ -34,7 +34,7 @@ public class Player : MonoBehaviour
     {
         DisplayHighScore();
         UpdateTimeText();
-        if (!isHopping && !isEagleActive)
+        if (!isHopping && !isEagleActive && Time.timeScale != 0) // FIX du mouvement alors qu'on est en pause
         {
             HandleMovement();
             CheckIdleTime();
