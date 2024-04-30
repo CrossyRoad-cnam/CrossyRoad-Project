@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
-    public static Player player; 
+    public static Player Instance { get; private set; }
     [SerializeField] private TerrainGenerator terrainGenerator;
     [SerializeField] private Text scoreText;
     [SerializeField] private GameObject ennemyPrefab;
@@ -23,6 +23,16 @@ public class Player : MonoBehaviour
     private bool isEagleActive = false;
     private int backStepsCounter;
 
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(this);
+            return;
+        }
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
+    }
     private void Start()
     {
         animator = GetComponent<Animator>();
@@ -39,11 +49,6 @@ public class Player : MonoBehaviour
             HandleMovement();
             CheckIdleTime();
         }
-    }
-    private void Awake()
-    {
-        player = this;
-        DontDestroyOnLoad(gameObject);
     }
     private void HandleMovement()
     {
