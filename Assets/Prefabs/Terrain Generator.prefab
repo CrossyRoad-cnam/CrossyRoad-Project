@@ -49,6 +49,14 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 8b712ac1d9abbfb4eaef08a1ed1d2ee1, type: 2}
   - {fileID: 11400000, guid: 81292531d01fb3d4685216ebbd8a3cf3, type: 2}
   - {fileID: 11400000, guid: c768d9b2794799c47a54190af1c91d15, type: 2}
+  - {fileID: 11400000, guid: aa7672478db640541b81cb1283c2c6c4, type: 2}
   maxTerrainCount: 20
   terrainHolder: {fileID: 0}
+  playerStartPos: 3
+  StartTerrains:
+  - {fileID: 5494086206471406026, guid: 3621d44641a83814aa1d2e07dfd420c4, type: 3}
+  - {fileID: 5494086206471406026, guid: 5cd4306acef7323448c104aed24b4957, type: 3}
+  - {fileID: 5494086206471406026, guid: b537dd7d6a03fb94e837d5b155f061c5, type: 3}
+  - {fileID: 5494086206471406026, guid: 2112d8605df1684459c0dac960084632, type: 3}
+  - {fileID: 5494086206471406026, guid: 856f2c97744f96c46ba8d881b8138520, type: 3}
   currentPosition: {x: 0, y: 0, z: 0}
