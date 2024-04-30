@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
+    public static Player player; 
     [SerializeField] private TerrainGenerator terrainGenerator;
     [SerializeField] private Text scoreText;
     [SerializeField] private GameObject ennemyPrefab;
@@ -38,6 +39,11 @@ public class Player : MonoBehaviour
             HandleMovement();
             CheckIdleTime();
         }
+    }
+    private void Awake()
+    {
+        player = this;
+        DontDestroyOnLoad(gameObject);
     }
     private void HandleMovement()
     {
@@ -105,7 +111,7 @@ public class Player : MonoBehaviour
     }
     private IEnumerator RotateOverTime(Quaternion newRotation)
     {
-        float duration = 0.2f;
+        float duration = 0.1f;
         float time = 0;
         Quaternion startRotation = transform.rotation;
 
@@ -217,8 +223,11 @@ public class Player : MonoBehaviour
     private void DisplayHighScore()
     {
         int highScore = scoreManager.GetHighestScore();
+        if (scoreValue > highScore)
+        {
+            highScore = Mathf.RoundToInt(scoreValue);
+        }
         highScoreText.text = "Top " + highScore;
-        Debug.Log(highScore);
     }
 
     // TO DO : Séparer les logiques d'affichage et de gestion de score de cette classe

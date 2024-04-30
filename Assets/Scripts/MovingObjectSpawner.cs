@@ -24,7 +24,6 @@ public class MovingObjectSpawner : MonoBehaviour
         float seconds = 1f;
         while (true)
         {
-            
             yield return new WaitForSeconds(seconds * (1 - EventThrowAdvancePercentage));
             ObjectIncoming?.Invoke();
             yield return new WaitForSeconds(seconds * EventThrowAdvancePercentage);
@@ -36,7 +35,6 @@ public class MovingObjectSpawner : MonoBehaviour
                 newObject.transform.Rotate(0, 180, 0);
             }
             seconds = Random.Range(minSeparationTime, maxSeparationTime);
-
 
             StartCoroutine(DestroyOutOfBounds(newObject));
         }
