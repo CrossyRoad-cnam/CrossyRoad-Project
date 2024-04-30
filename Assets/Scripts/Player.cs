@@ -27,7 +27,7 @@ public class Player : MonoBehaviour
     {
         if (Instance != null && Instance != this)
         {
-            Destroy(this);
+            Destroy(gameObject);
             return;
         }
         Instance = this;
@@ -44,7 +44,7 @@ public class Player : MonoBehaviour
     {
         DisplayHighScore();
         UpdateTimeText();
-        if (!isHopping && !isEagleActive)
+        if (!isHopping && !isEagleActive && Time.timeScale != 0)
         {
             HandleMovement();
             CheckIdleTime();
