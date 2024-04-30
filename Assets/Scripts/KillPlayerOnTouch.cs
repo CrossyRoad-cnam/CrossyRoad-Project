@@ -21,15 +21,17 @@ public class KillPlayer : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject == Player.Instance.gameObject)
-        {
-            Debug.Log("Player killed himself. GAME OVER");
-            ProcessGameOver();
-        }
+        CheckPlayerCollision(collision.gameObject);
     }
+
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject == Player.Instance.gameObject)
+        CheckPlayerCollision(other.gameObject);
+    }
+
+    private void CheckPlayerCollision(GameObject collidedObject)
+    {
+        if (collidedObject == Player.Instance.gameObject)
         {
             Debug.Log("Player was killed. GAME OVER");
             ProcessGameOver();
