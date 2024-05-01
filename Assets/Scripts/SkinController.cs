@@ -48,7 +48,7 @@ public class SkinController : MonoBehaviour
     {
         if (currentPreview != null) 
             Destroy(currentPreview);
-        currentPreview = Instantiate(skins[index], previewPosition.position, Quaternion.identity);
+        currentPreview = Instantiate(skins[index], previewPosition.position, Quaternion.identity, previewPosition);
         currentPreview.transform.localScale = skins[index].transform.localScale;
         currentPreview.transform.localPosition = new Vector3(0, -1, 0);
         currentPreview.transform.localRotation = Quaternion.Euler(0, 190, 0);
