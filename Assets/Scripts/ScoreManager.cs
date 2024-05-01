@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;
 using System.Linq;
+using UnityEngine.UI;
 
 public class ScoreManager : MonoBehaviour
 {

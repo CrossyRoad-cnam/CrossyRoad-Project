@@ -7,10 +7,6 @@ public class Player : MonoBehaviour
 {
     public static Player Instance { get; private set; }
     [SerializeField] private TerrainGenerator terrainGenerator;
-    [SerializeField] private Text scoreText;
-    [SerializeField] private Text timeText;
-    [SerializeField] private Text highScoreText;
-    [SerializeField] private ScoreManager scoreManager;
     private float initialPosition;
     private Quaternion initialRotation;
     private Animator animator;
@@ -38,8 +34,8 @@ public class Player : MonoBehaviour
     }
     private void Update()
     {
-        DisplayHighScore();
-        UpdateTimeText();
+        // DisplayHighScore();
+        // UpdateTimeText();
         if (!isHopping && !isEnnemyActive && Time.timeScale != 0)
         {
             HandleMovement();
@@ -138,17 +134,17 @@ public class Player : MonoBehaviour
         int currentScore = CalculateScore();
         if (currentScore > scoreValue)
             scoreValue = currentScore;
-            UpdateScoreText();
+            // UpdateScoreText();
     }
     private int CalculateScore()
     {
         float distanceMoved = transform.position.x - initialPosition;
         return Mathf.RoundToInt(distanceMoved);
     }
-    private void UpdateScoreText()
-    {
-        scoreText.text = scoreValue.ToString();
-    }
+    // private void UpdateScoreText()
+    // {
+    //     scoreText.text = scoreValue.ToString();
+    // }
     private void FinishHop()
     {
         isHopping = false;
@@ -196,23 +192,23 @@ public class Player : MonoBehaviour
         isEnnemyActive = true;
 
     }
-    private void UpdateTimeText()
-    {
-        int totalSeconds = Mathf.RoundToInt(Time.timeSinceLevelLoad);
-        int minutes = totalSeconds / 60;
-        int seconds = totalSeconds % 60;
+    // private void UpdateTimeText()
+    // {
+    //     int totalSeconds = Mathf.RoundToInt(Time.timeSinceLevelLoad);
+    //     int minutes = totalSeconds / 60;
+    //     int seconds = totalSeconds % 60;
 
-        timeText.text = "Time\n" + string.Format("{0:D2} : {1:D2}", minutes, seconds);
-    }
-    private void DisplayHighScore()
-    {
-        int highScore = scoreManager.GetHighestScore();
-        if (scoreValue > highScore)
-        {
-            highScore = Mathf.RoundToInt(scoreValue);
-        }
-        highScoreText.text = "Top " + highScore;
-    }
+    //     timeText.text = "Time\n" + string.Format("{0:D2} : {1:D2}", minutes, seconds);
+    // }
+    // private void DisplayHighScore()
+    // {
+    //     int highScore = scoreManager.GetHighestScore();
+    //     if (scoreValue > highScore)
+    //     {
+    //         highScore = Mathf.RoundToInt(scoreValue);
+    //     }
+    //     highScoreText.text = "Top " + highScore;
+    // }
 
     public bool CheckEnnemyTrigger()
     {
