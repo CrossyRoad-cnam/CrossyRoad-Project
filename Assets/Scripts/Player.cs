@@ -36,6 +36,7 @@ public class Player : MonoBehaviour
         ennemyInstance = Instantiate(ennemyPrefab);
         ennemyInstance.SetActive(false);
     }
+
     private void Update()
     {
         DisplayHighScore();
