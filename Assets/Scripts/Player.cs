@@ -208,5 +208,4 @@ public class Player : MonoBehaviour
         int selectedSkin = PlayerPrefs.GetInt("SelectedSkin", 0);
         ApplySkin(SkinController.Instance.skins[selectedSkin]);
     }
-    // TO DO : Séparer les logiques d'affichage et de gestion de score de cette classe
 }

@@ -16,6 +16,8 @@ public class SkinController : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+        if (PlayerPrefs.HasKey("SelectedSkin"))
+            currentIndex = PlayerPrefs.GetInt("SelectedSkin");
     }
 
     private void Start()
