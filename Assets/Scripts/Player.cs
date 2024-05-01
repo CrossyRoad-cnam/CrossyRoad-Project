@@ -7,7 +7,7 @@ public class Player : MonoBehaviour
 {
     public static Player Instance { get; private set; }
     [SerializeField] private TerrainGenerator terrainGenerator;
-    private GameObject skinPrefab;
+    public GameObject currentSkin;
     private float initialPosition;
     private Quaternion initialRotation;
     private Animator animator;
@@ -185,11 +185,15 @@ public class Player : MonoBehaviour
     private void TriggerEagle()
     {
         isEnnemyActive = true;
-
     }
     public bool CheckEnnemyTrigger()
     {
         return isEnnemyActive;
+    }
+    public void ApplySkin(GameObject newSkinPrefab)
+    {
+        if (currentSkin != null) Destroy(currentSkin);
+        currentSkin = Instantiate(newSkinPrefab, transform);
     }
     // TO DO : Séparer les logiques d'affichage et de gestion de score de cette classe
 }
