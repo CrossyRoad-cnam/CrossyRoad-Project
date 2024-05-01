@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using GLTF.Schema;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,6 +9,7 @@ public class Player : MonoBehaviour
     public static Player Instance { get; private set; }
     [SerializeField] private TerrainGenerator terrainGenerator;
     public GameObject currentSkin;
+    public Transform playerContainer;
     private float initialPosition;
     private Quaternion initialRotation;
     private Animator animator;
@@ -33,6 +35,8 @@ public class Player : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         initialPosition = transform.position.x;
+        currentSkin = playerContainer.GetChild(0).gameObject;
+        GetSkin();
     }
     private void Update()
     {
@@ -190,10 +194,19 @@ public class Player : MonoBehaviour
     {
         return isEnnemyActive;
     }
-    public void ApplySkin(GameObject newSkinPrefab)
+    public void ApplySkin(GameObject skin)
     {
-        if (currentSkin != null) Destroy(currentSkin);
-        currentSkin = Instantiate(newSkinPrefab, transform);
+        if (currentSkin != null)
+        {
+            Destroy(currentSkin);
+        }
+        currentSkin = Instantiate(skin, playerContainer);
+    }
+
+    private void GetSkin()
+    {
+        int selectedSkin = PlayerPrefs.GetInt("SelectedSkin", 0);
+        ApplySkin(SkinController.Instance.skins[selectedSkin]);
     }
     // TO DO : Séparer les logiques d'affichage et de gestion de score de cette classe
 }

@@ -64,17 +64,4 @@ public class AudioController : MonoBehaviour
             audioSource.volume = volume;
         }
     }
-
-
-    void Start()
-    {
-        Debug.Log("testStartAudio");
-
-    }
-
-    void Update()
-    {
-        Debug.Log("testStartAudio");
-
-    }
 }

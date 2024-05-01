@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
         CheckAndTriggerEagle();
     }
 
-    public void CheckAndTriggerEagle()
+    private void CheckAndTriggerEagle()
     {
         if (Player.Instance != null && Player.Instance.CheckEnnemyTrigger())
         {

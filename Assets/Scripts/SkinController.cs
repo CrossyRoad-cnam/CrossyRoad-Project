@@ -6,11 +6,17 @@ using TMPro;
 
 public class SkinController : MonoBehaviour
 {
+    public static SkinController Instance;
     public GameObject[] skins;
     public Transform previewPosition;
     public TextMeshProUGUI skinName;
     private GameObject currentPreview;
-    private int currentIndex = 0;
+    public int currentIndex = 0;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     private void Start()
     {
@@ -24,8 +30,8 @@ public class SkinController : MonoBehaviour
             NextSkin();
         if (Input.GetKeyDown(KeyCode.LeftArrow))
             PreviousSkin();
-        if (Input.GetKeyDown(KeyCode.Space))
-            SelectSkin();
+
+        SelectSkin();
     }
 
     public void NextSkin()
@@ -54,7 +60,8 @@ public class SkinController : MonoBehaviour
 
     public void SelectSkin()
     {
-        Player.Instance.ApplySkin(skins[currentIndex]);
+        PlayerPrefs.SetInt("SelectedSkin", currentIndex);
+        PlayerPrefs.Save();
     }
 
     private void DisplaySkinName()
