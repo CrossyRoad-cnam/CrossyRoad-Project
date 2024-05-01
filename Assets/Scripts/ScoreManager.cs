@@ -7,6 +7,12 @@ using System.Linq;
 public class ScoreManager : MonoBehaviour
 {
     private ScoreData sd;
+    private AudioSource audioSource;
+    public AudioClip sound;
+    private float volume = 0.5f;
+
+
+
 
     void Awake()
     {
@@ -23,6 +29,11 @@ public class ScoreManager : MonoBehaviour
         }
     }
 
+    public void PlayScore()
+    {
+        audioSource = GetComponent<AudioSource>();
+        audioSource.Play();
+    }
     public IEnumerable<Score> GetHighScores()
     {
         return sd.scores.OrderByDescending(x => x.score);
