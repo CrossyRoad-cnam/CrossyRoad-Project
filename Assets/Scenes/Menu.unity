@@ -515,9 +515,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 560972386}
-        m_TargetAssemblyTypeName: DifficultyController, Assembly-CSharp
-        m_MethodName: 
+      - m_Target: {fileID: 560972388}
+        m_TargetAssemblyTypeName: SkinController, Assembly-CSharp
+        m_MethodName: PreviousSkin
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1692,6 +1692,7 @@ MonoBehaviour:
   - {fileID: 4982156567103259965, guid: 6c9a368c904fcf144ba481cc89ab1a59, type: 3}
   - {fileID: 704148885703170215, guid: 0283795e80c7bb84da2e55485da9f23a, type: 3}
   previewPosition: {fileID: 1805392687}
+  skinName: {fileID: 1528630257}
 --- !u!1 &567301061
 GameObject:
   m_ObjectHideFlags: 0
@@ -4842,9 +4843,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 560972386}
-        m_TargetAssemblyTypeName: DifficultyController, Assembly-CSharp
-        m_MethodName: 
+      - m_Target: {fileID: 560972388}
+        m_TargetAssemblyTypeName: SkinController, Assembly-CSharp
+        m_MethodName: NextSkin
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
