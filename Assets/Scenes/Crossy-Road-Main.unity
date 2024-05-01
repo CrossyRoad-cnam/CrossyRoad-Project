@@ -1526,7 +1526,7 @@ GameObject:
   - component: {fileID: 479948195}
   - component: {fileID: 479948194}
   m_Layer: 5
-  m_Name: Panel
+  m_Name: InGame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2504,7 +2504,7 @@ GameObject:
   - component: {fileID: 941007130}
   - component: {fileID: 941007129}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: Dashboard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

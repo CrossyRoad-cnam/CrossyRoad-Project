@@ -17,6 +17,7 @@ public class Player : MonoBehaviour
     private bool isEnnemyActive = false;
     private int backStepsCounter;
 
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
