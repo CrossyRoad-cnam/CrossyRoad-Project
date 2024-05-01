@@ -13,13 +13,14 @@ GameObject:
   - component: {fileID: 3652848630357788322}
   - component: {fileID: 4426497179666156882}
   - component: {fileID: 2674490794370134091}
+  - component: {fileID: 2001688641452112821}
   m_Layer: 0
   m_Name: Ennemy
   m_TagString: Ennemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8277963961276134513
 Transform:
   m_ObjectHideFlags: 0
@@ -96,7 +97,21 @@ MonoBehaviour:
   sound: {fileID: 8300000, guid: b39c734991f1f7a4bb18ec92e0fca69f, type: 3}
   volume: 0.5
   pitch: 1
+  IsLoop: 0
   maxDistance: 20
+--- !u!114 &2001688641452112821
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4503261510948325133}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98438915b8938e24a94a72a0a7d90251, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 40
 --- !u!1001 &4580133554921001802
 PrefabInstance:
   m_ObjectHideFlags: 0

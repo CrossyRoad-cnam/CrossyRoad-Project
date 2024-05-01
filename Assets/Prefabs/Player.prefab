@@ -82,11 +82,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   terrainGenerator: {fileID: 0}
-  scoreText: {fileID: 0}
-  ennemyPrefab: {fileID: 4503261510948325133, guid: 3db80814791eff64d854f81560d8f544, type: 3}
-  timeText: {fileID: 0}
-  highScoreText: {fileID: 0}
-  scoreManager: {fileID: 0}
   scoreValue: 0
 --- !u!95 &6154235888902621169
 Animator:
