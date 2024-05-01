@@ -35,6 +35,7 @@ public class PauseMenu : MonoBehaviour
 
     public void QuitGame()
     {
+        Destroy(Player.Instance.gameObject);
         Time.timeScale = 1f;
         SceneManager.LoadScene(0);
 
