@@ -7,6 +7,7 @@ public class Player : MonoBehaviour
 {
     public static Player Instance { get; private set; }
     [SerializeField] private TerrainGenerator terrainGenerator;
+    private GameObject skinPrefab;
     private float initialPosition;
     private Quaternion initialRotation;
     private Animator animator;
