@@ -17,7 +17,6 @@ public class DisplayManager : MonoBehaviour
     {
         scoreManager = FindObjectOfType<ScoreManager>();
         highestScore = scoreManager.GetHighestScore();
-        playerScore = Mathf.RoundToInt(Player.Instance.scoreValue);
     }
 
     private void Update()
@@ -29,9 +28,10 @@ public class DisplayManager : MonoBehaviour
 
     public void DisplayScore()
     {
-        if (scoreText != null)
+        playerScore = Mathf.RoundToInt(Player.Instance.scoreValue);
+        if (scoreText != null && playerScore > 0)
         {
-            scoreText.text = Player.Instance.scoreValue.ToString();
+            scoreText.text = playerScore.ToString();
         }
     }
     public void DisplayHighScore()
