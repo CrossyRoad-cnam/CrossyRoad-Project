@@ -1645,6 +1645,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 560972387}
+  - component: {fileID: 560972388}
   m_Layer: 0
   m_Name: SkinContoller
   m_TagString: Untagged
@@ -1671,6 +1672,26 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &560972388
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 560972386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d35fbb0ab8b093f449bbb599d14ed8b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skins:
+  - {fileID: 1819408470957906232, guid: c6d5b2ac546786443b3154b8a382672c, type: 3}
+  - {fileID: 1365200517026272594, guid: 051df1cb895e4c44089d31ecf1ad06bd, type: 3}
+  - {fileID: 4265497144057886536, guid: 18d5d1cf800d36a4e885b346f8c8c551, type: 3}
+  - {fileID: 7751914802518786631, guid: f71d02e932aeade44b41fcb302619010, type: 3}
+  - {fileID: 4982156567103259965, guid: 6c9a368c904fcf144ba481cc89ab1a59, type: 3}
+  - {fileID: 704148885703170215, guid: 0283795e80c7bb84da2e55485da9f23a, type: 3}
+  previewPosition: {fileID: 1805392687}
 --- !u!1 &567301061
 GameObject:
   m_ObjectHideFlags: 0
