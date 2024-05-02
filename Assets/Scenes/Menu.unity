@@ -8365,6 +8365,18 @@ PrefabInstance:
       propertyPath: previewPosition
       value: 
       objectReference: {fileID: 1805392687}
+    - target: {fileID: 4082069555841986293, guid: ac6f701a8d1ad9e43a9ffbde34b76ba7, type: 3}
+      propertyPath: skins.Array.size
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4082069555841986293, guid: ac6f701a8d1ad9e43a9ffbde34b76ba7, type: 3}
+      propertyPath: skins.Array.data[6]
+      value: 
+      objectReference: {fileID: 969199128558716783, guid: 5ac497cc5e3051c48bdf1d81fb9128db, type: 3}
+    - target: {fileID: 4082069555841986293, guid: ac6f701a8d1ad9e43a9ffbde34b76ba7, type: 3}
+      propertyPath: skins.Array.data[7]
+      value: 
+      objectReference: {fileID: 7102813079918236578, guid: a89bd3c35bcb28645bdc005f4478cd52, type: 3}
     - target: {fileID: 4437080919484454950, guid: ac6f701a8d1ad9e43a9ffbde34b76ba7, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
