@@ -6,7 +6,7 @@ using TMPro;
 
 public class SkinController : MonoBehaviour
 {
-    public static SkinController Instance;
+    public static SkinController Instance { get; private set; }
     public GameObject[] skins;
     public Transform previewPosition;
     public TextMeshProUGUI skinName;
@@ -15,6 +15,11 @@ public class SkinController : MonoBehaviour
 
     private void Awake()
     {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
         Instance = this;
         if (PlayerPrefs.HasKey("SelectedSkin"))
             currentIndex = PlayerPrefs.GetInt("SelectedSkin");
