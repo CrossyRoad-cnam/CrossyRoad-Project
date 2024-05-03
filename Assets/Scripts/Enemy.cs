@@ -5,7 +5,7 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     private bool isActive = false;
-    [SerializeField] private float speed = 40.0f;
+    [SerializeField] private float speed = 35f;
     private Vector3 lastPlayerPosition;
 
     private void Start()
@@ -27,7 +27,6 @@ public class Enemy : MonoBehaviour
             {
                 targetPosition = lastPlayerPosition;
             }
-
             transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.unscaledDeltaTime);
         }
     }

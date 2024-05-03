@@ -9,9 +9,9 @@ public class Player : MonoBehaviour
     [SerializeField] private TerrainGenerator terrainGenerator;
     public GameObject currentSkin;
     public Transform playerContainer;
-    private float initialPosition;
-    private Quaternion initialRotation;
     private Animator animator;
+    private SkinController skinController;
+    private float initialPosition;
     private bool isHopping;
     public float scoreValue = 0;
     private float lastScore = 0;
@@ -33,6 +33,7 @@ public class Player : MonoBehaviour
     private void Start()
     {
         animator = GetComponent<Animator>();
+        skinController = SkinController.Instance;
         initialPosition = transform.position.x;
         currentSkin = playerContainer.GetChild(0).gameObject;
         GetSkin();
@@ -111,7 +112,7 @@ public class Player : MonoBehaviour
     }
     private IEnumerator RotateOverTime(Quaternion newRotation)
     {
-        float duration = 0.1f;
+        float duration = 0.15f;
         float time = 0;
         Quaternion startRotation = transform.rotation;
 
@@ -124,13 +125,31 @@ public class Player : MonoBehaviour
 
         transform.rotation = newRotation;
     }
-    private void PerformMove(Vector3 direction)
+   private void PerformMove(Vector3 direction)
     {
-        animator.SetTrigger("hop");
+        // animator.SetTrigger("hop");
         isHopping = true;
-        transform.position += direction;
+        StartCoroutine(SmoothMove(transform.position, transform.position + direction, 0.15f));
         RotateCharacter(direction);
         terrainGenerator.SpawnTerrain(false, transform.position);
+    }
+
+    private IEnumerator SmoothMove(Vector3 startPosition, Vector3 endPosition, float duration)
+    {
+        float timeElapsed = 0;
+        float height = 0.75f;
+
+        while (timeElapsed < duration)
+        {
+            float animationTime = timeElapsed / duration;
+            float arc = height * Mathf.Sin(Mathf.PI * animationTime);
+            transform.position = Vector3.Lerp(startPosition, new Vector3(endPosition.x, startPosition.y + arc, endPosition.z), animationTime);
+            timeElapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        transform.position = endPosition;
+        FinishHop();
     }
     private void UpdateScore()
     {
@@ -205,6 +224,6 @@ public class Player : MonoBehaviour
     private void GetSkin()
     {
         int selectedSkin = PlayerPrefs.GetInt("SelectedSkin", 0);
-        ApplySkin(SkinController.Instance.skins[selectedSkin]);
+        ApplySkin(skinController.skins[selectedSkin]);
     }
 }
