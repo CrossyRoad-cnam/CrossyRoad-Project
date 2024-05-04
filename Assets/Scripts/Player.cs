@@ -9,13 +9,15 @@ public class Player : MonoBehaviour
     [SerializeField] private TerrainGenerator terrainGenerator;
     public GameObject currentSkin;
     public Transform playerContainer;
-    private Animator animator;
+    // private Animator animator;
     private SkinController skinController;
     private float initialPosition;
     private bool isHopping;
     public float scoreValue = 0;
     private float lastScore = 0;
     private float idleTime = 0;
+    const float IDLE_TIME_LIMIT = 7.0f;
+    const int MAX_BACKSTEPS = 3;
     private bool isEnnemyActive = false;
     private int backStepsCounter;
 
@@ -32,7 +34,7 @@ public class Player : MonoBehaviour
     }
     private void Start()
     {
-        animator = GetComponent<Animator>();
+        // animator = GetComponent<Animator>();
         skinController = SkinController.Instance;
         initialPosition = transform.position.x;
         currentSkin = playerContainer.GetChild(0).gameObject;
@@ -71,7 +73,7 @@ public class Player : MonoBehaviour
         if (isBack)
         {
             backStepsCounter++;
-            if (backStepsCounter >= 3)
+            if (backStepsCounter >= MAX_BACKSTEPS)
             {
                 TriggerEagle();
                 backStepsCounter = 0;
@@ -142,8 +144,8 @@ public class Player : MonoBehaviour
         while (timeElapsed < duration)
         {
             float animationTime = timeElapsed / duration;
-            float arc = height * Mathf.Sin(Mathf.PI * animationTime);
-            transform.position = Vector3.Lerp(startPosition, new Vector3(endPosition.x, startPosition.y + arc, endPosition.z), animationTime);
+            float jumpArc = height * Mathf.Sin(Mathf.PI * animationTime);
+            transform.position = Vector3.Lerp(startPosition, new Vector3(endPosition.x, startPosition.y + jumpArc, endPosition.z), animationTime);
             timeElapsed += Time.deltaTime;
             yield return null;
         }
@@ -193,7 +195,7 @@ public class Player : MonoBehaviour
         if (scoreValue == lastScore)
         {
             idleTime += Time.deltaTime;
-            if (idleTime >= 5.0f && !isEnnemyActive)
+            if (idleTime >= IDLE_TIME_LIMIT && !isEnnemyActive)
             {
                 TriggerEagle();
             }
