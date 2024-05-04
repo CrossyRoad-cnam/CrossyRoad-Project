@@ -3,29 +3,27 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;
 using System.Linq;
+using UnityEngine.UI;
 
 public class ScoreManager : MonoBehaviour
 {
-    private ScoreData sd;
+    private ScoreData scoreData;
     private AudioSource audioSource;
     public AudioClip sound;
     private float volume = 0.5f;
 
-
-
-
     void Awake()
     {
-        if (sd == null)
+        if (scoreData == null)
         {
-            sd = new ScoreData();
+            scoreData = new ScoreData();
         }
 
         string json = PlayerPrefs.GetString("scores", "{}");
 
         if (!string.IsNullOrEmpty(json))
         {
-            sd = JsonUtility.FromJson<ScoreData>(json);
+            scoreData = JsonUtility.FromJson<ScoreData>(json);
         }
     }
 
@@ -36,17 +34,17 @@ public class ScoreManager : MonoBehaviour
     }
     public IEnumerable<Score> GetHighScores()
     {
-        return sd.scores.OrderByDescending(x => x.score);
+        return scoreData.scores.OrderByDescending(x => x.score);
     }
 
     public void AddScore(Score score)
     {
-        if (sd.scores == null)
+        if (scoreData.scores == null)
         {
-            sd.scores = new List<Score>();
+            scoreData.scores = new List<Score>();
         }
 
-        sd.scores.Add(score);
+        scoreData.scores.Add(score);
     }
 
     private void OnDestroy()
@@ -56,17 +54,17 @@ public class ScoreManager : MonoBehaviour
 
     public void SaveScore()
     {
-        string json = JsonUtility.ToJson(sd);
+        string json = JsonUtility.ToJson(scoreData);
 
         PlayerPrefs.SetString("scores", json);
     }
 
     public int GetHighestScore()
     {
-        if (sd.scores == null || sd.scores.Count == 0)
+        if (scoreData.scores == null || scoreData.scores.Count == 0)
         {
             return 0;
         }
-        return Mathf.RoundToInt(sd.scores.Max(x => x.score));
+        return Mathf.RoundToInt(scoreData.scores.Max(x => x.score));
     }
 }

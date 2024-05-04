@@ -13,16 +13,6 @@ public class GameOverManager : MonoBehaviour
     {
         GameOverScreen.SetActive(false);
     }
-    void Start()
-    {
-        
-    }
-
-    void Update()
-    {
-        
-    }
-
     public void GameOver()
     {
         GameOverScreen.SetActive(true);
@@ -31,13 +21,11 @@ public class GameOverManager : MonoBehaviour
             pauseMenu.enabled = false;
         }
     }
-
     public void RestartGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         Time.timeScale = 1f;
     }
-
     public void QuitGame()
     {
         Time.timeScale = 1f;
