@@ -157,8 +157,13 @@ public class Player : MonoBehaviour
     private void UpdateScore()
     {
         int currentScore = CalculateScore();
+
         if (currentScore > scoreValue)
             scoreValue = currentScore;
+        if (scoreValue % 50 == 0)
+        {
+            scoreManager.PlayScore();
+        }
     }
     private int CalculateScore()
     {

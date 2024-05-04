@@ -41,8 +41,17 @@ public class AudioController : MonoBehaviour
         audioSource.loop = IsLoop;
 
         LoadVolume();
+        if (audioSource.playOnAwake)
+        {
+            Play();
+        }
+    }
+
+    public void Play()
+    {
         audioSource.Play();
     }
+
     public void SetVolume(float newVolume)
     {
         volume = newVolume;

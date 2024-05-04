@@ -8,6 +8,9 @@ using UnityEngine.UI;
 public class ScoreManager : MonoBehaviour
 {
     private ScoreData scoreData;
+    private AudioSource audioSource;
+    public AudioClip sound;
+    private float volume = 0.5f;
 
     void Awake()
     {
@@ -24,6 +27,11 @@ public class ScoreManager : MonoBehaviour
         }
     }
 
+    public void PlayScore()
+    {
+        audioSource = GetComponent<AudioSource>();
+        audioSource.Play();
+    }
     public IEnumerable<Score> GetHighScores()
     {
         return scoreData.scores.OrderByDescending(x => x.score);
