@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
-
+    public static Player Instance { get; private set; }
     [SerializeField] private TerrainGenerator terrainGenerator;
     public GameObject currentSkin;
     public Transform playerContainer;
