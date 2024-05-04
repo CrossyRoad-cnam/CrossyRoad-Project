@@ -5,7 +5,8 @@ using UnityEngine;
 public class RailwayLightingSystem : MonoBehaviour
 {
     MovingObjectSpawner movingObjectSpawner;
-    [SerializeField] private GameObject RailwayLight;
+    [SerializeField] private GameObject RailwayLight_1;
+    [SerializeField] private GameObject RailwayLight_2;
     /// <summary>
     /// Total duration of blinking (1 second visible, 1 second hidden)
     /// </summary>
@@ -36,7 +37,8 @@ public class RailwayLightingSystem : MonoBehaviour
 
     private void StartBlinking()
     {
-        RailwayLight.SetActive(true); // Ensure light is visible when new object comes in
+        RailwayLight_1.SetActive(true); // Ensure light is visible when new object comes in
+        RailwayLight_2.SetActive(true); // Ensure light is visible when new object comes in
         blinkCoroutine = StartCoroutine(BlinkLight());
     }
 
@@ -45,7 +47,8 @@ public class RailwayLightingSystem : MonoBehaviour
         if (blinkCoroutine != null)
         {
             StopCoroutine(blinkCoroutine);
-            RailwayLight.SetActive(false); // Ensure light is hidden when blinking stops
+            RailwayLight_1.SetActive(false); // Ensure light is hidden when blinking stops
+            RailwayLight_2.SetActive(false); // Ensure light is hidden when blinking stops
         }
     }
 
@@ -55,7 +58,8 @@ public class RailwayLightingSystem : MonoBehaviour
 
         while (timeElapsed < blinkDuration)
         {
-            RailwayLight.SetActive(isLightOn);
+            RailwayLight_1.SetActive(isLightOn);
+            RailwayLight_2.SetActive(isLightOn);
             isLightOn = !isLightOn;
             yield return new WaitForSeconds(blinkingTime);
             timeElapsed += blinkingTime;

@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
-    public static Player Instance { get; private set; }
+
     [SerializeField] private TerrainGenerator terrainGenerator;
     public GameObject currentSkin;
     public Transform playerContainer;
@@ -40,6 +40,7 @@ public class Player : MonoBehaviour
         currentSkin = playerContainer.GetChild(0).gameObject;
         GetSkin();
     }
+
     private void Update()
     {
         if (!isHopping && !isEnnemyActive && Time.timeScale != 0)

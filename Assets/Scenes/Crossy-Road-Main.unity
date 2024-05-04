@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: d23986012f9572942ae15a606355b65a, type: 2}
   m_LightingSettings: {fileID: 4890085278179872738, guid: a273b523f06908f47adfb0ff39f2f258, type: 2}
 --- !u!196 &4
 NavMeshSettings:
@@ -1811,8 +1811,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 611305750}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.31347594, y: 0.5299155, z: -0.21949817, w: 0.7567979}
-  m_LocalPosition: {x: 3, y: 25, z: -15}
+  m_LocalRotation: {x: 0.2763341, y: 0.53995466, z: -0.19349119, w: 0.7711353}
+  m_LocalPosition: {x: 3.17, y: 1.89, z: 0.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1827,11 +1827,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 611305750}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e170de95f7e78584b987a0465fffdbeb, type: 3}
+  m_Script: {fileID: 11500000, guid: a7d7ffb3f6bb7c349900d5bcfbf6a4f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  offset: {x: 1, y: 1, z: 0}
-  smoothSpeed: 0.025
+  player: {fileID: 31379678}
+  followXAxis: 1
+  followYAxis: 0
+  followZAxis: 0
 --- !u!1 &704846533
 GameObject:
   m_ObjectHideFlags: 0
@@ -2413,7 +2415,7 @@ Transform:
   m_GameObject: {fileID: 863605536}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4, y: 20.71, z: 2}
+  m_LocalPosition: {x: 4, y: 20.71, z: 32.1}
   m_LocalScale: {x: 27.194, y: 1, z: 10.478}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3034,6 +3036,19 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8828932352373189211, guid: 87ff3e309995ffb4096e064740b9a1da, type: 3}
+      propertyPath: TimeText
+      value: 
+      objectReference: {fileID: 979787992}
+    - target: {fileID: 8828932352373189211, guid: 87ff3e309995ffb4096e064740b9a1da, type: 3}
+      propertyPath: timeText
+      value: 
+      objectReference: {fileID: 979787992}
+    - target: {fileID: 8828932352373189211, guid: 87ff3e309995ffb4096e064740b9a1da, type: 3}
+      propertyPath: scoreText
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8828932352373189211, guid: 87ff3e309995ffb4096e064740b9a1da, type: 3}
+      propertyPath: scoreManager
       propertyPath: currentSkin
       value: 
       objectReference: {fileID: 0}
@@ -3041,6 +3056,10 @@ PrefabInstance:
       propertyPath: playerContainer
       value: 
       objectReference: {fileID: 1345830031}
+    - target: {fileID: 8828932352373189211, guid: 87ff3e309995ffb4096e064740b9a1da, type: 3}
+      propertyPath: isEagleActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8828932352373189211, guid: 87ff3e309995ffb4096e064740b9a1da, type: 3}
       propertyPath: terrainGenerator
       value: 
@@ -3840,7 +3859,7 @@ Transform:
   m_GameObject: {fileID: 2073929686}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5, y: 20.71, z: 32}
+  m_LocalPosition: {x: 5, y: 20.71, z: 1.92}
   m_LocalScale: {x: 27.194, y: 1, z: 10.478}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4106,7 +4125,8 @@ PrefabInstance:
       value: DisplayManager
       objectReference: {fileID: 0}
     - target: {fileID: 3998251284076133160, guid: 9a9cb2eab5ece244d9351a589a682fbd, type: 3}
-      propertyPath: timeText
+      propertyPath: 
+      
       value: 
       objectReference: {fileID: 979787992}
     - target: {fileID: 3998251284076133160, guid: 9a9cb2eab5ece244d9351a589a682fbd, type: 3}
@@ -4279,6 +4299,58 @@ PrefabInstance:
       propertyPath: terrainHolder
       value: 
       objectReference: {fileID: 1595569629}
+    - target: {fileID: 6714637674210826803, guid: 55769f10b2354094597d2f41cb2c61bd, type: 3}
+      propertyPath: playerStartPos
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6714637674210826803, guid: 55769f10b2354094597d2f41cb2c61bd, type: 3}
+      propertyPath: maxTerrainCount
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 6714637674210826803, guid: 55769f10b2354094597d2f41cb2c61bd, type: 3}
+      propertyPath: terrainDatas.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6714637674210826803, guid: 55769f10b2354094597d2f41cb2c61bd, type: 3}
+      propertyPath: StartTerrains.Array.size
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6714637674210826803, guid: 55769f10b2354094597d2f41cb2c61bd, type: 3}
+      propertyPath: terrainDatas.Array.data[3]
+      value: 
+      objectReference: {fileID: 11400000, guid: aa7672478db640541b81cb1283c2c6c4, type: 2}
+    - target: {fileID: 6714637674210826803, guid: 55769f10b2354094597d2f41cb2c61bd, type: 3}
+      propertyPath: StartTerrains.Array.data[0]
+      value: 
+      objectReference: {fileID: 5494086206471406026, guid: 3621d44641a83814aa1d2e07dfd420c4, type: 3}
+    - target: {fileID: 6714637674210826803, guid: 55769f10b2354094597d2f41cb2c61bd, type: 3}
+      propertyPath: StartTerrains.Array.data[1]
+      value: 
+      objectReference: {fileID: 5494086206471406026, guid: 5cd4306acef7323448c104aed24b4957, type: 3}
+    - target: {fileID: 6714637674210826803, guid: 55769f10b2354094597d2f41cb2c61bd, type: 3}
+      propertyPath: StartTerrains.Array.data[2]
+      value: 
+      objectReference: {fileID: 5494086206471406026, guid: b537dd7d6a03fb94e837d5b155f061c5, type: 3}
+    - target: {fileID: 6714637674210826803, guid: 55769f10b2354094597d2f41cb2c61bd, type: 3}
+      propertyPath: StartTerrains.Array.data[3]
+      value: 
+      objectReference: {fileID: 5494086206471406026, guid: 2112d8605df1684459c0dac960084632, type: 3}
+    - target: {fileID: 6714637674210826803, guid: 55769f10b2354094597d2f41cb2c61bd, type: 3}
+      propertyPath: StartTerrains.Array.data[4]
+      value: 
+      objectReference: {fileID: 5494086206471406026, guid: 856f2c97744f96c46ba8d881b8138520, type: 3}
+    - target: {fileID: 6714637674210826803, guid: 55769f10b2354094597d2f41cb2c61bd, type: 3}
+      propertyPath: StartTerrains.Array.data[5]
+      value: 
+      objectReference: {fileID: 5494086206471406026, guid: 856f2c97744f96c46ba8d881b8138520, type: 3}
+    - target: {fileID: 6714637674210826803, guid: 55769f10b2354094597d2f41cb2c61bd, type: 3}
+      propertyPath: StartTerrains.Array.data[6]
+      value: 
+      objectReference: {fileID: 5494086206471406026, guid: 856f2c97744f96c46ba8d881b8138520, type: 3}
+    - target: {fileID: 6714637674210826803, guid: 55769f10b2354094597d2f41cb2c61bd, type: 3}
+      propertyPath: StartTerrains.Array.data[7]
+      value: 
+      objectReference: {fileID: 5494086206471406026, guid: b76609bdc13c6fd43b446a770c0cb1b9, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
