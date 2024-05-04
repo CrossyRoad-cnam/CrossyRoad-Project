@@ -160,10 +160,6 @@ public class Player : MonoBehaviour
 
         if (currentScore > scoreValue)
             scoreValue = currentScore;
-        if (scoreValue % 50 == 0)
-        {
-            scoreManager.PlayScore();
-        }
     }
     private int CalculateScore()
     {
