@@ -6,14 +6,7 @@ using UnityEngine.SceneManagement;
 public class PauseMenu : MonoBehaviour
 {
     public GameObject pauseMenuUI;
-    public GameObject player;
-    // Start is called before the first frame update
-    void Start()
-    {
-        player = GameObject.Find("Player");
-    }
 
-    // Update is called once per frame
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -42,6 +35,7 @@ public class PauseMenu : MonoBehaviour
 
     public void QuitGame()
     {
+        Destroy(Player.Instance.gameObject);
         Time.timeScale = 1f;
         SceneManager.LoadScene(0);
 
@@ -49,6 +43,7 @@ public class PauseMenu : MonoBehaviour
 
     public void RestartGame()
     {
+        Destroy(Player.Instance.gameObject); // Eviter une deduplication et crash sur les donnes
         Time.timeScale = 1f;
         SceneManager.LoadScene(1);
     }

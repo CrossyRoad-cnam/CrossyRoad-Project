@@ -8,9 +8,9 @@ public class DifficultyController : MonoBehaviour
 
     public TextMeshProUGUI difficultyText;
     private string[] difficultyLevels = { "Easy", "Medium", "Hard" };
-    private int currentDifficultyIndex = 1; // Medium par défaut
+    private int currentDifficultyIndex = 1;
     private string difficultyKey = "Difficulty";
-    // Start is called before the first frame update
+
     void Start()
     {
         if (PlayerPrefs.HasKey(difficultyKey))

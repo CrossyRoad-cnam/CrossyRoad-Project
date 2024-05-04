@@ -5,43 +5,45 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
-    /// <summary>
-    /// Indicates the amount of time, the player is allow to pass inactive, in seconds
-    /// </summary>
-    [SerializeField] private float EagleDelay = 5.0f;
+
     [SerializeField] private TerrainGenerator terrainGenerator;
-    [SerializeField] private Text scoreText;
-    [SerializeField] private GameObject ennemyPrefab;
-    [SerializeField] private Text timeText;
-    [SerializeField] private Text highScoreText;
-    [SerializeField] private ScoreManager scoreManager;
+    public GameObject currentSkin;
+    public Transform playerContainer;
+    // private Animator animator;
+    private SkinController skinController;
     private float initialPosition;
-    private Quaternion initialRotation;
-    private Animator animator;
     private bool isHopping;
     public float scoreValue = 0;
     private float lastScore = 0;
-    private GameObject ennemyInstance;
     private float idleTime = 0;
-    /// <summary>
-    /// Indicates if the eagle is flying toward the player. Avoid sending multiple eagles
-    /// </summary>
-    private bool isEagleActive = false;
+    const float IDLE_TIME_LIMIT = 7.0f;
+    const int MAX_BACKSTEPS = 3;
+    private bool isEnnemyActive = false;
     private int backStepsCounter;
 
+
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
+    }
     private void Start()
     {
-        animator = GetComponent<Animator>();
+        // animator = GetComponent<Animator>();
+        skinController = SkinController.Instance;
         initialPosition = transform.position.x;
-        ennemyInstance = Instantiate(ennemyPrefab);
-        ennemyInstance.SetActive(false);
+        currentSkin = playerContainer.GetChild(0).gameObject;
+        GetSkin();
     }
 
     private void Update()
     {
-        DisplayHighScore();
-        UpdateTimeText();
-        if (!isHopping && !isEagleActive)
+        if (!isHopping && !isEnnemyActive && Time.timeScale != 0)
         {
             HandleMovement();
             CheckIdleTime();
@@ -72,7 +74,7 @@ public class Player : MonoBehaviour
         if (isBack)
         {
             backStepsCounter++;
-            if (backStepsCounter >= 3)
+            if (backStepsCounter >= MAX_BACKSTEPS)
             {
                 TriggerEagle();
                 backStepsCounter = 0;
@@ -113,7 +115,7 @@ public class Player : MonoBehaviour
     }
     private IEnumerator RotateOverTime(Quaternion newRotation)
     {
-        float duration = 0.2f;
+        float duration = 0.15f;
         float time = 0;
         Quaternion startRotation = transform.rotation;
 
@@ -126,29 +128,42 @@ public class Player : MonoBehaviour
 
         transform.rotation = newRotation;
     }
-    private void PerformMove(Vector3 direction)
+   private void PerformMove(Vector3 direction)
     {
-        animator.SetTrigger("hop");
+        // animator.SetTrigger("hop");
         isHopping = true;
-        transform.position += direction;
+        StartCoroutine(SmoothMove(transform.position, transform.position + direction, 0.15f));
         RotateCharacter(direction);
         terrainGenerator.SpawnTerrain(false, transform.position);
+    }
+
+    private IEnumerator SmoothMove(Vector3 startPosition, Vector3 endPosition, float duration)
+    {
+        float timeElapsed = 0;
+        float height = 0.75f;
+
+        while (timeElapsed < duration)
+        {
+            float animationTime = timeElapsed / duration;
+            float jumpArc = height * Mathf.Sin(Mathf.PI * animationTime);
+            transform.position = Vector3.Lerp(startPosition, new Vector3(endPosition.x, startPosition.y + jumpArc, endPosition.z), animationTime);
+            timeElapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        transform.position = endPosition;
+        FinishHop();
     }
     private void UpdateScore()
     {
         int currentScore = CalculateScore();
         if (currentScore > scoreValue)
             scoreValue = currentScore;
-            UpdateScoreText();
     }
     private int CalculateScore()
     {
         float distanceMoved = transform.position.x - initialPosition;
         return Mathf.RoundToInt(distanceMoved);
-    }
-    private void UpdateScoreText()
-    {
-        scoreText.text = scoreValue.ToString();
     }
     private void FinishHop()
     {
@@ -181,7 +196,7 @@ public class Player : MonoBehaviour
         if (scoreValue == lastScore)
         {
             idleTime += Time.deltaTime;
-            if (idleTime >= EagleDelay && !isEagleActive)
+            if (idleTime >= IDLE_TIME_LIMIT && !isEnnemyActive)
             {
                 TriggerEagle();
             }
@@ -192,42 +207,26 @@ public class Player : MonoBehaviour
             idleTime = 0;
         }
     }
-    private void CheckBackSteps()
-    {
-        if (backStepsCounter >= 3)
-        {
-            TriggerEagle();
-            backStepsCounter = 0;
-        }
-    }
     private void TriggerEagle()
     {
-        isEagleActive = true;
-        ennemyInstance.SetActive(true);
-        ennemyInstance.transform.position = transform.position + new Vector3(10, 2, 0); 
+        isEnnemyActive = true;
     }
-    private void LateUpdate()
+    public bool CheckEnnemyTrigger()
     {
-        if (isEagleActive)
+        return isEnnemyActive;
+    }
+    public void ApplySkin(GameObject skin)
+    {
+        if (currentSkin != null)
         {
-            Vector3 targetPosition = transform.position;
-            ennemyInstance.transform.position = Vector3.Lerp(ennemyInstance.transform.position, targetPosition, Time.deltaTime * 7);
+            Destroy(currentSkin);
         }
-    }
-    private void UpdateTimeText()
-    {
-        int totalSeconds = Mathf.RoundToInt(Time.timeSinceLevelLoad);
-        int minutes = totalSeconds / 60;
-        int seconds = totalSeconds % 60;
-
-        timeText.text = "Time\n" + string.Format("{0:D2} : {1:D2}", minutes, seconds);
-    }
-    private void DisplayHighScore()
-    {
-        int highScore = scoreManager.GetHighestScore();
-        highScoreText.text = "Top " + highScore;
-        Debug.Log(highScore);
+        currentSkin = Instantiate(skin, playerContainer);
     }
 
-    // TO DO : Séparer les logiques d'affichage et de gestion de score de cette classe
+    private void GetSkin()
+    {
+        int selectedSkin = PlayerPrefs.GetInt("SelectedSkin", 0);
+        ApplySkin(skinController.skins[selectedSkin]);
+    }
 }
