@@ -65,7 +65,6 @@ public class Player : MonoBehaviour
         if (CanMoveInDirection(direction))
         {
             PerformMove(direction);
-            UpdateScore();
             ManageBackwardSteps(isBack);
         }
     }
@@ -153,6 +152,7 @@ public class Player : MonoBehaviour
 
         transform.position = endPosition;
         FinishHop();
+        UpdateScore();
     }
     private void UpdateScore()
     {
