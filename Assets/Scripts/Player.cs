@@ -26,7 +26,7 @@ public class Player : MonoBehaviour
     {
         if (Instance != null && Instance != this)
         {
-            Destroy(gameObject);
+            DestroyImmediate(gameObject, true);
             return;
         }
         Instance = this;
@@ -226,8 +226,13 @@ public class Player : MonoBehaviour
     }
 
     private void GetSkin()
+
     {
+        
         int selectedSkin = PlayerPrefs.GetInt("SelectedSkin", 0);
-        ApplySkin(skinController.skins[selectedSkin]);
+
+            ApplySkin(skinController.skins[selectedSkin]);
+
+       
     }
 }

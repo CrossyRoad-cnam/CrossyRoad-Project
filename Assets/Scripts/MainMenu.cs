@@ -10,6 +10,23 @@ public class MainMenu : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex +1);
     }
 
+    // pouvoir utiliser les fleches pour choisir les boutons
+    public void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            Debug.Log("Down");
+        }
+        if (Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            Debug.Log("Up");
+        }
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
+            Debug.Log("Enter");
+        }
+    }
+
     public void QuitGame()
     {
         Debug.Log("Quit");

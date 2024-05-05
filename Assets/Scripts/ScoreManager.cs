@@ -8,9 +8,7 @@ using UnityEngine.UI;
 public class ScoreManager : MonoBehaviour
 {
     private ScoreData scoreData;
-    private AudioSource audioSource;
-    public AudioClip sound;
-    private float volume = 0.5f;
+    private int playerScore;
 
     void Awake()
     {
@@ -25,12 +23,28 @@ public class ScoreManager : MonoBehaviour
         {
             scoreData = JsonUtility.FromJson<ScoreData>(json);
         }
+
+
+    }
+
+    public void Update()
+    {
+        playerScore = Mathf.RoundToInt(Player.Instance.scoreValue);
+        if (playerScore == null || playerScore == 0 )
+        {
+            return;
+        }
+        else if (playerScore % 50 == 0)
+        {
+            PlayScore();
+        }
+        
     }
 
     public void PlayScore()
     {
-        audioSource = GetComponent<AudioSource>();
-        audioSource.Play();
+        AudioController controller = GetComponent<AudioController>();
+        controller.Play();
     }
     public IEnumerable<Score> GetHighScores()
     {

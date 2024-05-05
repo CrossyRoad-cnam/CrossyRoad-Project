@@ -17,6 +17,8 @@ public class AudioController : MonoBehaviour
 
     private const string volumeKey = "Volume";
 
+    public bool playOnAwake = false;
+
     public bool IsLoop = false;  
 
     public virtual void Awake()
@@ -39,6 +41,7 @@ public class AudioController : MonoBehaviour
         audioSource.volume = volume;
         audioSource.pitch = pitch;
         audioSource.loop = IsLoop;
+        audioSource.playOnAwake = playOnAwake;
 
         LoadVolume();
         if (audioSource.playOnAwake)
@@ -49,7 +52,15 @@ public class AudioController : MonoBehaviour
 
     public void Play()
     {
-        audioSource.Play();
+        if (audioSource.clip == null)
+        {
+            return;
+        }
+        if (audioSource.isPlaying)
+        {
+            return;
+        }
+        audioSource.PlayOneShot(sound);
     }
 
     public void SetVolume(float newVolume)

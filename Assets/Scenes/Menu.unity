@@ -5969,7 +5969,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7aed144ee7672fd4d96691b614dd4141, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sound: {fileID: 0}
 --- !u!1 &1270110047
 GameObject:
   m_ObjectHideFlags: 0
@@ -8727,6 +8726,7 @@ MonoBehaviour:
   sound: {fileID: 8300000, guid: 4a72931a059384f429238d87b2b3d240, type: 3}
   volume: 1
   pitch: 1
+  playOnAwake: 1
   IsLoop: 1
 --- !u!4 &2141786906
 Transform:
