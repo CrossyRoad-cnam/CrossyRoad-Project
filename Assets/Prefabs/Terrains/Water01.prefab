@@ -146,7 +146,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1340897351910476466}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fcbd3a27666307343a0452c4476d3658, type: 3}
   m_Name: 
@@ -154,7 +154,8 @@ MonoBehaviour:
   sound: {fileID: 8300000, guid: dc025dc0c9032ad4ab2bc0eefa28a212, type: 3}
   volume: 0.5
   pitch: 1
-  IsLoop: 1
+  playOnAwake: 0
+  IsLoop: 0
   maxDistance: 2
 --- !u!1 &3093072053126955951
 GameObject:

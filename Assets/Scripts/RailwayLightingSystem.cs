@@ -9,10 +9,18 @@ public class RailwayLightingSystem : MonoBehaviour
     [SerializeField] private Light railwayLight2;
     [SerializeField] private float blinkDuration = 2f;
     [SerializeField] private float blinkingTime = 0.4f;
-
+    private AudioController audioController;
+    private GameObject player;
+    private const int maxDistance = 2;
     private bool isLightOn = true;
     private Coroutine blinkCoroutine;
 
+    void Awake()
+    {
+        audioController = GetComponent<AudioController>();
+        player = GameObject.FindGameObjectWithTag("Player");
+
+    }
     void Start()
     {
         try
@@ -26,6 +34,28 @@ public class RailwayLightingSystem : MonoBehaviour
         }
     }
 
+    private void CheckDistanceToPlayer()
+    {
+        if (player != null)
+        {
+            float distanceX = Mathf.Abs(transform.position.x - player.transform.position.x  );
+            // arrondi 
+            int distance = Mathf.RoundToInt(distanceX);
+            if (distance <= maxDistance && distanceX >= 0 )
+            {
+                if (audioController != null)
+                {
+                    audioController.Play();
+                }
+            }
+        }
+        else
+        {
+            Debug.LogWarning("Player object is null.");
+        }
+    }
+
+
     void OnDisable()
     {
         if (movingObjectSpawner != null)
@@ -37,6 +67,8 @@ public class RailwayLightingSystem : MonoBehaviour
     {
         if (blinkCoroutine != null) StopCoroutine(blinkCoroutine);
         blinkCoroutine = StartCoroutine(BlinkLight()); // Start the blinking coroutine
+
+
     }
 
     private void StopBlinking()
@@ -52,6 +84,7 @@ public class RailwayLightingSystem : MonoBehaviour
     private IEnumerator BlinkLight()
     {
         float timeElapsed = 0f;
+        CheckDistanceToPlayer(); // Play the audio
 
         while (timeElapsed < blinkDuration)
         {

@@ -7,6 +7,7 @@ public class Player : MonoBehaviour
 {
     public static Player Instance { get; private set; }
     [SerializeField] private TerrainGenerator terrainGenerator;
+    public bool eagleEnable = false;
     public GameObject currentSkin;
     public Transform playerContainer;
     // private Animator animator;
@@ -73,7 +74,7 @@ public class Player : MonoBehaviour
         if (isBack)
         {
             backStepsCounter++;
-            if (backStepsCounter >= MAX_BACKSTEPS)
+            if (backStepsCounter >= MAX_BACKSTEPS && eagleEnable)
             {
                 TriggerEagle();
                 backStepsCounter = 0;
@@ -197,7 +198,7 @@ public class Player : MonoBehaviour
         if (scoreValue == lastScore)
         {
             idleTime += Time.deltaTime;
-            if (idleTime >= IDLE_TIME_LIMIT && !isEnnemyActive)
+            if (idleTime >= IDLE_TIME_LIMIT && !isEnnemyActive && eagleEnable)
             {
                 TriggerEagle();
             }

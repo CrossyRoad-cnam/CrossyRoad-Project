@@ -15,13 +15,14 @@ public class EnnemiesAudioController : AudioController
     {
         if (player != null)
         {
-            float distanceZ = Mathf.Abs(transform.position.x - player.transform.position.x);
-            float distanceX = Mathf.Abs(transform.position.z - player.transform.position.z);
-            if (distanceZ < maxDistance)
+            //float distanceZ = Mathf.Abs( player.transform.position.z - transform.position.z );
+            float distanceX = Mathf.Abs(transform.position.x - player.transform.position.x);
+            int distance = Mathf.FloorToInt( distanceX );
+            if (distance <= maxDistance && distance >= 0)
             {
                 if (!audioSource.isPlaying)
                 {
-                    audioSource.Play();
+                    audioSource.PlayOneShot(sound);
                 }
             }
             else

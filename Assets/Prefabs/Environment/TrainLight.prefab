@@ -55,30 +55,5 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 3a9d0a44c267cd8408a7185752e7cdbd, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 6251005551694058395}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3a9d0a44c267cd8408a7185752e7cdbd, type: 3}
---- !u!1 &7601902436066584275 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 3a9d0a44c267cd8408a7185752e7cdbd, type: 3}
-  m_PrefabInstance: {fileID: 7331306231881128834}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &6251005551694058395
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7601902436066584275}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c4b53ce40823d7448afe609706ba38b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sound: {fileID: 8300000, guid: 56103ba52d55c8043bdbf7313d2508a9, type: 3}
-  volume: 0.5
-  pitch: 1
-  playOnAwake: 0
-  IsLoop: 0
