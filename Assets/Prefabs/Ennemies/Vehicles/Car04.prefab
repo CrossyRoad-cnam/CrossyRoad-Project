@@ -73,6 +73,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 0d59918b6e39c234ebcf9fdfccafb98d, type: 3}
       insertIndex: -1
       addedObject: {fileID: 287842320360151351}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 0d59918b6e39c234ebcf9fdfccafb98d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4127876885934823618}
   m_SourcePrefab: {fileID: 100100000, guid: 0d59918b6e39c234ebcf9fdfccafb98d, type: 3}
 --- !u!1 &1957904246838440411 stripped
 GameObject:
@@ -126,3 +129,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23d008ae30db2984b9f8eb618560aca1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &4127876885934823618
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1957904246838440411}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcbd3a27666307343a0452c4476d3658, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sound: {fileID: 8300000, guid: 5e8c8e4e6894dd3459e59c46237e33c2, type: 3}
+  volume: 0.5
+  isAmbient: 0
+  pitch: 1
+  isPlayWhenGameOver: 0
+  playOnAwake: 0
+  IsLoop: 0
+  gameOverManager: {fileID: 0}
+  maxDistance: 3

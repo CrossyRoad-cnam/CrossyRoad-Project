@@ -10,19 +10,26 @@ public class AudioController : MonoBehaviour
     [Range(0, 1f)]
     public float volume = 0.5f;
 
+    public bool isAmbient = false;
+
     [Range(0.1f, 2.5f)]
     public float pitch = 1f;
 
     protected AudioSource audioSource;
 
+    public bool isPlayWhenGameOver;
+
     private const string volumeKey = "Volume";
 
     public bool playOnAwake = false;
 
-    public bool IsLoop = false;  
+    public bool IsLoop = false;
+
+    public GameOverManager gameOverManager;
 
     public virtual void Awake()
     {
+        gameOverManager = FindAnyObjectByType<GameOverManager>();
         if (audioSource == null)
         {
             audioSource = GetComponent<AudioSource>();
@@ -50,6 +57,14 @@ public class AudioController : MonoBehaviour
         }
     }
 
+    public virtual void Update()
+    {
+        if (gameOverManager.GameOverScreen.active == true && !isPlayWhenGameOver)
+        {
+            audioSource.Stop();
+        }
+    }
+
     public void Play()
     {
         if (audioSource.clip == null)
@@ -66,7 +81,13 @@ public class AudioController : MonoBehaviour
     public void SetVolume(float newVolume)
     {
         volume = newVolume;
-        audioSource.volume = volume;
+        if (isAmbient)
+        {
+            audioSource.volume = volume / 2;
+        }
+        else { 
+            audioSource.volume = volume;
+        }
         SaveVolume();
     }
 
@@ -81,7 +102,13 @@ public class AudioController : MonoBehaviour
         if (PlayerPrefs.HasKey(volumeKey))
         {
             volume = PlayerPrefs.GetFloat(volumeKey);
-            audioSource.volume = volume;
+            if (isAmbient)
+            {
+                audioSource.volume = volume / 3;
+            } else
+            {
+                audioSource.volume = volume;
+            }
         }
     }
 }

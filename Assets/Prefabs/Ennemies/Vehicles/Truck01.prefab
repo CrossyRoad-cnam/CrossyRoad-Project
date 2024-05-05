@@ -73,6 +73,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 6a4b5614a075b954eb199cb2eee82716, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8373480282938495684}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 6a4b5614a075b954eb199cb2eee82716, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4655085736890931948}
   m_SourcePrefab: {fileID: 100100000, guid: 6a4b5614a075b954eb199cb2eee82716, type: 3}
 --- !u!1 &6375814923497777484 stripped
 GameObject:
@@ -91,7 +94,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 408f8b95df02bc84e9a6bb9bb98cb241, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isLog: 0
+  isJumpable: 0
   speed: 2
 --- !u!114 &6497045494720289922
 MonoBehaviour:
@@ -126,3 +129,24 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.0108, y: 0.0132, z: 0.03}
   m_Center: {x: 0, y: 0.0066, z: -4.689582e-17}
+--- !u!114 &4655085736890931948
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6375814923497777484}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcbd3a27666307343a0452c4476d3658, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sound: {fileID: 8300000, guid: 99bc0481ffde0584d90d96d64a3dcdd3, type: 3}
+  volume: 0.5
+  isAmbient: 0
+  pitch: 1
+  isPlayWhenGameOver: 0
+  playOnAwake: 0
+  IsLoop: 0
+  gameOverManager: {fileID: 0}
+  maxDistance: 3

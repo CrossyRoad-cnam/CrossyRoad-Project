@@ -8725,6 +8725,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sound: {fileID: 8300000, guid: 4a72931a059384f429238d87b2b3d240, type: 3}
   volume: 1
+  isAmbient: 1
   pitch: 1
   playOnAwake: 1
   IsLoop: 1
