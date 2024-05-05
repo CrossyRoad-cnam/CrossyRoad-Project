@@ -1263,6 +1263,7 @@ GameObject:
   - component: {fileID: 6429875076318321684}
   - component: {fileID: 2772705283221263738}
   - component: {fileID: 6161080723033680996}
+  - component: {fileID: 660325169003291745}
   m_Layer: 0
   m_Name: Rails02
   m_TagString: Untagged
@@ -1425,8 +1426,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   railwayLight1: {fileID: 5510775786466651133}
   railwayLight2: {fileID: 1609553174095557897}
-  blinkDuration: 2
-  blinkingTime: 0.4
+  blinkDuration: 1
+  blinkingTime: 0.2
+--- !u!114 &660325169003291745
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2303552780705726756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c4b53ce40823d7448afe609706ba38b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sound: {fileID: 8300000, guid: 56103ba52d55c8043bdbf7313d2508a9, type: 3}
+  volume: 0.5
+  pitch: 1
+  playOnAwake: 0
+  IsLoop: 0
 --- !u!1 &3150484527160209861
 GameObject:
   m_ObjectHideFlags: 0
