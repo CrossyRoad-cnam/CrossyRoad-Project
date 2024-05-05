@@ -19,8 +19,8 @@ public class EnnemiesAudioController : AudioController
         {
             float distanceZ = Mathf.Abs( player.transform.position.z - transform.position.z );
             float distanceX = Mathf.Abs(transform.position.x - player.transform.position.x);
-            int distanceXI = Mathf.FloorToInt( distanceX );
-            int distanceZI = Mathf.FloorToInt( distanceZ );
+            int distanceXI = Mathf.FloorToInt(Mathf.Abs( distanceX) );
+            int distanceZI = Mathf.FloorToInt(Mathf.Abs( distanceZ) );
 
             int distance = distanceXI + distanceZI;
             

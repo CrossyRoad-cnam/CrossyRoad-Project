@@ -59,9 +59,11 @@ public class AudioController : MonoBehaviour
 
     public virtual void Update()
     {
-        if (gameOverManager.GameOverScreen.active == true && !isPlayWhenGameOver)
-        {
-            audioSource.Stop();
+        if (gameOverManager != null) { 
+            if (gameOverManager.GameOverScreen.active == true && !isPlayWhenGameOver)
+            {
+                audioSource.Stop();
+            }
         }
     }
 
