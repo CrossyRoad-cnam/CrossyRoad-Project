@@ -10,7 +10,6 @@ public class Player : MonoBehaviour
     public bool eagleEnable = false;
     public GameObject currentSkin;
     public Transform playerContainer;
-    // private Animator animator;
     private SkinController skinController;
     private float initialPosition;
     private bool isHopping;
@@ -35,7 +34,6 @@ public class Player : MonoBehaviour
     }
     private void Start()
     {
-        // animator = GetComponent<Animator>();
         skinController = SkinController.Instance;
         initialPosition = transform.position.x;
         currentSkin = playerContainer.GetChild(0).gameObject;
@@ -130,7 +128,6 @@ public class Player : MonoBehaviour
     }
    private void PerformMove(Vector3 direction)
     {
-        // animator.SetTrigger("hop");
         isHopping = true;
         StartCoroutine(SmoothMove(transform.position, transform.position + direction, 0.15f));
         RotateCharacter(direction);
