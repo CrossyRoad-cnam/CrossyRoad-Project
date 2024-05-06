@@ -551,7 +551,7 @@ Transform:
   m_GameObject: {fileID: 741074556492251965}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -0.8, y: 1.8729999, z: -0.003800001}
+  m_LocalPosition: {x: -0.9, y: 2.25, z: -0.003800001}
   m_LocalScale: {x: 1, y: 1.1111119, z: 0.033333335}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1442,9 +1442,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sound: {fileID: 8300000, guid: 56103ba52d55c8043bdbf7313d2508a9, type: 3}
   volume: 0.5
+  isAmbient: 0
   pitch: 1
+  isPlayWhenGameOver: 0
   playOnAwake: 0
   IsLoop: 0
+  gameOverManager: {fileID: 0}
 --- !u!1 &3150484527160209861
 GameObject:
   m_ObjectHideFlags: 0
@@ -3287,7 +3290,7 @@ Transform:
   m_GameObject: {fileID: 7553539992019242876}
   serializedVersion: 2
   m_LocalRotation: {x: 0.5, y: -0.5, z: 0.5, w: 0.5}
-  m_LocalPosition: {x: -0.8, y: 1.8729999, z: 0.0044}
+  m_LocalPosition: {x: -0.9, y: 2.25, z: 0.0044}
   m_LocalScale: {x: 1, y: 1.11111, z: 0.033333335}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3894,7 +3897,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7076475878982335593, guid: b3cb0643a9e86154a888e8e6166d9325, type: 3}
       propertyPath: m_LocalScale.y
-      value: 100
+      value: 120
       objectReference: {fileID: 0}
     - target: {fileID: 7076475878982335593, guid: b3cb0643a9e86154a888e8e6166d9325, type: 3}
       propertyPath: m_LocalScale.z
