@@ -5206,7 +5206,7 @@ PrefabInstance:
       objectReference: {fileID: 1595569629}
     - target: {fileID: 6714637674210826803, guid: 55769f10b2354094597d2f41cb2c61bd, type: 3}
       propertyPath: playerStartPos
-      value: 4
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 6714637674210826803, guid: 55769f10b2354094597d2f41cb2c61bd, type: 3}
       propertyPath: maxTerrainCount
@@ -5218,7 +5218,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6714637674210826803, guid: 55769f10b2354094597d2f41cb2c61bd, type: 3}
       propertyPath: StartTerrains.Array.size
-      value: 8
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 6714637674210826803, guid: 55769f10b2354094597d2f41cb2c61bd, type: 3}
       propertyPath: terrainDatas.Array.data[3]
@@ -5231,31 +5231,47 @@ PrefabInstance:
     - target: {fileID: 6714637674210826803, guid: 55769f10b2354094597d2f41cb2c61bd, type: 3}
       propertyPath: StartTerrains.Array.data[1]
       value: 
-      objectReference: {fileID: 5494086206471406026, guid: 5cd4306acef7323448c104aed24b4957, type: 3}
+      objectReference: {fileID: 5494086206471406026, guid: 3621d44641a83814aa1d2e07dfd420c4, type: 3}
     - target: {fileID: 6714637674210826803, guid: 55769f10b2354094597d2f41cb2c61bd, type: 3}
       propertyPath: StartTerrains.Array.data[2]
       value: 
-      objectReference: {fileID: 5494086206471406026, guid: b537dd7d6a03fb94e837d5b155f061c5, type: 3}
+      objectReference: {fileID: 5494086206471406026, guid: 3621d44641a83814aa1d2e07dfd420c4, type: 3}
     - target: {fileID: 6714637674210826803, guid: 55769f10b2354094597d2f41cb2c61bd, type: 3}
       propertyPath: StartTerrains.Array.data[3]
       value: 
-      objectReference: {fileID: 5494086206471406026, guid: 2112d8605df1684459c0dac960084632, type: 3}
+      objectReference: {fileID: 5494086206471406026, guid: 3621d44641a83814aa1d2e07dfd420c4, type: 3}
     - target: {fileID: 6714637674210826803, guid: 55769f10b2354094597d2f41cb2c61bd, type: 3}
       propertyPath: StartTerrains.Array.data[4]
       value: 
-      objectReference: {fileID: 5494086206471406026, guid: 856f2c97744f96c46ba8d881b8138520, type: 3}
+      objectReference: {fileID: 5494086206471406026, guid: 3621d44641a83814aa1d2e07dfd420c4, type: 3}
     - target: {fileID: 6714637674210826803, guid: 55769f10b2354094597d2f41cb2c61bd, type: 3}
       propertyPath: StartTerrains.Array.data[5]
       value: 
-      objectReference: {fileID: 5494086206471406026, guid: 856f2c97744f96c46ba8d881b8138520, type: 3}
+      objectReference: {fileID: 5494086206471406026, guid: 3621d44641a83814aa1d2e07dfd420c4, type: 3}
     - target: {fileID: 6714637674210826803, guid: 55769f10b2354094597d2f41cb2c61bd, type: 3}
       propertyPath: StartTerrains.Array.data[6]
       value: 
-      objectReference: {fileID: 5494086206471406026, guid: 856f2c97744f96c46ba8d881b8138520, type: 3}
+      objectReference: {fileID: 5494086206471406026, guid: 5cd4306acef7323448c104aed24b4957, type: 3}
     - target: {fileID: 6714637674210826803, guid: 55769f10b2354094597d2f41cb2c61bd, type: 3}
       propertyPath: StartTerrains.Array.data[7]
       value: 
-      objectReference: {fileID: 5494086206471406026, guid: b76609bdc13c6fd43b446a770c0cb1b9, type: 3}
+      objectReference: {fileID: 5494086206471406026, guid: b537dd7d6a03fb94e837d5b155f061c5, type: 3}
+    - target: {fileID: 6714637674210826803, guid: 55769f10b2354094597d2f41cb2c61bd, type: 3}
+      propertyPath: StartTerrains.Array.data[8]
+      value: 
+      objectReference: {fileID: 5494086206471406026, guid: 2112d8605df1684459c0dac960084632, type: 3}
+    - target: {fileID: 6714637674210826803, guid: 55769f10b2354094597d2f41cb2c61bd, type: 3}
+      propertyPath: StartTerrains.Array.data[9]
+      value: 
+      objectReference: {fileID: 5494086206471406026, guid: 856f2c97744f96c46ba8d881b8138520, type: 3}
+    - target: {fileID: 6714637674210826803, guid: 55769f10b2354094597d2f41cb2c61bd, type: 3}
+      propertyPath: StartTerrains.Array.data[10]
+      value: 
+      objectReference: {fileID: 8562624435428234971, guid: 66b4fb01e8f001f43b93e73ba09b401a, type: 3}
+    - target: {fileID: 6714637674210826803, guid: 55769f10b2354094597d2f41cb2c61bd, type: 3}
+      propertyPath: StartTerrains.Array.data[11]
+      value: 
+      objectReference: {fileID: 4402331650590781773, guid: 817d9bec4c452af498acb4afe667b4e2, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
