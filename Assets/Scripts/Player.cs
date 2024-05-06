@@ -115,16 +115,16 @@ public class Player : MonoBehaviour
     {
         float duration = 0.15f;
         float time = 0;
-        Quaternion startRotation = transform.rotation;
+        Quaternion startRotation = playerContainer.rotation;
 
         while (time < duration)
         {
-            transform.rotation = Quaternion.Slerp(startRotation, newRotation, time / duration);
+            playerContainer.rotation = Quaternion.Slerp(startRotation, newRotation, time / duration);
             time += Time.deltaTime;
             yield return null;
         }
 
-        transform.rotation = newRotation;
+        playerContainer.rotation = newRotation;
     }
    private void PerformMove(Vector3 direction)
     {
