@@ -139,10 +139,10 @@ MonoBehaviour:
   - {fileID: 2398163146340014562, guid: d29dc3dc5874d7140a8a27c3dff6b693, type: 3}
   - {fileID: 553567890462961796, guid: a3fc053d3672aa54e84b01591d5d6cf7, type: 3}
   - {fileID: 2871564327831192317, guid: 1d10358b7b85d59418a09fc4e5822fd6, type: 3}
-  minSpaceBetween: 2
-  maxSpaceBetween: 5
-  terrainLength: 30
-  startPositionOnZ: -15
+  minSpaceBetween: 3
+  maxSpaceBetween: 7
+  zoneLength: 12
+  startPositionOnZ: -6
 --- !u!1001 &1310731657466048179
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -433,7 +433,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5572983026329508702, guid: 3e58a3485c5010b4a8cadffc177c89d7, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.23333335
+      value: -0.23333333
       objectReference: {fileID: 0}
     - target: {fileID: 5572983026329508702, guid: 3e58a3485c5010b4a8cadffc177c89d7, type: 3}
       propertyPath: m_LocalRotation.w

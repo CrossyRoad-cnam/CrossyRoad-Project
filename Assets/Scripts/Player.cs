@@ -16,8 +16,8 @@ public class Player : MonoBehaviour
     public float scoreValue = 0;
     private float lastScore = 0;
     private float idleTime = 0;
-    const float IDLE_TIME_LIMIT = 7.0f;
-    const int MAX_BACKSTEPS = 3;
+    private const float IDLE_TIME_LIMIT = 7.0f;
+    private const int MAX_BACKSTEPS = 3;
     private bool isEnnemyActive = false;
     private int backStepsCounter;
 
@@ -126,7 +126,7 @@ public class Player : MonoBehaviour
 
         playerContainer.rotation = newRotation;
     }
-   private void PerformMove(Vector3 direction)
+    private void PerformMove(Vector3 direction)
     {
         isHopping = true;
         StartCoroutine(SmoothMove(transform.position, transform.position + direction, 0.15f));

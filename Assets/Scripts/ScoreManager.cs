@@ -24,13 +24,12 @@ public class ScoreManager : MonoBehaviour
             scoreData = JsonUtility.FromJson<ScoreData>(json);
         }
 
-
     }
 
     public void Update()
     {
         playerScore = Mathf.RoundToInt(Player.Instance.scoreValue);
-        if (playerScore == null || playerScore == 0 )
+        if (playerScore == 0 )
         {
             return;
         }
@@ -38,7 +37,6 @@ public class ScoreManager : MonoBehaviour
         {
             PlayScore();
         }
-        
     }
 
     public void PlayScore()

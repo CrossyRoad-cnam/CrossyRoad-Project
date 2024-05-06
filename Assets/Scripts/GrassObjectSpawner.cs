@@ -6,9 +6,9 @@ public class GrassObjectSpawner : MonoBehaviour
 {
     [SerializeField] private List<GameObject> elements;
     [SerializeField] private int minSpaceBetween = 2;
-    [SerializeField] private int maxSpaceBetween = 5;
-    [SerializeField] private int terrainLength = 30;
-    [SerializeField] private int startPositionOnZ = -15;
+    [SerializeField] private int maxSpaceBetween = 7;
+    [SerializeField] private int zoneLength = 12;
+    [SerializeField] private int startPositionOnZ = -6;
 
     private Vector3 spawnPos;
 
@@ -25,7 +25,7 @@ public class GrassObjectSpawner : MonoBehaviour
 
     private void SpawnObjects()
     {
-        while (spawnPos.z < startPositionOnZ + terrainLength)
+        while (spawnPos.z < startPositionOnZ + zoneLength)
         {
             int randomIndex = Random.Range(0, elements.Count);
             GameObject newObject = Instantiate(elements[randomIndex], spawnPos, Quaternion.identity);

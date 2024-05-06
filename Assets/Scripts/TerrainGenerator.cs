@@ -23,16 +23,18 @@ public class TerrainGenerator : MonoBehaviour
     private List<GameObject> currentTerrains = new List<GameObject>();
     private GameObject lastSpawnedPrefab = null;
 
-    private void Start()
+    private void Awake()
     {
         DefineStartPosition();
         SpawnStartingTerrains();
+    }
+    private void Start()
+    {
         for (int i = 0; i < maxTerrainCount; i++)
         {
             SpawnTerrain(true, new Vector3(0, 0, 0));
         }
     }
-
     private void DefineStartPosition()
     {
         if (playerStartPos <= StartTerrains.Count - 1 && playerStartPos >= 0)
