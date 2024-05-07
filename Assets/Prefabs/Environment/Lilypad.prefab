@@ -67,6 +67,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c9622d7cdbb5432408064180ac97b3b2, type: 3}
       insertIndex: -1
       addedObject: {fileID: 3392089545938561813}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c9622d7cdbb5432408064180ac97b3b2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -5902689889832348850}
     - targetCorrespondingSourceObject: {fileID: 4584339947330567888, guid: c9622d7cdbb5432408064180ac97b3b2, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8023302760619394641}
@@ -134,3 +137,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isJumpable: 1
   speed: 0
+--- !u!114 &-5902689889832348850
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9163022839712953287}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b46aa0ebb310fc23bf29db3c2376796, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationSpeed: 10
+  rotationDirection1: 1
+  rotationDirection2: -1

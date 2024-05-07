@@ -42,7 +42,7 @@ public class MovingObjectSpawner : MonoBehaviour
 
     private IEnumerator DestroyOutOfBounds(GameObject obj)
     {
-        float terrainSize = transform.localScale.z;
+        float terrainSize = Mathf.Abs(spawnPosition.position.z) * 3;
         float minTerrainZ = spawnPosition.position.z - terrainSize;
         float maxTerrainZ = spawnPosition.position.z + terrainSize;
 
