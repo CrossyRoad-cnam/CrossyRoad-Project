@@ -35,7 +35,6 @@ public class MovingObjectSpawner : MonoBehaviour
                 newObject.transform.Rotate(0, 180, 0);
             }
             seconds = Random.Range(minSeparationTime, maxSeparationTime);
-
             StartCoroutine(DestroyOutOfBounds(newObject));
         }
     }
