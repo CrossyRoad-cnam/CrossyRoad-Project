@@ -47,7 +47,7 @@ public class DisplayManager : MonoBehaviour
     }
     public void DisplayTime()
     {
-       if (timeText != null)
+       if (timeText != null && Player.Instance != null)
         {
             if (!timerStarted && Player.Instance.HasMoved())
             {
