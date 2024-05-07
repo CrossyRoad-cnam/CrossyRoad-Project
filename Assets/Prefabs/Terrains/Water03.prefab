@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5325935995876154353}
   - component: {fileID: 6632435562999059754}
   - component: {fileID: 764274552472135835}
+  - component: {fileID: -6129274650198377755}
   m_Layer: 0
   m_Name: Water03
   m_TagString: Ennemy
@@ -124,6 +125,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23d008ae30db2984b9f8eb618560aca1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-6129274650198377755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1186318886909505561}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcbd3a27666307343a0452c4476d3658, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sound: {fileID: 8300000, guid: ff1b5a37c61d72842b3765a43979ff80, type: 3}
+  volume: 0.35
+  isAmbient: 1
+  pitch: 1
+  isPlayWhenGameOver: 0
+  playOnAwake: 0
+  IsLoop: 1
+  gameOverManager: {fileID: 0}
+  maxDistance: 2
 --- !u!1001 &459037206528264863
 PrefabInstance:
   m_ObjectHideFlags: 0

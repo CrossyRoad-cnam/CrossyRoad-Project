@@ -3477,7 +3477,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sound: {fileID: 8300000, guid: 56103ba52d55c8043bdbf7313d2508a9, type: 3}
   volume: 0.5
-  isAmbient: 0
+  isAmbient: 1
   pitch: 1
   isPlayWhenGameOver: 0
   playOnAwake: 0

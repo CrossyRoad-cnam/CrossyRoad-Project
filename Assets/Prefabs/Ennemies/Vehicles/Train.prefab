@@ -315,9 +315,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcbd3a27666307343a0452c4476d3658, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sound: {fileID: 8300000, guid: f0119109d2599c1408b0bf1fca053492, type: 3}
-  volume: 0.5
+  sound: {fileID: 8300000, guid: aeb21271b1572ec478d4853a3dda1537, type: 3}
+  volume: 1
+  isAmbient: 0
   pitch: 1
+  isPlayWhenGameOver: 0
   playOnAwake: 0
   IsLoop: 0
+  gameOverManager: {fileID: 0}
   maxDistance: 2
