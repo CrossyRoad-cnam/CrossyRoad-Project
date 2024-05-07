@@ -9,6 +9,7 @@ public class GrassObjectSpawner : MonoBehaviour
     [SerializeField] private int maxSpaceBetween = 7;
     [SerializeField] private int zoneLength = 12;
     [SerializeField] private int startPositionOnZ = -6;
+    private const float SPAWN_Y = 0.75f;
 
     private Vector3 spawnPos;
 
@@ -20,7 +21,7 @@ public class GrassObjectSpawner : MonoBehaviour
 
     private void DefineXAxis()
     {
-        spawnPos = new Vector3(gameObject.transform.position.x, 0.5f, startPositionOnZ);
+        spawnPos = new Vector3(gameObject.transform.position.x, SPAWN_Y, startPositionOnZ);
     }
 
     private void SpawnObjects()
