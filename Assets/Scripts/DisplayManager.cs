@@ -12,6 +12,8 @@ public class DisplayManager : MonoBehaviour
     private int highestScore;
     private int playerScore;
     private ScoreManager scoreManager;
+    private bool timerStarted = false;
+    private float timeSinceFirstMove = 0f;
 
     private void Start()
     {
@@ -45,13 +47,25 @@ public class DisplayManager : MonoBehaviour
     }
     public void DisplayTime()
     {
-        if (timeText != null && Player.Instance != null)
+       if (timeText != null)
         {
-            int totalSeconds = Mathf.RoundToInt(Time.timeSinceLevelLoad);
-            int minutes = totalSeconds / 60;
-            int seconds = totalSeconds % 60;
+            if (!timerStarted && Player.Instance.HasMoved())
+            {
+                timerStarted = true;
+                timeSinceFirstMove = Time.time;
+            }
 
-            timeText.text = "Time\n" + string.Format("{0:D2} : {1:D2}", minutes, seconds);
+            if (timerStarted)
+            {
+                int totalSeconds = Mathf.RoundToInt(Time.time - timeSinceFirstMove);
+                int minutes = totalSeconds / 60;
+                int seconds = totalSeconds % 60;
+                timeText.text = string.Format("Time\n{0:D2} : {1:D2}", minutes, seconds);
+            }
+            else
+            {
+                timeText.text = "Time\n00 : 00";
+            }
         }
     }
 }

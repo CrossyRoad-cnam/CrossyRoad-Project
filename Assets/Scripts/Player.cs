@@ -20,6 +20,7 @@ public class Player : MonoBehaviour
     private const int MAX_BACKSTEPS = 3;
     private bool isEnnemyActive = false;
     private int backStepsCounter;
+    private bool hasFirstMoved = false;
 
 
     private void Awake()
@@ -45,7 +46,8 @@ public class Player : MonoBehaviour
         if (!isHopping && !isEnnemyActive && Time.timeScale != 0)
         {
             HandleMovement();
-            CheckIdleTime();
+            if (hasFirstMoved)
+                CheckIdleTime();
         }
     }
     private void HandleMovement()
@@ -63,6 +65,8 @@ public class Player : MonoBehaviour
     {
         if (CanMoveInDirection(direction))
         {
+            if (!hasFirstMoved)
+                hasFirstMoved = true;
             PerformMove(direction);
             ManageBackwardSteps(isBack);
         }
@@ -228,5 +232,9 @@ public class Player : MonoBehaviour
     {
         int selectedSkin = PlayerPrefs.GetInt("SelectedSkin", 0);
             ApplySkin(skinController.skins[selectedSkin]);
+    }
+    public bool HasMoved()
+    {
+        return hasFirstMoved;
     }
 }
