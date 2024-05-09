@@ -25,10 +25,11 @@ public class TerrainGenerator : MonoBehaviour
     private void Awake()
     {
         DefineStartPosition();
+        SpawnStartingTerrains();
+
     }
     private void Start()
     {
-        SpawnStartingTerrains();
         for (int i = 0; i < maxTerrainCount; i++)
         {
             SpawnTerrain(true, new Vector3(0, 0, 0));

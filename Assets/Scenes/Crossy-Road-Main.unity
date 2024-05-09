@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028401, g: 0.22571425, b: 0.30692324, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -539,7 +539,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 73498926}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!114 &121287866 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6714637674210826803, guid: 55769f10b2354094597d2f41cb2c61bd, type: 3}
@@ -3402,7 +3402,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3280093714583535046, guid: 87ff3e309995ffb4096e064740b9a1da, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3502980149861243080, guid: 87ff3e309995ffb4096e064740b9a1da, type: 3}
       propertyPath: m_LocalPosition.y
