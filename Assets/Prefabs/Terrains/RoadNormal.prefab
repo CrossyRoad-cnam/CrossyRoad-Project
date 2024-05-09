@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7813019262034380928}
   - component: {fileID: 6870562408290249944}
   m_Layer: 0
-  m_Name: Road01
+  m_Name: RoadNormal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -128,6 +128,7 @@ MonoBehaviour:
   - {fileID: 5672644819596144330, guid: 0f5f5d91dacbafa4f87fc1146bd22bc2, type: 3}
   - {fileID: 6375814923497777484, guid: 24a0a899299039b49b2020d551abe24d, type: 3}
   - {fileID: 7222704409375085356, guid: 37ca7bc1301a91e6cb37d94ff2462332, type: 3}
+  - {fileID: 777685053844806963, guid: 70a0c25dacc215342890053087e14eb6, type: 3}
   spawnPositionR: {fileID: 4638223058832004323}
   spawnPositionL: {fileID: 2635729830716804451}
   minSeparationTime: 2
