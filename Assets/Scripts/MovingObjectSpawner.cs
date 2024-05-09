@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MovingObjectSpawner : MonoBehaviour
 {
-    [SerializeField] private GameObject movingObject;
+    [SerializeField] private List<GameObject> movingObjects;
     [SerializeField] private Transform spawnPosition;
     [SerializeField] private float minSeparationTime;
     [SerializeField] private float maxSeparationTime;
@@ -13,6 +13,7 @@ public class MovingObjectSpawner : MonoBehaviour
     [SerializeField] float EventThrowAdvancePercentage = 0.3f;
     public delegate void ObjectIncomingEventHandler();
     public event ObjectIncomingEventHandler ObjectIncoming;
+    private GameObject movingObject;
 
     private void Awake()
     {
@@ -20,6 +21,7 @@ public class MovingObjectSpawner : MonoBehaviour
             float randomValue = Random.Range(0f, 1f);
             isRightSide = (randomValue < 0.5f);
         }
+        movingObject = movingObjects[Random.Range(0, movingObjects.Count)];
     }
 
     private void Start()

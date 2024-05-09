@@ -119,7 +119,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17fff18bef122c8449ebf5877b2df364, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movingObject: {fileID: 1957904246838440411, guid: 41594c918e78ebc41851846389952e59, type: 3}
+  movingObjects:
+  - {fileID: 2965196231601898020, guid: e408ce6a6985a784a9e6465130b10d46, type: 3}
+  - {fileID: 1854150340933057434, guid: b82c2f4ef5b43f7428aea4b364d8b2c5, type: 3}
+  - {fileID: 1957904246838440411, guid: 41594c918e78ebc41851846389952e59, type: 3}
+  - {fileID: 335529026861336742, guid: 38320ed9136f3e94099c7de41f3b2c5e, type: 3}
+  - {fileID: 5672644819596144330, guid: 0f5f5d91dacbafa4f87fc1146bd22bc2, type: 3}
+  - {fileID: 6375814923497777484, guid: 24a0a899299039b49b2020d551abe24d, type: 3}
+  - {fileID: 7222704409375085356, guid: 37ca7bc1301a91e6cb37d94ff2462332, type: 3}
   spawnPosition: {fileID: 4638223058832004323}
   minSeparationTime: 2
   maxSeparationTime: 7
