@@ -1975,7 +1975,7 @@ MonoBehaviour:
   player: {fileID: 31379678}
   followXAxis: 1
   followYAxis: 0
-  followZAxis: 0
+  followZAxis: 1
   smoothSpeed: 1.5
 --- !u!1 &704846533
 GameObject:
