@@ -10,26 +10,25 @@ public class TerrainGenerator : MonoBehaviour
 {
     [SerializeField] private int minDistanceFromPlayer;
     [SerializeField] private List<TerrainData> terrainDatas;
+    [SerializeField] private TerrainData StartTerrains;
     [SerializeField] private int maxTerrainCount;
     [SerializeField] private Transform terrainHolder;
-    /// <summary>
-    /// Indicates which terrain the player will spawn on
-    /// </summary>
-    [SerializeField] private int playerStartPos;
-    [SerializeField] private List<GameObject> StartTerrains;
+   [SerializeField] private int playerStartPos;
 
     [HideInInspector] public Vector3 currentPosition = new Vector3(0, 0, 0);
 
     private List<GameObject> currentTerrains = new List<GameObject>();
     private GameObject lastSpawnedPrefab = null;
+    private GameObject lastSpawnedPrefabStart = null;
+
 
     private void Awake()
     {
         DefineStartPosition();
-        SpawnStartingTerrains();
     }
     private void Start()
     {
+        SpawnStartingTerrains();
         for (int i = 0; i < maxTerrainCount; i++)
         {
             SpawnTerrain(true, new Vector3(0, 0, 0));
@@ -37,7 +36,7 @@ public class TerrainGenerator : MonoBehaviour
     }
     private void DefineStartPosition()
     {
-        if (playerStartPos <= StartTerrains.Count - 1 && playerStartPos >= 0)
+        if (playerStartPos <= StartTerrains.maxInSuccession && playerStartPos >= 0)
         {
             currentPosition.x = currentPosition.x - playerStartPos;
         }
@@ -47,24 +46,29 @@ public class TerrainGenerator : MonoBehaviour
         }
     }
 
-    public void SpawnStartingTerrains()
+    private void SpawnStartingTerrains()
     {
-        int i = 0;
-        foreach (var terrain in StartTerrains)
+        for (int i = 0; i < StartTerrains.maxInSuccession; i++)
         {
-            SpawnTerrain(terrain, i++ - playerStartPos);
+            List<GameObject> possiblePrefabs = new List<GameObject>(StartTerrains.possibleTerrain);
+            if (possiblePrefabs.Count > 1 && lastSpawnedPrefabStart != null)
+            {
+                possiblePrefabs.Remove(lastSpawnedPrefabStart);
+            }
+            if (possiblePrefabs.Count > 0)
+            {
+                GameObject terrainPrefab = possiblePrefabs[i];
+
+            GameObject terrain = Instantiate(terrainPrefab, currentPosition, Quaternion.identity, terrainHolder);
+            currentTerrains.Add(terrain);
+            lastSpawnedPrefabStart = terrainPrefab;
+            currentPosition.x++;
+            }
+            else
+            {
+                Debug.LogWarning("Aucun préfabriqué de terrain disponible.");
+            }
         }
-    }
-    /// <summary>
-    /// Spawns a terrain to a dedicated x location
-    /// </summary>
-    /// <param name="terrain"></param>
-    /// <param name="position_X"></param>
-    public void SpawnTerrain(GameObject terrain, int position_X)
-    {
-        currentTerrains.Add(terrain);
-        Instantiate(terrain, currentPosition, Quaternion.identity, terrainHolder);
-        currentPosition.x++;
     }
 
     public void SpawnTerrain(bool isStart, Vector3 playerPosition)
@@ -104,4 +108,5 @@ public class TerrainGenerator : MonoBehaviour
 
         return possiblePrefabs[Random.Range(0, possiblePrefabs.Count)];
     }
+    
 }
