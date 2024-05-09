@@ -3200,10 +3200,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17fff18bef122c8449ebf5877b2df364, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movingObject: {fileID: 8518486559447410070, guid: 8c1d10f8fdc270e41a251d2389654b2b, type: 3}
+  movingObjects:
+  - {fileID: 8518486559447410070, guid: 8c1d10f8fdc270e41a251d2389654b2b, type: 3}
   spawnPosition: {fileID: 3247357463644425881}
   minSeparationTime: 5
   maxSeparationTime: 7
+  isFixed: 0
   isRightSide: 0
   EventThrowAdvancePercentage: 0.3
 --- !u!114 &1785728229284870074
