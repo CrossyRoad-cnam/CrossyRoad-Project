@@ -5,7 +5,8 @@ using UnityEngine;
 public class MovingObjectSpawner : MonoBehaviour
 {
     [SerializeField] private List<GameObject> movingObjects;
-    [SerializeField] private Transform spawnPosition;
+    [SerializeField] private Transform spawnPositionR;
+    [SerializeField] private Transform spawnPositionL;
     [SerializeField] private float minSeparationTime;
     [SerializeField] private float maxSeparationTime;
     [SerializeField] private bool isFixed;
@@ -14,6 +15,7 @@ public class MovingObjectSpawner : MonoBehaviour
     public delegate void ObjectIncomingEventHandler();
     public event ObjectIncomingEventHandler ObjectIncoming;
     private GameObject movingObject;
+    private Transform spawnPosition;
 
     private void Awake()
     {
@@ -22,6 +24,8 @@ public class MovingObjectSpawner : MonoBehaviour
             isRightSide = (randomValue < 0.5f);
         }
         movingObject = movingObjects[Random.Range(0, movingObjects.Count)];
+        spawnPosition = isRightSide ? spawnPositionR : spawnPositionL;
+
     }
 
     private void Start()
@@ -37,10 +41,6 @@ public class MovingObjectSpawner : MonoBehaviour
             yield return new WaitForSeconds(seconds * (1 - EventThrowAdvancePercentage));
             ObjectIncoming?.Invoke();
             yield return new WaitForSeconds(seconds * EventThrowAdvancePercentage);
-            if (isRightSide && !isFixed)
-            {
-                spawnPosition.position = new Vector3(spawnPosition.position.x, spawnPosition.position.y, -10);
-            }
             GameObject newObject = Instantiate(movingObject, spawnPosition.position, movingObject.transform.rotation);
             newObject.transform.SetParent(transform, true); // Hotfix pour que les objets soient détruites avec le terrain
 
