@@ -264,6 +264,7 @@ public class Player : MonoBehaviour
         }
         else
         {
+            // Rajouter le wait et qu'il attend pas
             if (CanMoveInDirection(left) && CanMoveInDirection(right)) // TODO : rajouter ici une optimisation s'il peut se déplacer sur les deux côtés, prioriser le movement qui se rapproche du centre. A optimiser
             // Si possible, tester cette fonctionnalité
             {
