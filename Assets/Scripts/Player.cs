@@ -11,6 +11,7 @@ public class Player : MonoBehaviour
     public bool eagleEnable = false;
     public GameObject currentSkin;
     public Transform playerContainer;
+    public bool isRobot = false;
     private SkinController skinController;
     private float initialPosition;
     private bool isHopping;
@@ -22,6 +23,10 @@ public class Player : MonoBehaviour
     private bool isEnnemyActive = false;
     private int backStepsCounter;
     private bool hasFirstMoved = false;
+    private Vector3 forward = new Vector3(1, 0, 0);
+    private Vector3 backward = new Vector3(-1, 0, 0);
+    private Vector3 left = new Vector3(0, 0, 1);
+    private Vector3 right = new Vector3(0, 0, -1);
     private bool isRobot = false;
 
 
@@ -56,20 +61,25 @@ public class Player : MonoBehaviour
         }
         else
         {
-            // robot
+            if (isRobot)
+                HandleRobotMovement();
+            else
+                HandleMovement();
 
+            if (hasFirstMoved)
+                CheckIdleTime();
         }
     }
     private void HandleMovement()
     {
         if (Input.GetKeyDown(KeyCode.UpArrow))
-            MoveCharacter(new Vector3(1, 0, 0), false);
+            MoveCharacter(forward, false);
         else if (Input.GetKeyDown(KeyCode.DownArrow))
-            MoveCharacter(new Vector3(-1, 0, 0), true);
+            MoveCharacter(backward, true);
         else if (Input.GetKeyDown(KeyCode.LeftArrow))
-            MoveCharacter(new Vector3(0, 0, 1), false);
+            MoveCharacter(left, false);
         else if (Input.GetKeyDown(KeyCode.RightArrow))
-            MoveCharacter(new Vector3(0, 0, -1), false);
+            MoveCharacter(right, false);
     }
     private void MoveCharacter(Vector3 direction, bool isBack)
     {
@@ -107,6 +117,15 @@ public class Player : MonoBehaviour
             if (hit.collider.CompareTag("Obstacle"))
             {
                 return false;
+            }
+
+            if (isRobot)
+            {
+                if(hit.collider.GetComponent<MovingObject>() != null)
+                {
+                    if (!hit.collider.GetComponent<MovingObject>().isJumpable)
+                        return false;
+                }
             }
         }
         return true;
@@ -246,5 +265,33 @@ public class Player : MonoBehaviour
     public bool HasMoved()
     {
         return hasFirstMoved;
+    }
+
+    private void HandleRobotMovement()
+    {
+        if (CanMoveInDirection(forward))
+        {
+            MoveCharacter(forward, false);
+        }
+        else
+        {
+            // Rajouter le wait et qu'il attend pas
+            if (CanMoveInDirection(left) && CanMoveInDirection(right)) // TODO : rajouter ici une optimisation s'il peut se déplacer sur les deux côtés, prioriser le movement qui se rapproche du centre. A optimiser
+            // Si possible, tester cette fonctionnalité
+            {
+                float distanceToLeft = Vector3.Distance(transform.position + left, Vector3.zero);
+                float distanceToRight = Vector3.Distance(transform.position + right, Vector3.zero);
+                if (distanceToLeft < distanceToRight)
+                    MoveCharacter(left, false);
+                else
+                    MoveCharacter(right, false);
+            }
+            else if (CanMoveInDirection(left))
+                MoveCharacter(left, false);
+            else if (CanMoveInDirection(right))
+                MoveCharacter(right, false);
+            else if (CanMoveInDirection(backward))
+                MoveCharacter(backward, true);
+        }
     }
 }

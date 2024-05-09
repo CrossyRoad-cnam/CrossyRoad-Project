@@ -1976,7 +1976,7 @@ MonoBehaviour:
   followXAxis: 1
   followYAxis: 0
   followZAxis: 0
-  smoothSpeed: 0.75
+  smoothSpeed: 1.5
 --- !u!1 &704846533
 GameObject:
   m_ObjectHideFlags: 0
@@ -3454,14 +3454,26 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8723654141832360691, guid: 87ff3e309995ffb4096e064740b9a1da, type: 3}
       propertyPath: m_Mass
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8723654141832360691, guid: 87ff3e309995ffb4096e064740b9a1da, type: 3}
       propertyPath: m_UseGravity
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8723654141832360691, guid: 87ff3e309995ffb4096e064740b9a1da, type: 3}
+      propertyPath: m_AngularDrag
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8723654141832360691, guid: 87ff3e309995ffb4096e064740b9a1da, type: 3}
+      propertyPath: m_Constraints
+      value: 122
+      objectReference: {fileID: 0}
+    - target: {fileID: 8723654141832360691, guid: 87ff3e309995ffb4096e064740b9a1da, type: 3}
       propertyPath: m_CollisionDetection
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8828932352373189211, guid: 87ff3e309995ffb4096e064740b9a1da, type: 3}
+      propertyPath: isRobot
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8828932352373189211, guid: 87ff3e309995ffb4096e064740b9a1da, type: 3}
@@ -3478,7 +3490,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8828932352373189211, guid: 87ff3e309995ffb4096e064740b9a1da, type: 3}
       propertyPath: eagleEnable
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8828932352373189211, guid: 87ff3e309995ffb4096e064740b9a1da, type: 3}
       propertyPath: scoreManager
@@ -4621,6 +4633,10 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 31379678}
+    - target: {fileID: 3905181921724914134, guid: e9692e18a79198542955863a79f736c3, type: 3}
+      propertyPath: m_Size.x
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 6312735029752844917, guid: e9692e18a79198542955863a79f736c3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -4664,6 +4680,10 @@ PrefabInstance:
     - target: {fileID: 6643733476193974421, guid: e9692e18a79198542955863a79f736c3, type: 3}
       propertyPath: m_Name
       value: Border
+      objectReference: {fileID: 0}
+    - target: {fileID: 7393763114242065911, guid: e9692e18a79198542955863a79f736c3, type: 3}
+      propertyPath: m_Size.x
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
