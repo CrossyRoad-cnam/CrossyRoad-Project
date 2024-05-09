@@ -265,6 +265,7 @@ public class Player : MonoBehaviour
         else
         {
             if (CanMoveInDirection(left) && CanMoveInDirection(right)) // TODO : rajouter ici une optimisation s'il peut se déplacer sur les deux côtés, prioriser le movement qui se rapproche du centre. A optimiser
+            // Si possible, tester cette fonctionnalité
             {
                 float distanceToLeft = Vector3.Distance(transform.position + left, Vector3.zero);
                 float distanceToRight = Vector3.Distance(transform.position + right, Vector3.zero);
