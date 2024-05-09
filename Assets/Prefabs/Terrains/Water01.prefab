@@ -36,6 +36,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6243455229314674770}
+  - {fileID: 3536764913881446793}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &8063740048169202
@@ -121,10 +122,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17fff18bef122c8449ebf5877b2df364, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movingObject: {fileID: 1935594207471027620, guid: a96b5219a009cf7489df56a85c135805, type: 3}
-  spawnPosition: {fileID: 6243455229314674770}
+  movingObjects:
+  - {fileID: 3137632959606903766, guid: a1a4adf457af217f085403620141c22a, type: 3}
+  - {fileID: 1935594207471027620, guid: a96b5219a009cf7489df56a85c135805, type: 3}
+  spawnPositionR: {fileID: 6243455229314674770}
+  spawnPositionL: {fileID: 3536764913881446793}
   minSeparationTime: 2
   maxSeparationTime: 3
+  isFixed: 1
   isRightSide: 1
   EventThrowAdvancePercentage: 0.3
 --- !u!114 &6409107824756878877
@@ -160,6 +165,37 @@ MonoBehaviour:
   IsLoop: 1
   gameOverManager: {fileID: 0}
   maxDistance: 2
+--- !u!1 &6413219518561798653
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3536764913881446793}
+  m_Layer: 4
+  m_Name: spawnPosL
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3536764913881446793
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6413219518561798653}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.075, z: 10}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2939595677052953016}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6730131944687095910
 GameObject:
   m_ObjectHideFlags: 0
@@ -170,7 +206,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6243455229314674770}
   m_Layer: 4
-  m_Name: spawnPos
+  m_Name: spawnPosR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

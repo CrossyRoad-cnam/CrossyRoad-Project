@@ -4,15 +4,29 @@ using UnityEngine;
 
 public class MovingObjectSpawner : MonoBehaviour
 {
-    [SerializeField] private GameObject movingObject;
-    [SerializeField] private Transform spawnPosition;
+    [SerializeField] private List<GameObject> movingObjects;
+    [SerializeField] private Transform spawnPositionR;
+    [SerializeField] private Transform spawnPositionL;
     [SerializeField] private float minSeparationTime;
     [SerializeField] private float maxSeparationTime;
+    [SerializeField] private bool isFixed;
     [SerializeField] private bool isRightSide;
     [SerializeField] float EventThrowAdvancePercentage = 0.3f;
     public delegate void ObjectIncomingEventHandler();
     public event ObjectIncomingEventHandler ObjectIncoming;
+    private GameObject movingObject;
+    private Transform spawnPosition;
 
+    private void Awake()
+    {
+        if (!isFixed) { 
+            float randomValue = Random.Range(0f, 1f);
+            isRightSide = (randomValue < 0.5f);
+        }
+        movingObject = movingObjects[Random.Range(0, movingObjects.Count)];
+        spawnPosition = isRightSide ? spawnPositionR : spawnPositionL;
+
+    }
 
     private void Start()
     {
@@ -38,6 +52,7 @@ public class MovingObjectSpawner : MonoBehaviour
             StartCoroutine(DestroyOutOfBounds(newObject));
         }
     }
+
 
     private IEnumerator DestroyOutOfBounds(GameObject obj)
     {

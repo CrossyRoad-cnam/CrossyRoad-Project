@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5615078928752257441}
   m_Layer: 0
-  m_Name: SpawnPos
+  m_Name: SpawnPosL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26,6 +26,37 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0.9, z: 10}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3263105840937088692}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1535523389739159648
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7249721517781088678}
+  m_Layer: 0
+  m_Name: SpawnPosR
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7249721517781088678
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1535523389739159648}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.9, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -65,6 +96,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5615078928752257441}
+  - {fileID: 7249721517781088678}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &3143133205490530451
@@ -150,9 +182,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17fff18bef122c8449ebf5877b2df364, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movingObject: {fileID: 2965196231601898020, guid: e408ce6a6985a784a9e6465130b10d46, type: 3}
-  spawnPosition: {fileID: 5615078928752257441}
+  movingObjects:
+  - {fileID: 2965196231601898020, guid: e408ce6a6985a784a9e6465130b10d46, type: 3}
+  - {fileID: 1854150340933057434, guid: b82c2f4ef5b43f7428aea4b364d8b2c5, type: 3}
+  - {fileID: 1957904246838440411, guid: 41594c918e78ebc41851846389952e59, type: 3}
+  - {fileID: 335529026861336742, guid: 38320ed9136f3e94099c7de41f3b2c5e, type: 3}
+  - {fileID: 5672644819596144330, guid: 0f5f5d91dacbafa4f87fc1146bd22bc2, type: 3}
+  - {fileID: 6375814923497777484, guid: 24a0a899299039b49b2020d551abe24d, type: 3}
+  - {fileID: 7222704409375085356, guid: 37ca7bc1301a91e6cb37d94ff2462332, type: 3}
+  spawnPositionR: {fileID: 7249721517781088678}
+  spawnPositionL: {fileID: 5615078928752257441}
   minSeparationTime: 3
   maxSeparationTime: 5
+  isFixed: 0
   isRightSide: 0
   EventThrowAdvancePercentage: 0.3
