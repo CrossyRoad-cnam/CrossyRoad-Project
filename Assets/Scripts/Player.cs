@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -21,6 +22,7 @@ public class Player : MonoBehaviour
     private bool isEnnemyActive = false;
     private int backStepsCounter;
     private bool hasFirstMoved = false;
+    private bool isRobot = false;
 
 
     private void Awake()
@@ -43,11 +45,19 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        if (!isHopping && !isEnnemyActive && Time.timeScale != 0)
+        if (!isRobot)
+        { 
+            if (!isHopping && !isEnnemyActive && Time.timeScale != 0)
+            {
+                HandleMovement();
+                if (hasFirstMoved)
+                    CheckIdleTime();
+            }
+        }
+        else
         {
-            HandleMovement();
-            if (hasFirstMoved)
-                CheckIdleTime();
+            // robot
+
         }
     }
     private void HandleMovement()

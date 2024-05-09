@@ -8,11 +8,19 @@ public class MovingObjectSpawner : MonoBehaviour
     [SerializeField] private Transform spawnPosition;
     [SerializeField] private float minSeparationTime;
     [SerializeField] private float maxSeparationTime;
+    [SerializeField] private bool isFixed;
     [SerializeField] private bool isRightSide;
     [SerializeField] float EventThrowAdvancePercentage = 0.3f;
     public delegate void ObjectIncomingEventHandler();
     public event ObjectIncomingEventHandler ObjectIncoming;
 
+    private void Awake()
+    {
+        if (!isFixed) { 
+            float randomValue = Random.Range(0f, 1f);
+            isRightSide = (randomValue < 0.5f);
+        }
+    }
 
     private void Start()
     {
@@ -27,6 +35,10 @@ public class MovingObjectSpawner : MonoBehaviour
             yield return new WaitForSeconds(seconds * (1 - EventThrowAdvancePercentage));
             ObjectIncoming?.Invoke();
             yield return new WaitForSeconds(seconds * EventThrowAdvancePercentage);
+            if (isRightSide && !isFixed)
+            {
+                spawnPosition.position = new Vector3(spawnPosition.position.x, spawnPosition.position.y, -10);
+            }
             GameObject newObject = Instantiate(movingObject, spawnPosition.position, movingObject.transform.rotation);
             newObject.transform.SetParent(transform, true); // Hotfix pour que les objets soient détruites avec le terrain
 
@@ -38,6 +50,7 @@ public class MovingObjectSpawner : MonoBehaviour
             StartCoroutine(DestroyOutOfBounds(newObject));
         }
     }
+
 
     private IEnumerator DestroyOutOfBounds(GameObject obj)
     {
