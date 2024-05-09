@@ -22,6 +22,10 @@ public class Player : MonoBehaviour
     private bool isEnnemyActive = false;
     private int backStepsCounter;
     private bool hasFirstMoved = false;
+    private Vector3 forward = new Vector3(1, 0, 0);
+    private Vector3 backward = new Vector3(-1, 0, 0);
+    private Vector3 left = new Vector3(0, 0, 1);
+    private Vector3 right = new Vector3(0, 0, -1);
 
 
     private void Awake()
@@ -58,13 +62,13 @@ public class Player : MonoBehaviour
     private void HandleMovement()
     {
         if (Input.GetKeyDown(KeyCode.UpArrow))
-            MoveCharacter(new Vector3(1, 0, 0), false);
+            MoveCharacter(forward, false);
         else if (Input.GetKeyDown(KeyCode.DownArrow))
-            MoveCharacter(new Vector3(-1, 0, 0), true);
+            MoveCharacter(backward, true);
         else if (Input.GetKeyDown(KeyCode.LeftArrow))
-            MoveCharacter(new Vector3(0, 0, 1), false);
+            MoveCharacter(left, false);
         else if (Input.GetKeyDown(KeyCode.RightArrow))
-            MoveCharacter(new Vector3(0, 0, -1), false);
+            MoveCharacter(right, false);
     }
     private void MoveCharacter(Vector3 direction, bool isBack)
     {
@@ -254,20 +258,22 @@ public class Player : MonoBehaviour
 
     private void HandleRobotMovement()
     {
-        Vector3 forward = new Vector3(1, 0, 0);
-        Vector3 backward = new Vector3(-1, 0, 0);
-        Vector3 left = new Vector3(0, 0, 1);
-        Vector3 right = new Vector3(0, 0, -1);
-        Vector3 wait = new Vector3(0, 0, 0);
-
         if (CanMoveInDirection(forward))
         {
             MoveCharacter(forward, false);
         }
         else
         {
-            MoveCharacter(wait, false);
-            if (CanMoveInDirection(left)) // TODO : rajouter ici une optimisation s'il peut se déplacer sur les deux côtés, prioriser le movement qui se rapproche du centre
+            if (CanMoveInDirection(left) && CanMoveInDirection(right)) // TODO : rajouter ici une optimisation s'il peut se déplacer sur les deux côtés, prioriser le movement qui se rapproche du centre. A optimiser
+            {
+                float distanceToLeft = Vector3.Distance(transform.position + left, Vector3.zero);
+                float distanceToRight = Vector3.Distance(transform.position + right, Vector3.zero);
+                if (distanceToLeft < distanceToRight)
+                    MoveCharacter(left, false);
+                else
+                    MoveCharacter(right, false);
+            }
+            else if (CanMoveInDirection(left))
                 MoveCharacter(left, false);
             else if (CanMoveInDirection(right))
                 MoveCharacter(right, false);
