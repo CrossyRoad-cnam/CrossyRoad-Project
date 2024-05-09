@@ -185,7 +185,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movingObjects:
-  - {fileID: 3137632959606903766, guid: 68236985da631774581d1f80cb0eef09, type: 3}
+  - {fileID: 3137632959606903766, guid: a1a4adf457af217f085403620141c22a, type: 3}
   - {fileID: 1935594207471027620, guid: a96b5219a009cf7489df56a85c135805, type: 3}
   spawnPositionR: {fileID: 6548769046790464759}
   spawnPositionL: {fileID: 2375167370973625524}
