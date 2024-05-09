@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
     public bool eagleEnable = false;
     public GameObject currentSkin;
     public Transform playerContainer;
+    public bool isRobot = false;
     private SkinController skinController;
     private float initialPosition;
     private bool isHopping;
@@ -45,7 +46,11 @@ public class Player : MonoBehaviour
     {
         if (!isHopping && !isEnnemyActive && Time.timeScale != 0)
         {
-            HandleMovement();
+            if (isRobot)
+                HandleRobotMovement();
+            else
+                HandleMovement();
+
             if (hasFirstMoved)
                 CheckIdleTime();
         }
@@ -97,6 +102,15 @@ public class Player : MonoBehaviour
             if (hit.collider.CompareTag("Obstacle"))
             {
                 return false;
+            }
+
+            if (isRobot)
+            {
+                if(hit.collider.GetComponent<MovingObject>() != null)
+                {
+                    if (!hit.collider.GetComponent<MovingObject>().isJumpable)
+                        return false;
+                }
             }
         }
         return true;
@@ -236,5 +250,29 @@ public class Player : MonoBehaviour
     public bool HasMoved()
     {
         return hasFirstMoved;
+    }
+
+    private void HandleRobotMovement()
+    {
+        Vector3 forward = new Vector3(1, 0, 0);
+        Vector3 backward = new Vector3(-1, 0, 0);
+        Vector3 left = new Vector3(0, 0, 1);
+        Vector3 right = new Vector3(0, 0, -1);
+        Vector3 wait = new Vector3(0, 0, 0);
+
+        if (CanMoveInDirection(forward))
+        {
+            MoveCharacter(forward, false);
+        }
+        else
+        {
+            MoveCharacter(wait, false);
+            if (CanMoveInDirection(left)) // TODO : rajouter ici une optimisation s'il peut se déplacer sur les deux côtés, prioriser le movement qui se rapproche du centre
+                MoveCharacter(left, false);
+            else if (CanMoveInDirection(right))
+                MoveCharacter(right, false);
+            else if (CanMoveInDirection(backward))
+                MoveCharacter(backward, true);
+        }
     }
 }
