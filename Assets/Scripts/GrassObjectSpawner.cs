@@ -5,6 +5,7 @@ using UnityEngine;
 public class GrassObjectSpawner : MonoBehaviour
 {
     [SerializeField] private List<GameObject> elements;
+    [SerializeField] private GameObject coins;
     [SerializeField] private int minSpaceBetween = 2;
     [SerializeField] private int maxSpaceBetween = 7;
     [SerializeField] private int zoneLength = 12;
@@ -26,11 +27,22 @@ public class GrassObjectSpawner : MonoBehaviour
 
     private void SpawnObjects()
     {
+        bool CoinSpawned = false;
         while (spawnPos.z < startPositionOnZ + zoneLength)
         {
-            int randomIndex = Random.Range(0, elements.Count);
-            GameObject newObject = Instantiate(elements[randomIndex], spawnPos, Quaternion.identity);
-            newObject.transform.SetParent(transform);
+            int randomIndex = Random.Range(0, 5);
+            if (randomIndex == 0 && !CoinSpawned)
+            {
+                Instantiate(coins, spawnPos, Quaternion.identity);
+                CoinSpawned = true;
+            }
+            else
+            {
+                int elementIndex = Random.Range(0, elements.Count);
+                GameObject newObject = Instantiate(elements[elementIndex], spawnPos, Quaternion.identity);
+                newObject.transform.SetParent(transform);
+            }
+
             spawnPos.z += Random.Range(minSpaceBetween, maxSpaceBetween);
         }
     }
