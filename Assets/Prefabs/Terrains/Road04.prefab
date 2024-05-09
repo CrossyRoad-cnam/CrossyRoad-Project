@@ -123,6 +123,7 @@ MonoBehaviour:
   spawnPosition: {fileID: 5381209036565283613}
   minSeparationTime: 2
   maxSeparationTime: 5
+  isFixed: 1
   isRightSide: 1
   EventThrowAdvancePercentage: 0.3
 --- !u!1 &7850771997937913328
