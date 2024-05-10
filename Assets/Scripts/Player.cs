@@ -256,6 +256,7 @@ public class Player : MonoBehaviour
         if (CanRobotMoveInDirection(forward))
         {
             MoveCharacter(forward);
+            return;
         }
         else
         {
@@ -281,6 +282,8 @@ public class Player : MonoBehaviour
     {
         RaycastHit hit;
         float range = 1f;
+
+        Vector3 raycastEnd = transform.position + direction * range;
         if(!CanMoveInDirection(direction))
             return false;
 
@@ -292,8 +295,15 @@ public class Player : MonoBehaviour
 
         if (Physics.Raycast(transform.position, direction, out hit, range))
         {
-            if (hit.collider.GetComponent<MovingObject>() != null && !hit.collider.GetComponent<MovingObject>().isJumpable)
-                return false;
+            Collider[] hitColliders = Physics.OverlapBox(raycastEnd, new Vector3(1f, 1f, 1f));
+
+            foreach (Collider collider in hitColliders)
+            {
+                if (collider.CompareTag("Ennemy") || collider.GetComponent<MovingObject>() != null && !collider.GetComponent<MovingObject>().isJumpable)
+                {
+                    return false;
+                }
+            }
         }
         return true;
     }
