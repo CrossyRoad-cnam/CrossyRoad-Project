@@ -20,6 +20,7 @@ public class Player : MonoBehaviour
     private float idleTime = 0;
     private const float IDLE_TIME_LIMIT = 7.0f;
     private const int MAX_BACKSTEPS = 3;
+    private const float ANIMATION_TIME = 0.15f;
     private bool isEnnemyActive = false;
     private int backStepsCounter;
     private bool hasFirstMoved = false;
@@ -125,13 +126,12 @@ public class Player : MonoBehaviour
     }
     private IEnumerator RotateOverTime(Quaternion newRotation)
     {
-        float duration = 0.15f;
         float time = 0;
         Quaternion startRotation = playerContainer.rotation;
 
-        while (time < duration)
+        while (time < ANIMATION_TIME)
         {
-            playerContainer.rotation = Quaternion.Slerp(startRotation, newRotation, time / duration);
+            playerContainer.rotation = Quaternion.Slerp(startRotation, newRotation, time / ANIMATION_TIME);
             time += Time.deltaTime;
             yield return null;
         }
@@ -141,29 +141,34 @@ public class Player : MonoBehaviour
     private void PerformMove(Vector3 direction)
     {
         isHopping = true;
-        StartCoroutine(SmoothMove(transform.position, transform.position + direction, 0.15f));
+        StartCoroutine(SmoothMove(transform.position, transform.position + direction));
         RotateCharacter(direction);
         terrainGenerator.SpawnTerrain(false, transform.position);
     }
 
-    private IEnumerator SmoothMove(Vector3 startPosition, Vector3 endPosition, float duration)
+    private IEnumerator SmoothMove(Vector3 startPosition, Vector3 endPosition, float duration = ANIMATION_TIME)
     {
         float timeElapsed = 0;
-        float height = 0.75f;
+        float height = 0.5f;
+        float playerContainerInitialY = playerContainer.position.y;
 
         while (timeElapsed < duration)
         {
             float animationTime = timeElapsed / duration;
             float jumpArc = height * Mathf.Sin(Mathf.PI * animationTime);
-            transform.position = Vector3.Lerp(startPosition, new Vector3(endPosition.x, startPosition.y + jumpArc, endPosition.z), animationTime);
+            Vector3 horizontalPosition = Vector3.Lerp(startPosition, endPosition, animationTime);
+            transform.position = new Vector3(horizontalPosition.x, startPosition.y, horizontalPosition.z);
+            playerContainer.position = new Vector3(horizontalPosition.x, playerContainerInitialY + jumpArc, horizontalPosition.z);
             timeElapsed += Time.deltaTime;
             yield return null;
         }
 
         transform.position = endPosition;
+        playerContainer.position = new Vector3(endPosition.x, playerContainerInitialY, endPosition.z);
         FinishHop();
         UpdateScore();
     }
+
     private void UpdateScore()
     {
         int currentScore = CalculateScore();
@@ -254,7 +259,7 @@ public class Player : MonoBehaviour
         }
         else
         {
-            // Rajouter le wait et qu'il attend pas
+            // Rajouter le wait et qu'il attend pas ICI
             if (CanRobotMoveInDirection(left) && CanRobotMoveInDirection(right)) // TODO : rajouter ici une optimisation s'il peut se déplacer sur les deux côtés, prioriser le movement qui se rapproche du centre. A optimiser
             // Si possible, tester cette fonctionnalité
             {

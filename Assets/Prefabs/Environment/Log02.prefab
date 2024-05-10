@@ -68,7 +68,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isJumpable: 1
-  speed: 3.5
+  speed: 4
 --- !u!1001 &2839808841363929648
 PrefabInstance:
   m_ObjectHideFlags: 0
