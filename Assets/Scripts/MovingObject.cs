@@ -22,11 +22,11 @@ public class MovingObject : MonoBehaviour
         switch (difficultyLevel)
         {
             case 0:
-                return 0.5f;
+                return 0.75f;
             case 1:
                 return 1f;
             case 2:
-                return 20f; 
+                return 2f; 
             default:
                 return 1f; 
         }
