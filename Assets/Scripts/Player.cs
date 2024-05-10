@@ -64,15 +64,15 @@ public class Player : MonoBehaviour
     private void HandleMovement()
     {
         if (Input.GetKeyDown(KeyCode.UpArrow))
-            MoveCharacter(forward, false);
+            MoveCharacter(forward);
         else if (Input.GetKeyDown(KeyCode.DownArrow))
             MoveCharacter(backward, true);
         else if (Input.GetKeyDown(KeyCode.LeftArrow))
-            MoveCharacter(left, false);
+            MoveCharacter(left);
         else if (Input.GetKeyDown(KeyCode.RightArrow))
-            MoveCharacter(right, false);
+            MoveCharacter(right);
     }
-    private void MoveCharacter(Vector3 direction, bool isBack)
+    private void MoveCharacter(Vector3 direction, bool isBack = false)
     {
         if (CanMoveInDirection(direction))
         {
@@ -255,25 +255,23 @@ public class Player : MonoBehaviour
     {
         if (CanRobotMoveInDirection(forward))
         {
-            MoveCharacter(forward, false);
+            MoveCharacter(forward);
         }
         else
         {
-            WaitForSeconds wait = new WaitForSeconds(0.5f);
-            if (CanRobotMoveInDirection(left) && CanRobotMoveInDirection(right)) // TODO : rajouter ici une optimisation s'il peut se déplacer sur les deux côtés, prioriser le movement qui se rapproche du centre. A optimiser
-            // Si possible, tester cette fonctionnalité
+            if (CanRobotMoveInDirection(left) && CanRobotMoveInDirection(right))
             {
                 float distanceToLeft = Vector3.Distance(transform.position + left, Vector3.zero);
                 float distanceToRight = Vector3.Distance(transform.position + right, Vector3.zero);
                 if (distanceToLeft < distanceToRight)
-                    MoveCharacter(left, false);
+                    MoveCharacter(left);
                 else
-                    MoveCharacter(right, false);
+                    MoveCharacter(right);
             }
             else if (CanRobotMoveInDirection(left))
-                MoveCharacter(left, false);
+                MoveCharacter(left);
             else if (CanRobotMoveInDirection(right))
-                MoveCharacter(right, false);
+                MoveCharacter(right);
             else if (CanRobotMoveInDirection(backward))
                 MoveCharacter(backward, true);
         }
@@ -283,7 +281,7 @@ public class Player : MonoBehaviour
     {
         RaycastHit hit;
         float range = 1f;
-        if(!CanMoveInDirection(direction)) // la règle qu'on utilise de base pour le Player humain
+        if(!CanMoveInDirection(direction))
             return false;
 
         if (Physics.Raycast(transform.position + direction, Vector3.down, out hit, range))
