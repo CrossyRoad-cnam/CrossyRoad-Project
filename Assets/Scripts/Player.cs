@@ -105,18 +105,7 @@ public class Player : MonoBehaviour
         if (Physics.Raycast(transform.position, direction, out hit, range))
         {
             if (hit.collider.CompareTag("Obstacle"))
-            {
                 return false;
-            }
-
-            if (isRobot)
-            {
-                if(hit.collider.GetComponent<MovingObject>() != null)
-                {
-                    if (!hit.collider.GetComponent<MovingObject>().isJumpable)
-                        return false;
-                }
-            }
         }
         return true;
     }
@@ -259,14 +248,14 @@ public class Player : MonoBehaviour
 
     private void HandleRobotMovement()
     {
-        if (CanMoveInDirection(forward))
+        if (CanRobotMoveInDirection(forward))
         {
             MoveCharacter(forward, false);
         }
         else
         {
             // Rajouter le wait et qu'il attend pas
-            if (CanMoveInDirection(left) && CanMoveInDirection(right)) // TODO : rajouter ici une optimisation s'il peut se déplacer sur les deux côtés, prioriser le movement qui se rapproche du centre. A optimiser
+            if (CanRobotMoveInDirection(left) && CanRobotMoveInDirection(right)) // TODO : rajouter ici une optimisation s'il peut se déplacer sur les deux côtés, prioriser le movement qui se rapproche du centre. A optimiser
             // Si possible, tester cette fonctionnalité
             {
                 float distanceToLeft = Vector3.Distance(transform.position + left, Vector3.zero);
@@ -276,12 +265,28 @@ public class Player : MonoBehaviour
                 else
                     MoveCharacter(right, false);
             }
-            else if (CanMoveInDirection(left))
+            else if (CanRobotMoveInDirection(left))
                 MoveCharacter(left, false);
-            else if (CanMoveInDirection(right))
+            else if (CanRobotMoveInDirection(right))
                 MoveCharacter(right, false);
-            else if (CanMoveInDirection(backward))
+            else if (CanRobotMoveInDirection(backward))
                 MoveCharacter(backward, true);
         }
+    }
+
+    private bool CanRobotMoveInDirection(Vector3 direction)
+    {
+        RaycastHit hit;
+        float range = 1f;
+        if(!CanMoveInDirection(direction)) // la règle qu'on utilise de base pour le Player humain
+            return false;
+
+        if (Physics.Raycast(transform.position + direction, Vector3.down, out hit, range))
+        {
+            if (hit.collider.CompareTag("Ennemy"))
+                return false;
+        }
+
+        return true;
     }
 }
