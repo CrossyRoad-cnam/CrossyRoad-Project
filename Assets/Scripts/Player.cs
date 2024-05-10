@@ -292,6 +292,12 @@ public class Player : MonoBehaviour
                 return false;
         }
 
+        if (Physics.Raycast(transform.position, direction, out hit, range)) // ici, d'apres mes observations, il calcule un seul chemin (1 direction)
+        {
+            if (hit.collider.CompareTag("Ennemy"))
+                return false;
+        }
+
         return true;
     }
 }
