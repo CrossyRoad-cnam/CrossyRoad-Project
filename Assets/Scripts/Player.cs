@@ -286,18 +286,11 @@ public class Player : MonoBehaviour
         if(!CanMoveInDirection(direction)) // la règle qu'on utilise de base pour le Player humain
             return false;
 
-        if (Physics.Raycast(transform.position + direction, Vector3.down, out hit, range))
+        if (Physics.Raycast(transform.position + direction, Vector3.down, out hit, range) || Physics.Raycast(transform.position, direction, out hit, range) )
         {
             if (hit.collider.CompareTag("Ennemy"))
                 return false;
         }
-
-        if (Physics.Raycast(transform.position, direction, out hit, range)) // ici, d'apres mes observations, il calcule un seul chemin (1 direction)
-        {
-            if (hit.collider.CompareTag("Ennemy"))
-                return false;
-        }
-
         return true;
     }
 }
