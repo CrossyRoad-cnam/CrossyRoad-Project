@@ -33,14 +33,13 @@ public class GrassObjectSpawner : MonoBehaviour
             int randomIndex = Random.Range(0, 5);
             if (randomIndex == 0 && !CoinSpawned)
             {
-                Instantiate(coins, spawnPos, Quaternion.identity);
+                Instantiate(coins, spawnPos, Quaternion.identity, transform);
                 CoinSpawned = true;
             }
             else
             {
                 int elementIndex = Random.Range(0, elements.Count);
-                GameObject newObject = Instantiate(elements[elementIndex], spawnPos, Quaternion.identity);
-                newObject.transform.SetParent(transform);
+                Instantiate(elements[elementIndex], spawnPos, Quaternion.identity, transform);
             }
 
             spawnPos.z += Random.Range(minSpaceBetween, maxSpaceBetween);
