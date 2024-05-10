@@ -4629,21 +4629,17 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 31379678}
+    - target: {fileID: 525055849603422421, guid: e9692e18a79198542955863a79f736c3, type: 3}
+      propertyPath: smoothSpeed
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2910749392315977888, guid: e9692e18a79198542955863a79f736c3, type: 3}
       propertyPath: player
       value: 
       objectReference: {fileID: 31379678}
-    - target: {fileID: 3905181921724914134, guid: e9692e18a79198542955863a79f736c3, type: 3}
-      propertyPath: m_Size.x
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 3905181921724914134, guid: e9692e18a79198542955863a79f736c3, type: 3}
-      propertyPath: m_Size.y
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 3905181921724914134, guid: e9692e18a79198542955863a79f736c3, type: 3}
-      propertyPath: m_Size.z
-      value: 1
+    - target: {fileID: 2910749392315977888, guid: e9692e18a79198542955863a79f736c3, type: 3}
+      propertyPath: smoothSpeed
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6312735029752844917, guid: e9692e18a79198542955863a79f736c3, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4688,14 +4684,6 @@ PrefabInstance:
     - target: {fileID: 6643733476193974421, guid: e9692e18a79198542955863a79f736c3, type: 3}
       propertyPath: m_Name
       value: Border
-      objectReference: {fileID: 0}
-    - target: {fileID: 7393763114242065911, guid: e9692e18a79198542955863a79f736c3, type: 3}
-      propertyPath: m_Size.x
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 7393763114242065911, guid: e9692e18a79198542955863a79f736c3, type: 3}
-      propertyPath: m_Size.y
-      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
