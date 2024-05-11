@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using GLTF.Schema;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,11 +9,13 @@ public class Player : MonoBehaviour
 {
     public static Player Instance { get; private set; }
     [SerializeField] private TerrainGenerator terrainGenerator;
-    public bool eagleEnable = false;
     public GameObject currentSkin;
     public Transform playerContainer;
     public bool isRobot = false;
     private SkinController skinController;
+    private Animator animator;
+    public bool eagleEnable = false;
+    private bool isEnnemyActive = false;
     private float initialPosition;
     private bool isHopping;
     public float scoreValue = 0;
@@ -21,13 +24,13 @@ public class Player : MonoBehaviour
     private const float IDLE_TIME_LIMIT = 7.0f;
     private const int MAX_BACKSTEPS = 3;
     private const float ANIMATION_TIME = 0.15f;
-    private bool isEnnemyActive = false;
     private int backStepsCounter;
     private bool hasFirstMoved = false;
     private Vector3 forward = new Vector3(1, 0, 0);
     private Vector3 backward = new Vector3(-1, 0, 0);
     private Vector3 left = new Vector3(0, 0, 1);
     private Vector3 right = new Vector3(0, 0, -1);
+    private bool isDead = false;
 
 
     private void Awake()
@@ -42,6 +45,7 @@ public class Player : MonoBehaviour
     }
     private void Start()
     {
+        animator = gameObject.GetComponent<Animator>();
         skinController = SkinController.Instance;
         initialPosition = transform.position.x;
         currentSkin = playerContainer.GetChild(0).gameObject;
@@ -50,7 +54,7 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        if (!isHopping && !isEnnemyActive && Time.timeScale != 0)
+        if (!isHopping && !isEnnemyActive && Time.timeScale != 0 && !isDead)
         {
             if (isRobot)
                 HandleRobotMovement();
@@ -251,7 +255,19 @@ public class Player : MonoBehaviour
     {
         return hasFirstMoved;
     }
-
+    public void DeathAnimation()
+    {
+        animator.Play("Death");
+    }
+    public void SetDead(bool isDead)
+    {
+        this.isDead = isDead;
+    }
+    // ROBOT
+    public void SetRobot(bool isRobot)
+    {
+        this.isRobot = isRobot;
+    }
     private void HandleRobotMovement()
     {
         if (CanRobotMoveInDirection(forward))

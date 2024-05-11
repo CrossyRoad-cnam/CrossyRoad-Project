@@ -43,7 +43,7 @@ public class PauseMenu : MonoBehaviour
 
     public void RestartGame()
     {
-        Destroy(Player.Instance.gameObject); // Eviter une deduplication et crash sur les donnes
+        Destroy(Player.Instance.gameObject);
         Time.timeScale = 1f;
         SceneManager.LoadScene(1);
     }

@@ -17,7 +17,8 @@ public class KillPlayer : MonoBehaviour
         gameOverManager.GameOver();
         scoreManager.AddScore(new Score("player", Player.Instance.scoreValue));
         scoreManager.SaveScore();
-        Destroy(Player.Instance.gameObject);
+        Player.Instance.DeathAnimation();
+        Player.Instance.SetDead(true);
     }
     private void OnCollisionEnter(Collision collision)
     {

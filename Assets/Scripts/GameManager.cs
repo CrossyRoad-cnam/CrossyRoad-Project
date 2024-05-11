@@ -7,6 +7,8 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] private Enemy enemyController;
 
+    public bool isGameOver = false;
+
     private void Update()
     {
         CheckAndTriggerEagle();
