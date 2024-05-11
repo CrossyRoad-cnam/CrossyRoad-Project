@@ -3393,6 +3393,10 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 8828932352373189211, guid: 87ff3e309995ffb4096e064740b9a1da, type: 3}
+      propertyPath: eagleEnable
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8828932352373189211, guid: 87ff3e309995ffb4096e064740b9a1da, type: 3}
       propertyPath: terrainGenerator
       value: 
       objectReference: {fileID: 121287866}
@@ -4458,6 +4462,10 @@ PrefabInstance:
       propertyPath: smoothSpeed
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 4564491389238371125, guid: e9692e18a79198542955863a79f736c3, type: 3}
+      propertyPath: m_TagString
+      value: Ennemy
+      objectReference: {fileID: 0}
     - target: {fileID: 6312735029752844917, guid: e9692e18a79198542955863a79f736c3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -4501,6 +4509,10 @@ PrefabInstance:
     - target: {fileID: 6643733476193974421, guid: e9692e18a79198542955863a79f736c3, type: 3}
       propertyPath: m_Name
       value: Border
+      objectReference: {fileID: 0}
+    - target: {fileID: 8620809165134460723, guid: e9692e18a79198542955863a79f736c3, type: 3}
+      propertyPath: m_TagString
+      value: Ennemy
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4585,7 +4597,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6714637674210826803, guid: 55769f10b2354094597d2f41cb2c61bd, type: 3}
       propertyPath: terrainDatas.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6714637674210826803, guid: 55769f10b2354094597d2f41cb2c61bd, type: 3}
       propertyPath: StartTerrains.Array.size
@@ -4594,11 +4606,11 @@ PrefabInstance:
     - target: {fileID: 6714637674210826803, guid: 55769f10b2354094597d2f41cb2c61bd, type: 3}
       propertyPath: terrainDatas.Array.data[0]
       value: 
-      objectReference: {fileID: 11400000, guid: 8b712ac1d9abbfb4eaef08a1ed1d2ee1, type: 2}
+      objectReference: {fileID: 11400000, guid: c768d9b2794799c47a54190af1c91d15, type: 2}
     - target: {fileID: 6714637674210826803, guid: 55769f10b2354094597d2f41cb2c61bd, type: 3}
       propertyPath: terrainDatas.Array.data[1]
       value: 
-      objectReference: {fileID: 11400000, guid: c768d9b2794799c47a54190af1c91d15, type: 2}
+      objectReference: {fileID: 11400000, guid: 8b712ac1d9abbfb4eaef08a1ed1d2ee1, type: 2}
     - target: {fileID: 6714637674210826803, guid: 55769f10b2354094597d2f41cb2c61bd, type: 3}
       propertyPath: terrainDatas.Array.data[2]
       value: 

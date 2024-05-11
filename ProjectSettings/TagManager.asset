@@ -7,6 +7,7 @@ TagManager:
   - Ennemy
   - Obstacle
   - Collectable
+  - Water
   layers:
   - Default
   - TransparentFX

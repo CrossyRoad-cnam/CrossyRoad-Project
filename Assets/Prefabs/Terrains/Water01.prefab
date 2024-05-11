@@ -15,9 +15,9 @@ GameObject:
   - component: {fileID: 2928863067764417288}
   - component: {fileID: 6409107824756878877}
   - component: {fileID: -1424668797141435410}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: Water01
-  m_TagString: Ennemy
+  m_TagString: Water
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

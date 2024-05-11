@@ -287,7 +287,7 @@ public class Player : MonoBehaviour
 
         if (Physics.Raycast(transform.position + direction, Vector3.down, out hit, range))
         {
-            if (hit.collider.CompareTag("Ennemy"))
+            if (hit.collider.CompareTag("Water"))
                 return false;
         }
 
