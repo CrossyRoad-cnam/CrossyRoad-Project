@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028356, g: 0.22571346, b: 0.30692205, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028401, g: 0.22571425, b: 0.30692324, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -8768,32 +8768,52 @@ PrefabInstance:
       objectReference: {fileID: 1805392687}
     - target: {fileID: 4082069555841986293, guid: ac6f701a8d1ad9e43a9ffbde34b76ba7, type: 3}
       propertyPath: skins.Array.size
-      value: 18
+      value: 19
       objectReference: {fileID: 0}
     - target: {fileID: 4082069555841986293, guid: ac6f701a8d1ad9e43a9ffbde34b76ba7, type: 3}
-      propertyPath: skins.Array.data[6]
+      propertyPath: skins.Array.data[1]
+      value: 
+      objectReference: {fileID: 1365200517026272594, guid: 051df1cb895e4c44089d31ecf1ad06bd, type: 3}
+    - target: {fileID: 4082069555841986293, guid: ac6f701a8d1ad9e43a9ffbde34b76ba7, type: 3}
+      propertyPath: skins.Array.data[2]
+      value: 
+      objectReference: {fileID: 7751914802518786631, guid: f71d02e932aeade44b41fcb302619010, type: 3}
+    - target: {fileID: 4082069555841986293, guid: ac6f701a8d1ad9e43a9ffbde34b76ba7, type: 3}
+      propertyPath: skins.Array.data[3]
       value: 
       objectReference: {fileID: 969199128558716783, guid: 5ac497cc5e3051c48bdf1d81fb9128db, type: 3}
     - target: {fileID: 4082069555841986293, guid: ac6f701a8d1ad9e43a9ffbde34b76ba7, type: 3}
-      propertyPath: skins.Array.data[7]
+      propertyPath: skins.Array.data[4]
       value: 
-      objectReference: {fileID: 7102813079918236578, guid: a89bd3c35bcb28645bdc005f4478cd52, type: 3}
+      objectReference: {fileID: 5141488513329074891, guid: 35178e85a168eb0b28653e53d1816b24, type: 3}
     - target: {fileID: 4082069555841986293, guid: ac6f701a8d1ad9e43a9ffbde34b76ba7, type: 3}
-      propertyPath: skins.Array.data[8]
+      propertyPath: skins.Array.data[5]
       value: 
-      objectReference: {fileID: 4380834679058979726, guid: 0bf86b5b2882eda4393625268ad12d35, type: 3}
+      objectReference: {fileID: 2808053751539503017, guid: 09a91e18d73062d75917d0f4230a1f89, type: 3}
     - target: {fileID: 4082069555841986293, guid: ac6f701a8d1ad9e43a9ffbde34b76ba7, type: 3}
-      propertyPath: skins.Array.data[9]
+      propertyPath: skins.Array.data[6]
       value: 
       objectReference: {fileID: 4613625245633858723, guid: fe2f3f1397ee2934aab7879cfe8f9b3e, type: 3}
     - target: {fileID: 4082069555841986293, guid: ac6f701a8d1ad9e43a9ffbde34b76ba7, type: 3}
-      propertyPath: skins.Array.data[10]
+      propertyPath: skins.Array.data[7]
       value: 
       objectReference: {fileID: 2588317755997855891, guid: c25779ec5c51c40418dd6f6ca4b62682, type: 3}
     - target: {fileID: 4082069555841986293, guid: ac6f701a8d1ad9e43a9ffbde34b76ba7, type: 3}
-      propertyPath: skins.Array.data[11]
+      propertyPath: skins.Array.data[8]
+      value: 
+      objectReference: {fileID: 1965343875539659230, guid: 1f57560f208db8a118fa44f47c506762, type: 3}
+    - target: {fileID: 4082069555841986293, guid: ac6f701a8d1ad9e43a9ffbde34b76ba7, type: 3}
+      propertyPath: skins.Array.data[9]
       value: 
       objectReference: {fileID: 427135137771311440, guid: 89b27a2195b7d3746b2f3f7294787f10, type: 3}
+    - target: {fileID: 4082069555841986293, guid: ac6f701a8d1ad9e43a9ffbde34b76ba7, type: 3}
+      propertyPath: skins.Array.data[10]
+      value: 
+      objectReference: {fileID: 4982156567103259965, guid: 6c9a368c904fcf144ba481cc89ab1a59, type: 3}
+    - target: {fileID: 4082069555841986293, guid: ac6f701a8d1ad9e43a9ffbde34b76ba7, type: 3}
+      propertyPath: skins.Array.data[11]
+      value: 
+      objectReference: {fileID: 4380834679058979726, guid: 0bf86b5b2882eda4393625268ad12d35, type: 3}
     - target: {fileID: 4082069555841986293, guid: ac6f701a8d1ad9e43a9ffbde34b76ba7, type: 3}
       propertyPath: skins.Array.data[12]
       value: 
@@ -8801,23 +8821,27 @@ PrefabInstance:
     - target: {fileID: 4082069555841986293, guid: ac6f701a8d1ad9e43a9ffbde34b76ba7, type: 3}
       propertyPath: skins.Array.data[13]
       value: 
-      objectReference: {fileID: 5141488513329074891, guid: 35178e85a168eb0b28653e53d1816b24, type: 3}
+      objectReference: {fileID: 704148885703170215, guid: 0283795e80c7bb84da2e55485da9f23a, type: 3}
     - target: {fileID: 4082069555841986293, guid: ac6f701a8d1ad9e43a9ffbde34b76ba7, type: 3}
       propertyPath: skins.Array.data[14]
       value: 
-      objectReference: {fileID: 812318169619240715, guid: 29c74e93740cfa54a89dfbedacd423c3, type: 3}
+      objectReference: {fileID: 3570325465330233011, guid: 2683539dae9b0e6aebba13b2c32be1a0, type: 3}
     - target: {fileID: 4082069555841986293, guid: ac6f701a8d1ad9e43a9ffbde34b76ba7, type: 3}
       propertyPath: skins.Array.data[15]
       value: 
-      objectReference: {fileID: 2808053751539503017, guid: 09a91e18d73062d75917d0f4230a1f89, type: 3}
+      objectReference: {fileID: 4265497144057886536, guid: 18d5d1cf800d36a4e885b346f8c8c551, type: 3}
     - target: {fileID: 4082069555841986293, guid: ac6f701a8d1ad9e43a9ffbde34b76ba7, type: 3}
       propertyPath: skins.Array.data[16]
       value: 
-      objectReference: {fileID: 3570325465330233011, guid: 2683539dae9b0e6aebba13b2c32be1a0, type: 3}
+      objectReference: {fileID: 5366060275488891418, guid: bbad7935d9ac4a1438a8c723311e0a7d, type: 3}
     - target: {fileID: 4082069555841986293, guid: ac6f701a8d1ad9e43a9ffbde34b76ba7, type: 3}
       propertyPath: skins.Array.data[17]
       value: 
-      objectReference: {fileID: 1965343875539659230, guid: 1f57560f208db8a118fa44f47c506762, type: 3}
+      objectReference: {fileID: 812318169619240715, guid: 29c74e93740cfa54a89dfbedacd423c3, type: 3}
+    - target: {fileID: 4082069555841986293, guid: ac6f701a8d1ad9e43a9ffbde34b76ba7, type: 3}
+      propertyPath: skins.Array.data[18]
+      value: 
+      objectReference: {fileID: 7102813079918236578, guid: a89bd3c35bcb28645bdc005f4478cd52, type: 3}
     - target: {fileID: 4437080919484454950, guid: ac6f701a8d1ad9e43a9ffbde34b76ba7, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
