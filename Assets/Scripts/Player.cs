@@ -231,7 +231,8 @@ public class Player : MonoBehaviour
     {
         return isEnnemyActive;
     }
-    public void ApplySkin(GameObject skin)
+
+    private void ApplySkin(GameObject skin)
     {
         if (currentSkin != null)
         {
@@ -264,10 +265,7 @@ public class Player : MonoBehaviour
             {
                 float distanceToLeft = Vector3.Distance(transform.position + left, Vector3.zero);
                 float distanceToRight = Vector3.Distance(transform.position + right, Vector3.zero);
-                if (distanceToLeft < distanceToRight)
-                    MoveCharacter(left);
-                else
-                    MoveCharacter(right);
+                MoveCharacter(distanceToLeft < distanceToRight ? left : right);
             }
             else if (CanRobotMoveInDirection(left))
                 MoveCharacter(left);
@@ -299,7 +297,7 @@ public class Player : MonoBehaviour
 
             foreach (Collider collider in hitColliders)
             {
-                if (collider.CompareTag("Ennemy") || collider.GetComponent<MovingObject>() != null && !collider.GetComponent<MovingObject>().isJumpable)
+                if (collider.GetComponent<MovingObject>() && !collider.GetComponent<MovingObject>().isJumpable)
                 {
                     return false;
                 }
