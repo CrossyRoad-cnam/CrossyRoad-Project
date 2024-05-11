@@ -24,14 +24,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2188399544300678151}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: 0, y: -0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 8155656226430575023}
+  - {fileID: 3657640794296959861}
   m_Father: {fileID: 2181244423828480601}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!1 &8364481363753794514
 GameObject:
   m_ObjectHideFlags: 0
@@ -63,7 +63,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: 0}
-  m_LocalScale: {x: 0.8, y: 0.7, z: 0.8}
+  m_LocalScale: {x: 0.9, y: 0.9, z: 0.9}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3502980149861243080}
@@ -82,6 +82,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   terrainGenerator: {fileID: 0}
+  eagleEnable: 0
+  currentSkin: {fileID: 556800755116469117}
+  playerContainer: {fileID: 3502980149861243080}
+  isRobot: 1
   scoreValue: 0
 --- !u!95 &6154235888902621169
 Animator:
@@ -130,7 +134,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 122
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!65 &5716090685469776869
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -150,8 +154,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.8071702, y: 1.110289, z: 0.7}
-  m_Center: {x: 0, y: 0.52864033, z: 0}
+  m_Size: {x: 0.8, y: 1, z: 0.8}
+  m_Center: {x: -0, y: 0, z: -0}
 --- !u!81 &3280093714583535046
 AudioListener:
   m_ObjectHideFlags: 0
@@ -160,7 +164,7 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8364481363753794514}
   m_Enabled: 0
---- !u!1001 &6731135176144720031
+--- !u!1001 &2199429024460747333
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -217,8 +221,13 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c6d5b2ac546786443b3154b8a382672c, type: 3}
---- !u!4 &8155656226430575023 stripped
+--- !u!1 &556800755116469117 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1819408470957906232, guid: c6d5b2ac546786443b3154b8a382672c, type: 3}
+  m_PrefabInstance: {fileID: 2199429024460747333}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &3657640794296959861 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3190657292301693232, guid: c6d5b2ac546786443b3154b8a382672c, type: 3}
-  m_PrefabInstance: {fileID: 6731135176144720031}
+  m_PrefabInstance: {fileID: 2199429024460747333}
   m_PrefabAsset: {fileID: 0}
