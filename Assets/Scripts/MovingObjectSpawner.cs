@@ -25,7 +25,6 @@ public class MovingObjectSpawner : MonoBehaviour
         }
         movingObject = movingObjects[Random.Range(0, movingObjects.Count)];
         spawnPosition = isRightSide ? spawnPositionR : spawnPositionL;
-
     }
 
     private void Start()
@@ -50,6 +49,7 @@ public class MovingObjectSpawner : MonoBehaviour
             }
             seconds = Random.Range(minSeparationTime, maxSeparationTime);
             StartCoroutine(DestroyOutOfBounds(newObject));
+
         }
     }
 
