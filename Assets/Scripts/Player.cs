@@ -173,6 +173,7 @@ public class Player : MonoBehaviour
 
         transform.position = endPosition;
         FinishHop();
+        FixPlayerPosition();
         UpdateScore();
     }
 
