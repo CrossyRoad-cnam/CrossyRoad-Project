@@ -28,6 +28,10 @@ public class ScoreManager : MonoBehaviour
 
     public void Update()
     {
+        if (Player.Instance == null)
+        {
+            return;
+        }
         playerScore = Mathf.RoundToInt(Player.Instance.scoreValue);
         if (playerScore == 0 )
         {
@@ -69,6 +73,11 @@ public class ScoreManager : MonoBehaviour
         string json = JsonUtility.ToJson(scoreData);
 
         PlayerPrefs.SetString("scores", json);
+    }
+
+    public IEnumerable<Score> GetScoreByDifficulty(int difficulty)
+    {
+        return scoreData.scores.Where(x => x.difficulty == difficulty).OrderByDescending(x => x.score);
     }
 
     public int GetHighestScore()
