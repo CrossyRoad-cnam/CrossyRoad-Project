@@ -13,10 +13,6 @@ public class KillPlayer : MonoBehaviour
         gameOverManager = FindObjectOfType<GameOverManager>();
         scoreManager = FindObjectOfType<ScoreManager>();
     }
-    private void Update()
-    {
-        CheckWaterCollision();
-    }
     private void ProcessGameOver()
     {
         gameOverManager.GameOver();
@@ -44,11 +40,5 @@ public class KillPlayer : MonoBehaviour
             Debug.Log("Player was killed. GAME OVER");
             ProcessGameOver();
         }
-    }
-
-    private void CheckWaterCollision()
-    {
-        // TODO : add if the player is on the water
-        return;
     }
 }

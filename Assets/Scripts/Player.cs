@@ -150,7 +150,6 @@ public class Player : MonoBehaviour
     private void PerformMove(Vector3 direction)
     {
         isHopping = true;
-
         AudioController audio = gameObject.GetComponent<AudioController>();
         audio.PlayAll();
         StartCoroutine(SmoothMove(transform.position, transform.position + direction));
