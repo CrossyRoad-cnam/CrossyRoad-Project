@@ -309,11 +309,11 @@ public class Player : MonoBehaviour
 
         if (Physics.Raycast(transform.position, direction, out hit, range))
         {
-            Collider[] hitColliders = Physics.OverlapBox(raycastEnd, new Vector3(1f, 1f, 1f));
+            Collider[] hitColliders = Physics.OverlapBox(raycastEnd, new Vector3(1, 0, 1));
 
             foreach (Collider collider in hitColliders)
             {
-                if (collider.GetComponent<MovingObject>() && !collider.GetComponent<MovingObject>().isJumpable)
+                if (collider.CompareTag("Ennemy"))
                 {
                     return false;
                 }
