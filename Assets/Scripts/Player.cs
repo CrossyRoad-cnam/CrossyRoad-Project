@@ -30,7 +30,7 @@ public class Player : MonoBehaviour
     private Vector3 backward = new Vector3(-1, 0, 0);
     private Vector3 left = new Vector3(0, 0, 1);
     private Vector3 right = new Vector3(0, 0, -1);
-    private bool isDead = false;
+    public bool isDead {get; private set;} = false;
 
 
     private void Awake()
