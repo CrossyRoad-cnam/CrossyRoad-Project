@@ -142,8 +142,8 @@ MonoBehaviour:
   - {fileID: 506711510475733616, guid: 68d07c50c8336a54bab2c3d25961ba8d, type: 3}
   - {fileID: 5052165930958094820, guid: 3e58a3485c5010b4a8cadffc177c89d7, type: 3}
   coins: {fileID: 4500142417697125587, guid: d02ad466a90c26f4fbf4601fc08efd58, type: 3}
-  minSpaceBetween: 3
-  maxSpaceBetween: 7
+  minSpaceBetween: 5
+  maxSpaceBetween: 8
   zoneLength: 12
   startPositionOnZ: -6
 --- !u!1001 &136429837127687876

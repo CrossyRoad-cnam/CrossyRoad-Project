@@ -19,10 +19,13 @@ public class KillPlayer : MonoBehaviour
     private void ProcessGameOver()
     {
         gameOverManager.GameOver();
-        scoreManager.AddScore(new Score("player", Player.Instance.scoreValue));
+
+        if (Player.Instance.isRobot)
+            scoreManager.AddScore(new Score("Robot", Player.Instance.scoreValue)); // Peut être séparer le highscore du robot et du joueur comme pour la difficulté
+        else
+            scoreManager.AddScore(new Score("Player", Player.Instance.scoreValue));
+
         scoreManager.SaveScore();
-
-
         Player.Instance.DeathAnimation();
         Player.Instance.SetDead(true);
     }
