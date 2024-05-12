@@ -162,21 +162,17 @@ public class Player : MonoBehaviour
     {
         float timeElapsed = 0;
         float height = 0.5f;
-        float playerContainerInitialY = playerContainer.position.y;
 
         while (timeElapsed < duration)
         {
             float animationTime = timeElapsed / duration;
             float jumpArc = height * Mathf.Sin(Mathf.PI * animationTime);
-            Vector3 horizontalPosition = Vector3.Lerp(startPosition, endPosition, animationTime);
-            transform.position = new Vector3(horizontalPosition.x, startPosition.y, horizontalPosition.z);
-            playerContainer.position = new Vector3(horizontalPosition.x, playerContainerInitialY + jumpArc, horizontalPosition.z);
+            transform.position = new Vector3(Vector3.Lerp(startPosition, endPosition, animationTime).x, startPosition.y + jumpArc, Vector3.Lerp(startPosition, endPosition, animationTime).z);
             timeElapsed += Time.deltaTime;
             yield return null;
         }
 
         transform.position = endPosition;
-        playerContainer.position = new Vector3(endPosition.x, playerContainerInitialY, endPosition.z);
         FinishHop();
         UpdateScore();
     }
