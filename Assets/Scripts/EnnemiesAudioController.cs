@@ -52,15 +52,12 @@ public class EnnemiesAudioController : AudioController
             soundPlayed = false;
         }
 
-        else if (gameOverManager != null && gameOverManager.isGameOver)
-        {
-            audioSource.Stop();
-            soundPlayed = false;
-        }
-
         else if (player != null) 
         {
-            CheckDistanceToPlayer();
+            if (gameOverManager != null && !gameOverManager.isGameOver)
+            { 
+                CheckDistanceToPlayer();
+            }
         }
         else
         {

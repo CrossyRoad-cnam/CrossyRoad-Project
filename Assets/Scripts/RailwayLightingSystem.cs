@@ -84,8 +84,10 @@ public class RailwayLightingSystem : MonoBehaviour
     private IEnumerator BlinkLight()
     {
         float timeElapsed = 0f;
-        CheckDistanceToPlayer(); // Play the audio
-
+        GameOverManager gameOver = FindObjectOfType<GameOverManager>();
+        if (gameOver != null && !gameOver.isGameOver) { 
+        CheckDistanceToPlayer(); 
+        }
         while (timeElapsed < blinkDuration)
         {
             railwayLight1.enabled = isLightOn;
