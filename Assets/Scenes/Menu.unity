@@ -9440,7 +9440,7 @@ PrefabInstance:
       objectReference: {fileID: 1805392687}
     - target: {fileID: 4082069555841986293, guid: ac6f701a8d1ad9e43a9ffbde34b76ba7, type: 3}
       propertyPath: skins.Array.size
-      value: 19
+      value: 21
       objectReference: {fileID: 0}
     - target: {fileID: 4082069555841986293, guid: ac6f701a8d1ad9e43a9ffbde34b76ba7, type: 3}
       propertyPath: skins.Array.data[1]
@@ -9514,6 +9514,14 @@ PrefabInstance:
       propertyPath: skins.Array.data[18]
       value: 
       objectReference: {fileID: 7102813079918236578, guid: a89bd3c35bcb28645bdc005f4478cd52, type: 3}
+    - target: {fileID: 4082069555841986293, guid: ac6f701a8d1ad9e43a9ffbde34b76ba7, type: 3}
+      propertyPath: skins.Array.data[19]
+      value: 
+      objectReference: {fileID: 5336338389960646116, guid: 93b93eecba3b405438145af68b2b096e, type: 3}
+    - target: {fileID: 4082069555841986293, guid: ac6f701a8d1ad9e43a9ffbde34b76ba7, type: 3}
+      propertyPath: skins.Array.data[20]
+      value: 
+      objectReference: {fileID: 4197996483183401088, guid: af900732fce4eac49b13c988b7548b22, type: 3}
     - target: {fileID: 4437080919484454950, guid: ac6f701a8d1ad9e43a9ffbde34b76ba7, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
