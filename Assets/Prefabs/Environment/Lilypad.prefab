@@ -9,6 +9,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: c9622d7cdbb5432408064180ac97b3b2, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.96
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c9622d7cdbb5432408064180ac97b3b2, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0
       objectReference: {fileID: 0}
@@ -55,6 +59,18 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: c9622d7cdbb5432408064180ac97b3b2, type: 3}
       propertyPath: m_Name
       value: Lilypad
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c9622d7cdbb5432408064180ac97b3b2, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c9622d7cdbb5432408064180ac97b3b2, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    - target: {fileID: 4584339947330567888, guid: c9622d7cdbb5432408064180ac97b3b2, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8328382968441376956, guid: c9622d7cdbb5432408064180ac97b3b2, type: 3}
       propertyPath: m_Materials.Array.data[0]

@@ -75,7 +75,7 @@ GameObject:
   - component: {fileID: 89008691563469031}
   - component: {fileID: 1290506799772163484}
   - component: {fileID: 1572489456677499529}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: RoadStripe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -173,7 +173,7 @@ MonoBehaviour:
   spawnPositionR: {fileID: 458981028526636951}
   spawnPositionL: {fileID: 1087658882765008233}
   minSeparationTime: 3
-  maxSeparationTime: 5
+  maxSeparationTime: 7
   isFixed: 0
   isRightSide: 0
   EventThrowAdvancePercentage: 0.3
