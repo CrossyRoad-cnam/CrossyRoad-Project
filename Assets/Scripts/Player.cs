@@ -42,6 +42,11 @@ public class Player : MonoBehaviour
         }
         Instance = this;
         DontDestroyOnLoad(gameObject);
+
+        if (PlayerPrefs.HasKey("Eagle"))
+            eagleEnable = PlayerPrefs.GetInt("Eagle") == 1;
+        if (PlayerPrefs.HasKey("Robot"))
+            isRobot = PlayerPrefs.GetInt("Robot") == 1;
     }
     private void Start()
     {
