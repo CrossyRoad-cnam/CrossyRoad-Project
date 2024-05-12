@@ -24,8 +24,6 @@ public class KillPlayer : MonoBehaviour
         int difficulty = PlayerPrefs.GetInt("Difficulty", 0); 
         scoreManager.AddScore(new Score(name, Player.Instance.scoreValue, difficulty));
         scoreManager.SaveScore();
-
-
         Player.Instance.DeathAnimation();
         Player.Instance.SetDead(true);
     }
