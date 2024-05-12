@@ -8,14 +8,16 @@ public class GameOverManager : MonoBehaviour
 
     public GameObject GameOverScreen;
     public PauseMenu pauseMenu;
-
+    public bool isGameOver = false;
     public void Awake()
     {
         GameOverScreen.SetActive(false);
+        isGameOver = false;
     }
     public void GameOver()
     {
         GameOverScreen.SetActive(true);
+        isGameOver = true;
         if (pauseMenu != null)
         {
             pauseMenu.enabled = false;

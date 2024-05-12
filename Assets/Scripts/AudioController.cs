@@ -25,7 +25,7 @@ public class AudioController : MonoBehaviour
 
     public bool IsLoop = false;
 
-    public GameOverManager gameOverManager;
+    protected GameOverManager gameOverManager;
 
     public virtual void Awake()
     {
@@ -65,6 +65,22 @@ public class AudioController : MonoBehaviour
                 audioSource.Stop();
             }
         }
+    }
+
+    public void PlayAll()
+    {
+        if (audioSource.clip == null)
+        {
+            return;
+        }
+        if (audioSource.isPlaying)
+        {
+            audioSource.Stop();
+            audioSource.PlayOneShot(sound);
+        }
+        else
+            audioSource.PlayOneShot(sound);
+
     }
 
     public void Play()

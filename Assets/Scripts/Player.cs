@@ -145,6 +145,9 @@ public class Player : MonoBehaviour
     private void PerformMove(Vector3 direction)
     {
         isHopping = true;
+
+        AudioController audio = gameObject.GetComponent<AudioController>();
+        audio.PlayAll();
         StartCoroutine(SmoothMove(transform.position, transform.position + direction));
         RotateCharacter(direction);
         terrainGenerator.SpawnTerrain(false, transform.position);
@@ -249,9 +252,13 @@ public class Player : MonoBehaviour
 
     {
         int selectedSkin = PlayerPrefs.GetInt("SelectedSkin", 0);
+        if (skinController != null)
+        { 
             ApplySkin(skinController.skins[selectedSkin]);
-    }
-    public bool HasMoved()
+
+        }
+        }
+        public bool HasMoved()
     {
         return hasFirstMoved;
     }
