@@ -53,7 +53,7 @@ public class AudioController : MonoBehaviour
         LoadVolume();
         if (audioSource.playOnAwake)
         {
-            Play();
+            audioSource.Play();
         }
     }
 
