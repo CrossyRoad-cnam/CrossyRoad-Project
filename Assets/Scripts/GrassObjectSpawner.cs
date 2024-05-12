@@ -33,7 +33,7 @@ public class GrassObjectSpawner : MonoBehaviour
             int randomIndex = Random.Range(0, 5);
             if (randomIndex == 0 && !CoinSpawned)
             {
-                Instantiate(coins, spawnPos, Quaternion.identity, transform);
+                Instantiate(coins, spawnPos, coins.transform.rotation, transform);
                 CoinSpawned = true;
             }
             else
