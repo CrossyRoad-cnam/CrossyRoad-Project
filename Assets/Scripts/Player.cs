@@ -461,4 +461,13 @@ public class Player : MonoBehaviour
         return timeToDestination <= 0.75f;
     }
 
+/*    private void DrawRay(Ray ray, float range)
+    {
+        Debug.DrawRay(ray.origin, ray.direction * range, Color.red);
+        Ray rightRay = new Ray(transform.position + forward, right);
+        Ray leftRay = new Ray(transform.position + forward, left);
+        DrawRay(rightRay, 6f);
+        DrawRay(leftRay, 6f);
+        float edgeRange = 6f;
+    }*/
 }
