@@ -217,7 +217,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 8300000, guid: 29df868fbeecd574f818e2f1b2c6a3d7, type: 3}
-  volume: 0.5
+  volume: 0.26
   isAmbient: 0
   pitch: 1
   isPlayWhenGameOver: 0
@@ -241,7 +241,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 8300000, guid: 29df868fbeecd574f818e2f1b2c6a3d7, type: 3}
-  volume: 0.5
+  volume: 0.21
   isAmbient: 0
   pitch: 1
   isPlayWhenGameOver: 0

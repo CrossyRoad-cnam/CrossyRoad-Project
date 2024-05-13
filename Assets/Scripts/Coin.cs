@@ -1,8 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CoinHelper : MonoBehaviour
+public class Coin : MonoBehaviour
 {
     private CoinManager coinManager;
 
@@ -25,8 +26,15 @@ public class CoinHelper : MonoBehaviour
     {
         if (collidedObject == Player.Instance.gameObject)
         {
+            PlaySound();
             Destroy(gameObject);
             coinManager.CollectCoin();
         }
+    }
+
+    private void PlaySound()
+    {
+        AudioController audio = gameObject.GetComponent<AudioController>();
+        audio.Play();
     }
 }

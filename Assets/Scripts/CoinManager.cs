@@ -44,7 +44,7 @@ public class CoinManager : MonoBehaviour
 
     private static void UpdateCoinScore()
     {
-        PlayerPrefs.SetInt(coinScoreKey, CoinScore);
+        PlayerPrefs.SetInt(coinScoreKey, CoinScore);    
     }
 
     /// <summary>
