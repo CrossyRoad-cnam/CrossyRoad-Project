@@ -52,6 +52,9 @@ public class CoinManager : MonoBehaviour
     /// </summary>
     internal void CollectCoin()
     {
+        AudioController audioController = GetComponent<AudioController>();
+        if (audioController != null)
+            audioController.Play();
         CoinScore++;
     }
 

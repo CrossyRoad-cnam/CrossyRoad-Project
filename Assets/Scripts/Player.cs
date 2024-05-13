@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using GLTF.Schema;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;

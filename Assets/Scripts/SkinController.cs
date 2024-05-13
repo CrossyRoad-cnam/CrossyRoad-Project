@@ -4,7 +4,6 @@ using UnityEngine.UI;
 using UnityEngine;
 using TMPro;
 using System;
-using GLTF.Schema;
 using System.Runtime.CompilerServices;
 
 public class SkinController : MonoBehaviour
@@ -125,6 +124,7 @@ public class SkinController : MonoBehaviour
         SelectSkinButton.gameObject.SetActive(skin.IsOwned());
         bool isCurrentSkinSelected = PlayerPrefs.GetInt("SelectedSkin") == currentIndex;
         SelectSkinButtonText.text = isCurrentSkinSelected ? "SELECTED" : "SELECT";
+        SelectSkinButton.interactable = !isCurrentSkinSelected;
     }
     #endregion
 
