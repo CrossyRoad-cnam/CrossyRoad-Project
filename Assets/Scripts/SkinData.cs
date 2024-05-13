@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Xml.Linq;
@@ -14,7 +15,6 @@ public class SkinData : ScriptableObject
     /// </summary>
     [SerializeField] public int owned = 0;
 
-    private string skinPriceKey { get { return "Skin_Price_" + skin.name; } }
     private string skinOwnedKey { get { return "Skin_Owned_" + skin.name; } }
 
     private void Start()
@@ -24,9 +24,8 @@ public class SkinData : ScriptableObject
 
     private void LoadSkin()
     {
-        if (PlayerPrefs.HasKey(skinPriceKey) || PlayerPrefs.HasKey(skinOwnedKey))
+        if (PlayerPrefs.HasKey(skinOwnedKey))
         {
-            price = PlayerPrefs.GetInt(skinPriceKey);
             owned = PlayerPrefs.GetInt(skinOwnedKey);
         }
         else
@@ -38,12 +37,27 @@ public class SkinData : ScriptableObject
 
     private void SaveSkin()
     {
-        PlayerPrefs.SetInt(skinPriceKey, price);
         PlayerPrefs.SetInt(skinOwnedKey, owned);
     }
 
     internal GameObject GetSkin()
     {
         return skin;
+    }
+
+    internal int GetPrice()
+    {
+        return price;
+    }
+
+    internal void Purchase()
+    {
+        owned = 1;
+        SaveSkin();
+    }
+
+    internal bool IsOwned()
+    {
+        return owned == 1;
     }
 }

@@ -3,9 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+/// <summary>
+/// Handles the wallet operations
+/// </summary>
 public class CoinManager : MonoBehaviour
 {
-    private int CoinScore
+    private static int CoinScore
     {
         get
         {
@@ -17,8 +21,8 @@ public class CoinManager : MonoBehaviour
             UpdateCoinScore();
         }
     }
-    private const string coinScoreKey = "coinScore";
-    private int coinScore = 0;
+    private static string coinScoreKey = "coinScore";
+    private static int coinScore = 0;
 
     private void Start()
     {
@@ -38,7 +42,7 @@ public class CoinManager : MonoBehaviour
         }
     }
 
-    private void UpdateCoinScore()
+    private static void UpdateCoinScore()
     {
         PlayerPrefs.SetInt(coinScoreKey, CoinScore);
     }
@@ -54,5 +58,20 @@ public class CoinManager : MonoBehaviour
     internal int GetCoinScore()
     {
         return CoinScore;
+    }
+
+    internal bool Buy(int amount)
+    {
+        if (CanBuy(amount))
+        {
+            CoinScore -= amount;
+            return true;
+        }
+        return false;
+    }
+
+    internal bool CanBuy(int amount)
+    {
+        return CoinScore - amount >= 0;
     }
 }

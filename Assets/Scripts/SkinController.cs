@@ -4,6 +4,8 @@ using UnityEngine.UI;
 using UnityEngine;
 using TMPro;
 using System;
+using GLTF.Schema;
+using System.Runtime.CompilerServices;
 
 public class SkinController : MonoBehaviour
 {
@@ -11,9 +13,19 @@ public class SkinController : MonoBehaviour
     public SkinData[] skins;
     public Transform previewPosition;
     public TextMeshProUGUI skinName;
+    public Button BuyButton;
+    public Button SelectSkinButton;
+    public TextMeshProUGUI SelectSkinButtonText;
+    public Text PriceText;
+    /// <summary>
+    /// Wallet amount (number of coins)
+    /// </summary>
+    public Text CoinText;
     private GameObject currentPreview;
     public int currentIndex = 0;
+    CoinManager coinManager;
 
+    #region Default Methods (Awake, Start, Update)
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -28,6 +40,7 @@ public class SkinController : MonoBehaviour
 
     private void Start()
     {
+        coinManager = FindObjectOfType<CoinManager>();
         PreviewSkin(currentIndex);
         DisplaySkinName();
     }
@@ -35,18 +48,22 @@ public class SkinController : MonoBehaviour
     private void Update()
     {
         DisplaySkinName();
+        DisplaySkinPrice();
+        DisplayCoinScore();
+        UpdateButtonsStatus();
         if (Input.GetKeyDown(KeyCode.RightArrow))
             NextSkin();
         if (Input.GetKeyDown(KeyCode.LeftArrow))
             PreviousSkin();
-
-        SelectSkin();
     }
+    #endregion
+
+    #region Skin Selection
 
     public void NextSkin()
     {
         currentIndex++;
-        if (currentIndex >= skins.Length) 
+        if (currentIndex >= skins.Length)
             currentIndex = 0;
         PreviewSkin(currentIndex);
     }
@@ -54,14 +71,14 @@ public class SkinController : MonoBehaviour
     public void PreviousSkin()
     {
         currentIndex--;
-        if (currentIndex < 0) 
+        if (currentIndex < 0)
             currentIndex = skins.Length - 1;
         PreviewSkin(currentIndex);
     }
 
     private void PreviewSkin(int index)
     {
-        if (currentPreview != null) 
+        if (currentPreview != null)
             Destroy(currentPreview);
         currentPreview = Instantiate(skins[index].GetSkin(), previewPosition.position, Quaternion.identity, previewPosition);
         currentPreview.transform.localPosition = Vector3.zero;
@@ -70,12 +87,55 @@ public class SkinController : MonoBehaviour
 
     public void SelectSkin()
     {
-        PlayerPrefs.SetInt("SelectedSkin", currentIndex); 
-        PlayerPrefs.Save();
+        if (skins[currentIndex].IsOwned())
+        {
+            PlayerPrefs.SetInt("SelectedSkin", currentIndex);
+            PlayerPrefs.Save();
+        }
     }
+    #endregion
 
+    #region Information Display
     private void DisplaySkinName()
     {
         skinName.text = skins[currentIndex].GetSkin().name;
     }
+    private void DisplaySkinPrice()
+    {
+        SkinData skin = skins[currentIndex];
+        int price = skin.GetPrice();
+        if (!skin.IsOwned())
+        {
+            PriceText.text = price > 0 ? "Price: " + price : "FREE";
+        }
+        else
+        {
+            PriceText.text = "OWNED";
+        }
+    }
+    private void DisplayCoinScore()
+    {
+        CoinText.text = "coin: " + coinManager.GetCoinScore();
+    }
+    private void UpdateButtonsStatus()
+    {
+        SkinData skin = skins[currentIndex];
+        bool isBuyable = !skin.IsOwned() && coinManager.CanBuy(skin.GetPrice());
+        BuyButton.gameObject.SetActive(isBuyable);
+        SelectSkinButton.gameObject.SetActive(skin.IsOwned());
+        bool isCurrentSkinSelected = PlayerPrefs.GetInt("SelectedSkin") == currentIndex;
+        SelectSkinButtonText.text = isCurrentSkinSelected ? "SELECTED" : "SELECT";
+    }
+    #endregion
+
+    #region Skin Purchase
+    public void BuySkin()
+    {
+        SkinData skin = skins[currentIndex];
+        if (coinManager.Buy(skin.GetPrice()))
+        {
+            skin.Purchase();
+        }
+    }
+    #endregion
 }

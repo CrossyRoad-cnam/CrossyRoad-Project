@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Luigi
   m_EditorClassIdentifier: 
   skin: {fileID: 4197996483183401088, guid: af900732fce4eac49b13c988b7548b22, type: 3}
-  price: 10
+  price: 20
   owned: 0
