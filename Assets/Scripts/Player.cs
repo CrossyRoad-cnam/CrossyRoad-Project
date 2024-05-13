@@ -252,7 +252,7 @@ public class Player : MonoBehaviour
 
     {
         int selectedSkin = PlayerPrefs.GetInt("SelectedSkin", 0);
-            ApplySkin(skinController.skins[selectedSkin]);
+            ApplySkin(skinController.skins[selectedSkin].GetSkin());
         }
         public bool HasMoved()
     {

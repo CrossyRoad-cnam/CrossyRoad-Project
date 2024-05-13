@@ -8,7 +8,7 @@ using System;
 public class SkinController : MonoBehaviour
 {
     public static SkinController Instance { get; private set; }
-    public GameObject[] skins;
+    public SkinData[] skins;
     public Transform previewPosition;
     public TextMeshProUGUI skinName;
     private GameObject currentPreview;
@@ -28,14 +28,8 @@ public class SkinController : MonoBehaviour
 
     private void Start()
     {
-        LoadSkins();
         PreviewSkin(currentIndex);
         DisplaySkinName();
-    }
-
-    private void LoadSkins()
-    {
-        throw new NotImplementedException();
     }
 
     private void Update()
@@ -69,7 +63,7 @@ public class SkinController : MonoBehaviour
     {
         if (currentPreview != null) 
             Destroy(currentPreview);
-        currentPreview = Instantiate(skins[index], previewPosition.position, Quaternion.identity, previewPosition);
+        currentPreview = Instantiate(skins[index].GetSkin(), previewPosition.position, Quaternion.identity, previewPosition);
         currentPreview.transform.localPosition = Vector3.zero;
         currentPreview.transform.localRotation = Quaternion.Euler(0, 0, 0);
     }
@@ -82,6 +76,6 @@ public class SkinController : MonoBehaviour
 
     private void DisplaySkinName()
     {
-        skinName.text = skins[currentIndex].name;
+        skinName.text = skins[currentIndex].GetSkin().name;
     }
 }

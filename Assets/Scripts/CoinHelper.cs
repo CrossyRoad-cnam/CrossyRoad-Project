@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CoinCounters : MonoBehaviour
+public class CoinHelper : MonoBehaviour
 {
     private CoinManager coinManager;
 
