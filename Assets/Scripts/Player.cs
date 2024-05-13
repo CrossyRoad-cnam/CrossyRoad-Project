@@ -323,21 +323,45 @@ public class Player : MonoBehaviour
 
     private void RayDraw() // TEST de Raycast rotation
     {
-        // CETTE fonction c'est que pouur tester le raycast, le fonctionnement est à implémenter sur le robotMovement
-        float rotationSpeed = 360f;
+        // CETTE fonction c'est que pour tester le raycast, le fonctionnement est à implémenter sur le robotMovement
+        float rotationSpeed = 0f;
         float angle = rotationSpeed * Time.deltaTime;
         Quaternion rotation = Quaternion.Euler(0, angle, 0);
         raycastDirection = rotation * raycastDirection;
-        Debug.DrawRay(transform.position, raycastDirection, Color.black);
-
         RaycastHit hit;
-        float range = 1f;
-        bool detectCollider = Physics.Raycast(transform.position, raycastDirection, out hit, range);
+        float range = 20f;
+        Vector3 halfScale = transform.localScale / 2;
+        Debug.DrawRay(transform.position + forward, right * range, Color.black);
+        Debug.DrawRay(transform.position + forward, left * range, Color.black);
+        Debug.DrawRay(transform.position, right * range, Color.red);
+        Debug.DrawRay(transform.position, left * range, Color.red);
+        Debug.DrawRay((transform.position - new Vector3(0, 0, halfScale.z)), forward, Color.red);
+        Debug.DrawRay((transform.position - new Vector3(0, 0, -halfScale.z)), forward, Color.red);
+        bool detectRight = Physics.Raycast(transform.position + forward, right, out hit, range);
+        bool detectLeft = Physics.Raycast(transform.position + forward, left, out hit, range);
         
-        if (detectCollider)
+        if (detectLeft || detectRight)
             if (hit.collider.CompareTag("Ennemy"))
-                Debug.Log(hit.collider.name + " - POSITION: " + hit.collider.transform.position + " - VITESSE: " + hit.collider.GetComponent<MovingObject>().speed);
-        
+            {
+                Vector3 ennemyPosition = hit.collider.transform.position;
+                Vector3 destinationPosition = transform.position;
+                float ennemySpeed = hit.collider.GetComponent<MovingObject>().speed;
+                float distanceToPosition = Vector3.Distance(ennemyPosition, destinationPosition);
+                float timeToDestination = distanceToPosition / ennemySpeed;
+                Debug.Log(timeToDestination);
+                //Debug.Log(hit.collider.name + " - POSITION: " + ennemyPosition + " - VITESSE: " + ennemySpeed);
+
+                if (timeToDestination > 0.75f)
+                {
+                    Debug.Log("SAFE");
+                }
+                else
+                {
+                    Thread.Sleep(1000);
+                    Debug.Log("DANGER");
+                }
+            }
+                
         // INFO
         // SI position augmente => les véhicules vont à droite SINON les véhicules vont à gauche
         // On peut augmenter la range du raycast pour détecter plus tôt
