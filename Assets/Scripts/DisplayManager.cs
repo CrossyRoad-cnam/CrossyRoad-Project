@@ -9,15 +9,19 @@ public class DisplayManager : MonoBehaviour
     [SerializeField] private Text scoreText; 
     [SerializeField] private Text highScoreText;
     [SerializeField] private Text timeText;
+    [SerializeField] private Text coinText;
     private int highestScore;
     private int playerScore;
+    private int coinScore;
     private ScoreManager scoreManager;
+    private CoinManager coinManager;
     private bool timerStarted = false;
     private float timeSinceFirstMove = 0f;
 
     private void Start()
     {
         scoreManager = FindObjectOfType<ScoreManager>();
+        coinManager = FindObjectOfType<CoinManager>();
         highestScore = scoreManager.GetHighestScore();
     }
 
@@ -26,6 +30,7 @@ public class DisplayManager : MonoBehaviour
         DisplayScore();
         DisplayHighScore();
         DisplayTime();
+        DisplayCoinScore();
     }
 
     public void DisplayScore()
@@ -36,6 +41,16 @@ public class DisplayManager : MonoBehaviour
             scoreText.text = playerScore.ToString();
         }
     }
+
+    public void DisplayCoinScore()
+    {
+        coinScore = coinManager.GetCoinScore();
+        if (coinText != null && coinScore > 0)
+        {
+            coinText.text = "Coins: " + coinScore.ToString();
+        }
+    }
+
     public void DisplayHighScore()
     {
         if (highScoreText != null)

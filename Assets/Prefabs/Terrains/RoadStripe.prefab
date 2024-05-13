@@ -75,6 +75,7 @@ GameObject:
   - component: {fileID: 89008691563469031}
   - component: {fileID: 1290506799772163484}
   - component: {fileID: 1572489456677499529}
+  - component: {fileID: 6594693867994354191}
   m_Layer: 3
   m_Name: RoadStripe
   m_TagString: Untagged
@@ -198,3 +199,21 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.000006, y: 0.87499994, z: 40}
   m_Center: {x: 0, y: 0.43749997, z: 0}
+--- !u!114 &6594693867994354191
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6634203542547338408}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22b557bec15a8c4488fb04263c887961, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  elements: []
+  minSpaceBetween: 2
+  maxSpaceBetween: 7
+  zoneLength: 12
+  startPositionOnZ: -6
+  coins: {fileID: 4500142417697125587, guid: d02ad466a90c26f4fbf4601fc08efd58, type: 3}
