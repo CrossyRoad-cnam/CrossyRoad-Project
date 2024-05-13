@@ -72,8 +72,6 @@ public class Player : MonoBehaviour
             if (hasFirstMoved)
                 CheckIdleTime();
         }
-        
-        VehicleRaycast();
     }
     private void HandleMovement()
     {
@@ -276,6 +274,7 @@ public class Player : MonoBehaviour
     {
         this.isRobot = isRobot;
     }
+
     private void HandleRobotMovement()
     {
         if (CanRobotMoveInDirection(forward))
@@ -283,43 +282,36 @@ public class Player : MonoBehaviour
             MoveCharacter(forward);
             return;
         }
-        else
+
+        if (CanRobotMoveInDirection(left) && CanRobotMoveInDirection(right))
         {
-            if (CanRobotMoveInDirection(left) && CanRobotMoveInDirection(right))
-            {
-                float distanceToLeft = Vector3.Distance(transform.position + left, Vector3.zero);
-                float distanceToRight = Vector3.Distance(transform.position + right, Vector3.zero);
-                MoveCharacter(distanceToLeft < distanceToRight ? left : right);
-            }
-            else if (CanRobotMoveInDirection(left))
-                MoveCharacter(left);
-            else if (CanRobotMoveInDirection(right))
-                MoveCharacter(right);
-            else if (CanRobotMoveInDirection(backward))
-                MoveCharacter(backward, true);
+            float distanceToLeft = Vector3.Distance(transform.position + left, Vector3.zero);
+            float distanceToRight = Vector3.Distance(transform.position + right, Vector3.zero);
+            MoveCharacter(distanceToLeft < distanceToRight ? left : right);
+        }
+        else if (CanRobotMoveInDirection(left))
+        {
+            MoveCharacter(left);
+        }
+        else if (CanRobotMoveInDirection(right))
+        {
+            MoveCharacter(right);
+        }
+        else if (CanRobotMoveInDirection(backward))
+        {
+            MoveCharacter(backward, true);
         }
     }
 
     private bool CanRobotMoveInDirection(Vector3 direction)
     {
-        RaycastHit hit;
-        float range = 1f;
-        
-        if(!CanMoveInDirection(direction))
+        if (!CanMoveInDirection(direction) || IsObstacleAhead(direction) || IsWaterAhead(direction))
             return false;
 
-        if (Physics.Raycast(transform.position + direction, Vector3.down, out hit, range))
-        {
-            if (hit.collider.CompareTag("Water"))
-                return false;
-        }
-        if (Physics.Raycast(transform.position, direction, out hit, range))
-        {
-            if (hit.collider.CompareTag("Ennemy"))
-                return false;
-        }
-        return true;
+        return !IsMovingObjectAhead(direction);
     }
+
+    /*// VERSION DE TEST RAYCAST
 
     private void VehicleRaycast() // TEST de Raycast rotation
     {
@@ -343,13 +335,13 @@ public class Player : MonoBehaviour
 
         Ray[] rays = { forwardLeft, forwardRight, backwardLeft, backwardRight, leftRay, rightRay };
         Ray[] edgeRays = { leftFrontEdgeRay, rightFrontEdgeRay, leftBackEdgeRay, rightBackEdgeRay };
-      
+
         float range = 20f;
         float edgeRange = 1f;
-        
+
         DrawRays(range, halfScale);
 
-        foreach(Ray ray in rays)
+        foreach (Ray ray in rays)
         {
             if (Physics.Raycast(ray, out RaycastHit hit, range))
             {
@@ -382,7 +374,7 @@ public class Player : MonoBehaviour
 
         Ray[] rays = { forwardLeft, forwardRight, backwardLeft, backwardRight, leftRay, rightRay };
         Ray[] edgeRays = { leftFrontEdgeRay, rightFrontEdgeRay, leftBackEdgeRay, rightBackEdgeRay };
-        
+
         for (int i = 0; i < rays.Length; i++)
         {
             Debug.DrawRay(rays[i].origin, rays[i].direction * range, Color.red);
@@ -403,17 +395,17 @@ public class Player : MonoBehaviour
             float enemySpeed = hit.collider.GetComponent<MovingObject>().speed;
             float distanceToPosition = Vector3.Distance(enemyPosition, transform.position + forward);
             float timeToDestination = distanceToPosition / enemySpeed;
-            
+
             Debug.Log(timeToDestination);
 
-            /*if (timeToDestination <= 0.75f)
+            *//*if (timeToDestination <= 0.75f)
             {
                 Debug.Log("DANGER");
             }
             else
             {
                 Debug.Log("SAFE");
-            }*/
+            }*//*
 
         }
     }
@@ -428,6 +420,45 @@ public class Player : MonoBehaviour
         {
             Debug.Log("Not touching the ennemy");
         }
+    }*/
+    private bool IsObstacleAhead(Vector3 direction)
+    {
+        RaycastHit hit;
+        float range = 1f;
+        Ray centerRay = new Ray(transform.position, direction);
+        Vector3 halfScale = transform.localScale / 2;
+        Ray rightEdgeRay = new Ray(transform.position + new Vector3(0, 0, halfScale.z), direction);
+        Ray leftEdgeRay = new Ray(transform.position + new Vector3(0, 0, -halfScale.z), direction);
+        return (Physics.Raycast(centerRay, out hit, range)|| Physics.Raycast(rightEdgeRay, out hit, range) || Physics.Raycast(leftEdgeRay, out hit, range))
+            && hit.collider.CompareTag("Ennemy");
     }
-    
+
+    private bool IsWaterAhead(Vector3 direction)
+    {
+        RaycastHit hit;
+        float range = 1f;
+        return Physics.Raycast(transform.position + direction, Vector3.down, out hit, range) && hit.collider.CompareTag("Water");
+    }
+
+    private bool IsMovingObjectAhead(Vector3 direction)
+    {
+        Vector3 halfScale = transform.localScale / 2;
+        Ray rightEdgeRay = new Ray(transform.position + new Vector3(0, 0, halfScale.z), direction);
+        Ray leftEdgeRay = new Ray(transform.position + new Vector3(0, 0, -halfScale.z), direction);
+        float edgeRange = 1f;
+
+        return (Physics.Raycast(leftEdgeRay, out RaycastHit hit, edgeRange) || Physics.Raycast(rightEdgeRay, out hit, edgeRange))
+            && hit.collider.CompareTag("Ennemy") && IsEnemyApproaching(hit, direction);
+    }
+
+    private bool IsEnemyApproaching(RaycastHit hit, Vector3 direction)
+    {
+        Vector3 enemyPosition = hit.collider.transform.position;
+        float enemySpeed = hit.collider.GetComponent<MovingObject>().speed;
+        float distanceToPosition = Vector3.Distance(enemyPosition, transform.position + direction);
+        float timeToDestination = distanceToPosition / enemySpeed;
+
+        return timeToDestination <= 0.75f;
+    }
+
 }
