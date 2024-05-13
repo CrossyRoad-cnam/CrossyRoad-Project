@@ -8,6 +8,7 @@ TagManager:
   - Obstacle
   - Collectable
   - Water
+  - Rail
   layers:
   - Default
   - TransparentFX

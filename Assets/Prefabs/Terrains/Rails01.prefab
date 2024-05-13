@@ -3324,7 +3324,7 @@ GameObject:
   - component: {fileID: 321527062523163971}
   m_Layer: 3
   m_Name: Rails01
-  m_TagString: Untagged
+  m_TagString: Rail
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3518,7 +3518,6 @@ MonoBehaviour:
   isPlayWhenGameOver: 0
   playOnAwake: 0
   IsLoop: 0
---- !u!114 &321527062523163971
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
