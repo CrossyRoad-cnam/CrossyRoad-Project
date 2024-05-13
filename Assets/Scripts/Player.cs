@@ -73,7 +73,7 @@ public class Player : MonoBehaviour
                 CheckIdleTime();
         }
         
-        RayDraw();
+        VehicleRaycast();
     }
     private void HandleMovement()
     {
@@ -321,50 +321,113 @@ public class Player : MonoBehaviour
         return true;
     }
 
-    private void RayDraw() // TEST de Raycast rotation
+    private void VehicleRaycast() // TEST de Raycast rotation
     {
         // CETTE fonction c'est que pour tester le raycast, le fonctionnement est à implémenter sur le robotMovement
-        float rotationSpeed = 0f;
-        float angle = rotationSpeed * Time.deltaTime;
-        Quaternion rotation = Quaternion.Euler(0, angle, 0);
-        raycastDirection = rotation * raycastDirection;
-        RaycastHit hit;
-        float range = 20f;
-        Vector3 halfScale = transform.localScale / 2;
-        Debug.DrawRay(transform.position + forward, right * range, Color.black);
-        Debug.DrawRay(transform.position + forward, left * range, Color.black);
-        Debug.DrawRay(transform.position, right * range, Color.red);
-        Debug.DrawRay(transform.position, left * range, Color.red);
-        Debug.DrawRay((transform.position - new Vector3(0, 0, halfScale.z)), forward, Color.red);
-        Debug.DrawRay((transform.position - new Vector3(0, 0, -halfScale.z)), forward, Color.red);
-        bool detectRight = Physics.Raycast(transform.position + forward, right, out hit, range);
-        bool detectLeft = Physics.Raycast(transform.position + forward, left, out hit, range);
-        
-        if (detectLeft || detectRight)
-            if (hit.collider.CompareTag("Ennemy"))
-            {
-                Vector3 ennemyPosition = hit.collider.transform.position;
-                Vector3 destinationPosition = transform.position;
-                float ennemySpeed = hit.collider.GetComponent<MovingObject>().speed;
-                float distanceToPosition = Vector3.Distance(ennemyPosition, destinationPosition);
-                float timeToDestination = distanceToPosition / ennemySpeed;
-                Debug.Log(timeToDestination);
-                //Debug.Log(hit.collider.name + " - POSITION: " + ennemyPosition + " - VITESSE: " + ennemySpeed);
-
-                if (timeToDestination > 0.75f)
-                {
-                    Debug.Log("SAFE");
-                }
-                else
-                {
-                    Thread.Sleep(1000);
-                    Debug.Log("DANGER");
-                }
-            }
-                
         // INFO
         // SI position augmente => les véhicules vont à droite SINON les véhicules vont à gauche
         // On peut augmenter la range du raycast pour détecter plus tôt
         // De préférence, on fera un raycast par vérification (obstacle, eau, objets mouvants)
+        // A CLEAAAAAN
+        Vector3 halfScale = transform.localScale / 2;
+        Ray forwardLeft = new Ray(transform.position + forward, left);
+        Ray forwardRight = new Ray(transform.position + forward, right);
+        Ray backwardLeft = new Ray(transform.position + backward, left);
+        Ray backwardRight = new Ray(transform.position + backward, right);
+        Ray leftRay = new Ray(transform.position, left);
+        Ray rightRay = new Ray(transform.position, right);
+        Ray leftFrontEdgeRay = new Ray(transform.position + new Vector3(0, 0, halfScale.z), forward);
+        Ray rightFrontEdgeRay = new Ray(transform.position + new Vector3(0, 0, -halfScale.z), forward);
+        Ray leftBackEdgeRay = new Ray(transform.position + new Vector3(0, 0, halfScale.z), backward);
+        Ray rightBackEdgeRay = new Ray(transform.position + new Vector3(0, 0, -halfScale.z), backward);
+
+        Ray[] rays = { forwardLeft, forwardRight, backwardLeft, backwardRight, leftRay, rightRay };
+        Ray[] edgeRays = { leftFrontEdgeRay, rightFrontEdgeRay, leftBackEdgeRay, rightBackEdgeRay };
+      
+        float range = 20f;
+        float edgeRange = 1f;
+        
+        DrawRays(range, halfScale);
+
+        foreach(Ray ray in rays)
+        {
+            if (Physics.Raycast(ray, out RaycastHit hit, range))
+            {
+                ProcessMovingDetection(hit);
+            }
+        }
+
+        foreach (Ray edgeRay in edgeRays)
+        {
+            if (Physics.Raycast(edgeRay.origin, edgeRay.direction, out RaycastHit hit, edgeRange))
+            {
+                ProcessDetection(hit);
+            }
+        }
     }
+
+    private void DrawRays(float range, Vector3 halfScale)
+    {
+        Ray forwardLeft = new Ray(transform.position + forward, left);
+        Ray forwardRight = new Ray(transform.position + forward, right);
+        Ray backwardLeft = new Ray(transform.position + backward, left);
+        Ray backwardRight = new Ray(transform.position + backward, right);
+        Ray leftRay = new Ray(transform.position, left);
+        Ray rightRay = new Ray(transform.position, right);
+        Ray leftFrontEdgeRay = new Ray(transform.position + new Vector3(0, 0, halfScale.z), forward);
+        Ray rightFrontEdgeRay = new Ray(transform.position + new Vector3(0, 0, -halfScale.z), forward);
+        Ray leftBackEdgeRay = new Ray(transform.position + new Vector3(0, 0, halfScale.z), backward);
+        Ray rightBackEdgeRay = new Ray(transform.position + new Vector3(0, 0, -halfScale.z), backward);
+
+
+        Ray[] rays = { forwardLeft, forwardRight, backwardLeft, backwardRight, leftRay, rightRay };
+        Ray[] edgeRays = { leftFrontEdgeRay, rightFrontEdgeRay, leftBackEdgeRay, rightBackEdgeRay };
+        
+        for (int i = 0; i < rays.Length; i++)
+        {
+            Debug.DrawRay(rays[i].origin, rays[i].direction * range, Color.red);
+        }
+
+        for (int i = 0; i < edgeRays.Length; i++)
+        {
+            Debug.DrawRay(edgeRays[i].origin, edgeRays[i].direction, Color.green);
+        }
+
+    }
+
+    private void ProcessMovingDetection(RaycastHit hit)
+    {
+        if (hit.collider.CompareTag("Ennemy"))
+        {
+            Vector3 enemyPosition = hit.collider.transform.position;
+            float enemySpeed = hit.collider.GetComponent<MovingObject>().speed;
+            float distanceToPosition = Vector3.Distance(enemyPosition, transform.position + forward);
+            float timeToDestination = distanceToPosition / enemySpeed;
+            
+            Debug.Log(timeToDestination);
+
+            /*if (timeToDestination <= 0.75f)
+            {
+                Debug.Log("DANGER");
+            }
+            else
+            {
+                Debug.Log("SAFE");
+            }*/
+
+        }
+    }
+
+    private void ProcessDetection(RaycastHit hit)
+    {
+        if (hit.collider.CompareTag("Ennemy"))
+        {
+            Debug.Log("Still touching the ennemy");
+        }
+        else
+        {
+            Debug.Log("Not touching the ennemy");
+        }
+    }
+    
 }
