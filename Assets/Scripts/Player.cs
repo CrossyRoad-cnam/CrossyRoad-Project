@@ -305,7 +305,6 @@ public class Player : MonoBehaviour
 
         if (Physics.Raycast(transform.position + direction, Vector3.down, out hit, range))
         {
-            Debug.Log(IsRailSignalOn());
 
             if (hit.collider.CompareTag("Rail") && IsRailSignalOn())
                 return false;
