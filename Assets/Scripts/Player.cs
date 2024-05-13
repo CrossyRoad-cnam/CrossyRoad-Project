@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using GLTF.Schema;
 using TMPro;
 using UnityEngine;
@@ -26,12 +27,12 @@ public class Player : MonoBehaviour
     private const float ANIMATION_TIME = 0.15f;
     private int backStepsCounter;
     private bool hasFirstMoved = false;
-    private Vector3 forward = new Vector3(1, 0, 0);
-    private Vector3 backward = new Vector3(-1, 0, 0);
-    private Vector3 left = new Vector3(0, 0, 1);
-    private Vector3 right = new Vector3(0, 0, -1);
+    private static readonly Vector3 forward = new Vector3(1, 0, 0);
+    private static readonly Vector3 backward = new Vector3(-1, 0, 0);
+    private static readonly Vector3 left = new Vector3(0, 0, 1);
+    private static readonly Vector3 right = new Vector3(0, 0, -1);
     public bool isDead {get; private set;} = false;
-    private Vector3 raycastDirection = Vector3.right;
+    private Vector3 raycastDirection = forward;
     
 
 
@@ -322,10 +323,24 @@ public class Player : MonoBehaviour
 
     private void RayDraw() // TEST de Raycast rotation
     {
-        float rotationSpeed = 360f * 2;
+        // CETTE fonction c'est que pouur tester le raycast, le fonctionnement est à implémenter sur le robotMovement
+        float rotationSpeed = 360f;
         float angle = rotationSpeed * Time.deltaTime;
         Quaternion rotation = Quaternion.Euler(0, angle, 0);
         raycastDirection = rotation * raycastDirection;
         Debug.DrawRay(transform.position, raycastDirection, Color.black);
+
+        RaycastHit hit;
+        float range = 1f;
+        bool detectCollider = Physics.Raycast(transform.position, raycastDirection, out hit, range);
+        
+        if (detectCollider)
+            if (hit.collider.CompareTag("Ennemy"))
+                Debug.Log(hit.collider.name + " - POSITION: " + hit.collider.transform.position + " - VITESSE: " + hit.collider.GetComponent<MovingObject>().speed);
+        
+        // INFO
+        // SI position augmente => les véhicules vont à droite SINON les véhicules vont à gauche
+        // On peut augmenter la range du raycast pour détecter plus tôt
+        // De préférence, on fera un raycast par vérification (obstacle, eau, objets mouvants)
     }
 }
