@@ -34,6 +34,11 @@ public class RailwayLightingSystem : MonoBehaviour
         }
     }
 
+    public bool IsLightOn
+    {
+        get { return isLightOn; }
+    }
+
     private void CheckDistanceToPlayer()
     {
         if (player != null)
@@ -79,6 +84,8 @@ public class RailwayLightingSystem : MonoBehaviour
             railwayLight1.enabled = false;
             railwayLight2.enabled = false;
         }
+        isLightOn = false;
+
     }
 
     private IEnumerator BlinkLight()
@@ -88,6 +95,7 @@ public class RailwayLightingSystem : MonoBehaviour
         if (gameOver != null && !gameOver.isGameOver) { 
         CheckDistanceToPlayer(); 
         }
+        isLightOn = true;
         while (timeElapsed < blinkDuration)
         {
             railwayLight1.enabled = isLightOn;

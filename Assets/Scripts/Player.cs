@@ -306,12 +306,19 @@ public class Player : MonoBehaviour
 
         if (Physics.Raycast(transform.position + direction, Vector3.down, out hit, range))
         {
+            Debug.Log(IsRailSignalOn());
+
+            if (hit.collider.CompareTag("Rail") && IsRailSignalOn())
+                return false;
+
             if (hit.collider.CompareTag("Water"))
                 return false;
         }
 
         if (Physics.Raycast(transform.position, direction, out hit, range))
         {
+
+
             Collider[] hitColliders = Physics.OverlapBox(raycastEnd, new Vector3(1, 0, 1));
 
             foreach (Collider collider in hitColliders)
@@ -323,5 +330,17 @@ public class Player : MonoBehaviour
             }
         }
         return true;
+    }
+
+    private bool IsRailSignalOn()
+    {
+        // Mettez ici la logique pour vérifier si le signal de rail est allumé
+        // Par exemple, vous pouvez accéder à l'instance du RailwayLightingSystem et vérifier si la lumière est activée
+        RailwayLightingSystem railwayLightingSystem = FindObjectOfType<RailwayLightingSystem>();
+        if (railwayLightingSystem != null)
+        {
+            return railwayLightingSystem.IsLightOn;
+        }
+        return true; // Par défaut, retourner true si le système de signal n'est pas trouvé ou si la lumière est allumée
     }
 }
