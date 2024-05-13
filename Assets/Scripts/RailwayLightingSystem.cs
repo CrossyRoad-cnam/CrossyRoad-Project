@@ -92,7 +92,6 @@ public class RailwayLightingSystem : MonoBehaviour
         {
             railwayLight1.enabled = isLightOn;
             railwayLight2.enabled = isLightOn;
-            isLightOn = !isLightOn; // Toggle light state
             yield return new WaitForSeconds(blinkingTime);
             timeElapsed += blinkingTime;
         }
