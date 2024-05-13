@@ -16,11 +16,11 @@ public class SkinController : MonoBehaviour
     public Button BuyButton;
     public Button SelectSkinButton;
     public TextMeshProUGUI SelectSkinButtonText;
-    public Text PriceText;
+    public TextMeshProUGUI PriceText;
     /// <summary>
     /// Wallet amount (number of coins)
     /// </summary>
-    public Text CoinText;
+    public TextMeshProUGUI CoinText;
     private GameObject currentPreview;
     public int currentIndex = 0;
     CoinManager coinManager;
