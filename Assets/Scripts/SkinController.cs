@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
 using TMPro;
+using System;
 
 public class SkinController : MonoBehaviour
 {
@@ -27,9 +28,16 @@ public class SkinController : MonoBehaviour
 
     private void Start()
     {
+        LoadSkins();
         PreviewSkin(currentIndex);
         DisplaySkinName();
     }
+
+    private void LoadSkins()
+    {
+        throw new NotImplementedException();
+    }
+
     private void Update()
     {
         DisplaySkinName();
@@ -68,7 +76,7 @@ public class SkinController : MonoBehaviour
 
     public void SelectSkin()
     {
-        PlayerPrefs.SetInt("SelectedSkin", currentIndex);
+        PlayerPrefs.SetInt("SelectedSkin", currentIndex); 
         PlayerPrefs.Save();
     }
 
