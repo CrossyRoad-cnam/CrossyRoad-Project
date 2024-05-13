@@ -31,6 +31,8 @@ public class Player : MonoBehaviour
     private Vector3 left = new Vector3(0, 0, 1);
     private Vector3 right = new Vector3(0, 0, -1);
     public bool isDead {get; private set;} = false;
+    private Vector3 raycastDirection = Vector3.right;
+    
 
 
     private void Awake()
@@ -69,6 +71,8 @@ public class Player : MonoBehaviour
             if (hasFirstMoved)
                 CheckIdleTime();
         }
+        
+        RayDraw();
     }
     private void HandleMovement()
     {
@@ -299,8 +303,7 @@ public class Player : MonoBehaviour
     {
         RaycastHit hit;
         float range = 1f;
-
-        Vector3 raycastEnd = transform.position + direction * range;
+        
         if(!CanMoveInDirection(direction))
             return false;
 
@@ -309,19 +312,20 @@ public class Player : MonoBehaviour
             if (hit.collider.CompareTag("Water"))
                 return false;
         }
-
         if (Physics.Raycast(transform.position, direction, out hit, range))
         {
-            Collider[] hitColliders = Physics.OverlapBox(raycastEnd, new Vector3(1, 0, 1));
-
-            foreach (Collider collider in hitColliders)
-            {
-                if (collider.CompareTag("Ennemy"))
-                {
-                    return false;
-                }
-            }
+            if (hit.collider.CompareTag("Ennemy"))
+                return false;
         }
         return true;
+    }
+
+    private void RayDraw() // TEST de Raycast rotation
+    {
+        float rotationSpeed = 360f * 2;
+        float angle = rotationSpeed * Time.deltaTime;
+        Quaternion rotation = Quaternion.Euler(0, angle, 0);
+        raycastDirection = rotation * raycastDirection;
+        Debug.DrawRay(transform.position, raycastDirection, Color.black);
     }
 }
