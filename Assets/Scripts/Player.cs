@@ -469,7 +469,7 @@ public class Player : MonoBehaviour
     {
         RaycastHit hit;
         float range = 1f;
-        return Physics.Raycast(transform.position + direction, Vector3.down, out hit, range) && hit.collider.CompareTag("Rail") && IsRailSignalOn();
+        return Physics.Raycast(transform.position + direction, Vector3.down, out hit, range) && hit.collider.CompareTag("Rail") && IsRailSignalOn(direction);
     }
 
     private bool IsWaterAhead(Vector3 direction)
@@ -554,14 +554,23 @@ public class Player : MonoBehaviour
     {
         Debug.DrawRay(ray.origin, ray.direction * range, Color.red);
     }
-    private bool IsRailSignalOn()
+
+    private bool IsRailSignalOn(Vector3 direction)
     {
-        RailwayLightingSystem railwayLightingSystem = FindObjectOfType<RailwayLightingSystem>();
-        if (railwayLightingSystem)
+        RaycastHit hit;
+        float range = 1f;
+        if (Physics.Raycast(transform.position + direction, Vector3.down, out hit, range))
         {
-            return railwayLightingSystem.IsLightOn;
+            if (hit.collider.CompareTag("Rail"))
+            {
+                RailwayLightingSystem railwayLightingSystem = hit.collider.GetComponent<RailwayLightingSystem>();
+                if (railwayLightingSystem)
+                {
+                    return railwayLightingSystem.IsLightOn;
+                }
+            }
         }
-        return true; // Par défaut, retourner true si le système de signal n'est pas trouvé ou si la lumière est allumée
+        return false;
     }
 
 }
