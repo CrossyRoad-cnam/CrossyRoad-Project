@@ -148,5 +148,4 @@ MonoBehaviour:
   isPlayWhenGameOver: 0
   playOnAwake: 0
   IsLoop: 0
-  gameOverManager: {fileID: 0}
   maxDistance: 2

@@ -444,7 +444,7 @@ private void HandleRobotMovement()
 
 private bool CanRobotMoveInDirection(Vector3 direction)
 {
-    return CanMoveInDirection(direction) && !IsObstacleAhead(direction) && !IsWaterAhead(direction) && !IsMovingObjectAhead(direction);
+    return CanMoveInDirection(direction) && !IsObstacleAhead(direction) && !IsWaterAhead(direction) && !IsMovingObjectAhead(direction) && !IsTrainAhead(direction);
 }
 
 private bool IsObstacleAhead(Vector3 direction)
@@ -466,8 +466,14 @@ private bool IsObstacleAhead(Vector3 direction)
     }
     return false;
 }
+    private bool IsTrainAhead(Vector3 direction)
+    {
+        RaycastHit hit;
+        float range = 1f;
+        return Physics.Raycast(transform.position + direction, Vector3.down, out hit, range) && hit.collider.CompareTag("Rail") && IsRailSignalOn();
+    }
 
-private bool IsWaterAhead(Vector3 direction)
+    private bool IsWaterAhead(Vector3 direction)
 {
     RaycastHit hit;
     float range = 1f;
@@ -504,8 +510,8 @@ private bool IsMovingObjectAhead(Vector3 direction)
     {
         if (Physics.Raycast(ray, out RaycastHit hit, frontBackRange) && hit.collider.CompareTag("Ennemy") && IsEnemyApproaching(hit, direction))
         {
-            Debug.Log("Ennemy devant");
-            return true;
+                Debug.Log(hit.collider.name);
+                return true;
         }
     }
 
@@ -513,8 +519,8 @@ private bool IsMovingObjectAhead(Vector3 direction)
     {
         if (Physics.Raycast(ray, out RaycastHit hit, sideRange) && hit.collider.CompareTag("Ennemy") && IsEnemyApproaching(hit, direction))
         {
-            Debug.Log("Ennemy arrive vers les cÃ´tÃ©s");
-            return true;
+              Debug.Log(hit.collider.name);
+                return true;
         }
     }
 
@@ -539,9 +545,9 @@ private bool IsEnemyApproaching(RaycastHit hit, Vector3 direction)
     float distanceToPosition = Vector3.Distance(enemyPosition, transform.position + direction);
     float timeToDestination = distanceToPosition / enemySpeed;
 
-    Debug.Log($"{hit.collider.name}: {timeToDestination}");
+    //Debug.Log($"{hit.collider.name}: {timeToDestination}");
 
-    return timeToDestination <= 0.5f;
+    return timeToDestination <= 0.75f;
 }
 
 private void DrawRays()
@@ -571,7 +577,6 @@ private void DrawRays()
         new Ray(transform.position + new Vector3(-1, 0, halfScale.z), right),
         new Ray(transform.position + new Vector3(-1, 0, -halfScale.z), right)
     };
-    https://www.google.com/search?client=firefox-b-d&q=algomius+binomiak
     foreach (var ray in frontBackRays)
     {
         Debug.DrawRay(ray.origin, ray.direction * frontBackRange, Color.red);
