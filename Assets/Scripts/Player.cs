@@ -71,7 +71,6 @@ public class Player : MonoBehaviour
             if (hasFirstMoved)
                 CheckIdleTime();
         }
-        DrawRays();
     }
     private void HandleMovement()
     {
@@ -506,8 +505,10 @@ public class Player : MonoBehaviour
             new Ray(transform.position + new Vector3(-1, 0, -halfScale.z), right)
         };
 
+
         foreach (var ray in frontBackRays)
         {
+            DrawRays(ray, frontBackRange);
             if (Physics.Raycast(ray, out RaycastHit hit, frontBackRange) && hit.collider.CompareTag("Ennemy") && IsEnemyApproaching(hit, direction))
             {
                     Debug.Log(hit.collider.name);
@@ -517,6 +518,7 @@ public class Player : MonoBehaviour
 
         foreach (var ray in sideRays)
         {
+            DrawRays(ray, sideRange);
             if (Physics.Raycast(ray, out RaycastHit hit, sideRange) && hit.collider.CompareTag("Ennemy") && IsEnemyApproaching(hit, direction))
             {
                   Debug.Log(hit.collider.name);
@@ -548,48 +550,12 @@ public class Player : MonoBehaviour
         return timeToDestination <= 0.5f;
     }
 
-    private void DrawRays()
+    private void DrawRays(Ray ray, float range)
     {
-        Vector3 halfScale = transform.localScale / 2;
-        float frontBackRange = 1f;
-        float sideRange = 6f;
-
-        Ray[] frontBackRays = {
-            new Ray(transform.position + new Vector3(0, 0, halfScale.z), forward),
-            new Ray(transform.position + new Vector3(0, 0, -halfScale.z), forward),
-            new Ray(transform.position + new Vector3(0, 0, halfScale.z), backward),
-            new Ray(transform.position + new Vector3(0, 0, -halfScale.z), backward)
-        };
-
-        Ray[] sideRays = {
-            new Ray(transform.position + new Vector3(0, 0, halfScale.z), left),
-            new Ray(transform.position + new Vector3(0, 0, -halfScale.z), left),
-            new Ray(transform.position + new Vector3(1, 0, halfScale.z), left),
-            new Ray(transform.position + new Vector3(1, 0, -halfScale.z), left),
-            new Ray(transform.position + new Vector3(-1, 0, halfScale.z), left),
-            new Ray(transform.position + new Vector3(-1, 0, -halfScale.z), left),
-            new Ray(transform.position + new Vector3(0, 0, halfScale.z), right),
-            new Ray(transform.position + new Vector3(0, 0, -halfScale.z), right),
-            new Ray(transform.position + new Vector3(1, 0, halfScale.z), right),
-            new Ray(transform.position + new Vector3(1, 0, -halfScale.z), right),
-            new Ray(transform.position + new Vector3(-1, 0, halfScale.z), right),
-            new Ray(transform.position + new Vector3(-1, 0, -halfScale.z), right)
-        };
-        foreach (var ray in frontBackRays)
-        {
-            Debug.DrawRay(ray.origin, ray.direction * frontBackRange, Color.red);
-        }
-        
-        foreach (var ray in sideRays)
-        {
-            Debug.DrawRay(ray.origin, ray.direction * sideRange, Color.green);
-        }
+        Debug.DrawRay(ray.origin, ray.direction * range, Color.red);
     }
-
     private bool IsRailSignalOn()
     {
-        // Mettez ici la logique pour vérifier si le signal de rail est allumé
-        // Par exemple, vous pouvez accéder à l'instance du RailwayLightingSystem et vérifier si la lumière est activée
         RailwayLightingSystem railwayLightingSystem = FindObjectOfType<RailwayLightingSystem>();
         if (railwayLightingSystem)
         {
