@@ -13,7 +13,7 @@ public class CoinSpawner : ObjectSpawner
     }
     internal override void SpawnObjects()
     {
-        if (Random.Range(1, 25) == 1)
+        if (Random.Range(1, 50) == 1)
         {
             while (spawnPos.z < startPositionOnZ + zoneLength)
             {

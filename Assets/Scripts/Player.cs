@@ -70,7 +70,7 @@ public class Player : MonoBehaviour
             if (hasFirstMoved)
                 CheckIdleTime();
         }
-        TestMyRays(forward);
+        TestMyRays(right);
     }
     private void HandleMovement()
     {
@@ -440,18 +440,25 @@ public class Player : MonoBehaviour
         float sideRange = 6f;
         Vector3 halfScale = transform.localScale / 2;
         RaycastHit hit;
+        
         Ray[] frontBackRays = {
-            new Ray(transform.position + new Vector3(0, 0, halfScale.z), direction),
-            new Ray(transform.position + new Vector3(0, 0, -halfScale.z), direction),
+            new Ray(transform.position + new Vector3(0, 0, halfScale.z), forward),
+            new Ray(transform.position + new Vector3(0, 0, -halfScale.z), forward),
+            new Ray(transform.position + new Vector3(0, 0, -halfScale.z), backward),
+            new Ray(transform.position + new Vector3(0, 0, -halfScale.z), backward),
+            new Ray(transform.position, direction)
         };
 
-        Ray[] sideRays = {
+        Ray[] leftSideRays = {
             new Ray(transform.position + new Vector3(0, 0, halfScale.z), left),
             new Ray(transform.position + new Vector3(0, 0, -halfScale.z), left),
             new Ray(transform.position + new Vector3(1, 0, halfScale.z), left),
             new Ray(transform.position + new Vector3(1, 0, -halfScale.z), left),
             new Ray(transform.position + new Vector3(-1, 0, halfScale.z), left),
             new Ray(transform.position + new Vector3(-1, 0, -halfScale.z), left),
+        };
+
+        Ray[] rightSideRays = {
             new Ray(transform.position + new Vector3(0, 0, halfScale.z), right),
             new Ray(transform.position + new Vector3(0, 0, -halfScale.z), right),
             new Ray(transform.position + new Vector3(1, 0, halfScale.z), right),
@@ -459,19 +466,24 @@ public class Player : MonoBehaviour
             new Ray(transform.position + new Vector3(-1, 0, halfScale.z), right),
             new Ray(transform.position + new Vector3(-1, 0, -halfScale.z), right)
         };
-
-
         foreach (var ray in frontBackRays)
         {
             DrawRays(ray, frontBackRange, Color.green);
-            if (Physics.Raycast(ray, out hit, frontBackRange) && hit.collider.CompareTag("Ennemy"))
-                Debug.Log($"Ennemy hit: {hit.collider.name}");
-                
+
         }
 
-        foreach (var ray in sideRays)
+        foreach (var ray in leftSideRays)
         {
             DrawRays(ray, sideRange, Color.black);
+            if (Physics.Raycast(ray, out hit, frontBackRange) && hit.collider.CompareTag("Ennemy"))
+                Debug.Log($"Ennemy LEFTSIDE hit: {hit.collider.name}");
+        }
+
+        foreach (var ray in rightSideRays)
+        {
+            DrawRays(ray, sideRange, Color.blue);
+            if (Physics.Raycast(ray, out hit, sideRange) && hit.collider.CompareTag("Ennemy"))
+                Debug.Log($"Ennemy RIGHTSIDE hit: {hit.collider.name}");
         }
 
     }
