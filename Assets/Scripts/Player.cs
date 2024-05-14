@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
-using GLTF.Schema;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -256,7 +255,7 @@ public class Player : MonoBehaviour
 
     {
         int selectedSkin = PlayerPrefs.GetInt("SelectedSkin", 0);
-            ApplySkin(skinController.skins[selectedSkin]);
+            ApplySkin(skinController.skins[selectedSkin].GetSkin());
         }
         public bool HasMoved()
     {
@@ -279,11 +278,11 @@ public class Player : MonoBehaviour
 
     private void VehicleRaycast() // TEST de Raycast rotation
     {
-        // CETTE fonction c'est que pour tester le raycast, le fonctionnement est à implémenter sur le robotMovement
+        // CETTE fonction c'est que pour tester le raycast, le fonctionnement est Ã  implÃ©menter sur le robotMovement
         // INFO
-        // SI position augmente => les véhicules vont à droite SINON les véhicules vont à gauche
-        // On peut augmenter la range du raycast pour détecter plus tôt
-        // De préférence, on fera un raycast par vérification (obstacle, eau, objets mouvants)
+        // SI position augmente => les vÃ©hicules vont Ã  droite SINON les vÃ©hicules vont Ã  gauche
+        // On peut augmenter la range du raycast pour dÃ©tecter plus tÃ´t
+        // De prÃ©fÃ©rence, on fera un raycast par vÃ©rification (obstacle, eau, objets mouvants)
         // A CLEAAAAAN
         Vector3 halfScale = transform.localScale / 2;
         Ray forwardLeft = new Ray(transform.position + forward, left);
@@ -342,12 +341,20 @@ public class Player : MonoBehaviour
         for (int i = 0; i < rays.Length; i++)
         {
             Debug.DrawRay(rays[i].origin, rays[i].direction * range, Color.red);
+
+            if (hit.collider.CompareTag("Rail") && IsRailSignalOn())
+                return false;
+
+            if (hit.collider.CompareTag("Water"))
+                return false;
         }
 
         for (int i = 0; i < edgeRays.Length; i++)
         {
             Debug.DrawRay(edgeRays[i].origin, edgeRays[i].direction, Color.green);
         }
+
+            Collider[] hitColliders = Physics.OverlapBox(raycastEnd, new Vector3(1, 0, 1));
 
     }
 
@@ -506,7 +513,7 @@ private bool IsMovingObjectAhead(Vector3 direction)
     {
         if (Physics.Raycast(ray, out RaycastHit hit, sideRange) && hit.collider.CompareTag("Ennemy") && IsEnemyApproaching(hit, direction))
         {
-            Debug.Log("Ennemy arrive vers les côtés");
+            Debug.Log("Ennemy arrive vers les cÃ´tÃ©s");
             return true;
         }
     }
@@ -564,7 +571,7 @@ private void DrawRays()
         new Ray(transform.position + new Vector3(-1, 0, halfScale.z), right),
         new Ray(transform.position + new Vector3(-1, 0, -halfScale.z), right)
     };
-    
+    https://www.google.com/search?client=firefox-b-d&q=algomius+binomiak
     foreach (var ray in frontBackRays)
     {
         Debug.DrawRay(ray.origin, ray.direction * frontBackRange, Color.red);
@@ -575,5 +582,17 @@ private void DrawRays()
         Debug.DrawRay(ray.origin, ray.direction * sideRange, Color.green);
     }
 }
+
+    private bool IsRailSignalOn()
+    {
+        // Mettez ici la logique pour vérifier si le signal de rail est allumé
+        // Par exemple, vous pouvez accéder à l'instance du RailwayLightingSystem et vérifier si la lumière est activée
+        RailwayLightingSystem railwayLightingSystem = FindObjectOfType<RailwayLightingSystem>();
+        if (railwayLightingSystem != null)
+        {
+            return railwayLightingSystem.IsLightOn;
+        }
+        return true; // Par défaut, retourner true si le système de signal n'est pas trouvé ou si la lumière est allumée
+    }
 
 }

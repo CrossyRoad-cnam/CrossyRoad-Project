@@ -3321,9 +3321,10 @@ GameObject:
   - component: {fileID: -2504086730187410767}
   - component: {fileID: 1021389383954275949}
   - component: {fileID: 4013352128137000051}
+  - component: {fileID: 321527062523163971}
   m_Layer: 3
   m_Name: Rails01
-  m_TagString: Untagged
+  m_TagString: Rail
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3517,7 +3518,23 @@ MonoBehaviour:
   isPlayWhenGameOver: 0
   playOnAwake: 0
   IsLoop: 0
-  gameOverManager: {fileID: 0}
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7050955806780540968}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22b557bec15a8c4488fb04263c887961, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  elements: []
+  minSpaceBetween: 2
+  maxSpaceBetween: 7
+  zoneLength: 12
+  startPositionOnZ: -6
+  coins: {fileID: 4500142417697125587, guid: d02ad466a90c26f4fbf4601fc08efd58, type: 3}
 --- !u!1 &7125144795713925991
 GameObject:
   m_ObjectHideFlags: 0

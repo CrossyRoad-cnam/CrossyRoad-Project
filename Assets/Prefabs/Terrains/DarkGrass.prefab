@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1822661525928610002}
   - component: {fileID: 8639336054082570553}
   - component: {fileID: -6018927421285530754}
+  - component: {fileID: 4019053254905567510}
   m_Layer: 3
   m_Name: DarkGrass
   m_TagString: Untagged
@@ -141,11 +142,28 @@ MonoBehaviour:
   - {fileID: 2871564327831192317, guid: 1d10358b7b85d59418a09fc4e5822fd6, type: 3}
   - {fileID: 506711510475733616, guid: 68d07c50c8336a54bab2c3d25961ba8d, type: 3}
   - {fileID: 5052165930958094820, guid: 3e58a3485c5010b4a8cadffc177c89d7, type: 3}
-  coins: {fileID: 4500142417697125587, guid: d02ad466a90c26f4fbf4601fc08efd58, type: 3}
   minSpaceBetween: 5
   maxSpaceBetween: 8
   zoneLength: 12
   startPositionOnZ: -6
+--- !u!114 &4019053254905567510
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9083724177791256119}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22b557bec15a8c4488fb04263c887961, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  elements: []
+  minSpaceBetween: 2
+  maxSpaceBetween: 7
+  zoneLength: 12
+  startPositionOnZ: -6
+  coins: {fileID: 4500142417697125587, guid: d02ad466a90c26f4fbf4601fc08efd58, type: 3}
 --- !u!1001 &136429837127687876
 PrefabInstance:
   m_ObjectHideFlags: 0
