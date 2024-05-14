@@ -8,6 +8,7 @@ TagManager:
   - Obstacle
   - Collectable
   - Water
+  - Border
   layers:
   - Default
   - TransparentFX

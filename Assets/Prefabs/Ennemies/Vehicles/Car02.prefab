@@ -121,4 +121,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isJumpable: 0
-  speed: 3.5
+  speed: 4
