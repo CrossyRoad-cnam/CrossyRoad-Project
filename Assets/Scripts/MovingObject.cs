@@ -5,7 +5,7 @@ using UnityEngine;
 public class MovingObject : MonoBehaviour
 {
     [SerializeField] public bool isJumpable;
-    [SerializeField] private float speed;
+    [SerializeField] public float speed;
     private int difficulty;
 
 

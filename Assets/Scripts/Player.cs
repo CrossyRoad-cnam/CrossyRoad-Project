@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -25,11 +26,13 @@ public class Player : MonoBehaviour
     private const float ANIMATION_TIME = 0.15f;
     private int backStepsCounter;
     private bool hasFirstMoved = false;
-    private Vector3 forward = new Vector3(1, 0, 0);
-    private Vector3 backward = new Vector3(-1, 0, 0);
-    private Vector3 left = new Vector3(0, 0, 1);
-    private Vector3 right = new Vector3(0, 0, -1);
+    private static readonly Vector3 forward = new Vector3(1, 0, 0);
+    private static readonly Vector3 backward = new Vector3(-1, 0, 0);
+    private static readonly Vector3 left = new Vector3(0, 0, 1);
+    private static readonly Vector3 right = new Vector3(0, 0, -1);
     public bool isDead {get; private set;} = false;
+    private Vector3 raycastDirection = forward;
+    
 
 
     private void Awake()
@@ -68,6 +71,7 @@ public class Player : MonoBehaviour
             if (hasFirstMoved)
                 CheckIdleTime();
         }
+        DrawRays();
     }
     private void HandleMovement()
     {
@@ -270,41 +274,73 @@ public class Player : MonoBehaviour
     {
         this.isRobot = isRobot;
     }
-    private void HandleRobotMovement()
+    /*// VERSION DE TEST RAYCAST
+
+    private void VehicleRaycast() // TEST de Raycast rotation
     {
-        if (CanRobotMoveInDirection(forward))
+        // CETTE fonction c'est que pour tester le raycast, le fonctionnement est Ã  implÃ©menter sur le robotMovement
+        // INFO
+        // SI position augmente => les vÃ©hicules vont Ã  droite SINON les vÃ©hicules vont Ã  gauche
+        // On peut augmenter la range du raycast pour dÃ©tecter plus tÃ´t
+        // De prÃ©fÃ©rence, on fera un raycast par vÃ©rification (obstacle, eau, objets mouvants)
+        // A CLEAAAAAN
+        Vector3 halfScale = transform.localScale / 2;
+        Ray forwardLeft = new Ray(transform.position + forward, left);
+        Ray forwardRight = new Ray(transform.position + forward, right);
+        Ray backwardLeft = new Ray(transform.position + backward, left);
+        Ray backwardRight = new Ray(transform.position + backward, right);
+        Ray leftRay = new Ray(transform.position, left);
+        Ray rightRay = new Ray(transform.position, right);
+        Ray leftFrontEdgeRay = new Ray(transform.position + new Vector3(0, 0, halfScale.z), forward);
+        Ray rightFrontEdgeRay = new Ray(transform.position + new Vector3(0, 0, -halfScale.z), forward);
+        Ray leftBackEdgeRay = new Ray(transform.position + new Vector3(0, 0, halfScale.z), backward);
+        Ray rightBackEdgeRay = new Ray(transform.position + new Vector3(0, 0, -halfScale.z), backward);
+
+        Ray[] rays = { forwardLeft, forwardRight, backwardLeft, backwardRight, leftRay, rightRay };
+        Ray[] edgeRays = { leftFrontEdgeRay, rightFrontEdgeRay, leftBackEdgeRay, rightBackEdgeRay };
+
+        float range = 20f;
+        float edgeRange = 1f;
+
+        DrawRays(range, halfScale);
+
+        foreach (Ray ray in rays)
         {
-            MoveCharacter(forward);
-            return;
-        }
-        else
-        {
-            if (CanRobotMoveInDirection(left) && CanRobotMoveInDirection(right))
+            if (Physics.Raycast(ray, out RaycastHit hit, range))
             {
-                float distanceToLeft = Vector3.Distance(transform.position + left, Vector3.zero);
-                float distanceToRight = Vector3.Distance(transform.position + right, Vector3.zero);
-                MoveCharacter(distanceToLeft < distanceToRight ? left : right);
+                ProcessMovingDetection(hit);
             }
-            else if (CanRobotMoveInDirection(left))
-                MoveCharacter(left);
-            else if (CanRobotMoveInDirection(right))
-                MoveCharacter(right);
-            else if (CanRobotMoveInDirection(backward))
-                MoveCharacter(backward, true);
+        }
+
+        foreach (Ray edgeRay in edgeRays)
+        {
+            if (Physics.Raycast(edgeRay.origin, edgeRay.direction, out RaycastHit hit, edgeRange))
+            {
+                ProcessDetection(hit);
+            }
         }
     }
 
-    private bool CanRobotMoveInDirection(Vector3 direction)
+    private void DrawRays(float range, Vector3 halfScale)
     {
-        RaycastHit hit;
-        float range = 1f;
+        Ray forwardLeft = new Ray(transform.position + forward, left);
+        Ray forwardRight = new Ray(transform.position + forward, right);
+        Ray backwardLeft = new Ray(transform.position + backward, left);
+        Ray backwardRight = new Ray(transform.position + backward, right);
+        Ray leftRay = new Ray(transform.position, left);
+        Ray rightRay = new Ray(transform.position, right);
+        Ray leftFrontEdgeRay = new Ray(transform.position + new Vector3(0, 0, halfScale.z), forward);
+        Ray rightFrontEdgeRay = new Ray(transform.position + new Vector3(0, 0, -halfScale.z), forward);
+        Ray leftBackEdgeRay = new Ray(transform.position + new Vector3(0, 0, halfScale.z), backward);
+        Ray rightBackEdgeRay = new Ray(transform.position + new Vector3(0, 0, -halfScale.z), backward);
 
-        Vector3 raycastEnd = transform.position + direction * range;
-        if(!CanMoveInDirection(direction))
-            return false;
 
-        if (Physics.Raycast(transform.position + direction, Vector3.down, out hit, range))
+        Ray[] rays = { forwardLeft, forwardRight, backwardLeft, backwardRight, leftRay, rightRay };
+        Ray[] edgeRays = { leftFrontEdgeRay, rightFrontEdgeRay, leftBackEdgeRay, rightBackEdgeRay };
+
+        for (int i = 0; i < rays.Length; i++)
         {
+            Debug.DrawRay(rays[i].origin, rays[i].direction * range, Color.red);
 
             if (hit.collider.CompareTag("Rail") && IsRailSignalOn())
                 return false;
@@ -313,32 +349,250 @@ public class Player : MonoBehaviour
                 return false;
         }
 
-        if (Physics.Raycast(transform.position, direction, out hit, range))
+        for (int i = 0; i < edgeRays.Length; i++)
         {
-
+            Debug.DrawRay(edgeRays[i].origin, edgeRays[i].direction, Color.green);
+        }
 
             Collider[] hitColliders = Physics.OverlapBox(raycastEnd, new Vector3(1, 0, 1));
 
-            foreach (Collider collider in hitColliders)
-            {
-                if (collider.CompareTag("Ennemy"))
-                {
-                    return false;
-                }
-            }
-        }
-        return true;
     }
+
+    private void ProcessMovingDetection(RaycastHit hit)
+    {
+        if (hit.collider.CompareTag("Ennemy"))
+        {
+            Vector3 enemyPosition = hit.collider.transform.position;
+            float enemySpeed = hit.collider.GetComponent<MovingObject>().speed;
+            float distanceToPosition = Vector3.Distance(enemyPosition, transform.position + forward);
+            float timeToDestination = distanceToPosition / enemySpeed;
+
+            Debug.Log(timeToDestination);
+
+            *//*if (timeToDestination <= 0.75f)
+            {
+                Debug.Log("DANGER");
+            }
+            else
+            {
+                Debug.Log("SAFE");
+            }*//*
+
+        }
+    }
+
+    private void ProcessDetection(RaycastHit hit)
+    {
+        if (hit.collider.CompareTag("Ennemy"))
+        {
+            Debug.Log("Still touching the ennemy");
+        }
+        else
+        {
+            Debug.Log("Not touching the ennemy");
+        }
+    }*/
+
+/*    private void DrawRay(Ray ray, float range)
+    {
+        Debug.DrawRay(ray.origin, ray.direction * range, Color.red);
+        Ray rightRay = new Ray(transform.position + forward, right);
+        Ray leftRay = new Ray(transform.position + forward, left);
+        DrawRay(rightRay, 6f);
+        DrawRay(leftRay, 6f);
+        float edgeRange = 6f;
+    }*/
+
+private void HandleRobotMovement()
+{
+    //Vector3[] directions = { forward, left, right, backward };
+
+    //foreach (var direction in directions)
+    //{
+        //if (CanRobotMoveInDirection(direction))
+        //{
+            //MoveCharacter(direction);
+            //return;
+        //}
+    //}
+    if (CanRobotMoveInDirection(forward))
+    {
+        MoveCharacter(forward);
+        return;
+    }
+
+    if (CanRobotMoveInDirection(left) && CanRobotMoveInDirection(right))
+    {
+        float distanceToLeft = Vector3.Distance(transform.position + left, Vector3.zero);
+        float distanceToRight = Vector3.Distance(transform.position + right, Vector3.zero);
+        MoveCharacter(distanceToLeft < distanceToRight ? left : right);
+    }
+    // detection des objets a gauche et a droite, la plus grande distance avec l'objet gagne si rien gauche
+    else if (CanRobotMoveInDirection(left))
+    {
+        MoveCharacter(left);
+    }
+    else if (CanRobotMoveInDirection(right))
+    {
+        MoveCharacter(right);
+    }
+    else if (CanRobotMoveInDirection(backward))
+    {
+        MoveCharacter(backward, true);
+    }
+}
+
+private bool CanRobotMoveInDirection(Vector3 direction)
+{
+    return CanMoveInDirection(direction) && !IsObstacleAhead(direction) && !IsWaterAhead(direction) && !IsMovingObjectAhead(direction);
+}
+
+private bool IsObstacleAhead(Vector3 direction)
+{
+    RaycastHit hit;
+    float range = 1f;
+    Vector3 halfScale = transform.localScale / 2;
+    Ray[] rays = {
+        new Ray(transform.position, direction),
+        new Ray(transform.position + new Vector3(0, 0, halfScale.z), direction),
+        new Ray(transform.position + new Vector3(0, 0, -halfScale.z), direction)
+    };
+    foreach (var ray in rays)
+    {
+        if (Physics.Raycast(ray, out hit, range) && hit.collider.CompareTag("Obstacle"))
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
+private bool IsWaterAhead(Vector3 direction)
+{
+    RaycastHit hit;
+    float range = 1f;
+    return Physics.Raycast(transform.position + direction, Vector3.down, out hit, range) && hit.collider.CompareTag("Water");
+}
+
+private bool IsMovingObjectAhead(Vector3 direction)
+{
+    Vector3 halfScale = transform.localScale / 2;
+    float frontBackRange = 1f;
+    float sideRange = 6f;
+
+    Ray[] frontBackRays = {
+        new Ray(transform.position + new Vector3(0, 0, halfScale.z), direction),
+        new Ray(transform.position + new Vector3(0, 0, -halfScale.z), direction),
+    };
+
+    Ray[] sideRays = {
+        new Ray(transform.position + new Vector3(0, 0, halfScale.z), left),
+        new Ray(transform.position + new Vector3(0, 0, -halfScale.z), left),
+        new Ray(transform.position + new Vector3(1, 0, halfScale.z), left),
+        new Ray(transform.position + new Vector3(1, 0, -halfScale.z), left),
+        new Ray(transform.position + new Vector3(-1, 0, halfScale.z), left),
+        new Ray(transform.position + new Vector3(-1, 0, -halfScale.z), left),
+        new Ray(transform.position + new Vector3(0, 0, halfScale.z), right),
+        new Ray(transform.position + new Vector3(0, 0, -halfScale.z), right),
+        new Ray(transform.position + new Vector3(1, 0, halfScale.z), right),
+        new Ray(transform.position + new Vector3(1, 0, -halfScale.z), right),
+        new Ray(transform.position + new Vector3(-1, 0, halfScale.z), right),
+        new Ray(transform.position + new Vector3(-1, 0, -halfScale.z), right)
+    };
+
+    foreach (var ray in frontBackRays)
+    {
+        if (Physics.Raycast(ray, out RaycastHit hit, frontBackRange) && hit.collider.CompareTag("Ennemy") && IsEnemyApproaching(hit, direction))
+        {
+            Debug.Log("Ennemy devant");
+            return true;
+        }
+    }
+
+    foreach (var ray in sideRays)
+    {
+        if (Physics.Raycast(ray, out RaycastHit hit, sideRange) && hit.collider.CompareTag("Ennemy") && IsEnemyApproaching(hit, direction))
+        {
+            Debug.Log("Ennemy arrive vers les cÃ´tÃ©s");
+            return true;
+        }
+    }
+
+    return false;
+}
+
+private bool IsEnemyApproaching(RaycastHit hit, Vector3 direction)
+{
+    if (hit.collider == null)
+    {
+        return false;
+    }
+
+    MovingObject movingObject = hit.collider.GetComponent<MovingObject>();
+    if (movingObject == null)
+    {
+        return false;
+    }
+
+    Vector3 enemyPosition = movingObject.transform.position;
+    float enemySpeed = movingObject.speed;
+    float distanceToPosition = Vector3.Distance(enemyPosition, transform.position + direction);
+    float timeToDestination = distanceToPosition / enemySpeed;
+
+    Debug.Log($"{hit.collider.name}: {timeToDestination}");
+
+    return timeToDestination <= 0.5f;
+}
+
+private void DrawRays()
+{
+    Vector3 halfScale = transform.localScale / 2;
+    float frontBackRange = 1f;
+    float sideRange = 6f;
+
+    Ray[] frontBackRays = {
+        new Ray(transform.position + new Vector3(0, 0, halfScale.z), forward),
+        new Ray(transform.position + new Vector3(0, 0, -halfScale.z), forward),
+        new Ray(transform.position + new Vector3(0, 0, halfScale.z), backward),
+        new Ray(transform.position + new Vector3(0, 0, -halfScale.z), backward)
+    };
+
+    Ray[] sideRays = {
+        new Ray(transform.position + new Vector3(0, 0, halfScale.z), left),
+        new Ray(transform.position + new Vector3(0, 0, -halfScale.z), left),
+        new Ray(transform.position + new Vector3(1, 0, halfScale.z), left),
+        new Ray(transform.position + new Vector3(1, 0, -halfScale.z), left),
+        new Ray(transform.position + new Vector3(-1, 0, halfScale.z), left),
+        new Ray(transform.position + new Vector3(-1, 0, -halfScale.z), left),
+        new Ray(transform.position + new Vector3(0, 0, halfScale.z), right),
+        new Ray(transform.position + new Vector3(0, 0, -halfScale.z), right),
+        new Ray(transform.position + new Vector3(1, 0, halfScale.z), right),
+        new Ray(transform.position + new Vector3(1, 0, -halfScale.z), right),
+        new Ray(transform.position + new Vector3(-1, 0, halfScale.z), right),
+        new Ray(transform.position + new Vector3(-1, 0, -halfScale.z), right)
+    };
+    https://www.google.com/search?client=firefox-b-d&q=algomius+binomiak
+    foreach (var ray in frontBackRays)
+    {
+        Debug.DrawRay(ray.origin, ray.direction * frontBackRange, Color.red);
+    }
+    
+    foreach (var ray in sideRays)
+    {
+        Debug.DrawRay(ray.origin, ray.direction * sideRange, Color.green);
+    }
+}
 
     private bool IsRailSignalOn()
     {
-        // Mettez ici la logique pour v�rifier si le signal de rail est allum�
-        // Par exemple, vous pouvez acc�der � l'instance du RailwayLightingSystem et v�rifier si la lumi�re est activ�e
+        // Mettez ici la logique pour vérifier si le signal de rail est allumé
+        // Par exemple, vous pouvez accéder à l'instance du RailwayLightingSystem et vérifier si la lumière est activée
         RailwayLightingSystem railwayLightingSystem = FindObjectOfType<RailwayLightingSystem>();
         if (railwayLightingSystem != null)
         {
             return railwayLightingSystem.IsLightOn;
         }
-        return true; // Par d�faut, retourner true si le syst�me de signal n'est pas trouv� ou si la lumi�re est allum�e
+        return true; // Par défaut, retourner true si le système de signal n'est pas trouvé ou si la lumière est allumée
     }
+
 }
