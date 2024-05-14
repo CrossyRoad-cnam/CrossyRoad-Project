@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028401, g: 0.22571425, b: 0.30692324, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028356, g: 0.22571346, b: 0.30692205, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4783,7 +4783,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4564491389238371125, guid: e9692e18a79198542955863a79f736c3, type: 3}
       propertyPath: m_TagString
-      value: Border
+      value: Ennemy
       objectReference: {fileID: 0}
     - target: {fileID: 6312735029752844917, guid: e9692e18a79198542955863a79f736c3, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4831,7 +4831,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8620809165134460723, guid: e9692e18a79198542955863a79f736c3, type: 3}
       propertyPath: m_TagString
-      value: Border
+      value: Ennemy
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

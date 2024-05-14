@@ -5,9 +5,6 @@ using UnityEngine;
 public class CoinSpawner : ObjectSpawner
 {
     [SerializeField] private GameObject coins;
-    internal new int minSpaceBetween = 0;
-    internal new int maxSpaceBetween = 12;
-
     void Start()
     {
         elements.Clear();

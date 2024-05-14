@@ -212,8 +212,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   elements: []
-  minSpaceBetween: 2
-  maxSpaceBetween: 7
+  minSpaceBetween: 0
+  maxSpaceBetween: 12
   zoneLength: 12
   startPositionOnZ: -6
   coins: {fileID: 4500142417697125587, guid: d02ad466a90c26f4fbf4601fc08efd58, type: 3}
