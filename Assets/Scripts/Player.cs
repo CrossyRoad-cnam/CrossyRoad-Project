@@ -51,6 +51,7 @@ public class Player : MonoBehaviour
     }
     private void Start()
     {
+        Time.timeScale = 0.5f;
         animator = gameObject.GetComponent<Animator>();
         skinController = SkinController.Instance;
         initialPosition = transform.position.x;
@@ -160,14 +161,27 @@ public class Player : MonoBehaviour
 
     private IEnumerator SmoothMove(Vector3 startPosition, Vector3 endPosition, float duration = ANIMATION_TIME)
     {
+        isHopping = true;
+        Transform parent = transform.parent;
+        Vector3 initialParentPosition = parent ? parent.position : Vector3.zero;
         float timeElapsed = 0;
         float height = 0.5f;
 
         while (timeElapsed < duration)
         {
+            if (parent)
+            {
+                Vector3 parentDelta = parent.position - initialParentPosition;
+                startPosition += parentDelta;
+                endPosition += parentDelta;
+                initialParentPosition = parent.position;
+            }
+            
             float animationTime = timeElapsed / duration;
             float jumpArc = height * Mathf.Sin(Mathf.PI * animationTime);
-            transform.position = new Vector3(Vector3.Lerp(startPosition, endPosition, animationTime).x, startPosition.y + jumpArc, Vector3.Lerp(startPosition, endPosition, animationTime).z);
+            Vector3 newPos = Vector3.Lerp(startPosition, endPosition, animationTime);
+            transform.position = new Vector3(newPos.x, startPosition.y + jumpArc, newPos.z);
+
             timeElapsed += Time.deltaTime;
             yield return null;
         }
@@ -176,6 +190,7 @@ public class Player : MonoBehaviour
         FinishHop();
         UpdateScore();
     }
+
 
     private void UpdateScore()
     {
