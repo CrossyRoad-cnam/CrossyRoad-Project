@@ -31,8 +31,7 @@ public class Player : MonoBehaviour
     private static readonly Vector3 left = new Vector3(0, 0, 1);
     private static readonly Vector3 right = new Vector3(0, 0, -1);
     public bool isDead {get; private set;} = false;
-    private Vector3 raycastDirection = forward;
-    
+   
 
 
     private void Awake()
@@ -70,6 +69,7 @@ public class Player : MonoBehaviour
 
             if (hasFirstMoved)
                 CheckIdleTime();
+            
         }
     }
     private void HandleMovement()
@@ -271,6 +271,7 @@ public class Player : MonoBehaviour
     {
         this.isDead = isDead;
     }
+    
     // ROBOT
     public void SetRobot(bool isRobot)
     {
