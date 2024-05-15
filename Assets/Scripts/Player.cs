@@ -372,9 +372,9 @@ public class Player : MonoBehaviour
         bool rectifieFirst = false;
         bool rectifie = false;
 
-        Vector3 rightPosition = (Player.Instance.transform.position+direction) - Vector3.forward * 0.5f;
+        Vector3 rightPosition = (Player.Instance.transform.position + direction) - Vector3.forward * 0.5f;
         Vector3 middlePosition = (Player.Instance.transform.position + direction);
-        Vector3 leftPosition = (Player.Instance.transform.position+direction) + Vector3.forward * 0.5f;
+        Vector3 leftPosition = (Player.Instance.transform.position + direction) + Vector3.forward * 0.5f;
         Vector2 actualPosition = Player.Instance.transform.position;
         Vector3 downDirection = Vector3.down;
         // recuperer le gameObject devant le joueur. 
@@ -382,68 +382,68 @@ public class Player : MonoBehaviour
 
         RaycastHit leftHit, rightHit, hit, middlehit, actualHit;
 
-        if (direction == Vector3.forward) { 
+        if (direction == Vector3.forward) {
             if (Physics.Raycast(actualPosition, downDirection, out actualHit, raycastDistance) && actualHit.collider.CompareTag("Water"))
             {
-                    bool isRightSide;
-                    MovingObjectSpawner movingObjectSpawn = actualHit.collider.GetComponent<MovingObjectSpawner>();
-                    if (movingObjectSpawn != null)
+                bool isRightSide;
+                MovingObjectSpawner movingObjectSpawn = actualHit.collider.GetComponent<MovingObjectSpawner>();
+                if (movingObjectSpawn != null)
+                {
+                    isRightSide = movingObjectSpawn.isRightSide;
+                    if (isRightSide && !rectifieFirst)
                     {
-                        isRightSide = movingObjectSpawn.isRightSide;
-                        if (isRightSide && !rectifieFirst)
-                        {
-                            Debug.Log("de droite a gauche");
-                        middlePosition -= (Vector3.right * 0.3f);
-                        rightPosition -= (Vector3.right * 0.3f);
-                        leftPosition -= (Vector3.right * 0.3f);
+                        Debug.Log("de droite a gauche");
+                        middlePosition += (Vector3.right * 0.2f);
+                        rightPosition += (Vector3.right * 0.2f);
+                        leftPosition += (Vector3.right * 0.2f);
                         rectifieFirst = true;
 
-                        }
-                        else if (!isRightSide && !rectifieFirst)
-                        {
-                            Debug.Log("de gauche a droite");
-                        middlePosition += (Vector3.right * 0.3f);
-                        rightPosition += (Vector3.right * 0.3f);
-                        leftPosition += (Vector3.right * 0.3f);
+                    }
+                    else if (!isRightSide && !rectifieFirst)
+                    {
+                        Debug.Log("de gauche a droite");
+                        middlePosition -= (Vector3.right * 0.2f);
+                        rightPosition -= (Vector3.right * 0.2f);
+                        leftPosition -= (Vector3.right * 0.2f);
                         rectifieFirst = true;
-                        }
-                    
+                    }
+
                 }
             }
             if (Physics.Raycast(middlePosition, downDirection, out hit, raycastDistance) && hit.collider.CompareTag("Water"))
             {
-                    bool isRightSide;
-                    MovingObjectSpawner movingObjectSpawn = hit.collider.GetComponent<MovingObjectSpawner>();
-                    if (movingObjectSpawn != null)
+                bool isRightSide;
+                MovingObjectSpawner movingObjectSpawn = hit.collider.GetComponent<MovingObjectSpawner>();
+                if (movingObjectSpawn != null)
+                {
+                    isRightSide = movingObjectSpawn.isRightSide;
+                    if (isRightSide && !rectifie)
                     {
-                        isRightSide = movingObjectSpawn.isRightSide;
-                        if (isRightSide && !rectifie)
-                        {
-                            Debug.Log("de droite a gauche");
-                            middlePosition += (Vector3.right * 0.3f);
-                            rightPosition += (Vector3.right * 0.3f);
-                            leftPosition += (Vector3.right * 0.3f);
-                            rectifie = true;
-                        }
-                        else if(!isRightSide && !rectifie)
-                        {
-                            Debug.Log("de gauche a droite");
-                            middlePosition -= (Vector3.right * 0.3f);
-                            rightPosition -= (Vector3.right * 0.3f);
-                            leftPosition -= (Vector3.right * 0.3f);
-                            rectifie = true;
-                        }
-
+                        Debug.Log("de droite a gauche");
+                        middlePosition += (Vector3.right * 0.2f);
+                        rightPosition += (Vector3.right * 0.2f);
+                        leftPosition += (Vector3.right * 0.2f);
+                        rectifie = true;
                     }
+                    else if (!isRightSide && !rectifie)
+                    {
+                        Debug.Log("de gauche a droite");
+                        middlePosition -= (Vector3.right * 0.2f);
+                        rightPosition -= (Vector3.right * 0.2f);
+                        leftPosition -= (Vector3.right * 0.2f);
+                        rectifie = true;
+                    }
+
                 }
+            }
 
         }
 
         if (Physics.Raycast(middlePosition, downDirection, out middlehit, raycastDistance))
         {
-            if (direction == Vector3.forward) { 
-            Debug.DrawRay(middlePosition, downDirection * raycastDistance, Color.blue);
-        }
+            if (direction == Vector3.forward) {
+                Debug.DrawRay(middlePosition, downDirection * raycastDistance, Color.blue);
+            }
 
             if (middlehit.collider.CompareTag("Water"))
             {
@@ -465,15 +465,16 @@ public class Player : MonoBehaviour
         }
         if (Physics.Raycast(rightPosition, downDirection, out rightHit, raycastDistance))
         {
-            if (direction == Vector3.forward) { 
-            Debug.DrawRay(rightPosition, downDirection * raycastDistance, Color.yellow);
+            if (direction == Vector3.forward) {
+                Debug.DrawRay(rightPosition, downDirection * raycastDistance, Color.yellow);
             }
             if (rightHit.collider.CompareTag("Water"))
             {
                 waterCount++;
             }
         }
-
+        if (!Physics.Raycast(middlePosition, downDirection, out middlehit, raycastDistance) && middlehit.collider.CompareTag("Nenuphar"))
+        { return waterCount >= 2; }
         return waterCount >= 1;
     }
 
