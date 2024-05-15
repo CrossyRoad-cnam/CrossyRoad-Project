@@ -23,7 +23,7 @@ public class Player : MonoBehaviour
     private float idleTime = 0;
     private const float IDLE_TIME_LIMIT = 7.0f;
     private const int MAX_BACKSTEPS = 3;
-    private const float ANIMATION_TIME = 0.2f;
+    private const float ANIMATION_TIME = 0.15f;
     private int backStepsCounter;
     private bool hasFirstMoved = false;
     private static readonly Vector3 forward = new Vector3(1, 0, 0);
@@ -168,19 +168,38 @@ public class Player : MonoBehaviour
     private IEnumerator SmoothMove(Vector3 startPosition, Vector3 endPosition, float duration = ANIMATION_TIME)
     {
         isHopping = true;
+        Transform parent = transform.parent;
+        Vector3 initialParentPosition = parent != null ? parent.position : Vector3.zero;
 
         float timeElapsed = 0;
-        float height = 1f;
+        float height = 0.5f;
 
         while (timeElapsed < duration)
         {
+            if (parent != null)
+            {
+                Vector3 parentDelta = parent.position - initialParentPosition;
+                startPosition += parentDelta;
+                endPosition += parentDelta;
+                initialParentPosition = parent.position;
+            }
 
             float animationTime = timeElapsed / duration;
             float jumpArc = height * Mathf.Sin(Mathf.PI * animationTime);
-            transform.position = new Vector3(Vector3.Lerp(startPosition, endPosition, animationTime).x, startPosition.y + jumpArc, Vector3.Lerp(startPosition, endPosition, animationTime).z);
+            Vector3 newPos = Vector3.Lerp(startPosition, endPosition, animationTime);
+            transform.position = new Vector3(newPos.x, startPosition.y + jumpArc, newPos.z);
+
             timeElapsed += Time.deltaTime;
             yield return null;
         }
+
+        if (parent != null)
+        {
+            Vector3 parentDelta = parent.position - initialParentPosition;
+            startPosition += parentDelta;
+            endPosition += parentDelta;
+        }
+
         smoothMoveCoroutine = null;
         transform.position = endPosition;
         FinishHop();
@@ -346,9 +365,74 @@ public class Player : MonoBehaviour
 
     private bool IsWaterAhead(Vector3 direction)
     {
-        RaycastHit hit;
-        float range = 1f;
-        return Physics.Raycast(transform.position + direction, Vector3.down, out hit, range) && hit.collider.CompareTag("Water");
+
+        int waterCount = 0;
+
+        float raycastDistance = 2f;
+
+        Vector3 leftPosition = (Player.Instance.transform.position+direction) - Vector3.forward * 0.5f;
+        Vector3 middlePosition = (Player.Instance.transform.position + direction);
+        Vector3 rightPosition = (Player.Instance.transform.position+direction) + Vector3.forward * 0.5f;
+        Vector3 downDirection = Vector3.down;
+        // recuperer le gameObject devant le joueur. 
+        RaycastHit leftHit, rightHit, hit, middlehit;
+
+        if (Physics.Raycast(middlePosition, downDirection, out hit, raycastDistance))
+        {
+            if (hit.collider.CompareTag("Water"))
+            {
+
+                bool isRightSide;
+                MovingObjectSpawner movingObjectSpawn = hit.collider.GetComponent<MovingObjectSpawner>();
+                if (movingObjectSpawn != null)
+                {
+                    isRightSide = movingObjectSpawn.isRightSide;
+                    if (isRightSide)
+                    {
+                        middlePosition -= Vector3.forward * 0.5f;
+                        rightPosition -= Vector3.forward * 0.5f;
+                        leftPosition -= Vector3.forward * 0.5f;
+
+                    }
+                    else
+                    {
+                        middlePosition += Vector3.forward * 0.5f;
+                        rightPosition += Vector3.forward * 0.5f;
+                        leftPosition += Vector3.forward * 0.5f;
+                    }
+
+                }
+
+            }
+
+        }
+
+        if (Physics.Raycast(middlePosition, downDirection, out middlehit, raycastDistance))
+        {
+
+            if (middlehit.collider.CompareTag("Water"))
+            {
+                waterCount++;
+            }
+        }
+
+
+        if (Physics.Raycast(leftPosition, downDirection, out leftHit, raycastDistance))
+        {
+            if (leftHit.collider.CompareTag("Water"))
+            {
+                waterCount++;
+            }
+        }
+        if (Physics.Raycast(rightPosition, downDirection, out rightHit, raycastDistance))
+        {
+            if (rightHit.collider.CompareTag("Water"))
+            {
+                waterCount++;
+            }
+        }
+
+        return waterCount >= 2;
     }
 
     private bool IsMovingObjectAhead(Vector3 direction)
