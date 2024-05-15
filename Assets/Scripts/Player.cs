@@ -23,7 +23,7 @@ public class Player : MonoBehaviour
     private float idleTime = 0;
     private const float IDLE_TIME_LIMIT = 7.0f;
     private const int MAX_BACKSTEPS = 3;
-    private const float ANIMATION_TIME = 0.15f;
+    private const float ANIMATION_TIME = 0.2f;
     private int backStepsCounter;
     private bool hasFirstMoved = false;
     private static readonly Vector3 forward = new Vector3(1, 0, 0);
@@ -31,8 +31,9 @@ public class Player : MonoBehaviour
     private static readonly Vector3 left = new Vector3(0, 0, 1);
     private static readonly Vector3 right = new Vector3(0, 0, -1);
     public bool isDead {get; private set;} = false;
-   
-
+    private Vector3 raycastDirection = forward;
+    private Vector3 raycastDirection = forward;
+    private Coroutine smoothMoveCoroutine;
 
     private void Awake()
     {
@@ -151,28 +152,36 @@ public class Player : MonoBehaviour
     }
     private void PerformMove(Vector3 direction)
     {
-        isHopping = true;
-        AudioController audio = gameObject.GetComponent<AudioController>();
-        audio.PlayAll();
-        StartCoroutine(SmoothMove(transform.position, transform.position + direction));
-        RotateCharacter(direction);
-        terrainGenerator.SpawnTerrain(false, transform.position);
+        if (!isHopping) {
+            if (smoothMoveCoroutine != null)
+            {
+                return;
+            }
+            AudioController audio = gameObject.GetComponent<AudioController>();
+            audio.PlayAll();
+            smoothMoveCoroutine = StartCoroutine(SmoothMove(transform.position, transform.position + direction));
+            RotateCharacter(direction);
+            terrainGenerator.SpawnTerrain(false, transform.position);
+        }
     }
 
     private IEnumerator SmoothMove(Vector3 startPosition, Vector3 endPosition, float duration = ANIMATION_TIME)
     {
+        isHopping = true;
+
         float timeElapsed = 0;
-        float height = 0.5f;
+        float height = 1f;
 
         while (timeElapsed < duration)
         {
+
             float animationTime = timeElapsed / duration;
             float jumpArc = height * Mathf.Sin(Mathf.PI * animationTime);
             transform.position = new Vector3(Vector3.Lerp(startPosition, endPosition, animationTime).x, startPosition.y + jumpArc, Vector3.Lerp(startPosition, endPosition, animationTime).z);
             timeElapsed += Time.deltaTime;
             yield return null;
         }
-
+        smoothMoveCoroutine = null;
         transform.position = endPosition;
         FinishHop();
         UpdateScore();
@@ -198,15 +207,12 @@ public class Player : MonoBehaviour
     {
         Vector3 position = transform.position;
         position.x = Mathf.Round(position.x);
-        Debug.Log("Position x : " + position.x);
         position.z = Mathf.Round(position.z);
-        Debug.Log("Position y : "+ position.z);
         transform.position = position;
     }
     private void OnCollisionEnter(Collision collision)
     {
 
-        FixPlayerPosition();
         if (collision.collider.GetComponent<MovingObject>() != null)
         {
             if (collision.collider.GetComponent<MovingObject>().isJumpable)
@@ -216,6 +222,7 @@ public class Player : MonoBehaviour
         }
         else
         {
+            FixPlayerPosition();
             transform.parent = null;
         }
     }
@@ -376,7 +383,6 @@ public class Player : MonoBehaviour
             DrawRays(ray, frontBackRange);
             if (Physics.Raycast(ray, out RaycastHit hit, frontBackRange) && hit.collider.CompareTag("Ennemy") && IsEnemyApproaching(hit, direction))
             {
-                    Debug.Log(hit.collider.name);
                     return true;
             }
         }
@@ -386,7 +392,6 @@ public class Player : MonoBehaviour
             DrawRays(ray, sideRange);
             if (Physics.Raycast(ray, out RaycastHit hit, sideRange) && hit.collider.CompareTag("Ennemy") && IsEnemyApproaching(hit, direction))
             {
-                  Debug.Log(hit.collider.name);
                     return true;
             }
         }
