@@ -476,7 +476,7 @@ public class Player : MonoBehaviour
             Debug.Log("Nenupar");
             return waterCount >= 2; 
         }
-        return waterCount >= 1;
+        return waterCount >= 2;
     }
 
     private bool IsMovingObjectAhead(Vector3 direction)
