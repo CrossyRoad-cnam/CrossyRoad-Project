@@ -32,8 +32,8 @@ public class Player : MonoBehaviour
     private static readonly Vector3 right = new Vector3(0, 0, -1);
     public bool isDead {get; private set;} = false;
     private Vector3 raycastDirection = forward;
-    private Vector3 raycastDirection = forward;
-    private Coroutine smoothMoveCoroutine;
+    private Coroutine smoothMoveCoroutine; // Ajoutez une variable pour stocker la coroutine en cours
+
 
     private void Awake()
     {
