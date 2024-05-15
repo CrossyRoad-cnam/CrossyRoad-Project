@@ -114,7 +114,7 @@ public class SkinController : MonoBehaviour
     }
     private void DisplayCoinScore()
     {
-        CoinText.text = "coin: " + coinManager.GetCoinScore();
+        CoinText.text = coinManager.GetCoinScore().ToString();
     }
     private void UpdateButtonsStatus()
     {
