@@ -25,13 +25,19 @@ public class GameOverManager : MonoBehaviour
     }
     public void RestartGame()
     {
-        Destroy(Player.Instance.gameObject);
+        if (Player.Instance != null) { 
+            Destroy(Player.Instance.gameObject);
+        }
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         Time.timeScale = 1f;
+
     }
     public void QuitGame()
     {
-        Destroy(Player.Instance.gameObject);
+        if (Player.Instance != null)
+        {
+            Destroy(Player.Instance.gameObject);
+        }
         Time.timeScale = 1f;
         SceneManager.LoadScene(0);
     }

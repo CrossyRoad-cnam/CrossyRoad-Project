@@ -198,11 +198,15 @@ public class Player : MonoBehaviour
     {
         Vector3 position = transform.position;
         position.x = Mathf.Round(position.x);
+        Debug.Log("Position x : " + position.x);
         position.z = Mathf.Round(position.z);
+        Debug.Log("Position y : "+ position.z);
         transform.position = position;
     }
     private void OnCollisionEnter(Collision collision)
     {
+
+        FixPlayerPosition();
         if (collision.collider.GetComponent<MovingObject>() != null)
         {
             if (collision.collider.GetComponent<MovingObject>().isJumpable)
@@ -213,7 +217,6 @@ public class Player : MonoBehaviour
         else
         {
             transform.parent = null;
-            FixPlayerPosition();
         }
     }
     private void CheckIdleTime()

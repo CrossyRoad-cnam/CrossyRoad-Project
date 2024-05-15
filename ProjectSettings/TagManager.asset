@@ -10,6 +10,7 @@ TagManager:
   - Water
   - Border
   - Rail
+  - Log
   layers:
   - Default
   - TransparentFX
