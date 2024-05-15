@@ -316,7 +316,7 @@ public class Player : MonoBehaviour
             MoveCharacter(forward);
             return;
         }
-        if (Physics.Raycast(actualPosition, downDirection, out mid, raycastDistance) && !mid.collider.CompareTag("Nenuphar"))
+        if (Physics.Raycast(actualPosition, downDirection, out mid, raycastDistance) && !mid.collider.CompareTag("Nenuphar") && !mid.collider.CompareTag("Log"))
         { 
                 if (CanRobotMoveInDirection(left) && CanRobotMoveInDirection(right))
             {
@@ -392,7 +392,6 @@ public class Player : MonoBehaviour
 
         RaycastHit leftHit, rightHit, hit, middlehit, actualHit, mid;
 
-        if (direction == Vector3.forward) {
             if (Physics.Raycast(actualPosition, downDirection, out actualHit, raycastDistance) && actualHit.collider.CompareTag("Water"))
             {
                 bool isRightSide;
@@ -402,17 +401,17 @@ public class Player : MonoBehaviour
                     isRightSide = movingObjectSpawn.isRightSide;
                     if (isRightSide && !rectifieFirst)
                     {
-                        middlePosition += (Vector3.right * 0.2f);
-                        rightPosition += (Vector3.right * 0.2f);
-                        leftPosition += (Vector3.right * 0.2f);
+                        middlePosition += (Vector3.right * 0.4f);
+                        rightPosition += (Vector3.right * 0.4f);
+                        leftPosition += (Vector3.right * 0.4f);
                         rectifieFirst = true;
 
                     }
                     else if (!isRightSide && !rectifieFirst)
                     {
-                        middlePosition -= (Vector3.right * 0.2f);
-                        rightPosition -= (Vector3.right * 0.2f);
-                        leftPosition -= (Vector3.right * 0.2f);
+                        middlePosition -= (Vector3.right * 0.4f);
+                        rightPosition -= (Vector3.right * 0.4f);
+                        leftPosition -= (Vector3.right * 0.4f);
                         rectifieFirst = true;
                     }
 
@@ -427,29 +426,26 @@ public class Player : MonoBehaviour
                     isRightSide = movingObjectSpawn.isRightSide;
                     if (isRightSide && !rectifie)
                     {
-                        middlePosition += (Vector3.right * 0.2f);
-                        rightPosition += (Vector3.right * 0.2f);
-                        leftPosition += (Vector3.right * 0.2f);
+                        middlePosition += (Vector3.right * 0.4f);
+                        rightPosition += (Vector3.right * 0.4f);
+                        leftPosition += (Vector3.right * 0.4f);
                         rectifie = true;
                     }
                     else if (!isRightSide && !rectifie)
                     {
-                        middlePosition -= (Vector3.right * 0.2f);
-                        rightPosition -= (Vector3.right * 0.2f);
-                        leftPosition -= (Vector3.right * 0.2f);
+                        middlePosition -= (Vector3.right * 0.4f);
+                        rightPosition -= (Vector3.right * 0.4f);
+                        leftPosition -= (Vector3.right * 0.4f);
                         rectifie = true;
                     }
 
                 }
             }
 
-        }
+        
 
         if (Physics.Raycast(middlePosition, downDirection, out middlehit, raycastDistance))
         {
-            if (direction == Vector3.forward) {
-                Debug.DrawRay(middlePosition, downDirection * raycastDistance, Color.blue);
-            }
 
             if (middlehit.collider.CompareTag("Water"))
             {
@@ -460,10 +456,6 @@ public class Player : MonoBehaviour
 
         if (Physics.Raycast(leftPosition, downDirection, out leftHit, raycastDistance))
         {
-            if (direction == Vector3.forward)
-            {
-                Debug.DrawRay(leftPosition, downDirection * raycastDistance, Color.magenta);
-            }
             if (leftHit.collider.CompareTag("Water"))
             {
                 waterCount++;
@@ -479,10 +471,11 @@ public class Player : MonoBehaviour
                 waterCount++;
             }
         }
-        if (!Physics.Raycast(middleMidlle, downDirection, out mid, raycastDistance) && mid.collider.CompareTag("Nenuphar"))
+        if (Physics.Raycast(middleMidlle, downDirection, out mid, raycastDistance) && mid.collider.CompareTag("Nenuphar"))
         {
             Debug.Log("Nenupar");
-            return waterCount >= 2; }
+            return waterCount >= 2; 
+        }
         return waterCount >= 1;
     }
 
