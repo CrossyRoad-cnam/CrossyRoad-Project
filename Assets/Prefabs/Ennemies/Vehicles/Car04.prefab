@@ -102,7 +102,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 0.0084, y: 0.0095999995, z: 0.0132}
-  m_Center: {x: 0, y: 0.0047999998, z: -3.410605e-17}
+  m_Center: {x: 0, y: 0.0047999998, z: 0}
 --- !u!114 &7568658381139100708
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -148,5 +148,4 @@ MonoBehaviour:
   isPlayWhenGameOver: 0
   playOnAwake: 0
   IsLoop: 0
-  gameOverManager: {fileID: 0}
   maxDistance: 3
