@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using System.Threading;
 using TMPro;
 using UnityEngine;
@@ -305,30 +306,37 @@ public class Player : MonoBehaviour
     }
     private void HandleRobotMovement()
     {
+        float raycastDistance = 1.5f;
+        RaycastHit mid;
+        Vector3 actualPosition = Player.Instance.transform.position;
+        Vector3 downDirection = Vector3.down;
+
         if (CanRobotMoveInDirection(forward))
         {
             MoveCharacter(forward);
             return;
         }
-
-        if (CanRobotMoveInDirection(left) && CanRobotMoveInDirection(right))
-        {
-            float distanceToLeft = Vector3.Distance(transform.position + left, Vector3.zero);
-            float distanceToRight = Vector3.Distance(transform.position + right, Vector3.zero);
-            MoveCharacter(distanceToLeft < distanceToRight ? left : right);
-        }
-        // detection des objets a gauche et a droite, la plus grande distance avec l'objet gagne si rien gauche
-        else if (CanRobotMoveInDirection(left))
-        {
-            MoveCharacter(left);
-        }
-        else if (CanRobotMoveInDirection(right))
-        {
-            MoveCharacter(right);
-        }
-        else if (CanRobotMoveInDirection(backward))
-        {
-            MoveCharacter(backward, true);
+        if (Physics.Raycast(actualPosition, downDirection, out mid, raycastDistance) && !mid.collider.CompareTag("Nenuphar"))
+        { 
+                if (CanRobotMoveInDirection(left) && CanRobotMoveInDirection(right))
+            {
+                float distanceToLeft = Vector3.Distance(transform.position + left, Vector3.zero);
+                float distanceToRight = Vector3.Distance(transform.position + right, Vector3.zero);
+                MoveCharacter(distanceToLeft < distanceToRight ? left : right);
+            }
+            // detection des objets a gauche et a droite, la plus grande distance avec l'objet gagne si rien gauche
+            else if (CanRobotMoveInDirection(left))
+            {
+                MoveCharacter(left);
+            }
+            else if (CanRobotMoveInDirection(right))
+            {
+                MoveCharacter(right);
+            }
+            else if (CanRobotMoveInDirection(backward))
+            {
+                MoveCharacter(backward, true);
+            }
         }
     }
 
@@ -374,13 +382,15 @@ public class Player : MonoBehaviour
 
         Vector3 rightPosition = (Player.Instance.transform.position + direction) - Vector3.forward * 0.5f;
         Vector3 middlePosition = (Player.Instance.transform.position + direction);
+        Vector3 middleMidlle = (Player.Instance.transform.position + direction);
+
         Vector3 leftPosition = (Player.Instance.transform.position + direction) + Vector3.forward * 0.5f;
-        Vector2 actualPosition = Player.Instance.transform.position;
+        Vector3 actualPosition = Player.Instance.transform.position;
         Vector3 downDirection = Vector3.down;
         // recuperer le gameObject devant le joueur. 
 
 
-        RaycastHit leftHit, rightHit, hit, middlehit, actualHit;
+        RaycastHit leftHit, rightHit, hit, middlehit, actualHit, mid;
 
         if (direction == Vector3.forward) {
             if (Physics.Raycast(actualPosition, downDirection, out actualHit, raycastDistance) && actualHit.collider.CompareTag("Water"))
@@ -392,7 +402,6 @@ public class Player : MonoBehaviour
                     isRightSide = movingObjectSpawn.isRightSide;
                     if (isRightSide && !rectifieFirst)
                     {
-                        Debug.Log("de droite a gauche");
                         middlePosition += (Vector3.right * 0.2f);
                         rightPosition += (Vector3.right * 0.2f);
                         leftPosition += (Vector3.right * 0.2f);
@@ -401,7 +410,6 @@ public class Player : MonoBehaviour
                     }
                     else if (!isRightSide && !rectifieFirst)
                     {
-                        Debug.Log("de gauche a droite");
                         middlePosition -= (Vector3.right * 0.2f);
                         rightPosition -= (Vector3.right * 0.2f);
                         leftPosition -= (Vector3.right * 0.2f);
@@ -419,7 +427,6 @@ public class Player : MonoBehaviour
                     isRightSide = movingObjectSpawn.isRightSide;
                     if (isRightSide && !rectifie)
                     {
-                        Debug.Log("de droite a gauche");
                         middlePosition += (Vector3.right * 0.2f);
                         rightPosition += (Vector3.right * 0.2f);
                         leftPosition += (Vector3.right * 0.2f);
@@ -427,7 +434,6 @@ public class Player : MonoBehaviour
                     }
                     else if (!isRightSide && !rectifie)
                     {
-                        Debug.Log("de gauche a droite");
                         middlePosition -= (Vector3.right * 0.2f);
                         rightPosition -= (Vector3.right * 0.2f);
                         leftPosition -= (Vector3.right * 0.2f);
@@ -473,8 +479,10 @@ public class Player : MonoBehaviour
                 waterCount++;
             }
         }
-        if (!Physics.Raycast(middlePosition, downDirection, out middlehit, raycastDistance) && middlehit.collider.CompareTag("Nenuphar"))
-        { return waterCount >= 2; }
+        if (!Physics.Raycast(middleMidlle, downDirection, out mid, raycastDistance) && mid.collider.CompareTag("Nenuphar"))
+        {
+            Debug.Log("Nenupar");
+            return waterCount >= 2; }
         return waterCount >= 1;
     }
 
