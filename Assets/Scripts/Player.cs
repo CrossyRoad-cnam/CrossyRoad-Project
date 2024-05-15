@@ -31,7 +31,7 @@ public class Player : MonoBehaviour
     private static readonly Vector3 left = new Vector3(0, 0, 1);
     private static readonly Vector3 right = new Vector3(0, 0, -1);
     public bool isDead {get; private set;} = false;
-   
+    private Coroutine smoothMoveCoroutine; // Ajoutez une variable pour stocker la coroutine en cours
 
 
     private void Awake()
@@ -51,7 +51,6 @@ public class Player : MonoBehaviour
     }
     private void Start()
     {
-        Time.timeScale = 0.5f;
         animator = gameObject.GetComponent<Animator>();
         skinController = SkinController.Instance;
         initialPosition = transform.position.x;
@@ -151,12 +150,17 @@ public class Player : MonoBehaviour
     }
     private void PerformMove(Vector3 direction)
     {
-        isHopping = true;
-        AudioController audio = gameObject.GetComponent<AudioController>();
-        audio.PlayAll();
-        StartCoroutine(SmoothMove(transform.position, transform.position + direction));
-        RotateCharacter(direction);
-        terrainGenerator.SpawnTerrain(false, transform.position);
+        if (!isHopping) {
+            if (smoothMoveCoroutine != null)
+            {
+                return;
+            }
+            AudioController audio = gameObject.GetComponent<AudioController>();
+            audio.PlayAll();
+            smoothMoveCoroutine = StartCoroutine(SmoothMove(transform.position, transform.position + direction));
+            RotateCharacter(direction);
+            terrainGenerator.SpawnTerrain(false, transform.position);
+        }
     }
 
     private IEnumerator SmoothMove(Vector3 startPosition, Vector3 endPosition, float duration = ANIMATION_TIME)
@@ -185,12 +189,11 @@ public class Player : MonoBehaviour
             timeElapsed += Time.deltaTime;
             yield return null;
         }
-
+        smoothMoveCoroutine = null;
         transform.position = endPosition;
         FinishHop();
         UpdateScore();
     }
-
 
     private void UpdateScore()
     {
@@ -226,8 +229,8 @@ public class Player : MonoBehaviour
         }
         else
         {
-            transform.parent = null;
             FixPlayerPosition();
+            transform.parent = null;
         }
     }
     private void CheckIdleTime()
@@ -282,6 +285,7 @@ public class Player : MonoBehaviour
     {
         this.isDead = isDead;
     }
+    
     // ROBOT
     public void SetRobot(bool isRobot)
     {
@@ -387,6 +391,7 @@ public class Player : MonoBehaviour
             new Ray(transform.position + new Vector3(-1, 0, -halfScale.z), right)
         };
 
+
         foreach (var ray in frontBackRays)
         {
             DrawRays(ray, frontBackRange, Color.black);
@@ -422,6 +427,11 @@ public class Player : MonoBehaviour
 
     private bool IsEnemyApproaching(RaycastHit hit, Vector3 direction)
     {
+        if (!hit.collider)
+        {
+            return false;
+        }
+
         MovingObject movingObject = hit.collider.GetComponent<MovingObject>();
         if (!movingObject)
         {

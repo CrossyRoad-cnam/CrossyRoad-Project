@@ -14,6 +14,12 @@ public class KillPlayer : MonoBehaviour
         gameOverManager = FindObjectOfType<GameOverManager>();
         scoreManager = FindObjectOfType<ScoreManager>();
     }
+
+    void Update()
+    {
+        if (!Player.Instance.isDead && !Player.Instance.isRobot)
+            CheckWaterBelow();
+    }
     private void ProcessGameOver()
     {
         gameOverManager.GameOver();
@@ -41,5 +47,11 @@ public class KillPlayer : MonoBehaviour
             Debug.Log("Player was killed. GAME OVER");
             ProcessGameOver();
         }
+    }
+    private void CheckWaterBelow()
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(Player.Instance.transform.position, Vector3.down, out hit,1f) && hit.collider.CompareTag("Water"))
+            ProcessGameOver();
     }
 }

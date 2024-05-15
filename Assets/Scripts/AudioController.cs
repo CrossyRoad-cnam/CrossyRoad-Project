@@ -69,6 +69,7 @@ public class AudioController : MonoBehaviour
 
     public void PlayAll()
     {
+        LoadVolume();
         if (audioSource.clip == null)
         {
             return;
@@ -85,6 +86,7 @@ public class AudioController : MonoBehaviour
 
     public void Play()
     {
+        LoadVolume();
         if (audioSource.clip == null)
         {
             return;
