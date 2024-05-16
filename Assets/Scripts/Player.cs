@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using System.Threading;
 using TMPro;
 using UnityEngine;
@@ -173,14 +174,12 @@ public class Player : MonoBehaviour
 
         while (timeElapsed < duration)
         {
-            if (parent)
             {
                 Vector3 parentDelta = parent.position - initialParentPosition;
                 startPosition += parentDelta;
                 endPosition += parentDelta;
                 initialParentPosition = parent.position;
             }
-            
             float animationTime = timeElapsed / duration;
             float jumpArc = height * Mathf.Sin(Mathf.PI * animationTime);
             Vector3 newPos = Vector3.Lerp(startPosition, endPosition, animationTime);
@@ -189,6 +188,14 @@ public class Player : MonoBehaviour
             timeElapsed += Time.deltaTime;
             yield return null;
         }
+
+        if (parent != null)
+        {
+            Vector3 parentDelta = parent.position - initialParentPosition;
+            startPosition += parentDelta;
+            endPosition += parentDelta;
+        }
+
         smoothMoveCoroutine = null;
         transform.position = endPosition;
         FinishHop();
@@ -293,30 +300,37 @@ public class Player : MonoBehaviour
     }
     private void HandleRobotMovement()
     {
+        float raycastDistance = 1.5f;
+        RaycastHit mid;
+        Vector3 actualPosition = Player.Instance.transform.position;
+        Vector3 downDirection = Vector3.down;
+
         if (CanRobotMoveInDirection(forward))
         {
             MoveCharacter(forward);
             return;
         }
-
-        if (CanRobotMoveInDirection(left) && CanRobotMoveInDirection(right))
-        {
-            float distanceToLeft = Vector3.Distance(transform.position + left, Vector3.zero);
-            float distanceToRight = Vector3.Distance(transform.position + right, Vector3.zero);
-            MoveCharacter(distanceToLeft < distanceToRight ? left : right);
-        }
-        // detection des objets a gauche et a droite, la plus grande distance avec l'objet gagne si rien gauche
-        else if (CanRobotMoveInDirection(left))
-        {
-            MoveCharacter(left);
-        }
-        else if (CanRobotMoveInDirection(right))
-        {
-            MoveCharacter(right);
-        }
-        else if (CanRobotMoveInDirection(backward))
-        {
-            MoveCharacter(backward, true);
+        if (Physics.Raycast(actualPosition, downDirection, out mid, raycastDistance) && !mid.collider.CompareTag("Nenuphar") && !mid.collider.CompareTag("Log"))
+        { 
+                if (CanRobotMoveInDirection(left) && CanRobotMoveInDirection(right))
+            {
+                float distanceToLeft = Vector3.Distance(transform.position + left, Vector3.zero);
+                float distanceToRight = Vector3.Distance(transform.position + right, Vector3.zero);
+                MoveCharacter(distanceToLeft < distanceToRight ? left : right);
+            }
+            // detection des objets a gauche et a droite, la plus grande distance avec l'objet gagne si rien gauche
+            else if (CanRobotMoveInDirection(left))
+            {
+                MoveCharacter(left);
+            }
+            else if (CanRobotMoveInDirection(right))
+            {
+                MoveCharacter(right);
+            }
+            else if (CanRobotMoveInDirection(backward))
+            {
+                MoveCharacter(backward, true);
+            }
         }
     }
 
@@ -353,9 +367,110 @@ public class Player : MonoBehaviour
 
     private bool IsWaterAhead(Vector3 direction)
     {
-        RaycastHit hit;
-        float range = 1f;
-        return Physics.Raycast(transform.position + direction, Vector3.down, out hit, range) && hit.collider.CompareTag("Water");
+
+        int waterCount = 0;
+
+        float raycastDistance = 2f;
+        bool rectifieFirst = false;
+        bool rectifie = false;
+
+        Vector3 rightPosition = (Player.Instance.transform.position + direction) - Vector3.forward * 0.5f;
+        Vector3 middlePosition = (Player.Instance.transform.position + direction);
+        Vector3 middleMidlle = (Player.Instance.transform.position + direction);
+
+        Vector3 leftPosition = (Player.Instance.transform.position + direction) + Vector3.forward * 0.5f;
+        Vector3 actualPosition = Player.Instance.transform.position;
+        Vector3 downDirection = Vector3.down;
+        // recuperer le gameObject devant le joueur. 
+
+
+        RaycastHit leftHit, rightHit, hit, middlehit, actualHit, mid;
+
+            if (Physics.Raycast(actualPosition, downDirection, out actualHit, raycastDistance) && actualHit.collider.CompareTag("Water"))
+            {
+                bool isRightSide;
+                MovingObjectSpawner movingObjectSpawn = actualHit.collider.GetComponent<MovingObjectSpawner>();
+                if (movingObjectSpawn != null)
+                {
+                    isRightSide = movingObjectSpawn.isRightSide;
+                    if (isRightSide && !rectifieFirst)
+                    {
+                        middlePosition += (Vector3.right * 0.4f);
+                        rightPosition += (Vector3.right * 0.4f);
+                        leftPosition += (Vector3.right * 0.4f);
+                        rectifieFirst = true;
+
+                    }
+                    else if (!isRightSide && !rectifieFirst)
+                    {
+                        middlePosition -= (Vector3.right * 0.4f);
+                        rightPosition -= (Vector3.right * 0.4f);
+                        leftPosition -= (Vector3.right * 0.4f);
+                        rectifieFirst = true;
+                    }
+
+                }
+            }
+            if (Physics.Raycast(middlePosition, downDirection, out hit, raycastDistance) && hit.collider.CompareTag("Water"))
+            {
+                bool isRightSide;
+                MovingObjectSpawner movingObjectSpawn = hit.collider.GetComponent<MovingObjectSpawner>();
+                if (movingObjectSpawn != null)
+                {
+                    isRightSide = movingObjectSpawn.isRightSide;
+                    if (isRightSide && !rectifie)
+                    {
+                        middlePosition += (Vector3.right * 0.4f);
+                        rightPosition += (Vector3.right * 0.4f);
+                        leftPosition += (Vector3.right * 0.4f);
+                        rectifie = true;
+                    }
+                    else if (!isRightSide && !rectifie)
+                    {
+                        middlePosition -= (Vector3.right * 0.4f);
+                        rightPosition -= (Vector3.right * 0.4f);
+                        leftPosition -= (Vector3.right * 0.4f);
+                        rectifie = true;
+                    }
+
+                }
+            }
+
+        
+
+        if (Physics.Raycast(middlePosition, downDirection, out middlehit, raycastDistance))
+        {
+
+            if (middlehit.collider.CompareTag("Water"))
+            {
+                waterCount++;
+            }
+        }
+
+
+        if (Physics.Raycast(leftPosition, downDirection, out leftHit, raycastDistance))
+        {
+            if (leftHit.collider.CompareTag("Water"))
+            {
+                waterCount++;
+            }
+        }
+        if (Physics.Raycast(rightPosition, downDirection, out rightHit, raycastDistance))
+        {
+            if (direction == Vector3.forward) {
+                Debug.DrawRay(rightPosition, downDirection * raycastDistance, Color.yellow);
+            }
+            if (rightHit.collider.CompareTag("Water"))
+            {
+                waterCount++;
+            }
+        }
+        if (Physics.Raycast(middleMidlle, downDirection, out mid, raycastDistance) && mid.collider.CompareTag("Nenuphar"))
+        {
+            Debug.Log("Nenupar");
+            return waterCount >= 2; 
+        }
+        return waterCount >= 2;
     }
 
     private bool IsMovingObjectAhead(Vector3 direction)

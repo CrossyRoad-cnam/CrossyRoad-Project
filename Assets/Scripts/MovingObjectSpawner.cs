@@ -10,7 +10,7 @@ public class MovingObjectSpawner : MonoBehaviour
     [SerializeField] private float minSeparationTime;
     [SerializeField] private float maxSeparationTime;
     [SerializeField] private bool isFixed;
-    [SerializeField] private bool isRightSide;
+    [SerializeField] public bool isRightSide;
     [SerializeField] float EventThrowAdvancePercentage = 0.3f;
     public delegate void ObjectIncomingEventHandler();
     public event ObjectIncomingEventHandler ObjectIncoming;

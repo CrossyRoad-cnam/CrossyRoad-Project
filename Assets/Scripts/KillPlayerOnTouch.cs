@@ -17,7 +17,7 @@ public class KillPlayer : MonoBehaviour
 
     void Update()
     {
-        if (!Player.Instance.isDead && !Player.Instance.isRobot)
+        if (!Player.Instance.isDead)
             CheckWaterBelow();
     }
     private void ProcessGameOver()
@@ -50,8 +50,45 @@ public class KillPlayer : MonoBehaviour
     }
     private void CheckWaterBelow()
     {
-        RaycastHit hit;
-        if (Physics.Raycast(Player.Instance.transform.position, Vector3.down, out hit,1f) && hit.collider.CompareTag("Water"))
+        int waterCount = 0;
+
+        float raycastDistance = 2f;
+
+        Vector3 leftPosition = Player.Instance.transform.position - Vector3.forward * 0.5f;
+        Vector3 rightPosition = Player.Instance.transform.position + Vector3.forward * 0.5f;
+        Vector3 downDirection = Vector3.down;
+
+        RaycastHit leftHit, rightHit;
+        if (Physics.Raycast(leftPosition, downDirection, out leftHit, raycastDistance))
+        {
+            Debug.DrawRay(leftPosition, downDirection * raycastDistance, Color.green);
+            if (leftHit.collider.CompareTag("Water"))
+            {
+                waterCount++;
+            }
+        }
+        else
+        {
+            Debug.DrawRay(leftPosition, downDirection * raycastDistance, Color.red);
+        }
+
+        if (Physics.Raycast(rightPosition, downDirection, out rightHit, raycastDistance))
+        {
+            Debug.DrawRay(rightPosition, downDirection * raycastDistance, Color.green);
+            if (rightHit.collider.CompareTag("Water"))
+            {
+                waterCount++;
+            }
+        }
+        else
+        {
+            Debug.DrawRay(rightPosition, downDirection * raycastDistance, Color.red);
+        }
+
+        // Vérifier si les deux raycasts ont détecté de l'eau
+        if (waterCount == 2)
+        {
             ProcessGameOver();
+        }
     }
 }
