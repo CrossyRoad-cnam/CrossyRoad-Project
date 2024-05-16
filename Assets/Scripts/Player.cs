@@ -174,12 +174,14 @@ public class Player : MonoBehaviour
 
         while (timeElapsed < duration)
         {
+            if (parent)
             {
                 Vector3 parentDelta = parent.position - initialParentPosition;
                 startPosition += parentDelta;
                 endPosition += parentDelta;
                 initialParentPosition = parent.position;
             }
+
             float animationTime = timeElapsed / duration;
             float jumpArc = height * Mathf.Sin(Mathf.PI * animationTime);
             Vector3 newPos = Vector3.Lerp(startPosition, endPosition, animationTime);
@@ -188,19 +190,12 @@ public class Player : MonoBehaviour
             timeElapsed += Time.deltaTime;
             yield return null;
         }
-
-        if (parent != null)
-        {
-            Vector3 parentDelta = parent.position - initialParentPosition;
-            startPosition += parentDelta;
-            endPosition += parentDelta;
-        }
-
         smoothMoveCoroutine = null;
         transform.position = endPosition;
         FinishHop();
         UpdateScore();
     }
+
 
     private void UpdateScore()
     {
@@ -374,11 +369,11 @@ public class Player : MonoBehaviour
         bool rectifieFirst = false;
         bool rectifie = false;
 
-        Vector3 rightPosition = (Player.Instance.transform.position + direction) - Vector3.forward * 0.5f;
+        Vector3 rightPosition = (Player.Instance.transform.position + direction) - Vector3.forward * 0.3f;
         Vector3 middlePosition = (Player.Instance.transform.position + direction);
         Vector3 middleMidlle = (Player.Instance.transform.position + direction);
 
-        Vector3 leftPosition = (Player.Instance.transform.position + direction) + Vector3.forward * 0.5f;
+        Vector3 leftPosition = (Player.Instance.transform.position + direction) + Vector3.forward * 0.3f;
         Vector3 actualPosition = Player.Instance.transform.position;
         Vector3 downDirection = Vector3.down;
         // recuperer le gameObject devant le joueur. 
@@ -395,17 +390,17 @@ public class Player : MonoBehaviour
                     isRightSide = movingObjectSpawn.isRightSide;
                     if (isRightSide && !rectifieFirst)
                     {
-                        middlePosition += (Vector3.right * 0.4f);
-                        rightPosition += (Vector3.right * 0.4f);
-                        leftPosition += (Vector3.right * 0.4f);
+                        middlePosition += (Vector3.right * 0.3f);
+                        rightPosition += (Vector3.right * 0.3f);
+                        leftPosition += (Vector3.right * 0.3f);
                         rectifieFirst = true;
 
                     }
                     else if (!isRightSide && !rectifieFirst)
                     {
-                        middlePosition -= (Vector3.right * 0.4f);
-                        rightPosition -= (Vector3.right * 0.4f);
-                        leftPosition -= (Vector3.right * 0.4f);
+                        middlePosition -= (Vector3.right * 0.3f);
+                        rightPosition -= (Vector3.right * 0.3f);
+                        leftPosition -= (Vector3.right * 0.3f);
                         rectifieFirst = true;
                     }
 
@@ -420,16 +415,16 @@ public class Player : MonoBehaviour
                     isRightSide = movingObjectSpawn.isRightSide;
                     if (isRightSide && !rectifie)
                     {
-                        middlePosition += (Vector3.right * 0.4f);
-                        rightPosition += (Vector3.right * 0.4f);
-                        leftPosition += (Vector3.right * 0.4f);
+                        middlePosition += (Vector3.right * 0.3f);
+                        rightPosition += (Vector3.right * 0.3f);
+                        leftPosition += (Vector3.right * 0.3f);
                         rectifie = true;
                     }
                     else if (!isRightSide && !rectifie)
                     {
-                        middlePosition -= (Vector3.right * 0.4f);
-                        rightPosition -= (Vector3.right * 0.4f);
-                        leftPosition -= (Vector3.right * 0.4f);
+                        middlePosition -= (Vector3.right * 0.3f);
+                        rightPosition -= (Vector3.right * 0.3f);
+                        leftPosition -= (Vector3.right * 0.3f);
                         rectifie = true;
                     }
 
@@ -468,9 +463,9 @@ public class Player : MonoBehaviour
         if (Physics.Raycast(middleMidlle, downDirection, out mid, raycastDistance) && mid.collider.CompareTag("Nenuphar"))
         {
             Debug.Log("Nenupar");
-            return waterCount >= 2; 
+            return waterCount >= 1; 
         }
-        return waterCount >= 2;
+        return waterCount >= 1;
     }
 
     private bool IsMovingObjectAhead(Vector3 direction)
