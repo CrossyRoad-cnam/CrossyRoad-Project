@@ -45,9 +45,9 @@ public class DisplayManager : MonoBehaviour
     public void DisplayCoinScore()
     {
         coinScore = coinManager.GetCoinScore();
-        if (coinText != null && coinScore > 0)
+        if (coinText != null)
         {
-            coinText.text = "Coins: " + coinScore.ToString();
+            coinText.text = coinScore.ToString();
         }
     }
 
@@ -63,24 +63,24 @@ public class DisplayManager : MonoBehaviour
     public void DisplayTime()
     {
        if (timeText != null && Player.Instance != null && !Player.Instance.isDead)
-        {
-            if (!timerStarted && Player.Instance.HasMoved())
-            {
-                timerStarted = true;
-                timeSinceFirstMove = Time.time;
-            }
+       {
+           if (!timerStarted && Player.Instance.HasMoved())
+           {
+               timerStarted = true;
+               timeSinceFirstMove = Time.time;
+           }
 
-            if (timerStarted)
-            {
-                int totalSeconds = Mathf.RoundToInt(Time.time - timeSinceFirstMove);
-                int minutes = totalSeconds / 60;
-                int seconds = totalSeconds % 60;
-                timeText.text = string.Format("Time\n{0:D2} : {1:D2}", minutes, seconds);
-            }
-            else
-            {
-                timeText.text = "Time\n00 : 00";
-            }
-        }
+           if (timerStarted)
+           {
+               int totalSeconds = Mathf.RoundToInt(Time.time - timeSinceFirstMove);
+               int minutes = totalSeconds / 60;
+               int seconds = totalSeconds % 60;
+               timeText.text = string.Format("Time\n{0:D2} : {1:D2}", minutes, seconds);
+           }
+           else
+           {
+               timeText.text = "Time\n00 : 00";
+           }
+       }
     }
 }
