@@ -474,12 +474,16 @@ public class Player : MonoBehaviour
         float frontBackRange = 1f;
         float sideRange = 6f;
 
-        Ray[] frontBackRays = {
+        Ray[] frontRays = {
             new Ray(transform.position + new Vector3(0, 0, halfScale.z), forward),
             new Ray(transform.position + new Vector3(0, 0, -halfScale.z), forward),
+            new Ray(transform.position, direction)
+        };
+
+        Ray[] backRays =
+        {
             new Ray(transform.position + new Vector3(0, 0, halfScale.z), backward),
             new Ray(transform.position + new Vector3(0, 0, -halfScale.z), backward),
-            new Ray(transform.position, direction)
         };
 
         Ray[] leftSideRays = {
@@ -502,7 +506,7 @@ public class Player : MonoBehaviour
         };
 
 
-        foreach (var ray in frontBackRays)
+        foreach (var ray in frontRays)
         {
             DrawRays(ray, frontBackRange, Color.black);
             if (Physics.Raycast(ray, out RaycastHit hit, frontBackRange) && hit.collider.CompareTag("Ennemy"))
@@ -532,6 +536,15 @@ public class Player : MonoBehaviour
             }
         }
 
+        foreach (var ray in backRays)
+        {
+            DrawRays(ray, frontBackRange, Color.black);
+            if (Physics.Raycast(ray, out RaycastHit hit, frontBackRange) && hit.collider.CompareTag("Ennemy"))
+            {
+                Debug.Log(hit.collider.name);
+                return true;
+            }
+        }
         return false;
     }
 
