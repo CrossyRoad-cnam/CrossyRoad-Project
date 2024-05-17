@@ -50,9 +50,10 @@ public class KillPlayer : MonoBehaviour
 
         Vector3 leftPosition = Player.Instance.transform.position - Vector3.forward * 0.5f;
         Vector3 rightPosition = Player.Instance.transform.position + Vector3.forward * 0.5f;
+        Vector2 playerPosition = Player.Instance.transform.position;
         Vector3 downDirection = Vector3.down;
 
-        RaycastHit leftHit, rightHit;
+        RaycastHit leftHit, rightHit, pos;
         if (Physics.Raycast(leftPosition, downDirection, out leftHit, raycastDistance))
         {
             Debug.DrawRay(leftPosition, downDirection * raycastDistance, Color.green);
@@ -64,6 +65,19 @@ public class KillPlayer : MonoBehaviour
         else
         {
             Debug.DrawRay(leftPosition, downDirection * raycastDistance, Color.red);
+        }
+
+        if (Physics.Raycast(playerPosition, downDirection, out pos, raycastDistance))
+        {
+            Debug.DrawRay(playerPosition, downDirection * raycastDistance, Color.green);
+            if (pos.collider.CompareTag("Water"))
+            {
+                waterCount++;
+            }
+        }
+        else
+        {
+            Debug.DrawRay(playerPosition, downDirection * raycastDistance, Color.red);
         }
 
         if (Physics.Raycast(rightPosition, downDirection, out rightHit, raycastDistance))
@@ -80,7 +94,7 @@ public class KillPlayer : MonoBehaviour
         }
 
         // Vérifier si les deux raycasts ont détecté de l'eau
-        if (waterCount == 2)
+        if (waterCount == 3)
         {
             ProcessGameOver();
         }

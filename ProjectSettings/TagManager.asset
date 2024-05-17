@@ -12,6 +12,9 @@ TagManager:
   - Rail
   - Log
   - Nenuphar
+  - Undefined
+  - Road
+  - Grass
   layers:
   - Default
   - TransparentFX

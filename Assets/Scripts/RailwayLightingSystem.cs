@@ -65,7 +65,9 @@ public class RailwayLightingSystem : MonoBehaviour
     {
         if (movingObjectSpawner != null)
             movingObjectSpawner.ObjectIncoming -= StartBlinking; // Unsubscribe safely
-        StopBlinking(); // Stop blinking when disabled
+        StopBlinking();
+        isLightOn = false;
+        // Stop blinking when disabled
     }
 
     private void StartBlinking()
@@ -83,8 +85,9 @@ public class RailwayLightingSystem : MonoBehaviour
             StopCoroutine(blinkCoroutine);
             railwayLight1.enabled = false;
             railwayLight2.enabled = false;
+            isLightOn = false;
+
         }
-        isLightOn = false;
 
     }
 
@@ -96,14 +99,18 @@ public class RailwayLightingSystem : MonoBehaviour
         CheckDistanceToPlayer(); 
         }
         isLightOn = true;
-        while (timeElapsed < blinkDuration)
+
+        while (timeElapsed <= blinkDuration)
         {
+            isLightOn = true;
             railwayLight1.enabled = isLightOn;
             railwayLight2.enabled = isLightOn;
             yield return new WaitForSeconds(blinkingTime);
             timeElapsed += blinkingTime;
         }
 
-        StopBlinking(); 
+        StopBlinking();
+        isLightOn = false;
+
     }
 }
