@@ -513,6 +513,10 @@ public class Player : MonoBehaviour
         Ray[] frontRays = {
             new Ray(transform.position + new Vector3(0, 0, halfScale.z), forward),
             new Ray(transform.position + new Vector3(0, 0, -halfScale.z), forward),
+            new Ray(transform.position + new Vector3(1, 0, halfScale.z), left),
+            new Ray(transform.position + new Vector3(1, 0, -halfScale.z), left),
+            new Ray(transform.position + new Vector3(1, 0, halfScale.z), right),
+            new Ray(transform.position + new Vector3(1, 0, -halfScale.z), right),
             //new Ray(transform.position, direction)
         };
 
@@ -520,25 +524,19 @@ public class Player : MonoBehaviour
         {
             new Ray(transform.position + new Vector3(0, 0, halfScale.z), backward),
             new Ray(transform.position + new Vector3(0, 0, -halfScale.z), backward),
+            new Ray(transform.position + new Vector3(-1, 0, halfScale.z), left),
+            new Ray(transform.position + new Vector3(-1, 0, -halfScale.z), left),
+            new Ray(transform.position + new Vector3(-1, 0, halfScale.z), right),
+            new Ray(transform.position + new Vector3(-1, 0, -halfScale.z), right)
         };
 
         Ray[] leftSideRays = {
-            new Ray(transform.position + new Vector3(0, 0, halfScale.z), left),
-            new Ray(transform.position + new Vector3(0, 0, -halfScale.z), left),
-            new Ray(transform.position + new Vector3(1, 0, halfScale.z), left),
-            new Ray(transform.position + new Vector3(1, 0, -halfScale.z), left),
-            new Ray(transform.position + new Vector3(-1, 0, halfScale.z), left),
-            new Ray(transform.position + new Vector3(-1, 0, -halfScale.z), left)
+            new Ray(transform.position, left),
         };
 
         Ray[] rightSideRays =
         {
-            new Ray(transform.position + new Vector3(0, 0, halfScale.z), right),
-            new Ray(transform.position + new Vector3(0, 0, -halfScale.z), right),
-            new Ray(transform.position + new Vector3(1, 0, halfScale.z), right),
-            new Ray(transform.position + new Vector3(1, 0, -halfScale.z), right),
-            new Ray(transform.position + new Vector3(-1, 0, halfScale.z), right),
-            new Ray(transform.position + new Vector3(-1, 0, -halfScale.z), right)
+            new Ray(transform.position, right),
         };
 
         if (direction == forward)
