@@ -245,6 +245,10 @@ public class Player : MonoBehaviour
                 transform.parent = collision.collider.transform;
             }
         }
+        else if (collision.collider.CompareTag("Nenuphar"))
+        {
+            transform.parent = collision.collider.transform;
+        }
         else
         {
             FixPlayerPosition();
@@ -322,21 +326,23 @@ public class Player : MonoBehaviour
             return;
         }
         if (Physics.Raycast(actualPosition, downDirection, out mid, raycastDistance) && !mid.collider.CompareTag("Nenuphar") && !mid.collider.CompareTag("Log"))
-        { 
-                if (CanRobotMoveInDirection(left) && CanRobotMoveInDirection(right))
+        {
+            if (CanRobotMoveInDirection(left) || CanRobotMoveInDirection(right))
             {
+                if (CanRobotMoveInDirection(left) && !CanRobotMoveInDirection(right))
+                {
+                    MoveCharacter(left);
+                    return;
+                }
+                else if (!CanRobotMoveInDirection(left) && CanRobotMoveInDirection(right))
+                {
+                    MoveCharacter(right);
+                    return;
+
+                }
                 float distanceToLeft = Vector3.Distance(transform.position + left, Vector3.zero);
                 float distanceToRight = Vector3.Distance(transform.position + right, Vector3.zero);
                 MoveCharacter(distanceToLeft < distanceToRight ? left : right);
-            }
-            // detection des objets a gauche et a droite, la plus grande distance avec l'objet gagne si rien gauche
-            else if (CanRobotMoveInDirection(left))
-            {
-                MoveCharacter(left);
-            }
-            else if (CanRobotMoveInDirection(right))
-            {
-                MoveCharacter(right);
             }
             else if (CanRobotMoveInDirection(backward))
             {
@@ -480,7 +486,7 @@ public class Player : MonoBehaviour
         //{
         //    return waterCount >= 1; 
         //}
-        return waterCount >= 1;
+        return waterCount >= 2;
     }
 
     private bool IsMovingObjectAhead(Vector3 direction)
@@ -520,40 +526,71 @@ public class Player : MonoBehaviour
             new Ray(transform.position + new Vector3(-1, 0, -halfScale.z), right)
         };
 
-
-        foreach (var ray in frontRays)
-        {
-            DrawRays(ray, frontBackRange, Color.black);
-            if (Physics.Raycast(ray, out RaycastHit hit, frontBackRange) && hit.collider.CompareTag("Ennemy"))
+        if (direction == forward)
+        { 
+            foreach (var ray in frontRays)
             {
-                return true;
+                foreach (var ray2 in leftSideRays)
+                {
+                    if (Physics.Raycast(ray2, out RaycastHit hit2, sideRange) && IsEnemyApproaching(hit2, direction))
+                    {
+                        return true;
+                    }
+                }
+                foreach (var ray3 in rightSideRays)
+                {
+                    if (Physics.Raycast(ray3, out RaycastHit hit3, sideRange) && IsEnemyApproaching(hit3, direction))
+                    {
+                        return true;
+                    }
+                }
+                if (Physics.Raycast(ray, out RaycastHit hit, sideRange) && hit.collider.CompareTag("Ennemy") && IsEnemyApproaching(hit, direction))
+                {
+                    return true;
+                }
+    
+                Debug.Log("tout droit ok");
+                return false; 
             }
         }
 
-        foreach (var ray in leftSideRays)
+
+        if (direction == left)
         {
-            DrawRays(ray, sideRange, Color.green);
-            if (Physics.Raycast(ray, out RaycastHit hit, sideRange) && hit.collider.CompareTag("Ennemy") && IsEnemyApproaching(hit, direction))
+            foreach (var ray in leftSideRays)
             {
-                return true;
+                DrawRays(ray, sideRange, Color.green);
+
+                if (Physics.Raycast(ray, out RaycastHit hit, sideRange) && hit.collider.CompareTag("Ennemy") && IsEnemyApproaching(hit, direction))
+                {
+                    return true;
+                }
             }
+            Debug.Log("gauche ok");
         }
 
-        foreach (var ray in rightSideRays)
+        if (direction == right)
         {
-            DrawRays(ray, sideRange, Color.cyan);
-            if (Physics.Raycast(ray, out RaycastHit hit, sideRange) && hit.collider.CompareTag("Ennemy") && IsEnemyApproaching(hit, direction))
+            foreach (var ray in rightSideRays)
             {
-                return true;
+                DrawRays(ray, sideRange, Color.cyan);
+                if (Physics.Raycast(ray, out RaycastHit hit, sideRange) && hit.collider.CompareTag("Ennemy") && IsEnemyApproaching(hit, direction))
+                {
+                    return true;
+                }
             }
+            Debug.Log("droite ok");
         }
 
-        foreach (var ray in backRays)
-        {
-            DrawRays(ray, frontBackRange, Color.black);
-            if (Physics.Raycast(ray, out RaycastHit hit, frontBackRange) && hit.collider.CompareTag("Ennemy"))
+        if (direction == backward)
+        { 
+            foreach (var ray in backRays)
             {
-                return true;
+                DrawRays(ray, frontBackRange, Color.black);
+                if (Physics.Raycast(ray, out RaycastHit hit, frontBackRange) && hit.collider.CompareTag("Ennemy") && IsEnemyApproaching(hit, direction))
+                {
+                    return true;            
+                }
             }
         }
         return false;
@@ -576,8 +613,8 @@ public class Player : MonoBehaviour
         float enemySpeed = movingObject.speed;
         float distanceToPosition = Vector3.Distance(enemyPosition, transform.position + direction);
         float timeToDestination = distanceToPosition / enemySpeed;
-        
-        return timeToDestination <= 0.65f;
+
+        return timeToDestination <= 0.6f;
     }
 
     private void DrawRays(Ray ray, float range, Color color)
@@ -596,6 +633,7 @@ public class Player : MonoBehaviour
                 RailwayLightingSystem railwayLightingSystem = hit.collider.GetComponent<RailwayLightingSystem>();
                 if (railwayLightingSystem)
                 {
+                    Debug.Log(railwayLightingSystem.IsLightOn);
                     return railwayLightingSystem.IsLightOn;
                 }
             }
