@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 4019053254905567510}
   m_Layer: 3
   m_Name: DarkGrass
-  m_TagString: Untagged
+  m_TagString: Grass
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
