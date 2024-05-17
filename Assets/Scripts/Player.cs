@@ -4,6 +4,7 @@ using System.Security.Cryptography;
 using System.Threading;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Player : MonoBehaviour
@@ -31,12 +32,14 @@ public class Player : MonoBehaviour
     private static readonly Vector3 backward = new Vector3(-1, 0, 0);
     private static readonly Vector3 left = new Vector3(0, 0, 1);
     private static readonly Vector3 right = new Vector3(0, 0, -1);
+    private ScoreManager scoreManager;
     public bool isDead {get; private set;} = false;
     private Coroutine smoothMoveCoroutine; // Ajoutez une variable pour stocker la coroutine en cours
 
 
     private void Awake()
     {
+        scoreManager = FindObjectOfType<ScoreManager>();
         if (Instance != null && Instance != this)
         {
             DestroyImmediate(gameObject, true);
@@ -162,6 +165,19 @@ public class Player : MonoBehaviour
             RotateCharacter(direction);
             terrainGenerator.SpawnTerrain(false, transform.position);
         }
+    }
+
+    private void OnDestroy()
+    {
+        SaveScore();
+    }
+
+    private void SaveScore()
+    {
+        string pseudo = isRobot ? "bot" : "player";
+        int difficulty = PlayerPrefs.GetInt("Difficulty", 1);
+        scoreManager.AddScore(new Score(pseudo, scoreValue, difficulty));
+        scoreManager.SaveScore();
     }
 
     private IEnumerator SmoothMove(Vector3 startPosition, Vector3 endPosition, float duration = ANIMATION_TIME)
@@ -460,11 +476,10 @@ public class Player : MonoBehaviour
                 waterCount++;
             }
         }
-        if (Physics.Raycast(middleMidlle, downDirection, out mid, raycastDistance) && mid.collider.CompareTag("Nenuphar"))
-        {
-            Debug.Log("Nenupar");
-            return waterCount >= 1; 
-        }
+        //if (Physics.Raycast(middleMidlle, downDirection, out mid, raycastDistance) && mid.collider.CompareTag("Nenuphar"))
+        //{
+        //    return waterCount >= 1; 
+        //}
         return waterCount >= 1;
     }
 
@@ -511,7 +526,6 @@ public class Player : MonoBehaviour
             DrawRays(ray, frontBackRange, Color.black);
             if (Physics.Raycast(ray, out RaycastHit hit, frontBackRange) && hit.collider.CompareTag("Ennemy"))
             {
-                Debug.Log(hit.collider.name);
                 return true;
             }
         }
@@ -521,7 +535,6 @@ public class Player : MonoBehaviour
             DrawRays(ray, sideRange, Color.green);
             if (Physics.Raycast(ray, out RaycastHit hit, sideRange) && hit.collider.CompareTag("Ennemy") && IsEnemyApproaching(hit, direction))
             {
-                Debug.Log(hit.collider.name);
                 return true;
             }
         }
@@ -531,7 +544,6 @@ public class Player : MonoBehaviour
             DrawRays(ray, sideRange, Color.cyan);
             if (Physics.Raycast(ray, out RaycastHit hit, sideRange) && hit.collider.CompareTag("Ennemy") && IsEnemyApproaching(hit, direction))
             {
-                Debug.Log(hit.collider.name);
                 return true;
             }
         }
@@ -541,7 +553,6 @@ public class Player : MonoBehaviour
             DrawRays(ray, frontBackRange, Color.black);
             if (Physics.Raycast(ray, out RaycastHit hit, frontBackRange) && hit.collider.CompareTag("Ennemy"))
             {
-                Debug.Log(hit.collider.name);
                 return true;
             }
         }
@@ -566,8 +577,6 @@ public class Player : MonoBehaviour
         float distanceToPosition = Vector3.Distance(enemyPosition, transform.position + direction);
         float timeToDestination = distanceToPosition / enemySpeed;
         
-        Debug.Log(timeToDestination);
-
         return timeToDestination <= 0.65f;
     }
 
@@ -593,58 +602,4 @@ public class Player : MonoBehaviour
         }
         return false;
     }
-
-    private void TestMyRays(Vector3 direction)
-    {
-        float frontBackRange = 1f;
-        float sideRange = 6f;
-        Vector3 halfScale = transform.localScale / 2;
-        RaycastHit hit;
-        
-        Ray[] frontBackRays = {
-            new Ray(transform.position + new Vector3(0, 0, halfScale.z), forward),
-            new Ray(transform.position + new Vector3(0, 0, -halfScale.z), forward),
-            new Ray(transform.position + new Vector3(0, 0, -halfScale.z), backward),
-            new Ray(transform.position + new Vector3(0, 0, -halfScale.z), backward),
-            new Ray(transform.position, direction)
-        };
-
-        Ray[] leftSideRays = {
-            new Ray(transform.position + new Vector3(0, 0, halfScale.z), left),
-            new Ray(transform.position + new Vector3(0, 0, -halfScale.z), left),
-            new Ray(transform.position + new Vector3(1, 0, halfScale.z), left),
-            new Ray(transform.position + new Vector3(1, 0, -halfScale.z), left),
-            new Ray(transform.position + new Vector3(-1, 0, halfScale.z), left),
-            new Ray(transform.position + new Vector3(-1, 0, -halfScale.z), left),
-        };
-
-        Ray[] rightSideRays = {
-            new Ray(transform.position + new Vector3(0, 0, halfScale.z), right),
-            new Ray(transform.position + new Vector3(0, 0, -halfScale.z), right),
-            new Ray(transform.position + new Vector3(1, 0, halfScale.z), right),
-            new Ray(transform.position + new Vector3(1, 0, -halfScale.z), right),
-            new Ray(transform.position + new Vector3(-1, 0, halfScale.z), right),
-            new Ray(transform.position + new Vector3(-1, 0, -halfScale.z), right)
-        };
-        foreach (var ray in frontBackRays)
-        {
-            DrawRays(ray, frontBackRange, Color.green);
-        }
-
-        foreach (var ray in leftSideRays)
-        {
-            DrawRays(ray, sideRange, Color.black);
-            if (Physics.Raycast(ray, out hit, frontBackRange) && hit.collider.CompareTag("Ennemy"))
-                Debug.Log("");
-        }
-
-        foreach (var ray in rightSideRays)
-        {
-            DrawRays(ray, sideRange, Color.blue);
-            if (Physics.Raycast(ray, out hit, sideRange) && hit.collider.CompareTag("Ennemy"))
-                Debug.Log("");
-        }
-
-    }
-
 }

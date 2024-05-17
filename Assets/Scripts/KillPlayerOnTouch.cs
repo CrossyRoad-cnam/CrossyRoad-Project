@@ -6,13 +6,11 @@ using UnityEngine;
 public class KillPlayer : MonoBehaviour
 {
     private GameOverManager gameOverManager;
-    private ScoreManager scoreManager;
-    private string name;
+
 
     void Start()
     {
         gameOverManager = FindObjectOfType<GameOverManager>();
-        scoreManager = FindObjectOfType<ScoreManager>();
     }
 
     void Update()
@@ -23,10 +21,6 @@ public class KillPlayer : MonoBehaviour
     private void ProcessGameOver()
     {
         gameOverManager.GameOver();
-        name = Player.Instance.isRobot ? "bot" : "player";
-        int difficulty = PlayerPrefs.GetInt("Difficulty", 0); 
-        scoreManager.AddScore(new Score(name, Player.Instance.scoreValue, difficulty));
-        scoreManager.SaveScore();
         Player.Instance.DeathAnimation();
         Player.Instance.SetDead(true);
     }

@@ -4992,7 +4992,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6714637674210826803, guid: 55769f10b2354094597d2f41cb2c61bd, type: 3}
       propertyPath: terrainDatas.Array.size
-      value: 1
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6714637674210826803, guid: 55769f10b2354094597d2f41cb2c61bd, type: 3}
       propertyPath: StartTerrains.Array.size
@@ -5009,11 +5009,11 @@ PrefabInstance:
     - target: {fileID: 6714637674210826803, guid: 55769f10b2354094597d2f41cb2c61bd, type: 3}
       propertyPath: terrainDatas.Array.data[2]
       value: 
-      objectReference: {fileID: 11400000, guid: 81292531d01fb3d4685216ebbd8a3cf3, type: 2}
+      objectReference: {fileID: 11400000, guid: aa7672478db640541b81cb1283c2c6c4, type: 2}
     - target: {fileID: 6714637674210826803, guid: 55769f10b2354094597d2f41cb2c61bd, type: 3}
       propertyPath: terrainDatas.Array.data[3]
       value: 
-      objectReference: {fileID: 11400000, guid: c768d9b2794799c47a54190af1c91d15, type: 2}
+      objectReference: {fileID: 11400000, guid: 81292531d01fb3d4685216ebbd8a3cf3, type: 2}
     - target: {fileID: 6714637674210826803, guid: 55769f10b2354094597d2f41cb2c61bd, type: 3}
       propertyPath: terrainDatas.Array.data[4]
       value: 
