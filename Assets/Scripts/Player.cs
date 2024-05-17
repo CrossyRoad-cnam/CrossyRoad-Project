@@ -33,7 +33,7 @@ public class Player : MonoBehaviour
     private static readonly Vector3 left = new Vector3(0, 0, 1);
     private static readonly Vector3 right = new Vector3(0, 0, -1);
     private ScoreManager scoreManager;
-    public bool isDead {get; private set;} = false;
+    public bool isDead { get; private set; } = false;
     private Coroutine smoothMoveCoroutine; // Ajoutez une variable pour stocker la coroutine en cours
 
 
@@ -293,9 +293,9 @@ public class Player : MonoBehaviour
 
     {
         int selectedSkin = PlayerPrefs.GetInt("SelectedSkin", 0);
-            ApplySkin(skinController.skins[selectedSkin].GetSkin());
-        }
-        public bool HasMoved()
+        ApplySkin(skinController.skins[selectedSkin].GetSkin());
+    }
+    public bool HasMoved()
     {
         return hasFirstMoved;
     }
@@ -307,7 +307,7 @@ public class Player : MonoBehaviour
     {
         this.isDead = isDead;
     }
-    
+
     // ROBOT
     public void SetRobot(bool isRobot)
     {
@@ -316,7 +316,7 @@ public class Player : MonoBehaviour
     private void HandleRobotMovement()
     {
         float raycastDistance = 1.5f;
-        RaycastHit mid;
+        RaycastHit mid, grass, nenu;
         Vector3 actualPosition = Player.Instance.transform.position;
         Vector3 downDirection = Vector3.down;
 
@@ -325,9 +325,9 @@ public class Player : MonoBehaviour
             MoveCharacter(forward);
             return;
         }
-        if (Physics.Raycast(actualPosition, downDirection, out mid, raycastDistance) && !mid.collider.CompareTag("Nenuphar") && !mid.collider.CompareTag("Log"))
+        if (Physics.Raycast(actualPosition, downDirection, out nenu, raycastDistance) && nenu.collider.CompareTag("Nenuphar"))
         {
-            if (CanRobotMoveInDirection(left) || CanRobotMoveInDirection(right))
+            if (Physics.Raycast(actualPosition, downDirection, out grass, raycastDistance) && grass.collider.CompareTag("Grass"))
             {
                 if (CanRobotMoveInDirection(left) && !CanRobotMoveInDirection(right))
                 {
@@ -340,6 +340,29 @@ public class Player : MonoBehaviour
                     return;
 
                 }
+                else if (CanRobotMoveInDirection(left) && CanRobotMoveInDirection(right))
+                {
+                    float distanceToLeft = Vector3.Distance(transform.position + left, Vector3.zero);
+                    float distanceToRight = Vector3.Distance(transform.position + right, Vector3.zero);
+
+                }
+            }
+        }
+            if (Physics.Raycast(actualPosition, downDirection, out mid, raycastDistance) && !mid.collider.CompareTag("Log") && !mid.collider.CompareTag("Nenuphar"))
+        {
+                if (CanRobotMoveInDirection(left) && !CanRobotMoveInDirection(right))
+                {
+                    MoveCharacter(left);
+                    return;
+                }
+                else if (!CanRobotMoveInDirection(left) && CanRobotMoveInDirection(right))
+                {
+                    MoveCharacter(right);
+                    return;
+
+                }
+                else if (CanRobotMoveInDirection(left) && CanRobotMoveInDirection(right))
+            { 
                 float distanceToLeft = Vector3.Distance(transform.position + left, Vector3.zero);
                 float distanceToRight = Vector3.Distance(transform.position + right, Vector3.zero);
                 MoveCharacter(distanceToLeft < distanceToRight ? left : right);
@@ -353,7 +376,26 @@ public class Player : MonoBehaviour
 
     private bool CanRobotMoveInDirection(Vector3 direction)
     {
-        return !IsObstacleAhead(direction) && !IsWaterAhead(direction) && !IsMovingObjectAhead(direction) && !IsTrainAhead(direction);
+
+        RaycastHit hit, hit2;
+        float range = 1f;
+        if (Physics.Raycast(transform.position, Vector3.down, out hit2, range))
+        {
+            if (hit2.collider.CompareTag("Road"))
+                return !IsMovingObjectAhead(direction) && !IsTrainAhead(direction) && !IsWaterAhead(direction) && !IsObstacleAhead(direction);
+        }
+
+        if (Physics.Raycast(transform.position + direction, Vector3.down, out hit, range))
+        {
+            if (hit.collider.CompareTag("Rail"))
+                return !IsTrainAhead(direction) && !IsObstacleAhead(direction);
+            if (hit.collider.CompareTag("Water"))
+                return !IsWaterAhead(direction); 
+            if (hit.collider.CompareTag("Grass"))
+                return !IsObstacleAhead(direction);
+            
+        }
+         return !IsMovingObjectAhead(direction);
     }
 
     private bool IsObstacleAhead(Vector3 direction)
@@ -362,9 +404,7 @@ public class Player : MonoBehaviour
         float range = 1f;
         Vector3 halfScale = transform.localScale / 2;
         Ray[] rays = {
-            new Ray(transform.position, direction),
-            new Ray(transform.position + new Vector3(0, 0, halfScale.z), direction),
-            new Ray(transform.position + new Vector3(0, 0, -halfScale.z), direction)
+            new Ray(transform.position, direction)
         };
         foreach (var ray in rays)
         {
@@ -428,32 +468,33 @@ public class Player : MonoBehaviour
 
                 }
             }
-            if (Physics.Raycast(middlePosition, downDirection, out hit, raycastDistance) && hit.collider.CompareTag("Water"))
-            {
-                bool isRightSide;
-                MovingObjectSpawner movingObjectSpawn = hit.collider.GetComponent<MovingObjectSpawner>();
-                if (movingObjectSpawn != null)
-                {
-                    isRightSide = movingObjectSpawn.isRightSide;
-                    if (isRightSide && !rectifie)
-                    {
-                        middlePosition += (Vector3.right * 0.3f);
-                        rightPosition += (Vector3.right * 0.3f);
-                        leftPosition += (Vector3.right * 0.3f);
-                        rectifie = true;
-                    }
-                    else if (!isRightSide && !rectifie)
-                    {
-                        middlePosition -= (Vector3.right * 0.3f);
-                        rightPosition -= (Vector3.right * 0.3f);
-                        leftPosition -= (Vector3.right * 0.3f);
-                        rectifie = true;
-                    }
-
-                }
-            }
-
         
+        if (Physics.Raycast(middlePosition, downDirection, out hit, raycastDistance) && hit.collider.CompareTag("Water"))
+        {
+            bool isRightSide;
+            MovingObjectSpawner movingObjectSpawn = hit.collider.GetComponent<MovingObjectSpawner>();
+            if (movingObjectSpawn != null)
+            {
+                isRightSide = movingObjectSpawn.isRightSide;
+                if (isRightSide && !rectifie)
+                {
+                    middlePosition += (Vector3.right * 0.4f);
+                    rightPosition += (Vector3.right * 0.4f);
+                    leftPosition += (Vector3.right * 0.4f);
+                    rectifie = true;
+                }
+                else if (!isRightSide && !rectifie)
+                {
+                    middlePosition -= (Vector3.right * 0.4f);
+                    rightPosition -= (Vector3.right * 0.4f);
+                    leftPosition -= (Vector3.right * 0.4f);
+                    rectifie = true;
+                }
+
+            }
+        }
+
+
 
         if (Physics.Raycast(middlePosition, downDirection, out middlehit, raycastDistance))
         {
@@ -482,11 +523,7 @@ public class Player : MonoBehaviour
                 waterCount++;
             }
         }
-        //if (Physics.Raycast(middleMidlle, downDirection, out mid, raycastDistance) && mid.collider.CompareTag("Nenuphar"))
-        //{
-        //    return waterCount >= 1; 
-        //}
-        return waterCount >= 2;
+        return waterCount > 1;
     }
 
     private bool IsMovingObjectAhead(Vector3 direction)
@@ -495,41 +532,56 @@ public class Player : MonoBehaviour
         float frontBackRange = 1f;
         float sideRange = 6f;
 
+
+        Ray[] frontSide =
+        {
+            new Ray(transform.position + new Vector3(1, 0, halfScale.z), left),
+            new Ray(transform.position + new Vector3(1, 0, -halfScale.z), left),
+            new Ray(transform.position + new Vector3(1, 0, halfScale.z), right),
+            new Ray(transform.position + new Vector3(1, 0, -halfScale.z), right),
+        }; 
+
         Ray[] frontRays = {
             new Ray(transform.position + new Vector3(0, 0, halfScale.z), forward),
             new Ray(transform.position + new Vector3(0, 0, -halfScale.z), forward),
-            new Ray(transform.position, direction)
+
+            //new Ray(transform.position, direction)
+        };
+        Ray[] backSide =
+        {
+            new Ray(transform.position + new Vector3(-1, 0, halfScale.z), left),
+            new Ray(transform.position + new Vector3(-1, 0, -halfScale.z), left),
+            new Ray(transform.position + new Vector3(-1, 0, halfScale.z), right),
+            new Ray(transform.position + new Vector3(-1, 0, -halfScale.z), right)
         };
 
         Ray[] backRays =
         {
             new Ray(transform.position + new Vector3(0, 0, halfScale.z), backward),
             new Ray(transform.position + new Vector3(0, 0, -halfScale.z), backward),
+
         };
 
         Ray[] leftSideRays = {
-            new Ray(transform.position + new Vector3(0, 0, halfScale.z), left),
-            new Ray(transform.position + new Vector3(0, 0, -halfScale.z), left),
-            new Ray(transform.position + new Vector3(1, 0, halfScale.z), left),
-            new Ray(transform.position + new Vector3(1, 0, -halfScale.z), left),
-            new Ray(transform.position + new Vector3(-1, 0, halfScale.z), left),
-            new Ray(transform.position + new Vector3(-1, 0, -halfScale.z), left)
+            new Ray(transform.position, left),
         };
 
         Ray[] rightSideRays =
         {
-            new Ray(transform.position + new Vector3(0, 0, halfScale.z), right),
-            new Ray(transform.position + new Vector3(0, 0, -halfScale.z), right),
-            new Ray(transform.position + new Vector3(1, 0, halfScale.z), right),
-            new Ray(transform.position + new Vector3(1, 0, -halfScale.z), right),
-            new Ray(transform.position + new Vector3(-1, 0, halfScale.z), right),
-            new Ray(transform.position + new Vector3(-1, 0, -halfScale.z), right)
+            new Ray(transform.position, right),
         };
 
         if (direction == forward)
-        { 
+        {
             foreach (var ray in frontRays)
             {
+                foreach(var ray4 in frontSide)
+                {
+                    if (Physics.Raycast(ray4, out RaycastHit hit4, sideRange) && hit4.collider.CompareTag("Ennemy") && IsEnemyApproaching(hit4, direction))
+                    {
+                        return true;
+                    }
+                }
                 foreach (var ray2 in leftSideRays)
                 {
                     if (Physics.Raycast(ray2, out RaycastHit hit2, sideRange) && IsEnemyApproaching(hit2, direction))
@@ -544,13 +596,12 @@ public class Player : MonoBehaviour
                         return true;
                     }
                 }
-                if (Physics.Raycast(ray, out RaycastHit hit, sideRange) && hit.collider.CompareTag("Ennemy") && IsEnemyApproaching(hit, direction))
+                if (Physics.Raycast(ray, out RaycastHit hit, frontBackRange) && hit.collider.CompareTag("Ennemy") && IsEnemyApproaching(hit, direction))
                 {
                     return true;
                 }
-    
-                Debug.Log("tout droit ok");
-                return false; 
+
+                return false;
             }
         }
 
@@ -559,6 +610,20 @@ public class Player : MonoBehaviour
         {
             foreach (var ray in leftSideRays)
             {
+                foreach (var ray4 in frontSide)
+                {
+                    if (Physics.Raycast(ray4, out RaycastHit hit4, sideRange) && !hit4.collider.CompareTag("Ennemy") && !IsEnemyApproaching(hit4, direction))
+                    {
+                        return true;
+                    }
+                }
+                foreach (var ray2 in frontRays)
+                {
+                    if (Physics.Raycast(ray2, out RaycastHit hit2, sideRange) && !hit2.collider.CompareTag("Ennemy") && !IsEnemyApproaching(hit2, direction))
+                    {
+                        return true;
+                    }
+                }
                 DrawRays(ray, sideRange, Color.green);
 
                 if (Physics.Raycast(ray, out RaycastHit hit, sideRange) && hit.collider.CompareTag("Ennemy") && IsEnemyApproaching(hit, direction))
@@ -566,30 +631,51 @@ public class Player : MonoBehaviour
                     return true;
                 }
             }
-            Debug.Log("gauche ok");
+            return false;
         }
 
         if (direction == right)
         {
             foreach (var ray in rightSideRays)
             {
+                foreach (var ray4 in frontSide)
+                {
+                    if (Physics.Raycast(ray4, out RaycastHit hit4, sideRange) && !hit4.collider.CompareTag("Ennemy") && !IsEnemyApproaching(hit4, direction))
+                    {
+                        return true;
+                    }
+                }
+                foreach (var ray2 in frontRays)
+                {
+                    if (Physics.Raycast(ray2, out RaycastHit hit2, sideRange) && !hit2.collider.CompareTag("Ennemy") && !IsEnemyApproaching(hit2, direction))
+                    {
+                        return true;
+                    }
+                }
                 DrawRays(ray, sideRange, Color.cyan);
                 if (Physics.Raycast(ray, out RaycastHit hit, sideRange) && hit.collider.CompareTag("Ennemy") && IsEnemyApproaching(hit, direction))
                 {
                     return true;
                 }
             }
-            Debug.Log("droite ok");
+            return false;
         }
 
         if (direction == backward)
-        { 
+        {
+            foreach (var ray4 in backSide)
+            {
+                if (Physics.Raycast(ray4, out RaycastHit hit4, sideRange) && hit4.collider.CompareTag("Ennemy") && IsEnemyApproaching(hit4, direction))
+                {
+                    return true;
+                }
+            }
             foreach (var ray in backRays)
             {
                 DrawRays(ray, frontBackRange, Color.black);
-                if (Physics.Raycast(ray, out RaycastHit hit, frontBackRange) && hit.collider.CompareTag("Ennemy") && IsEnemyApproaching(hit, direction))
+                if (Physics.Raycast(ray, out RaycastHit hit, frontBackRange) && hit.collider.CompareTag("Ennemy") && IsEnemyApproaching(hit, direction) )
                 {
-                    return true;            
+                    return true;
                 }
             }
         }
@@ -603,18 +689,39 @@ public class Player : MonoBehaviour
             return false;
         }
 
-        MovingObject movingObject = hit.collider.GetComponent<MovingObject>();
-        if (!movingObject)
+        if (!hit.collider.CompareTag("Ennemy"))
         {
             return false;
         }
 
-        Vector3 enemyPosition = movingObject.transform.position;
-        float enemySpeed = movingObject.speed;
-        float distanceToPosition = Vector3.Distance(enemyPosition, transform.position + direction);
-        float timeToDestination = distanceToPosition / enemySpeed;
+        MovingObject movingObject = hit.collider.GetComponent<MovingObject>();
 
-        return timeToDestination <= 0.6f;
+        Vector3 enemyPosition;
+        float enemySpeed;
+
+        if (movingObject != null)
+        {
+            enemyPosition = movingObject.transform.position;
+            enemySpeed = movingObject.speed;
+        }
+        else
+        {
+            enemyPosition = hit.collider.transform.position;
+            enemySpeed = 0f;
+        }
+
+        // Calculate the distance and time to the destination
+        float distanceToPosition = Vector3.Distance(enemyPosition, transform.position + direction);
+        float timeToDestination = enemySpeed != 0f ? (distanceToPosition / enemySpeed) : distanceToPosition;
+
+        Debug.Log(distanceToPosition + ", " + timeToDestination);
+        // valeur absolu de la distance
+        if (timeToDestination < 0)
+        {
+            timeToDestination = -timeToDestination;
+        }
+
+        return timeToDestination <= 0.9f;
     }
 
     private void DrawRays(Ray ray, float range, Color color)
@@ -633,7 +740,6 @@ public class Player : MonoBehaviour
                 RailwayLightingSystem railwayLightingSystem = hit.collider.GetComponent<RailwayLightingSystem>();
                 if (railwayLightingSystem)
                 {
-                    Debug.Log(railwayLightingSystem.IsLightOn);
                     return railwayLightingSystem.IsLightOn;
                 }
             }

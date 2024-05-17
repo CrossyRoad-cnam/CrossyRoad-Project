@@ -33,7 +33,7 @@ public abstract class ObjectSpawner : MonoBehaviour
     {
         while (spawnPos.z < startPositionOnZ + zoneLength)
         {
-                int elementIndex = Random.Range(0, elements.Count);
+            int elementIndex = Random.Range(0, elements.Count);
                 Instantiate(elements[elementIndex], spawnPos, Quaternion.identity, transform);
                 spawnPos.z += Random.Range(minSpaceBetween, maxSpaceBetween);
                 SpawnedElementCount++;
