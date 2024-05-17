@@ -6,6 +6,11 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Menu.unity
+    guid: 361f39d41480aa647b118e8d518f2d45
+  - enabled: 1
     path: Assets/Scenes/Crossy-Road-Main.unity
     guid: adb0c2dacfc92514d94b001ac44a2627
-  m_configObjects: {}
+  m_configObjects:
+    com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: 390491b24441531408610b4dd5670f56, type: 2}
+    com.unity.adaptiveperformance.simulator.provider_settings: {fileID: 11400000, guid: 564adbe49c455f44295a5eba3c63dd24, type: 2}

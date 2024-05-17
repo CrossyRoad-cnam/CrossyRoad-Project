@@ -6,11 +6,17 @@ TagManager:
   tags:
   - Ennemy
   - Obstacle
+  - Collectable
+  - Water
+  - Border
+  - Rail
+  - Log
+  - Nenuphar
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Ground
   - Water
   - UI
   - 

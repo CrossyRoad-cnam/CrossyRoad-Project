@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: Grass
   m_EditorClassIdentifier: 
   possibleTerrain:
-  - {fileID: 8562624435428234971, guid: 66b4fb01e8f001f43b93e73ba09b401a, type: 3}
-  - {fileID: 5665028700151794608, guid: 56e9734eac3e2c245be3e4f37a512706, type: 3}
-  - {fileID: 807271347715415454, guid: ed0d5eb832eba3647a1f2469717d252e, type: 3}
-  maxInSuccession: 3
+  - {fileID: 3797857263056907123, guid: 77f63aaf03f984946ba032b3da69bb96, type: 3}
+  - {fileID: 9083724177791256119, guid: 5a7dab5b441122c40ac596fc8e2b844e, type: 3}
+  maxInSuccession: 2

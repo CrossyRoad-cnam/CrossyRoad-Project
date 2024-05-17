@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0915b5226e1fc954eada4364e46ea65a, type: 3}
+  m_Name: Rails
+  m_EditorClassIdentifier: 
+  possibleTerrain:
+  - {fileID: 7050955806780540968, guid: dd5ceea0431038e4bb21fd43e8a811ae, type: 3}
+  maxInSuccession: 2
