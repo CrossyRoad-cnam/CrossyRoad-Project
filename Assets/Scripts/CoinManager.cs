@@ -5,7 +5,7 @@ using UnityEngine;
 
 
 /// <summary>
-/// Handles the wallet operations
+/// C'est pour avoir toujours dans n'importe qu'elle scene le nombre de coin que le joueur a, ainsi que la facon de les dépenser. 
 /// </summary>
 public class CoinManager : MonoBehaviour
 {

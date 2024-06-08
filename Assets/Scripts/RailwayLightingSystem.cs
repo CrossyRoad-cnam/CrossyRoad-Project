@@ -2,6 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+
+/// <summary>
+/// Object pour la coroutine de la lumière et le son d'alarmes
+/// </summary>
 public class RailwayLightingSystem : MonoBehaviour
 {
     private MovingObjectSpawner movingObjectSpawner;
@@ -26,7 +31,7 @@ public class RailwayLightingSystem : MonoBehaviour
         try
         {
             movingObjectSpawner = GetComponent<MovingObjectSpawner>();
-            movingObjectSpawner.ObjectIncoming += StartBlinking; // Subscribe to the event to start blinking
+            movingObjectSpawner.ObjectIncoming += StartBlinking; 
         }
         catch (System.Exception)
         {

@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+/// <summary>
+///  ROTATION D'OBJETS pour les rotation de nenuphare
+/// </summary>
 public class RotateObject : MonoBehaviour
 {
     [SerializeField] private float rotationSpeed = 10f;

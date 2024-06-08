@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+/// <summary>
+///  Gestion des sons des ennemis qui hérite d'audio controller
+/// </summary>
 public class EnnemiesAudioController : AudioController
 {
     private GameObject player; 

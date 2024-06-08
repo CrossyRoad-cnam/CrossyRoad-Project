@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
+/// <summary>
+///  UI gestion de la difficulté du jeu
+/// </summary>
 public class SliderController : MonoBehaviour
 {
 

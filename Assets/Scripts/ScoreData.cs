@@ -5,6 +5,9 @@ using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;
 
 
+/// <summary>
+/// Classe de données de score
+/// </summary>
 [Serializable]
 public class ScoreData 
 {

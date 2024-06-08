@@ -3,6 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+
+/// <summary>
+/// GESTION du canva de game Over
+/// </summary>
+
 public class GameOverManager : MonoBehaviour
 {
 

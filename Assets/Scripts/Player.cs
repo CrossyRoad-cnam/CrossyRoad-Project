@@ -34,7 +34,7 @@ public class Player : MonoBehaviour
     private static readonly Vector3 right = new Vector3(0, 0, -1);
     private ScoreManager scoreManager;
     public bool isDead { get; private set; } = false;
-    private Coroutine smoothMoveCoroutine; // Ajoutez une variable pour stocker la coroutine en cours
+    private Coroutine smoothMoveCoroutine;
 
 
     private void Awake()

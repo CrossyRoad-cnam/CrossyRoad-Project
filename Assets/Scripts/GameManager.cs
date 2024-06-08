@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
+/// <summary>
+/// Trigger de l'eagle
+/// </summary>
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private Enemy enemyController;

@@ -6,6 +6,11 @@ using TMPro;
 using System;
 using System.Runtime.CompilerServices;
 
+
+
+/// <summary>
+///  Controlleur du skin 
+/// </summary>
 public class SkinController : MonoBehaviour
 {
     public static SkinController Instance { get; private set; }

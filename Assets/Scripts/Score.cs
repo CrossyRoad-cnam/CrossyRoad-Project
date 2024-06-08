@@ -3,6 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+/// <summary>
+/// Classe score 
+/// </summary>
 [Serializable]
 public class Score
 {

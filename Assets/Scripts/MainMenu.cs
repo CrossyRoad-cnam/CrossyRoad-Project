@@ -5,6 +5,9 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 //using UnityEngine.UIElements;
 
+/// <summary>
+/// Gestion du menu principal avec les paramétrages du jeu
+/// </summary>
 public class MainMenu : MonoBehaviour
 {
     public Toggle eagleToggle;

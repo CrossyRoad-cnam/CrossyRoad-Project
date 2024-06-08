@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// LE SPAWNER DE PIECES
+/// </summary>
 public class CoinSpawner : ObjectSpawner
 {
     [SerializeField] private GameObject coins;

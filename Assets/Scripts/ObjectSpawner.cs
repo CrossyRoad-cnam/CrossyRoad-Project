@@ -2,6 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+/// <summary>
+/// Classe abstraite pour le spawner d'objets
+/// </summary>
+
 public abstract class ObjectSpawner : MonoBehaviour
 {
     [SerializeField] internal List<GameObject> elements;

@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+/// <summary>
+///  Classe ENEMY GAMEOBJECT pour la gestion de l'aigle
+/// </summary>
 public class Enemy : MonoBehaviour
 {
     private bool isActive = false;

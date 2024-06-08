@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+// CONTROLEUR DE BASE POUR L'AUDIO 
 public class AudioController : MonoBehaviour
 {
 

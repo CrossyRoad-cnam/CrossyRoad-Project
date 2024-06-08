@@ -2,6 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// CHange la vitesse des objets selon la difficulté
+/// et lui donne une trajectoire et une vitesse
+/// </summary> 
+
 public class MovingObject : MonoBehaviour
 {
     [SerializeField] public bool isJumpable;

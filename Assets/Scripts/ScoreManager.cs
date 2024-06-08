@@ -5,6 +5,9 @@ using UnityEngine.SocialPlatforms.Impl;
 using System.Linq;
 using UnityEngine.UI;
 
+/// <summary>
+/// Gestion des scores du jeu 
+/// </summary>
 public class ScoreManager : MonoBehaviour
 {
     private ScoreData scoreData;

@@ -5,7 +5,9 @@ using System.Xml.Linq;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Skin Data", menuName = "Skin Data")]
-
+/// <summary>
+/// GESTION DU SKIN et de ces achats
+/// </summary>
 public class SkinData : ScriptableObject
 {
     [SerializeField] public GameObject skin;

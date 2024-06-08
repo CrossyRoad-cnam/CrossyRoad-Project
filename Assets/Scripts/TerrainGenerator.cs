@@ -6,6 +6,9 @@ using UnityEngine.UIElements;
 using UnityEngine.XR;
 using Random = UnityEngine.Random;
 
+/// <summary>
+///  GENERATEUR DE TERRAIN
+/// </summary>
 public class TerrainGenerator : MonoBehaviour
 {
     [SerializeField] private int minDistanceFromPlayer;

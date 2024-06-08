@@ -4,6 +4,9 @@ using UnityEngine;
 using System.Linq;
 using UnityEngine.UI;
 
+/// <summary>
+/// Dashboard du jeu avec les choses afficher genre score, temps de jeux, pièces... 
+/// </summary>
 public class DisplayManager : MonoBehaviour
 {
     [SerializeField] private Text scoreText; 

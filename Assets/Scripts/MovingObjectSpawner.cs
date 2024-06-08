@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Le spawner d'objets, avec un random de gauche ou droite selon l'élément
+/// </summary>
+
 public class MovingObjectSpawner : MonoBehaviour
 {
     [SerializeField] private List<GameObject> movingObjects;

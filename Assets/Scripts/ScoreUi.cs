@@ -5,6 +5,10 @@ using UnityEngine.SceneManagement;
 using System.Linq;
 using TMPro;
 
+/// <summary>
+/// GESTION du score
+/// 
+/// </summary>
 public class ScoreUi : MonoBehaviour
 {
     public RowUi rowUi;

@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
 
+/// <summary>
+/// Check des collisions avec les différents et élements et déclenche la mort 
+/// </summary>
 public class KillPlayer : MonoBehaviour
 {
     private GameOverManager gameOverManager;

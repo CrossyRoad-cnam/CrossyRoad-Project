@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
+
+/// <summary>
+/// Gestion de la difficulté du jeu
+/// </summary>
 public class DifficultyController : MonoBehaviour
 {
 

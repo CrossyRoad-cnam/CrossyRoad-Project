@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+/// <summary>
+/// CAMERA et game Border
+/// </summary>
 public class FollowObjectAxis : MonoBehaviour
 {
     [SerializeField] private GameObject player;
