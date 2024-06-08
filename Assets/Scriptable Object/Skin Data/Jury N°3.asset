@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: "Jury N\xB03"
   m_EditorClassIdentifier: 
   skin: {fileID: 812318169619240715, guid: 29c74e93740cfa54a89dfbedacd423c3, type: 3}
-  price: 100
+  price: 20
   owned: 0

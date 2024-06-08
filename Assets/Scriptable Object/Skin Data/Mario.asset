@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Mario
   m_EditorClassIdentifier: 
   skin: {fileID: 5336338389960646116, guid: 93b93eecba3b405438145af68b2b096e, type: 3}
-  price: 20
+  price: 100
   owned: 0
